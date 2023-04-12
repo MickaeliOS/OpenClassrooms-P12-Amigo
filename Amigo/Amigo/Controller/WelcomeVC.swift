@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class WelcomeVC: UIViewController {
     
@@ -15,10 +16,15 @@ class WelcomeVC: UIViewController {
         setupInterface()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     // MARK: - OUTLETS & VARIABLES
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    let authService = FirebaseManager()
 
     // MARK: - ACTIONS
     @IBAction func loginButtonTapped(_ sender: Any) {
@@ -35,6 +41,4 @@ class WelcomeVC: UIViewController {
     private func createAccount() {
         
     }
-
 }
-

@@ -8,9 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8323F6EC29E587B800CBDFB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */; };
-		8323F6EE29E58CBD00CBDFB5 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6ED29E58CBD00CBDFB5 /* AuthService.swift */; };
+		8323F6EE29E58CBD00CBDFB5 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6ED29E58CBD00CBDFB5 /* FirebaseManager.swift */; };
 		8323F6F029E5908600CBDFB5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6EF29E5908600CBDFB5 /* User.swift */; };
-		8323F6F229E5930100CBDFB5 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6F129E5930100CBDFB5 /* CreateAccountVC.swift */; };
 		8361E03229E5522900EE7D2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8361E03129E5522900EE7D2B /* AppDelegate.swift */; };
 		8361E03429E5522900EE7D2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8361E03329E5522900EE7D2B /* SceneDelegate.swift */; };
 		8361E03629E5522900EE7D2B /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8361E03529E5522900EE7D2B /* WelcomeVC.swift */; };
@@ -24,13 +23,16 @@
 		8361E05329E585A400EE7D2B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 8361E05229E585A400EE7D2B /* FirebaseFirestore */; };
 		8361E05529E585A400EE7D2B /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8361E05429E585A400EE7D2B /* FirebaseFirestoreSwift */; };
 		8361E05729E585A400EE7D2B /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8361E05629E585A400EE7D2B /* FirebaseStorage */; };
+		8388260C29E68FBA003EBCC1 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260B29E68FBA003EBCC1 /* CreateAccountVC.swift */; };
+		8388260E29E6931A003EBCC1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260D29E6931A003EBCC1 /* Extension.swift */; };
+		8388261029E6A2F9003EBCC1 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260F29E6A2F9003EBCC1 /* ProfileVC.swift */; };
+		8388261429E6C9ED003EBCC1 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388261329E6C9ED003EBCC1 /* CustomTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8323F6ED29E58CBD00CBDFB5 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		8323F6ED29E58CBD00CBDFB5 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		8323F6EF29E5908600CBDFB5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		8323F6F129E5930100CBDFB5 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountVC.swift; sourceTree = "<group>"; };
 		8361E02E29E5522900EE7D2B /* Amigo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amigo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8361E03129E5522900EE7D2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8361E03329E5522900EE7D2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -39,6 +41,10 @@
 		8361E03A29E5522A00EE7D2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8361E03D29E5522A00EE7D2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8361E03F29E5522A00EE7D2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8388260B29E68FBA003EBCC1 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountVC.swift; sourceTree = "<group>"; };
+		8388260D29E6931A003EBCC1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		8388260F29E6A2F9003EBCC1 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		8388261329E6C9ED003EBCC1 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,8 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				8361E04829E5527700EE7D2B /* Controller */,
-				8361E04729E5527300EE7D2B /* View */,
 				8361E04629E5526F00EE7D2B /* Model */,
+				8361E04729E5527300EE7D2B /* View */,
 				8361E04529E5524100EE7D2B /* Ressources */,
 			);
 			path = Amigo;
@@ -101,8 +107,9 @@
 		8361E04629E5526F00EE7D2B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8323F6ED29E58CBD00CBDFB5 /* AuthService.swift */,
+				8323F6ED29E58CBD00CBDFB5 /* FirebaseManager.swift */,
 				8323F6EF29E5908600CBDFB5 /* User.swift */,
+				8388260D29E6931A003EBCC1 /* Extension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -120,7 +127,9 @@
 			isa = PBXGroup;
 			children = (
 				8361E03529E5522900EE7D2B /* WelcomeVC.swift */,
-				8323F6F129E5930100CBDFB5 /* CreateAccountVC.swift */,
+				8388260B29E68FBA003EBCC1 /* CreateAccountVC.swift */,
+				8388260F29E6A2F9003EBCC1 /* ProfileVC.swift */,
+				8388261329E6C9ED003EBCC1 /* CustomTabBarController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -210,11 +219,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8361E03629E5522900EE7D2B /* WelcomeVC.swift in Sources */,
+				8388261029E6A2F9003EBCC1 /* ProfileVC.swift in Sources */,
 				8361E03229E5522900EE7D2B /* AppDelegate.swift in Sources */,
-				8323F6F229E5930100CBDFB5 /* CreateAccountVC.swift in Sources */,
+				8388260E29E6931A003EBCC1 /* Extension.swift in Sources */,
+				8388260C29E68FBA003EBCC1 /* CreateAccountVC.swift in Sources */,
 				8361E03429E5522900EE7D2B /* SceneDelegate.swift in Sources */,
 				8323F6F029E5908600CBDFB5 /* User.swift in Sources */,
-				8323F6EE29E58CBD00CBDFB5 /* AuthService.swift in Sources */,
+				8323F6EE29E58CBD00CBDFB5 /* FirebaseManager.swift in Sources */,
+				8388261429E6C9ED003EBCC1 /* CustomTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
