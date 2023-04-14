@@ -11,30 +11,108 @@ import FirebaseAuth
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-    weak var handle: AuthStateDidChangeListenerHandle?
+    
+    /*func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+     print("MKA - Listener va démarrer")
+     handle = Auth.auth().addStateDidChangeListener { (_, user) in
+     if ((user) != nil) {
+     UserService.shared.currentlyLoggedIn = true
+     print("MKA - currentlyLoggedIn est à true")
+     } else {
+     UserService.shared.currentlyLoggedIn = false
+     }
+     }
+     }*/
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        //try? Auth.auth().signOut()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.windowScene = windowScene
-        
-        handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
-            if ((user) != nil) {
-                // If the user is logged in, the UITabBar which contains all his personal screens become the new RootViewController, fot cleaner navigation.
-                let customTabBarController = storyboard.instantiateViewController(withIdentifier: "CustomTabBarController") as! CustomTabBarController
-                self?.window?.rootViewController = customTabBarController
-                
-            } else {
-                // Otherwise, if he disconnect, then we go back to the WelcomeVC.
-                let welcomeVC = storyboard.instantiateViewController(withIdentifier: "WelcomeVC") as! WelcomeVC
-                self?.window?.rootViewController = welcomeVC
-            }
-        }
-        window?.makeKeyAndVisible()
+        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
+        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
+        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        guard let _ = (scene as? UIWindowScene) else { return }
     }
+    
+    /*func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+     // Version avec fetchUser()
+     guard let windowScene = (scene as? UIWindowScene) else { return }
+     window = UIWindow(windowScene: windowScene)
+     let storyboard = UIStoryboard(name: "Main", bundle: nil)
+     
+     // Ce listener est déclenché dès qu'un changement d'authentification a lieu (il est également lancé au démarrage de l'app s'il y a un utilisateur qui était précédement authentifié.
+     handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
+     
+     // Si un user est trouvé
+     if ((user) != nil) {
+     
+     // On va chercher notre utilisateur
+     FirebaseManager().fetchUser { user in
+     guard let user = user else { return }
+     
+     // Comme on a un utilisateur, on définit notre UITabBar en tant que rootViewController
+     // On lui transmet également l'user, afin qu'il le transmette lui-même aux différents onglets
+     let customTabBarController = storyboard.instantiateViewController(withIdentifier: "CustomTabBarController") as! CustomTabBarController
+     customTabBarController.user = user
+     self?.window?.rootViewController = customTabBarController
+     self?.window?.makeKeyAndVisible()
+     }
+     } else {
+     // S'il n'y a pas d'user, alors on revient au début, sur l'écran login/mdp
+     let welcomeNC = storyboard.instantiateViewController(withIdentifier: "WelcomeNavigationController")
+     self?.window?.rootViewController = welcomeNC
+     self?.window?.makeKeyAndVisible()
+     }
+     }
+     }*/
+    
+    /*func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+     // Version sans fetchUser()
+     guard let windowScene = (scene as? UIWindowScene) else { return }
+     window?.windowScene =  windowScene
+     let storyboard = UIStoryboard(name: "Main", bundle: nil)
+     
+     handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
+     if ((user) != nil) {
+     
+     // If the user is logged in, the UITabBar which contains all his personal screens become the new RootViewController, fot cleaner navigation.
+     UserService.shared.currentlyLoggedIn = true
+     let MainTabBar = storyboard.instantiateViewController(withIdentifier: "MainTabBar")
+     self?.window?.rootViewController = MainTabBar
+     self?.window?.makeKeyAndVisible()
+     
+     } else {
+     // Otherwise, if he disconnect, then we go back to the WelcomeVC.
+     let welcomeNC = storyboard.instantiateViewController(withIdentifier: "WelcomeNavigationController")
+     self?.window?.rootViewController = welcomeNC
+     self?.window?.makeKeyAndVisible()
+     }
+     }
+     }*/
+    
+    /*func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+     // Version qui mène sur AuthStateVC
+     guard let windowScene = (scene as? UIWindowScene) else { return }
+     window = UIWindow(windowScene: windowScene)
+     let storyboard = UIStoryboard(name: "Main", bundle: nil)
+     
+     // Ce listener est déclenché dès qu'un changement d'authentification a lieu (il est également lancé au démarrage de l'app s'il y a un utilisateur qui était précédement authentifié.
+     handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
+     
+     // Si un user est trouvé
+     if ((user) != nil) {
+     
+     // If the user is logged in, we can go and fetch the user's informations inside AuthStateVC
+     let authStateVC = storyboard.instantiateViewController(withIdentifier: "AuthStateVC") as! AuthStateVC
+     self?.window?.rootViewController = authStateVC
+     self?.window?.makeKeyAndVisible()
+     
+     } else {
+     
+     // Otherwise, if he disconnect, then we go back to the WelcomeVC.
+     let welcomeNC = storyboard.instantiateViewController(withIdentifier: "WelcomeNavigationController")
+     self?.window?.rootViewController = welcomeNC
+     self?.window?.makeKeyAndVisible()
+     }
+     }
+     }*/
     
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -64,3 +142,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 }
+// If the user is logged in, the UITabBar which contains all his personal screens become the new RootViewController, fot cleaner navigation.

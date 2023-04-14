@@ -23,7 +23,7 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
-    let authService = FirebaseManager()
+    let firebaseManager = FirebaseManager()
 
     
     @IBAction func createAccountButtonTapped(_ sender: Any) {
@@ -38,7 +38,7 @@ class CreateAccountVC: UIViewController {
             return
         }
         
-        authService.createUser(email: emailTextField.text!, password: passwordTextField.text!) { success, error in
+        firebaseManager.createUser(email: emailTextField.text!, password: passwordTextField.text!) { success, error in
             if let error = error {
                 //TODO: Handle error
                 print("MKA - ERROR createUser")
@@ -59,7 +59,7 @@ class CreateAccountVC: UIViewController {
                 return
             }
             
-            self.authService.saveUserInDatabase(user: user) { [weak self] success, error in
+            self.firebaseManager.saveUserInDatabase(user: user) { [weak self] success, error in
                 if let error = error {
                     //TODO: Handle error
                     print("MKA - ERROR Database")

@@ -7,47 +7,63 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7E43BE1A-FAAA-405B-A914-91AA75845EC6"
-            shouldBeEnabled = "Yes"
+            uuid = "12195364-77BE-4A36-8177-DE11B5FC070D"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/CustomTabBarController.swift"
+            filePath = "Amigo/Model/FirebaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "fetchUser()"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "fetchUser(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "627CC342-892F-403A-B56F-CD40D6CEC27A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Model/FirebaseManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "fetchUser(completion:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "7E43BE1A-FAAA-405B-A914-91AA75845EC6 - 997b98c326ae0d8a"
+                  uuid = "627CC342-892F-403A-B56F-CD40D6CEC27A - 9cd69d99cc1febd7"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Amigo.CustomTabBarController.fetchUser() -&gt; ()"
+                  symbolName = "Amigo.FirebaseManager.fetchUser(completion: (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "Amigo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/CustomTabBarController.swift"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/FirebaseManager.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "32">
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "308">
                </Location>
                <Location
-                  uuid = "7E43BE1A-FAAA-405B-A914-91AA75845EC6 - 50eff7b1f1978ba1"
+                  uuid = "627CC342-892F-403A-B56F-CD40D6CEC27A - 2755d86a1aa942a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Amigo.User&gt;) -&gt; () in Amigo.CustomTabBarController.fetchUser() -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRDocumentSnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Amigo.FirebaseManager.fetchUser(completion: (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "Amigo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/CustomTabBarController.swift"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/FirebaseManager.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20"
-                  offsetFromSymbolStart = "84">
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "176">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -55,192 +71,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7FD65450-853E-45A2-A5CA-BDF1F46C0130"
-            shouldBeEnabled = "Yes"
+            uuid = "86668602-FA8D-4FD4-A6F8-88EA6FF66274"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/CustomTabBarController.swift"
+            filePath = "Amigo/Model/FirebaseManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "transmitUser()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "447F17DA-F0D0-4736-B5D2-811C325AC90A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/ProfileVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "447F17DA-F0D0-4736-B5D2-811C325AC90A - b8c987593a1c5f38"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Amigo.ProfileVC.viewDidLoad() -&gt; ()"
-                  moduleName = "Amigo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/ProfileVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "120">
-               </Location>
-               <Location
-                  uuid = "447F17DA-F0D0-4736-B5D2-811C325AC90A - b8c987593a1c5f38"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Amigo.ProfileVC.viewDidLoad() -&gt; ()"
-                  moduleName = "Amigo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/ProfileVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "200">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0E5521F7-FFA9-4043-B326-A7DB4B58F25C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/CustomTabBarController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "fetchUser()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "0E5521F7-FFA9-4043-B326-A7DB4B58F25C - 50eff7b1f1978b80"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Amigo.User&gt;) -&gt; () in Amigo.CustomTabBarController.fetchUser() -&gt; ()"
-                  moduleName = "Amigo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/CustomTabBarController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "21"
-                  endingLineNumber = "21"
-                  offsetFromSymbolStart = "96">
-               </Location>
-               <Location
-                  uuid = "0E5521F7-FFA9-4043-B326-A7DB4B58F25C - 50eff7b1f1978b80"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Amigo.User&gt;) -&gt; () in Amigo.CustomTabBarController.fetchUser() -&gt; ()"
-                  moduleName = "Amigo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/CustomTabBarController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "21"
-                  endingLineNumber = "21"
-                  offsetFromSymbolStart = "300">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8EA94BC5-299E-452C-9B9C-65F9ED1AF571"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/CustomTabBarController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "fetchUser()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "376C252A-FE8C-40BE-9840-149677C1EA35"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Ressources/SceneDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "scene(_:willConnectTo:options:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "376C252A-FE8C-40BE-9840-149677C1EA35 - 2bfff1b2caac5a11"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Amigo.SceneDelegate.scene(_: __C.UIScene, willConnectTo: __C.UISceneSession, options: __C.UISceneConnectionOptions) -&gt; ()"
-                  moduleName = "Amigo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Ressources/SceneDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "560">
-               </Location>
-               <Location
-                  uuid = "376C252A-FE8C-40BE-9840-149677C1EA35 - 9e2acc572755897"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.FIRAuth, Swift.Optional&lt;__C.FIRUser&gt;) -&gt; () in Amigo.SceneDelegate.scene(_: __C.UIScene, willConnectTo: __C.UISceneSession, options: __C.UISceneConnectionOptions) -&gt; ()"
-                  moduleName = "Amigo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Ressources/SceneDelegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "24"
-                  endingLineNumber = "24"
-                  offsetFromSymbolStart = "56">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2519DB91-8A96-43C4-BE2A-AC6313DE7390"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Ressources/SceneDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "scene(_:willConnectTo:options:)"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "fetchUser(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

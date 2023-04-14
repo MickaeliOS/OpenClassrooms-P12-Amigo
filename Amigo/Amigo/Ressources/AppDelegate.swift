@@ -7,12 +7,26 @@
 
 import UIKit
 import FirebaseCore
+import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    //weak var handle: AuthStateDidChangeListenerHandle?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        
+        /*print("MKA - Listener va démarrer")
+        handle = Auth.auth().addStateDidChangeListener { (_, user) in
+            if ((user) != nil) {
+                UserService.shared.currentlyLoggedIn = true
+                print("MKA - currentlyLoggedIn est à true")
+            } else {
+                UserService.shared.currentlyLoggedIn = false
+            }
+        }*/
+        
         return true
     }
 

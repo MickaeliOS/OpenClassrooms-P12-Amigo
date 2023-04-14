@@ -24,10 +24,25 @@ class WelcomeVC: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    let authService = FirebaseManager()
+    let firebaseManager = FirebaseManager()
 
     // MARK: - ACTIONS
     @IBAction func loginButtonTapped(_ sender: Any) {
+        //TODO: Contrôler les champs
+        
+        firebaseManager.signIn(email: emailTextField.text ?? "", password: passwordTextField.text ?? "") { success, error in
+            if let _ = error {
+                //TODO: Handle Errors
+                return
+            }
+            
+            guard success else {
+                //TODO: Handle No Success
+                return
+            }
+            
+            self.dismiss(animated: true)
+        }
     }
     
     @IBAction func createAccountButtonTapped(_ sender: Any) {

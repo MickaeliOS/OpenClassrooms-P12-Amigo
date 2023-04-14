@@ -11,8 +11,17 @@ import UIKit
 extension UITextField {
     var isEmpty: Bool {
         if let text = text, !text.isEmpty {
-             return false
+            return false
         }
         return true
+    }
+}
+
+extension UIViewController {
+    func presentVCFullScreen(with identifier: String) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: identifier)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated:true)
     }
 }

@@ -6,21 +6,26 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileVC: UIViewController {
-    var user: User?
-
+    
+    @IBOutlet weak var disconnectButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let user = user else {
-            print("MKA - HomeVC empty user")
-            return
-        }
-        print("MKA - FIRSTNAME : \(user.firstname)")
-        // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func disconnectButtonTapped(_ sender: Any) {
+        do {
+            try FirebaseManager().signOut()
+            presentVCFullScreen(with: "WelcomeVC")
+        } catch (let error) {
+            //TODO: Handle Error
+            print(error)
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

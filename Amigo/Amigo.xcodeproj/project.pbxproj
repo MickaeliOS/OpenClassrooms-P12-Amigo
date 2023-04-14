@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		830F478C29E9260F00697C34 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F478B29E9260F00697C34 /* UserService.swift */; };
+		830F479129E9311800697C34 /* AddTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F479029E9311800697C34 /* AddTripVC.swift */; };
 		8323F6EC29E587B800CBDFB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */; };
 		8323F6EE29E58CBD00CBDFB5 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6ED29E58CBD00CBDFB5 /* FirebaseManager.swift */; };
 		8323F6F029E5908600CBDFB5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6EF29E5908600CBDFB5 /* User.swift */; };
@@ -26,10 +28,11 @@
 		8388260C29E68FBA003EBCC1 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260B29E68FBA003EBCC1 /* CreateAccountVC.swift */; };
 		8388260E29E6931A003EBCC1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260D29E6931A003EBCC1 /* Extension.swift */; };
 		8388261029E6A2F9003EBCC1 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260F29E6A2F9003EBCC1 /* ProfileVC.swift */; };
-		8388261429E6C9ED003EBCC1 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388261329E6C9ED003EBCC1 /* CustomTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		830F478B29E9260F00697C34 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		830F479029E9311800697C34 /* AddTripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripVC.swift; sourceTree = "<group>"; };
 		8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8323F6ED29E58CBD00CBDFB5 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		8323F6EF29E5908600CBDFB5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -44,7 +47,6 @@
 		8388260B29E68FBA003EBCC1 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountVC.swift; sourceTree = "<group>"; };
 		8388260D29E6931A003EBCC1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		8388260F29E6A2F9003EBCC1 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
-		8388261329E6C9ED003EBCC1 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				8323F6ED29E58CBD00CBDFB5 /* FirebaseManager.swift */,
 				8323F6EF29E5908600CBDFB5 /* User.swift */,
 				8388260D29E6931A003EBCC1 /* Extension.swift */,
+				830F478B29E9260F00697C34 /* UserService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -129,7 +132,7 @@
 				8361E03529E5522900EE7D2B /* WelcomeVC.swift */,
 				8388260B29E68FBA003EBCC1 /* CreateAccountVC.swift */,
 				8388260F29E6A2F9003EBCC1 /* ProfileVC.swift */,
-				8388261329E6C9ED003EBCC1 /* CustomTabBarController.swift */,
+				830F479029E9311800697C34 /* AddTripVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -224,9 +227,10 @@
 				8388260E29E6931A003EBCC1 /* Extension.swift in Sources */,
 				8388260C29E68FBA003EBCC1 /* CreateAccountVC.swift in Sources */,
 				8361E03429E5522900EE7D2B /* SceneDelegate.swift in Sources */,
+				830F479129E9311800697C34 /* AddTripVC.swift in Sources */,
+				830F478C29E9260F00697C34 /* UserService.swift in Sources */,
 				8323F6F029E5908600CBDFB5 /* User.swift in Sources */,
 				8323F6EE29E58CBD00CBDFB5 /* FirebaseManager.swift in Sources */,
-				8388261429E6C9ED003EBCC1 /* CustomTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

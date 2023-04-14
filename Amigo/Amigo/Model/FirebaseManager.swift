@@ -10,7 +10,6 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class FirebaseManager {
-    
     func createUser(email: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
             if let error = error {
@@ -47,22 +46,40 @@ class FirebaseManager {
         }
     }
     
-    func fetchUser(completion: @escaping (User?) -> Void) {
+    func signIn(email: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if let _ = error {
+                //TODO: Handle Errors
+                completion(false, error)
+                return
+            }
+            
+            guard let _ = result else {
+                //TODO: Handle No Results
+                completion(false, nil)
+                return
+            }
+        
+            completion(true, nil)
+        }
+    }
+    
+    func fetchUser(completion: @escaping (Bool, Error?) -> Void) {
         guard let currentUserID = Auth.auth().currentUser?.uid else {
-            completion(nil)
+            completion(false, nil)
             return
         }
 
         Firestore.firestore().collection("User").document(currentUserID).getDocument { snapshot, error in
-            if let _ = error {
+            if let error = error {
                 //TODO: Handle Error
-                completion(nil)
+                completion(false, error)
                 return
             }
             
             guard let data = snapshot?.data() else {
                 //TODO: Handle no data
-                completion(nil)
+                completion(false, nil)
                 return
             }
             
@@ -77,7 +94,18 @@ class FirebaseManager {
                 email: data["email"] as? String ?? ""
             )
             
-            completion(user)
+            UserService.shared.user = user
+            completion(true, nil)
+        }
+    }
+    
+    func signOut() throws {
+        do {
+            try Auth.auth().signOut()
+        } catch (let error) {
+            //TODO: Handle error
+            print("error")
+            throw error
         }
     }
 }
