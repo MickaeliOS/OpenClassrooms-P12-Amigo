@@ -9,27 +9,26 @@ import UIKit
 import FirebaseAuth
 
 class CreateAccountVC: UIViewController {
+    // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
-    
+    // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var lastnameTextField: UITextField!
     @IBOutlet weak var firstnameTextField: UITextField!
     @IBOutlet weak var genderSegmentedControl: UISegmentedControl!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
-    let firebaseManager = FirebaseManager()
+    let userService = UserService.shared
 
-    
+    // MARK: - ACTIONS
     @IBAction func createAccountButtonTapped(_ sender: Any) {
         registerUser()
     }
     
+    // MARK: - PRIVATE FUNCTIONS
     private func registerUser() {
         guard fieldsControl() else {
             //TODO: Erreur, Remplir tous les champs
@@ -38,7 +37,7 @@ class CreateAccountVC: UIViewController {
             return
         }
         
-        firebaseManager.createUser(email: emailTextField.text!, password: passwordTextField.text!) { success, error in
+        userService.createUser(email: emailTextField.text!, password: passwordTextField.text!) { success, error in
             if let error = error {
                 //TODO: Handle error
                 print("MKA - ERROR createUser")
@@ -59,7 +58,7 @@ class CreateAccountVC: UIViewController {
                 return
             }
             
-            self.firebaseManager.saveUserInDatabase(user: user) { [weak self] success, error in
+            self.userService.saveUserInDatabase(user: user) { [weak self] success, error in
                 if let error = error {
                     //TODO: Handle error
                     print("MKA - ERROR Database")

@@ -29,6 +29,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        
+        let theme = UserDefaults.standard.integer(forKey: "theme")
+
+        switch theme {
+        case 0:
+            window?.overrideUserInterfaceStyle = .unspecified
+        case 1:
+            window?.overrideUserInterfaceStyle = .light
+        case 2:
+            window?.overrideUserInterfaceStyle = .dark
+        default:
+            window?.overrideUserInterfaceStyle = .unspecified
+        }
     }
     
     /*func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

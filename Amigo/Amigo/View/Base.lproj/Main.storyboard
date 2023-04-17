@@ -26,8 +26,14 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1N1-Sy-rWz">
-                                        <rect key="frame" x="0.0" y="208.33333333333331" width="355" height="145"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log In" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="paU-6k-szn">
+                                        <rect key="frame" x="0.0" y="144.33333333333334" width="355" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1N1-Sy-rWz">
+                                        <rect key="frame" x="0.0" y="272.33333333333331" width="355" height="145"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m2G-pC-iKf">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="70"/>
@@ -36,6 +42,27 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="envelope.fill" catalog="system"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                        <real key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightPadding">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="size">
+                                                        <real key="value" value="25"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftImageSize">
+                                                        <real key="value" value="25"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftImagePaddingLeft">
+                                                        <real key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="vMa-6M-CoB"/>
+                                                </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RtS-am-i6P">
                                                 <rect key="frame" x="0.0" y="75" width="355" height="70"/>
@@ -43,9 +70,45 @@
                                                     <constraint firstAttribute="height" constant="70" id="WJs-Nz-IVL"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="leftImage" value="lock.fill" catalog="system"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="size">
+                                                        <real key="value" value="25"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftPadding">
+                                                        <real key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="rightImage" value="eye" catalog="system"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightImageSize">
+                                                        <real key="value" value="25"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightImagePaddingLeft">
+                                                        <real key="value" value="0.0"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftImageSize">
+                                                        <real key="value" value="25"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="leftImagePaddingLeft">
+                                                        <real key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="rightImagePaddingRight">
+                                                        <real key="value" value="15"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="rightImageClickable" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="iJN-oH-hau"/>
+                                                </connections>
                                             </textField>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0jh-xL-ezu">
+                                                <rect key="frame" x="0.0" y="145" width="355" height="0.0"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                <color key="textColor" systemColor="systemRedColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
+                                        <color key="tintColor" systemColor="labelColor"/>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="BYZ-2c-KcN">
                                         <rect key="frame" x="0.0" y="521" width="355" height="160"/>
@@ -75,7 +138,6 @@
                                                     <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
                                                 </buttonConfiguration>
                                                 <connections>
-                                                    <action selector="createAccountButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jmc-hZ-tO2"/>
                                                     <segue destination="ofh-3Y-lyi" kind="presentation" id="w1M-Vg-9EC"/>
                                                 </connections>
                                             </button>
@@ -86,21 +148,31 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="u9v-rS-ktA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="3v6-n2-KOd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="u9v-rS-ktA" secondAttribute="trailing" constant="10" id="EzJ-cn-NF8"/>
                             <constraint firstItem="u9v-rS-ktA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="nnW-Qk-N95"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="u9v-rS-ktA" secondAttribute="bottom" constant="10" id="r8y-dz-tnJ"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="vge-Lt-Hkk" appends="YES" id="hAP-Fb-GkN"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="hUV-UH-LQu"/>
                     <connections>
                         <outlet property="emailTextField" destination="m2G-pC-iKf" id="lSp-a2-tkE"/>
+                        <outlet property="errorMessageLabel" destination="0jh-xL-ezu" id="a2E-t4-hHp"/>
                         <outlet property="loginButton" destination="2IU-KH-FLX" id="BmQ-4q-Bne"/>
                         <outlet property="passwordTextField" destination="RtS-am-i6P" id="wVa-kv-WQk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="vge-Lt-Hkk">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="BYZ-38-t0r" id="b6X-Xj-Sds"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="138" y="4"/>
         </scene>
@@ -119,7 +191,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmN-EO-wnd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2262" y="754"/>
+            <point key="canvasLocation" x="2350" y="4"/>
         </scene>
         <!--ProfileVC-->
         <scene sceneID="2oN-eV-tsX">
@@ -128,28 +200,74 @@
                     <view key="view" contentMode="scaleToFill" id="tED-u8-vva">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSB-td-cdh">
-                                <rect key="frame" x="117" y="444" width="111" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Disconnect"/>
-                                <connections>
-                                    <action selector="disconnectButtonTapped:" destination="sEF-q8-yfU" eventType="touchUpInside" id="wwt-P8-EqH"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Li9-Xy-bwE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="PfG-3d-AiZ"/>
-                    <connections>
-                        <outlet property="disconnectButton" destination="dSB-td-cdh" id="9Ay-U4-9gY"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="47b-D5-53p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3126" y="754"/>
+            <point key="canvasLocation" x="3214" y="4"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="gDB-d4-T8k">
+            <objects>
+                <viewController id="b9P-vA-qFd" customClass="SettingsViewController" customModule="Amigo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pZD-TU-wqP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tTV-cw-g1N">
+                                <rect key="frame" x="10" y="47.000000000000007" width="355" height="95.666666666666686"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saY-ab-Oth">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dyO-PX-gQ8">
+                                        <rect key="frame" x="0.0" y="25.333333333333329" width="355" height="32"/>
+                                        <segments>
+                                            <segment title="Device"/>
+                                            <segment title="Light"/>
+                                            <segment title="Dark"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="toggleSegmentedControl:" destination="b9P-vA-qFd" eventType="valueChanged" id="eWN-7x-BZN"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNZ-9z-Eza">
+                                        <rect key="frame" x="0.0" y="61.333333333333329" width="355" height="34.333333333333329"/>
+                                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Sign Out">
+                                            <color key="baseForegroundColor" systemColor="labelColor"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="signOutButtonTapped:" destination="b9P-vA-qFd" eventType="touchUpInside" id="Rfm-CT-sFW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="x26-9F-iUV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tTV-cw-g1N" firstAttribute="top" secondItem="x26-9F-iUV" secondAttribute="top" id="B2g-zL-Brj"/>
+                            <constraint firstItem="x26-9F-iUV" firstAttribute="trailing" secondItem="tTV-cw-g1N" secondAttribute="trailing" constant="10" id="OFu-f0-Sbo"/>
+                            <constraint firstItem="tTV-cw-g1N" firstAttribute="leading" secondItem="x26-9F-iUV" secondAttribute="leading" constant="10" id="o01-eu-QA3"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" image="gear" catalog="system" id="m2Z-xX-Aww"/>
+                    <connections>
+                        <outlet property="themeLabel" destination="saY-ab-Oth" id="t48-aN-tIK"/>
+                        <outlet property="themeSegmentedControl" destination="dyO-PX-gQ8" id="tBm-Jp-Iwy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nhj-s5-SrV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2350" y="807"/>
         </scene>
         <!--Item 1-->
         <scene sceneID="ddJ-uK-hhc">
@@ -192,13 +310,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wkl-qd-fie" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3126" y="4"/>
+            <point key="canvasLocation" x="3191" y="-858"/>
         </scene>
         <!--Add Trip-->
         <scene sceneID="apq-vP-EWN">
             <objects>
                 <navigationController id="eYi-bl-3pL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Add Trip" image="airplane.departure" catalog="system" id="owK-BC-oqw"/>
+                    <tabBarItem key="tabBarItem" title="Add Trip" image="airplane" catalog="system" id="owK-BC-oqw"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="O17-dX-xNJ">
                         <rect key="frame" x="0.0" y="47" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -209,7 +327,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UDx-6r-MdR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2262" y="4"/>
+            <point key="canvasLocation" x="2327" y="-858"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="5Uk-PI-Jfx">
@@ -224,6 +342,7 @@
                     <connections>
                         <segue destination="eYi-bl-3pL" kind="relationship" relationship="viewControllers" id="U9C-RX-fxP"/>
                         <segue destination="4Ex-pv-IF4" kind="relationship" relationship="viewControllers" id="0v1-cC-iNu"/>
+                        <segue destination="b9P-vA-qFd" kind="relationship" relationship="viewControllers" id="vuy-Kb-2LD"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kat-bl-Ji6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -351,11 +470,29 @@
             <point key="canvasLocation" x="137" y="755"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="RtS-am-i6P">
+            <size key="intrinsicContentSize" width="94" height="34"/>
+        </designable>
+        <designable name="m2G-pC-iKf">
+            <size key="intrinsicContentSize" width="64.666666666666671" height="34"/>
+        </designable>
+    </designables>
     <resources>
-        <image name="airplane.departure" catalog="system" width="128" height="84"/>
+        <image name="airplane" catalog="system" width="128" height="115"/>
+        <image name="envelope.fill" catalog="system" width="128" height="93"/>
+        <image name="eye" catalog="system" width="128" height="79"/>
+        <image name="gear" catalog="system" width="128" height="122"/>
+        <image name="lock.fill" catalog="system" width="125" height="128"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tintColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
