@@ -22,6 +22,7 @@ class WelcomeVC: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
     let userService = UserService.shared
+    var isPasswordVisible = false
 
     // MARK: - ACTIONS
     @IBAction func loginButtonTapped(_ sender: Any) {
@@ -52,21 +53,11 @@ class WelcomeVC: UIViewController {
     
     private func setupTextFields() {
         guard let emailImage = UIImage(systemName: "envelope.fill"),
-              let passwordLeftImage = UIImage(systemName: "lock.fill"),
-              let passwordRightImage = UIImage(systemName: "eye.fill") else { return }
+              let passwordLeftImage = UIImage(systemName: "lock.fill") else { return }
         
-        emailTextField.addLeftSystemImage(image: emailImage,
-                                          paddingLeft: 15,
-                                          paddingRight: 0,
-                                          size: 25)
-        passwordTextField.addLeftSystemImage(image: passwordLeftImage,
-                                              paddingLeft: 15,
-                                              paddingRight: 0,
-                                              size: 25)
-        passwordTextField.addRightSystemImage(image: passwordRightImage,
-                                              paddingLeft: 0,
-                                              paddingRight: 15,
-                                              size: 25)
+        emailTextField.addLeftSystemImage(image: emailImage)
+        passwordTextField.addLeftSystemImage(image: passwordLeftImage)
+        passwordTextField.addPasswordToggleImage(target: self, action: #selector(togglePasswordVisibility))
     }
     
     private func fieldsControl() -> Bool {
@@ -76,6 +67,18 @@ class WelcomeVC: UIViewController {
             return false
         }
         return true
+    }
+    
+    @objc func togglePasswordVisibility(_ sender: UIButton) {
+        isPasswordVisible.toggle()
+        
+        if isPasswordVisible {
+            sender.setImage(UIImage(systemName: "eye.fill"), for: .normal)
+        } else {
+            sender.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+        }
+
+        passwordTextField.isSecureTextEntry = !isPasswordVisible
     }
 }
 

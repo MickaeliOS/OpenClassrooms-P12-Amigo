@@ -11,16 +11,7 @@ class SettingsViewController: UIViewController {
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        switch theme {
-        case .unspecified:
-            themeSegmentedControl.selectedSegmentIndex = 0
-        case .light:
-            themeSegmentedControl.selectedSegmentIndex = 1
-        case .dark:
-            themeSegmentedControl.selectedSegmentIndex = 2
-        }
-        
+        setupSegmentedControl()
         changeMode(mode: theme.interfaceStyle)
     }
     
@@ -66,6 +57,17 @@ class SettingsViewController: UIViewController {
     }
     
     // MARK: - PRIVATE FUNCTIONS
+    private func setupSegmentedControl() {
+        switch theme {
+        case .unspecified:
+            themeSegmentedControl.selectedSegmentIndex = 0
+        case .light:
+            themeSegmentedControl.selectedSegmentIndex = 1
+        case .dark:
+            themeSegmentedControl.selectedSegmentIndex = 2
+        }
+    }
+    
     private func saveMode(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:

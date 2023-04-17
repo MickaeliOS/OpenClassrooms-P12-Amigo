@@ -34,33 +34,35 @@ extension UIViewController {
 }
 
 extension UITextField {
-    func addLeftSystemImage(image: UIImage, paddingLeft: CGFloat, paddingRight: CGFloat, size: CGFloat) {
+    func addLeftSystemImage(image: UIImage) {
         leftViewMode = .always
         
-        let imageView = UIImageView(frame: CGRect(x: paddingLeft, y: 0, width: size, height: size))
+        let imageView = UIImageView(frame: CGRect(x: 15, y: 0, width: 25, height: 25))
         imageView.contentMode = .scaleAspectFit // If the image isn't squared, we keep the aspect ratio.
         imageView.tintColor = UIColor.placeholderText
         imageView.image = image
 
-        let width = size + paddingLeft + paddingRight
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: width, height: size))
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 25))
         view.addSubview(imageView)
         
         leftView = view
     }
     
-    func addRightSystemImage(image: UIImage, paddingLeft: CGFloat, paddingRight: CGFloat, size: CGFloat) {
-        rightViewMode = .always
+    func addPasswordToggleImage(target: Any?, action: Selector) {
+        // This method adds an eye icon to the given UITextField for toggling password visibility.
+        // The button's action needs to be handled in your UIViewController.
+        let button = UIButton(type: .custom)
         
-        let imageView = UIImageView(frame: CGRect(x: -paddingLeft, y: 0, width: size, height: size))
-        imageView.contentMode = .scaleAspectFit // If the image isn't squared, we keep the aspect ratio.
-        imageView.tintColor = UIColor.placeholderText
-        imageView.image = image
-
-        let width = size + paddingLeft + paddingRight
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: width, height: size))
-        view.addSubview(imageView)
+        button.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
+        button.addTarget(target, action: action, for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        button.contentMode = .scaleAspectFit
+        button.tintColor = UIColor.placeholderText
         
-        rightView = view
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 25))
+        view.addSubview(button)
+        
+        self.rightView = view
+        self.rightViewMode = .always
     }
 }
