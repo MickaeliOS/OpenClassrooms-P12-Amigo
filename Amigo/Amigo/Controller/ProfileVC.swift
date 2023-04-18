@@ -9,9 +9,6 @@ import UIKit
 import FirebaseAuth
 
 class ProfileVC: UIViewController {
+    // MARK: - OUTLETS & PROPERTIES
     let userService = UserService.shared
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 }

@@ -25,13 +25,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
      }*/
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
         
         let theme = UserDefaults.standard.integer(forKey: "theme")
-
+        
         switch theme {
         case 0:
             window?.overrideUserInterfaceStyle = .unspecified
@@ -77,28 +74,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
      }*/
     
     /*func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-     // Version sans fetchUser()
-     guard let windowScene = (scene as? UIWindowScene) else { return }
-     window?.windowScene =  windowScene
-     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-     
-     handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
-     if ((user) != nil) {
-     
-     // If the user is logged in, the UITabBar which contains all his personal screens become the new RootViewController, fot cleaner navigation.
-     UserService.shared.currentlyLoggedIn = true
-     let MainTabBar = storyboard.instantiateViewController(withIdentifier: "MainTabBar")
-     self?.window?.rootViewController = MainTabBar
-     self?.window?.makeKeyAndVisible()
-     
-     } else {
-     // Otherwise, if he disconnect, then we go back to the WelcomeVC.
-     let welcomeNC = storyboard.instantiateViewController(withIdentifier: "WelcomeNavigationController")
-     self?.window?.rootViewController = welcomeNC
-     self?.window?.makeKeyAndVisible()
-     }
-     }
-     }*/
+        // Version sans fetchUser()
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window?.windowScene =  windowScene
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        handle = Auth.auth().addStateDidChangeListener { [weak self] (auth, user) in
+            if ((user) != nil) {
+                
+                // If the user is logged in, the UITabBar which contains all his personal screens become the new RootViewController, fot cleaner navigation.
+                UserService.shared.currentlyLoggedIn = true
+                let MainTabBar = storyboard.instantiateViewController(withIdentifier: "MainTabBar")
+                self?.window?.rootViewController = MainTabBar
+                self?.window?.makeKeyAndVisible()
+                
+            } else {
+                // Otherwise, if he disconnect, then we go back to the WelcomeVC.
+                let welcomeNC = storyboard.instantiateViewController(withIdentifier: "WelcomeNavigationController")
+                self?.window?.rootViewController = welcomeNC
+                self?.window?.makeKeyAndVisible()
+            }
+        }
+    }*/
     
     /*func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
      // Version qui mène sur AuthStateVC

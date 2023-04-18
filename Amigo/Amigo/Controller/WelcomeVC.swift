@@ -29,8 +29,7 @@ class WelcomeVC: UIViewController {
         if fieldsControl() {
             userService.signIn(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] error in
                 if let error = error {
-                    self?.errorMessageLabel.isHidden = false
-                    self?.errorMessageLabel.text = error.localizedDescription
+                    self?.errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
                     return
                 }
                 
@@ -62,8 +61,7 @@ class WelcomeVC: UIViewController {
     
     private func fieldsControl() -> Bool {
         if emailTextField.isEmpty || passwordTextField.isEmpty {
-            errorMessageLabel.isHidden = false
-            errorMessageLabel.text = "All fields must be filled."
+            errorMessageLabel.displayErrorMessage(message: "All fields must be filled.")
             return false
         }
         return true

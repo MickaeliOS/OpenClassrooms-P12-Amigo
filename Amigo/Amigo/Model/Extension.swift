@@ -8,15 +8,6 @@
 import Foundation
 import UIKit
 
-extension UITextField {
-    var isEmpty: Bool {
-        if let text = text, !text.isEmpty {
-            return false
-        }
-        return true
-    }
-}
-
 extension UIViewController {
     func presentVCFullScreen(with identifier: String) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -34,6 +25,13 @@ extension UIViewController {
 }
 
 extension UITextField {
+    var isEmpty: Bool {
+        if let text = text, !text.isEmpty {
+            return false
+        }
+        return true
+    }
+    
     func addLeftSystemImage(image: UIImage) {
         leftViewMode = .always
         
@@ -64,5 +62,22 @@ extension UITextField {
         
         self.rightView = view
         self.rightViewMode = .always
+    }
+}
+
+extension UILabel {
+    func displayErrorMessage(message: String) {
+        isHidden = false
+        text = message
+    }
+}
+
+extension UIImageView {
+    func makeRounded() {
+        layer.borderWidth = 1
+        layer.masksToBounds = false
+        layer.borderColor = UIColor.black.cgColor
+        layer.cornerRadius = self.frame.height / 2
+        clipsToBounds = true
     }
 }

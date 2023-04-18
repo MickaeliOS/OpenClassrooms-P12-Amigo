@@ -11,10 +11,6 @@ import FirebaseAuth
 class AddTripVC: UIViewController {
     
     // MARK: - VIEW LIFE CYCLE
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         startLoginFlow()
@@ -24,6 +20,9 @@ class AddTripVC: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var labelToDLete: UILabel!
     var userService = UserService.shared
+    
+    // MARK: - ACTIONS
+    @IBAction func unwindToRootVC(segue: UIStoryboardSegue) {}
     
     // MARK: - PRIVATE FUNCTIONS
     private func startLoginFlow() {
