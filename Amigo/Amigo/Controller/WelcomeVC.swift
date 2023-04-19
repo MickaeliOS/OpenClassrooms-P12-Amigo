@@ -80,6 +80,7 @@ class WelcomeVC: UIViewController {
     }
 }
 
+// MARK: - EXTENSIONS
 extension WelcomeVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         errorMessageLabel.isHidden = true

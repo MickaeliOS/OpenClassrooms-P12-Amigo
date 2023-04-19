@@ -32,6 +32,7 @@ class AddTripVC: UIViewController {
             userService.fetchUser { [weak self] error in
                 if let error = error {
                     self?.presentAlert(with: error.localizedDescription)
+                    self?.presentVCFullScreen(with: "WelcomeVC") // TODO: Ne fonctionne pas, seul l'alerte marche. Si pas d'alerte, ça marche.
                     return
                 }
                 
@@ -39,8 +40,9 @@ class AddTripVC: UIViewController {
                 return
             }
             return
+        } else {
+            self.presentVCFullScreen(with: "WelcomeVC")
         }
-        self.presentVCFullScreen(with: "WelcomeVC")
     }
     
     private func setupInterface() {

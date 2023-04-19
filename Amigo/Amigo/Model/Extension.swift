@@ -74,9 +74,9 @@ extension UILabel {
 
 extension UIImageView {
     func makeRounded() {
-        layer.borderWidth = 1
+        layer.borderWidth = 2
         layer.masksToBounds = false
-        layer.borderColor = UIColor.black.cgColor
+        layer.borderColor = UIColor.white.cgColor
         layer.cornerRadius = self.frame.height / 2
         clipsToBounds = true
     }

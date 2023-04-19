@@ -19,6 +19,7 @@ class UserService {
     var currentlyLoggedIn: Bool {
         Auth.auth().currentUser != nil
     }
+    let userTableConstants = Constant.FirestoreTables.User.self
     
     // MARK: - USER MANAGEMENT
     func createUser(email: String?, password: String?, completion: @escaping (FirebaseAuth.User?, CreateAccountError?) -> Void) {
@@ -41,13 +42,13 @@ class UserService {
     
     func saveUserInDatabase(user: User, completion: @escaping (DatabaseError?) -> Void) {
         let database = Firestore.firestore()
-        let userData = ["userID": user.userID,
-                        "email": user.email,
-                        "lastname": user.lastname,
-                        "firstname": user.firstname,
-                        "gender": user.gender.rawValue]
+        let userData = [userTableConstants.userID: user.userID,
+                        userTableConstants.firstname: user.firstname,
+                        userTableConstants.lastname: user.lastname,
+                        userTableConstants.gender: user.gender.rawValue,
+                        userTableConstants.email: user.email]
         
-        database.collection("User").document(user.userID).setData(userData) { error in
+        database.collection(userTableConstants.tableName).document(user.userID).setData(userData) { error in
             guard error == nil else {
                 completion(.defaultError)
                 return
@@ -87,7 +88,9 @@ class UserService {
             return
         }
         
-        Firestore.firestore().collection("User").document(currentUserID).getDocument { document, error in
+        Firestore.firestore().collection(userTableConstants.tableName).document(currentUserID).getDocument { [weak self] document, error in
+            guard let self = self else { return } // Pas sûr de ce cas la, à revoir
+            
             if let _ = error {
                 completion(.cannotGetDocument)
                 return
@@ -97,16 +100,16 @@ class UserService {
                 completion(.noDocument)
                 return
             }
-            
-            let genderString = data["gender"] as? String ?? ""
+
+            let genderString = data[self.userTableConstants.gender] as? String ?? ""
             let gender = User.Gender(rawValue: genderString) ?? .woman
             
             let user = User(
-                userID: data["userID"] as? String ?? "",
-                firstname: data["firstname"] as? String ?? "",
-                lastname: data["lastname"] as? String ?? "",
+                userID: data[self.userTableConstants.userID] as? String ?? "",
+                firstname: data[self.userTableConstants.firstname] as? String ?? "",
+                lastname: data[self.userTableConstants.lastname] as? String ?? "",
                 gender: gender,
-                email: data["email"] as? String ?? ""
+                email: data[self.userTableConstants.email] as? String ?? ""
             )
             
             UserService.shared.user = user
@@ -265,7 +268,7 @@ extension UserService {
         ) != nil
     }
     
-    private func emptyControl(fields: [String?]) -> Bool {
+    func emptyControl(fields: [String?]) -> Bool {
         for field in fields {
             guard let field = field, !field.isEmpty else {
                 return false
