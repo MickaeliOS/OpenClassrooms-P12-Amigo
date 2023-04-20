@@ -22,4 +22,9 @@ struct User {
         case man = "Man"
         case woman = "Woman"
     }
+    
+    /*struct ImageInfos {
+        var image: String
+        var data: Data?
+    }*/
 }

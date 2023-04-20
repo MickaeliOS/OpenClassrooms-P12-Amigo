@@ -27,5 +27,14 @@ class ProfileVC: UIViewController {
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
         profilePictureImage.makeRounded()
+        setupUserInfos()
+    }
+    
+    private func setupUserInfos() {
+        // TODO: Gérer les images
+        firstnameLabel.text = userService.user?.firstname
+        lastnameLabel.text = userService.user?.lastname
+        genderLabel.text = userService.user?.gender.rawValue
+        descriptionLabel.text = userService.user?.description ?? "No description."
     }
 }

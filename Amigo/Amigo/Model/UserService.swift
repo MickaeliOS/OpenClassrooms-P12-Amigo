@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseStorage
 
 class UserService {
     // MARK: - SINGLETON
@@ -20,6 +21,8 @@ class UserService {
         Auth.auth().currentUser != nil
     }
     let userTableConstants = Constant.FirestoreTables.User.self
+    let database = Firestore.firestore()
+    let storageRef = Storage.storage().reference()
     
     // MARK: - USER MANAGEMENT
     func createUser(email: String?, password: String?, completion: @escaping (FirebaseAuth.User?, CreateAccountError?) -> Void) {
@@ -41,13 +44,15 @@ class UserService {
     }
     
     func saveUserInDatabase(user: User, completion: @escaping (DatabaseError?) -> Void) {
-        let database = Firestore.firestore()
         let userData = [userTableConstants.userID: user.userID,
                         userTableConstants.firstname: user.firstname,
                         userTableConstants.lastname: user.lastname,
                         userTableConstants.gender: user.gender.rawValue,
-                        userTableConstants.email: user.email]
-        
+                        userTableConstants.email: user.email,
+                        userTableConstants.description: user.description ?? "",
+                        userTableConstants.profilePicture: user.profilePicture ?? "",
+                        userTableConstants.banner: user.banner ?? ""]
+
         database.collection(userTableConstants.tableName).document(user.userID).setData(userData) { error in
             guard error == nil else {
                 completion(.defaultError)
@@ -87,8 +92,8 @@ class UserService {
             completion(.noUser)
             return
         }
-        
-        Firestore.firestore().collection(userTableConstants.tableName).document(currentUserID).getDocument { [weak self] document, error in
+
+        database.collection(userTableConstants.tableName).document(currentUserID).getDocument { [weak self] document, error in
             guard let self = self else { return } // Pas sûr de ce cas la, à revoir
             
             if let _ = error {
@@ -109,7 +114,10 @@ class UserService {
                 firstname: data[self.userTableConstants.firstname] as? String ?? "",
                 lastname: data[self.userTableConstants.lastname] as? String ?? "",
                 gender: gender,
-                email: data[self.userTableConstants.email] as? String ?? ""
+                email: data[self.userTableConstants.email] as? String ?? "",
+                description: data[self.userTableConstants.description] as? String ?? "",
+                profilePicture: data[self.userTableConstants.profilePicture] as? String ?? "",
+                banner: data[self.userTableConstants.banner] as? String ?? ""
             )
             
             UserService.shared.user = user
@@ -123,6 +131,46 @@ class UserService {
         } catch {
             throw SignOutError.cannotSignOut
         }
+    }
+    
+    func uploadPicture(picture: Data?, type: String, completion: @escaping (Bool) -> Void) {
+        guard user != nil else {
+            //TODO: Erreur, pas d'utilisateur, demander à l'user de se reconnecter
+            completion(false)
+            return
+        }
+        
+        guard let picture = picture else {
+            //TODO: Erreur, pas de data
+            completion(false)
+            return
+        }
+                
+        let savingPath = "\(user!.userID)/images/\(type)"
+
+        let fileRef = storageRef.child(savingPath)
+        
+        let uploadTask = fileRef.putData(picture) { [weak self] metadata, error in
+            if error == nil && metadata != nil {
+                if type == "banner" {
+                    self?.user!.banner = savingPath
+                    completion(true)
+                } else {
+                    self?.user!.profilePicture = savingPath
+                    completion(true)
+                }
+            }
+            completion(false)
+        }
+    }
+    
+    func updateUser() {
+        guard user != nil else { return }
+        //database.collection(Constant.FirestoreTables.User.tableName).document(user!.userID).update
+    }
+    
+    func getUserBanner() {
+        database.collection(Constant.FirestoreTables.User.tableName).document(user!.userID)
     }
 }
 
