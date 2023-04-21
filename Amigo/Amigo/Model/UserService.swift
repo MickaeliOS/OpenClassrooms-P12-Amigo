@@ -48,10 +48,7 @@ class UserService {
                         userTableConstants.firstname: user.firstname,
                         userTableConstants.lastname: user.lastname,
                         userTableConstants.gender: user.gender.rawValue,
-                        userTableConstants.email: user.email,
-                        userTableConstants.description: user.description ?? "",
-                        userTableConstants.profilePicture: user.profilePicture ?? "",
-                        userTableConstants.banner: user.banner ?? ""]
+                        userTableConstants.email: user.email]
 
         database.collection(userTableConstants.tableName).document(user.userID).setData(userData) { error in
             guard error == nil else {
@@ -115,9 +112,9 @@ class UserService {
                 lastname: data[self.userTableConstants.lastname] as? String ?? "",
                 gender: gender,
                 email: data[self.userTableConstants.email] as? String ?? "",
-                description: data[self.userTableConstants.description] as? String ?? "",
-                profilePicture: data[self.userTableConstants.profilePicture] as? String ?? "",
-                banner: data[self.userTableConstants.banner] as? String ?? ""
+                description: data[self.userTableConstants.description] as? String,
+                profilePicture: ImageInfos(image: data[self.userTableConstants.profilePicture] as? String),
+                banner: ImageInfos(image: data[self.userTableConstants.banner] as? String)
             )
             
             UserService.shared.user = user
@@ -133,16 +130,16 @@ class UserService {
         }
     }
     
-    func uploadPicture(picture: Data?, type: String, completion: @escaping (Bool) -> Void) {
+    func uploadPicture(picture: Data?, type: String, completion: @escaping (String?) -> Void) {
         guard user != nil else {
             //TODO: Erreur, pas d'utilisateur, demander à l'user de se reconnecter
-            completion(false)
+            completion(nil)
             return
         }
         
         guard let picture = picture else {
             //TODO: Erreur, pas de data
-            completion(false)
+            completion(nil)
             return
         }
                 
@@ -153,24 +150,46 @@ class UserService {
         let uploadTask = fileRef.putData(picture) { [weak self] metadata, error in
             if error == nil && metadata != nil {
                 if type == "banner" {
-                    self?.user!.banner = savingPath
-                    completion(true)
+                    completion(savingPath)
                 } else {
-                    self?.user!.profilePicture = savingPath
-                    completion(true)
+                    completion(savingPath)
                 }
+                return
             }
-            completion(false)
+            completion(nil)
         }
     }
     
-    func updateUser() {
+    func updateUser(fields: [String:Any], completion: @escaping (Error?) -> Void) {
         guard user != nil else { return }
-        //database.collection(Constant.FirestoreTables.User.tableName).document(user!.userID).update
+        
+        database.collection(Constant.FirestoreTables.User.tableName).document(user!.userID).updateData(fields) { error in
+            if let error = error {
+                //TODO: error
+                completion(error)
+                return
+            }
+            
+            completion(nil)
+        }
     }
     
-    func getUserBanner() {
-        database.collection(Constant.FirestoreTables.User.tableName).document(user!.userID)
+    func getImage(path: String?, completion: @escaping (Data?) -> Void) {
+        guard let path = path else {
+            //TODO: Empty path
+            completion(nil)
+            return
+        }
+        
+        storageRef.child(path).getData(maxSize: 5 * 1024 * 1024) { data, error in
+            guard let data = data, error == nil else {
+                //TODO: Erreur lors du téléchargement
+                completion(nil)
+                return
+            }
+            
+            completion(data)
+        }
     }
 }
 
@@ -308,6 +327,7 @@ extension UserService {
     }
     
     private func isValidPassword(_ password: String) -> Bool {
+        // Same logic as the email verification.
         let regex = #"(?=^.{7,}$)(?=^.*[A-Z].*$)(?=^.*\d.*$).*"#
         
         return password.range(
@@ -327,5 +347,40 @@ extension UserService {
     
     private func passwordEqualityCheck(password: String, confirmPassword: String) -> Bool {
         return password == confirmPassword
+    }
+    
+    func getModifiedProperties(from updatedUser: User) -> [String: Any]? {
+        guard let currentUser = user else {
+            //TODO: Se relog
+            return nil
+        }
+        
+        var modifiedProperties: [String: Any] = [:]
+        
+        if currentUser.firstname != updatedUser.firstname {
+            modifiedProperties[Constant.FirestoreTables.User.firstname] = updatedUser.firstname
+        }
+        
+        if currentUser.lastname != updatedUser.lastname {
+            modifiedProperties[Constant.FirestoreTables.User.lastname] = updatedUser.lastname
+        }
+        
+        if currentUser.gender != updatedUser.gender {
+            modifiedProperties[Constant.FirestoreTables.User.gender] = updatedUser.gender.rawValue
+        }
+        
+        if currentUser.description != updatedUser.description {
+            modifiedProperties[Constant.FirestoreTables.User.description] = updatedUser.description
+        }
+        
+        if currentUser.profilePicture?.data != updatedUser.profilePicture?.data {
+            modifiedProperties[Constant.FirestoreTables.User.profilePicture] = ""
+        }
+        
+        if currentUser.banner?.data != updatedUser.banner?.data {
+            modifiedProperties[Constant.FirestoreTables.User.banner] = ""
+        }
+        
+        return modifiedProperties
     }
 }

@@ -15,16 +15,16 @@ struct User {
     var email: String
     var description: String?
     var globalNote: Double?
-    var profilePicture: String?
-    var banner: String?
+    var profilePicture: ImageInfos?
+    var banner: ImageInfos?
     
     enum Gender: String {
         case man = "Man"
         case woman = "Woman"
     }
-    
-    /*struct ImageInfos {
-        var image: String
-        var data: Data?
-    }*/
+}
+
+struct ImageInfos {
+    var image: String?
+    var data: Data?
 }

@@ -172,11 +172,11 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVy-Wo-U9X">
                                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="223.33333333333334"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MKB-av-NaK">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MKB-av-NaK">
                                                                         <rect key="frame" x="0.0" y="0.0" width="355" height="156.33333333333334"/>
                                                                         <color key="backgroundColor" systemColor="linkColor"/>
                                                                     </imageView>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1le-lv-8Ds">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1le-lv-8Ds">
                                                                         <rect key="frame" x="110.66666666666667" y="89.333333333333343" width="133.66666666666663" height="134"/>
                                                                         <color key="backgroundColor" red="0.19161859580000001" green="0.44787720959999999" blue="0.21893528919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                         <gestureRecognizers/>
@@ -330,7 +330,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PAO-AB-MVo">
                                                                 <rect key="frame" x="0.0" y="36.333333333333329" width="355" height="177"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9BZ-kg-Hql">
+                                                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9BZ-kg-Hql">
                                                                         <rect key="frame" x="0.0" y="0.0" width="355" height="177"/>
                                                                         <gestureRecognizers/>
                                                                         <connections>
@@ -359,7 +359,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Qq-Pw-lMi">
                                                                 <rect key="frame" x="0.0" y="36.333333333333371" width="355" height="177"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VQD-LD-GAl">
+                                                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VQD-LD-GAl">
                                                                         <rect key="frame" x="89" y="0.0" width="177" height="177"/>
                                                                         <gestureRecognizers/>
                                                                         <constraints>

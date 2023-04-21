@@ -31,10 +31,31 @@ class ProfileVC: UIViewController {
     }
     
     private func setupUserInfos() {
-        // TODO: Gérer les images
+        // Retrieving images
+        getProfilePicture()
+        getBannerImage()
+        
         firstnameLabel.text = userService.user?.firstname
         lastnameLabel.text = userService.user?.lastname
         genderLabel.text = userService.user?.gender.rawValue
         descriptionLabel.text = userService.user?.description ?? "No description."
+    }
+    
+    private func getProfilePicture() {
+        userService.getImage(path: userService.user?.profilePicture?.image) { [weak self] data in
+            guard let data = data else { return }
+            
+            self?.userService.user?.profilePicture?.data = data
+            self?.profilePictureImage.image = UIImage(data: data)
+        }
+    }
+    
+    private func getBannerImage() {
+        userService.getImage(path: userService.user?.banner?.image) { [weak self] data in
+            guard let data = data else { return }
+            
+            self?.userService.user?.banner?.data = data
+            self?.bannerImage.image = UIImage(data: data)
+        }
     }
 }
