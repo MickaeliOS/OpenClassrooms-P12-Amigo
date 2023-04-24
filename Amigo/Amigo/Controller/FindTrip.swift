@@ -1,5 +1,5 @@
 //
-//  AddTripVC.swift
+//  FindTrip.swift
 //  Amigo
 //
 //  Created by Mickaël Horn on 14/04/2023.
@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class AddTripVC: UIViewController {
+class FindTrip: UIViewController {
     
     // MARK: - VIEW LIFE CYCLE
     override func viewWillAppear(_ animated: Bool) {
@@ -18,7 +18,6 @@ class AddTripVC: UIViewController {
 
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var labelToDLete: UILabel!
     var userService = UserService.shared
     
     // MARK: - ACTIONS
@@ -47,6 +46,5 @@ class AddTripVC: UIViewController {
     
     private func setupInterface() {
         self.activityIndicator.isHidden = true
-        self.labelToDLete.text = UserService.shared.user?.firstname
     }
 }

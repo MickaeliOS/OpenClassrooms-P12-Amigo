@@ -76,7 +76,7 @@ extension UIImageView {
     func makeRounded() {
         layer.borderWidth = 2
         layer.masksToBounds = false
-        layer.borderColor = UIColor.white.cgColor
+        layer.borderColor = UIColor(named: "Label Color")?.cgColor
         layer.cornerRadius = self.frame.height / 2
         clipsToBounds = true
     }

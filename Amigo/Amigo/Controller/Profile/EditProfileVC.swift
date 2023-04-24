@@ -15,6 +15,11 @@ class EditProfileVC: UIViewController {
         setupInterface()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        delegate?.editProfileVCDidDismiss()
+    }
+    
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var bannerImage: UIImageView!
     @IBOutlet weak var profilePictureImage: UIImageView!
@@ -23,11 +28,20 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var genderSegmentedControl: UISegmentedControl!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var saveProfileButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     let userService = UserService.shared
     var fromBanner = false
     var changedUser: User?
+    weak var delegate: EditProfileVCDelegate?
     
     // MARK: - ACTIONS
+    @IBAction func dismissKeyboard(_ sender: Any) {
+        lastnameTextField.resignFirstResponder()
+        firstnameTextField.resignFirstResponder()
+        descriptionTextView.resignFirstResponder()
+    }
+    
     @IBAction func saveProfileButtonTapped(_ sender: Any) {
         saveUserProfile()
         
@@ -45,16 +59,13 @@ class EditProfileVC: UIViewController {
     
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
-        /*if let bannerImageData = userService.user?.banner?.data {
+        if let bannerImageData = userService.user?.banner?.data {
             bannerImage.image = UIImage(data: bannerImageData)
         }
         
         if let profilePictureImageData = userService.user?.profilePicture?.data {
             profilePictureImage.image = UIImage(data: profilePictureImageData)
-        }*/
-        
-        bannerImage.image = UIImage(systemName: "photo")
-        profilePictureImage.image = UIImage(systemName: "photo")
+        }
 
         profilePictureImage.makeRounded()
         saveProfileButton.layer.cornerRadius = 10
@@ -70,6 +81,9 @@ class EditProfileVC: UIViewController {
             genderSegmentedControl.selectedSegmentIndex = 0
         }
         
+        if userService.user?.description == nil || userService.user?.description == "" {
+            descriptionTextView.text = "No description."
+        }
     }
     
     private func fieldsControl() -> Bool {
@@ -100,14 +114,18 @@ class EditProfileVC: UIViewController {
     }
     
     private func saveUserProfile() {
+        toggleActivityIndicator(shown: true)
+        
         guard let currentUser = userService.user else {
             //TODO: demande à se relog
+            toggleActivityIndicator(shown: false)
             return
         }
         
         // First step -> we make sure the mandatory fields are filled.
         guard fieldsControl() else {
             //TODO: Fields must not be empty
+            toggleActivityIndicator(shown: false)
             return
         }
         
@@ -129,6 +147,7 @@ class EditProfileVC: UIViewController {
         
         // Third step -> Let's get the potential modified properties
         guard var modifiedProperties = userService.getModifiedProperties(from: changedUser!) else {
+            toggleActivityIndicator(shown: false)
             //TODO: Rien à update
             return
         }
@@ -138,12 +157,14 @@ class EditProfileVC: UIViewController {
             
             userService.uploadPicture(picture: bannerImageData, type: Constant.FirestoreTables.User.banner) { [weak self] imagePath in
                 guard let bannerPath = imagePath else {
+                    self?.toggleActivityIndicator(shown: false)
                     //TODO: Gérer l'erreur
                     return
                 }
                 
                 self?.userService.uploadPicture(picture: profilePictureImageData, type: Constant.FirestoreTables.User.profilePicture) { [weak self] imagePath in
                     guard let profilePicturePath = imagePath else {
+                        self?.toggleActivityIndicator(shown: false)
                         //TODO: Gérer l'erreur
                         return
                     }
@@ -155,10 +176,14 @@ class EditProfileVC: UIViewController {
                     // Last step -> We can save the user.
                     self?.userService.updateUser(fields: modifiedProperties) { error in
                         if let error = error {
+                            self?.toggleActivityIndicator(shown: false)
                             //TODO: Gérer l'erreur
                             return
                         }
                         self?.userService.user = self?.changedUser
+                        self?.userService.user?.banner?.image = bannerPath
+                        self?.userService.user?.profilePicture?.image = profilePicturePath
+                        self?.dismiss(animated: true)
                         return
                     }
                 }
@@ -169,21 +194,25 @@ class EditProfileVC: UIViewController {
                 userService.uploadPicture(picture: bannerImageData, type: Constant.FirestoreTables.User.banner) { [weak self] imagePath in
                     guard let bannerPath = imagePath else {
                         //TODO: Gérer l'erreur
+                        self?.toggleActivityIndicator(shown: false)
                         return
                     }
                     // Fifth step -> Once we have the path, we add it in the modifiedProperties dictionnary.
                     modifiedProperties[Constant.FirestoreTables.User.banner] = bannerPath
+                    self?.userService.user?.banner?.image = bannerPath
                 }
             }
             
             if modifiedProperties[Constant.FirestoreTables.User.profilePicture] != nil {
                 userService.uploadPicture(picture: profilePictureImageData, type: Constant.FirestoreTables.User.profilePicture) { [weak self] imagePath in
                     guard let profilePicturePath = imagePath else {
+                        self?.toggleActivityIndicator(shown: false)
                         //TODO: Gérer l'erreur
                         return
                     }
                     // Fifth step -> Once we have the path, we add it in the modifiedProperties dictionnary.
                     modifiedProperties[Constant.FirestoreTables.User.profilePicture] = profilePicturePath
+                    self?.userService.user?.profilePicture?.image = profilePicturePath
                 }
             }
             
@@ -191,15 +220,24 @@ class EditProfileVC: UIViewController {
             userService.updateUser(fields: modifiedProperties) { [weak self] error in
                 if let error = error {
                     //TODO: Gérer l'erreur
+                    self?.toggleActivityIndicator(shown: false)
                     return
                 }
                 self?.userService.user = self?.changedUser
+                self?.dismiss(animated: true)
             }
         }
     }
+    
+    private func toggleActivityIndicator(shown: Bool) {
+        // If shown is true, then the button is hidden and we display the Activity Indicator
+        // If not, we hide the Activity Indicator and show the button
+        saveProfileButton.isHidden = shown
+        activityIndicator.isHidden = !shown
+    }
 }
 
-// MARK: - EXTENSIONS
+// MARK: - EXTENSIONS & PROTOCOL
 extension EditProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if fromBanner {
@@ -209,4 +247,8 @@ extension EditProfileVC: UIImagePickerControllerDelegate, UINavigationController
         }
         dismiss(animated: true)
     }
+}
+
+protocol EditProfileVCDelegate: AnyObject {
+    func editProfileVCDidDismiss()
 }
