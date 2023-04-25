@@ -21,8 +21,8 @@ class WelcomeVC: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
-    let userService = UserService.shared
-    var isPasswordVisible = false
+    private let userService = UserService.shared
+    private var isPasswordVisible = false
 
     // MARK: - ACTIONS
     @IBAction func loginButtonTapped(_ sender: Any) {

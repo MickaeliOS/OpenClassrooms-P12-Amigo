@@ -46,12 +46,17 @@ class ProfileVC: UIViewController {
         
         if userService.user?.description == nil || userService.user?.description == "" {
             descriptionLabel.text = "No description."
+        } else {
+            descriptionLabel.text = userService.user?.description
         }
     }
     
     private func getProfilePicture() {
         userService.getImage(path: userService.user?.profilePicture?.image) { [weak self] data in
-            guard let data = data else { return }
+            guard let data = data else {
+                //TODO: Mettre l'image placeHolder
+                return
+            }
             
             self?.userService.user?.profilePicture?.data = data
             self?.profilePictureImage.image = UIImage(data: data)
@@ -60,7 +65,10 @@ class ProfileVC: UIViewController {
     
     private func getBannerImage() {
         userService.getImage(path: userService.user?.banner?.image) { [weak self] data in
-            guard let data = data else { return }
+            guard let data = data else {
+                //TODO: Mettre l'image placeHolder
+                return
+            }
             
             self?.userService.user?.banner?.data = data
             self?.bannerImage.image = UIImage(data: data)

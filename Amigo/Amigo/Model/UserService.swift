@@ -187,7 +187,7 @@ class UserService {
                 completion(nil)
                 return
             }
-            
+
             completion(data)
         }
     }
@@ -349,7 +349,7 @@ extension UserService {
         return password == confirmPassword
     }
     
-    func getModifiedProperties(from updatedUser: User) -> [String: Any]? {
+    func getModifiedProperties(from changedUser: User) -> [String: Any]? {
         guard let currentUser = user else {
             //TODO: Se relog
             return nil
@@ -357,27 +357,27 @@ extension UserService {
         
         var modifiedProperties: [String: Any] = [:]
         
-        if currentUser.firstname != updatedUser.firstname {
-            modifiedProperties[Constant.FirestoreTables.User.firstname] = updatedUser.firstname
+        if currentUser.firstname != changedUser.firstname {
+            modifiedProperties[Constant.FirestoreTables.User.firstname] = changedUser.firstname
         }
         
-        if currentUser.lastname != updatedUser.lastname {
-            modifiedProperties[Constant.FirestoreTables.User.lastname] = updatedUser.lastname
+        if currentUser.lastname != changedUser.lastname {
+            modifiedProperties[Constant.FirestoreTables.User.lastname] = changedUser.lastname
         }
         
-        if currentUser.gender != updatedUser.gender {
-            modifiedProperties[Constant.FirestoreTables.User.gender] = updatedUser.gender.rawValue
+        if currentUser.gender != changedUser.gender {
+            modifiedProperties[Constant.FirestoreTables.User.gender] = changedUser.gender.rawValue
         }
         
-        if currentUser.description != updatedUser.description {
-            modifiedProperties[Constant.FirestoreTables.User.description] = updatedUser.description
+        if currentUser.description != changedUser.description {
+            modifiedProperties[Constant.FirestoreTables.User.description] = changedUser.description
         }
         
-        if currentUser.profilePicture?.data != updatedUser.profilePicture?.data {
+        if currentUser.profilePicture?.data != changedUser.profilePicture?.data {
             modifiedProperties[Constant.FirestoreTables.User.profilePicture] = ""
         }
         
-        if currentUser.banner?.data != updatedUser.banner?.data {
+        if currentUser.banner?.data != changedUser.banner?.data {
             modifiedProperties[Constant.FirestoreTables.User.banner] = ""
         }
         

@@ -17,8 +17,8 @@ class SettingsViewController: UIViewController {
     // MARK: - OUTLETS, VARIABLES & ENUMS
     @IBOutlet weak var themeLabel: UILabel!
     @IBOutlet weak var themeSegmentedControl: UISegmentedControl!
-    let userService = UserService.shared
-    let theme = Theme.shared
+    private let userService = UserService.shared
+    private let theme = Theme.shared
     
     var currentTheme: Theme {
         return Theme(rawValue: UserDefaults.standard.integer(forKey: "theme")) ?? .unspecified

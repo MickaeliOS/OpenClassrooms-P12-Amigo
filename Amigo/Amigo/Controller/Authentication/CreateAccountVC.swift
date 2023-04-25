@@ -24,8 +24,8 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var createAccountButton: UIButton!
-    let userService = UserService.shared
-    var isPasswordVisible = false
+    private let userService = UserService.shared
+    private var isPasswordVisible = false
     
     // MARK: - ACTIONS
     @IBAction func createAccountButtonTapped(_ sender: Any) {

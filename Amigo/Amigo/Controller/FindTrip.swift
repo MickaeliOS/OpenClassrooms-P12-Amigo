@@ -18,7 +18,7 @@ class FindTrip: UIViewController {
 
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    var userService = UserService.shared
+    private var userService = UserService.shared
     
     // MARK: - ACTIONS
     @IBAction func unwindToRootVC(segue: UIStoryboardSegue) {}

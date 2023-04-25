@@ -89,3 +89,9 @@ extension UIImage {
         return data1.isEqual(data2)
     }
 }
+
+extension Locale {
+    static var countryList: [String] {
+        Locale.isoRegionCodes.compactMap { Locale.current.localizedString(forRegionCode: $0) }
+    }
+}

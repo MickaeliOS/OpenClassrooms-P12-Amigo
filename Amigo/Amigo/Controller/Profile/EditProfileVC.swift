@@ -83,6 +83,8 @@ class EditProfileVC: UIViewController {
         
         if userService.user?.description == nil || userService.user?.description == "" {
             descriptionTextView.text = "No description."
+        } else {
+            descriptionTextView.text = userService.user?.description
         }
     }
     
@@ -132,10 +134,10 @@ class EditProfileVC: UIViewController {
         // Second step -> we instanciate the changedUser with potential new informations.
         let genderRawValue = genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex)!
         let gender = User.Gender(rawValue: genderRawValue)!
+        
         let bannerImageData = bannerImage.image?.pngData()
         let profilePictureImageData = profilePictureImage.image?.pngData()
 
-        
         changedUser = User(userID: currentUser.userID,
                                firstname: firstnameTextField.text!,
                                lastname: lastnameTextField.text!,
@@ -175,7 +177,7 @@ class EditProfileVC: UIViewController {
 
                     // Last step -> We can save the user.
                     self?.userService.updateUser(fields: modifiedProperties) { error in
-                        if let error = error {
+                        if let _ = error {
                             self?.toggleActivityIndicator(shown: false)
                             //TODO: Gérer l'erreur
                             return
@@ -218,7 +220,7 @@ class EditProfileVC: UIViewController {
             
             // Last step -> We can save the user.
             userService.updateUser(fields: modifiedProperties) { [weak self] error in
-                if let error = error {
+                if let _ = error {
                     //TODO: Gérer l'erreur
                     self?.toggleActivityIndicator(shown: false)
                     return
