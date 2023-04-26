@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.swift
+//  SettingsVC.swift
 //  Amigo
 //
 //  Created by Mickaël Horn on 17/04/2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsVC: UIViewController {
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +17,9 @@ class SettingsViewController: UIViewController {
     // MARK: - OUTLETS, VARIABLES & ENUMS
     @IBOutlet weak var themeLabel: UILabel!
     @IBOutlet weak var themeSegmentedControl: UISegmentedControl!
-    private let userService = UserService.shared
+    
+    private let userAuth = UserAuth.shared
+    private let userAuthService = UserAuthService()
     private let theme = Theme.shared
     
     var currentTheme: Theme {
@@ -32,7 +34,7 @@ class SettingsViewController: UIViewController {
     
     @IBAction func signOutButtonTapped(_ sender: Any) {
         do {
-            try userService.signOut()
+            try userAuthService.signOut()
             presentVCFullScreen(with: "WelcomeVC")
         } catch (let error) {
             presentAlert(with: error.localizedDescription)

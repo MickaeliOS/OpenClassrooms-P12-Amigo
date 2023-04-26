@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class WelcomeVC: UIViewController {
     
@@ -21,21 +20,13 @@ class WelcomeVC: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
-    private let userService = UserService.shared
+    
     private var isPasswordVisible = false
+    private let userAuthService = UserAuthService()
 
     // MARK: - ACTIONS
     @IBAction func loginButtonTapped(_ sender: Any) {
-        if fieldsControl() {
-            userService.signIn(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] error in
-                if let error = error {
-                    self?.errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
-                    return
-                }
-                
-                self?.dismiss(animated: true)
-            }
-        }
+        loginFlow()
     }
     
     @IBAction func dismissKeyboard(_ sender: Any) {
@@ -57,6 +48,19 @@ class WelcomeVC: UIViewController {
         emailTextField.addLeftSystemImage(image: emailImage)
         passwordTextField.addLeftSystemImage(image: passwordLeftImage)
         passwordTextField.addPasswordToggleImage(target: self, action: #selector(togglePasswordVisibility))
+    }
+    
+    private func loginFlow() {
+        guard fieldsControl() else { return }
+        
+        Task {
+            do {
+                try await userAuthService.signIn(email: emailTextField.text!, password: passwordTextField.text!)
+                dismiss(animated: true)
+            } catch {
+                errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
+            }
+        }
     }
     
     private func fieldsControl() -> Bool {

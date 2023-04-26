@@ -26,7 +26,8 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var genderLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    let userService = UserService.shared
+    let userAuth = UserAuth.shared
+    let pictureService = PictureService()
     
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
@@ -40,38 +41,40 @@ class ProfileVC: UIViewController {
         getBannerImage()
         
         // Retrieving texts
-        firstnameLabel.text = userService.user?.firstname
-        lastnameLabel.text = userService.user?.lastname
-        genderLabel.text = userService.user?.gender.rawValue
+        firstnameLabel.text = userAuth.user?.firstname
+        lastnameLabel.text = userAuth.user?.lastname
+        genderLabel.text = userAuth.user?.gender.rawValue
         
-        if userService.user?.description == nil || userService.user?.description == "" {
+        if userAuth.user?.description == nil || userAuth.user?.description == "" {
             descriptionLabel.text = "No description."
         } else {
-            descriptionLabel.text = userService.user?.description
+            descriptionLabel.text = userAuth.user?.description
         }
     }
     
     private func getProfilePicture() {
-        userService.getImage(path: userService.user?.profilePicture?.image) { [weak self] data in
-            guard let data = data else {
-                //TODO: Mettre l'image placeHolder
-                return
-            }
-            
-            self?.userService.user?.profilePicture?.data = data
-            self?.profilePictureImage.image = UIImage(data: data)
+        guard let user = userAuth.user else {
+            presentAlert(with: "An error occured, please reconnect.")
+            return
+        }
+        
+        Task {
+            let result = try await pictureService.getImage(path: user.profilePicture?.image ?? "")
+            userAuth.user?.profilePicture?.data = result
+            profilePictureImage.image = UIImage(data: result)
         }
     }
     
     private func getBannerImage() {
-        userService.getImage(path: userService.user?.banner?.image) { [weak self] data in
-            guard let data = data else {
-                //TODO: Mettre l'image placeHolder
-                return
-            }
-            
-            self?.userService.user?.banner?.data = data
-            self?.bannerImage.image = UIImage(data: data)
+        guard let user = userAuth.user else {
+            presentAlert(with: "An error occured, please reconnect.")
+            return
+        }
+        
+        Task {
+            let result = try await pictureService.getImage(path: user.banner?.image ?? "")
+            userAuth.user?.banner?.data = result
+            bannerImage.image = UIImage(data: result)
         }
     }
 }

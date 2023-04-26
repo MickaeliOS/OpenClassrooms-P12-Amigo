@@ -24,7 +24,8 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var createAccountButton: UIButton!
-    private let userService = UserService.shared
+
+    private let userCreationService = UserCreationService()
     private var isPasswordVisible = false
     
     // MARK: - ACTIONS
@@ -42,36 +43,30 @@ class CreateAccountVC: UIViewController {
     
     // MARK: - PRIVATE FUNCTIONS
     private func registerUser() {
-        userService.creationAccountFormControl(email: emailTextField.text,
-                                               password: passwordTextField.text,
-                                               confirmPassword: confirmPasswordTextField.text,
-                                               lastname: lastnameTextField.text,
-                                               firstname: firstnameTextField.text,
-                                               gender: genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex)) { error in
-            if let error = error {
-                self.errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
-                return
-            }
-            
-            userService.createUser(email: emailTextField.text!, password: passwordTextField.text!) { [weak self] authUser, error in
-                guard let authUser = authUser, error == nil else {
-                    if let error = error {
-                        self?.errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
-                    }
-                    return
-                }
+        do {
+            try userCreationService.creationAccountFormControl(email: emailTextField.text,
+                                                           password: passwordTextField.text,
+                                                           confirmPassword: confirmPasswordTextField.text,
+                                                           lastname: lastnameTextField.text,
+                                                           firstname: firstnameTextField.text,
+                                                           gender: genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex))
+        } catch {
+            errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
+        }
+        
+        Task {
+            do {
+                let firebaseUser = try await userCreationService.createUser(email: emailTextField.text!,
+                                                                            password: passwordTextField.text!)
                 
-                guard let user = self?.createUserObject(authUser: authUser) else { return }
+                guard let user = createUserObject(authUser: firebaseUser) else { return }
+                try await userCreationService.saveUserInDatabase(user: user)
                 
-                self?.userService.saveUserInDatabase(user: user) { [weak self] error in
-                    if let error = error {
-                        self?.errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
-                        return
-                    }
-                    
-                    // If all the create user process went good, we can go back on the TabBar.
-                    self?.performSegue(withIdentifier: "unwindToRootVC", sender: nil)
-                }
+                // If all the create user process went good, we can go back on the TabBar.
+                performSegue(withIdentifier: "unwindToRootVC", sender: nil)
+
+            } catch {
+                errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
             }
         }
     }

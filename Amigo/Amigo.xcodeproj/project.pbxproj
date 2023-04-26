@@ -9,9 +9,17 @@
 /* Begin PBXBuildFile section */
 		8300096029F6B4D7006DBD54 /* CreateTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300095F29F6B4D7006DBD54 /* CreateTripVC.swift */; };
 		8300096229F6BBD2006DBD54 /* DestinationPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300096129F6BBD2006DBD54 /* DestinationPickerVC.swift */; };
-		830F479129E9311800697C34 /* FindTrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F479029E9311800697C34 /* FindTrip.swift */; };
+		8300096529F8FF2F006DBD54 /* UserCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300096429F8FF2F006DBD54 /* UserCreationService.swift */; };
+		8300096729F90598006DBD54 /* UserAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300096629F90598006DBD54 /* UserAuthService.swift */; };
+		8300096929F905CA006DBD54 /* UserFetchingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300096829F905CA006DBD54 /* UserFetchingService.swift */; };
+		8300096B29F905EB006DBD54 /* UserUpdatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300096A29F905EB006DBD54 /* UserUpdatingService.swift */; };
+		8300096D29F90612006DBD54 /* PictureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300096C29F90612006DBD54 /* PictureService.swift */; };
+		8300097129F907D2006DBD54 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097029F907D2006DBD54 /* UserError.swift */; };
+		8300097329F90960006DBD54 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097229F90960006DBD54 /* Utilities.swift */; };
+		8300097529F90AA1006DBD54 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097429F90AA1006DBD54 /* FirebaseManager.swift */; };
+		830F479129E9311800697C34 /* FindTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F479029E9311800697C34 /* FindTripVC.swift */; };
 		8323F6EC29E587B800CBDFB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */; };
-		8323F6EE29E58CBD00CBDFB5 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6ED29E58CBD00CBDFB5 /* UserService.swift */; };
+		8323F6EE29E58CBD00CBDFB5 /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6ED29E58CBD00CBDFB5 /* UserAuth.swift */; };
 		8323F6F029E5908600CBDFB5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6EF29E5908600CBDFB5 /* User.swift */; };
 		832A841829F018EB0074DC14 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832A841729F018EB0074DC14 /* EditProfileVC.swift */; };
 		832A841A29F01D360074DC14 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832A841929F01D360074DC14 /* Constant.swift */; };
@@ -31,16 +39,24 @@
 		8388260C29E68FBA003EBCC1 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260B29E68FBA003EBCC1 /* CreateAccountVC.swift */; };
 		8388260E29E6931A003EBCC1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260D29E6931A003EBCC1 /* Extension.swift */; };
 		8388261029E6A2F9003EBCC1 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260F29E6A2F9003EBCC1 /* ProfileVC.swift */; };
-		83C20F8A29ED6B3A009B252B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8929ED6B3A009B252B /* SettingsViewController.swift */; };
+		83C20F8A29ED6B3A009B252B /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8929ED6B3A009B252B /* SettingsVC.swift */; };
 		83C20F8E29EE6C54009B252B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8D29EE6C54009B252B /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8300095F29F6B4D7006DBD54 /* CreateTripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTripVC.swift; sourceTree = "<group>"; };
 		8300096129F6BBD2006DBD54 /* DestinationPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationPickerVC.swift; sourceTree = "<group>"; };
-		830F479029E9311800697C34 /* FindTrip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTrip.swift; sourceTree = "<group>"; };
+		8300096429F8FF2F006DBD54 /* UserCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCreationService.swift; sourceTree = "<group>"; };
+		8300096629F90598006DBD54 /* UserAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthService.swift; sourceTree = "<group>"; };
+		8300096829F905CA006DBD54 /* UserFetchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFetchingService.swift; sourceTree = "<group>"; };
+		8300096A29F905EB006DBD54 /* UserUpdatingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUpdatingService.swift; sourceTree = "<group>"; };
+		8300096C29F90612006DBD54 /* PictureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureService.swift; sourceTree = "<group>"; };
+		8300097029F907D2006DBD54 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
+		8300097229F90960006DBD54 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		8300097429F90AA1006DBD54 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		830F479029E9311800697C34 /* FindTripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTripVC.swift; sourceTree = "<group>"; };
 		8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8323F6ED29E58CBD00CBDFB5 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		8323F6ED29E58CBD00CBDFB5 /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
 		8323F6EF29E5908600CBDFB5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		832A841729F018EB0074DC14 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		832A841929F01D360074DC14 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -55,7 +71,7 @@
 		8388260B29E68FBA003EBCC1 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountVC.swift; sourceTree = "<group>"; };
 		8388260D29E6931A003EBCC1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		8388260F29E6A2F9003EBCC1 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
-		83C20F8929ED6B3A009B252B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		83C20F8929ED6B3A009B252B /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		83C20F8D29EE6C54009B252B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,6 +109,21 @@
 				832A841729F018EB0074DC14 /* EditProfileVC.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		8300096329F8FE90006DBD54 /* UserServices */ = {
+			isa = PBXGroup;
+			children = (
+				8323F6ED29E58CBD00CBDFB5 /* UserAuth.swift */,
+				8300096429F8FF2F006DBD54 /* UserCreationService.swift */,
+				8300096629F90598006DBD54 /* UserAuthService.swift */,
+				8300096829F905CA006DBD54 /* UserFetchingService.swift */,
+				8300096A29F905EB006DBD54 /* UserUpdatingService.swift */,
+				8300096C29F90612006DBD54 /* PictureService.swift */,
+				8300097029F907D2006DBD54 /* UserError.swift */,
+				8300097229F90960006DBD54 /* Utilities.swift */,
+			);
+			path = UserServices;
 			sourceTree = "<group>";
 		};
 		8361E02529E5522900EE7D2B = {
@@ -138,10 +169,10 @@
 		8361E04629E5526F00EE7D2B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8323F6ED29E58CBD00CBDFB5 /* UserService.swift */,
+				8300096329F8FE90006DBD54 /* UserServices */,
 				8323F6EF29E5908600CBDFB5 /* User.swift */,
-				8388260D29E6931A003EBCC1 /* Extension.swift */,
 				83C20F8D29EE6C54009B252B /* Theme.swift */,
+				8300097429F90AA1006DBD54 /* FirebaseManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -160,10 +191,11 @@
 			children = (
 				8300095D29F6B42E006DBD54 /* Authentication */,
 				8300095E29F6B468006DBD54 /* Profile */,
-				830F479029E9311800697C34 /* FindTrip.swift */,
-				83C20F8929ED6B3A009B252B /* SettingsViewController.swift */,
+				830F479029E9311800697C34 /* FindTripVC.swift */,
+				83C20F8929ED6B3A009B252B /* SettingsVC.swift */,
 				8300095F29F6B4D7006DBD54 /* CreateTripVC.swift */,
 				8300096129F6BBD2006DBD54 /* DestinationPickerVC.swift */,
+				8388260D29E6931A003EBCC1 /* Extension.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -254,19 +286,27 @@
 			files = (
 				8361E03629E5522900EE7D2B /* WelcomeVC.swift in Sources */,
 				8300096029F6B4D7006DBD54 /* CreateTripVC.swift in Sources */,
+				8300097329F90960006DBD54 /* Utilities.swift in Sources */,
 				8388261029E6A2F9003EBCC1 /* ProfileVC.swift in Sources */,
-				83C20F8A29ED6B3A009B252B /* SettingsViewController.swift in Sources */,
+				83C20F8A29ED6B3A009B252B /* SettingsVC.swift in Sources */,
 				8300096229F6BBD2006DBD54 /* DestinationPickerVC.swift in Sources */,
+				8300097129F907D2006DBD54 /* UserError.swift in Sources */,
 				8361E03229E5522900EE7D2B /* AppDelegate.swift in Sources */,
 				83C20F8E29EE6C54009B252B /* Theme.swift in Sources */,
 				8388260E29E6931A003EBCC1 /* Extension.swift in Sources */,
 				8388260C29E68FBA003EBCC1 /* CreateAccountVC.swift in Sources */,
+				8300096B29F905EB006DBD54 /* UserUpdatingService.swift in Sources */,
+				8300096529F8FF2F006DBD54 /* UserCreationService.swift in Sources */,
 				8361E03429E5522900EE7D2B /* SceneDelegate.swift in Sources */,
-				830F479129E9311800697C34 /* FindTrip.swift in Sources */,
+				8300096729F90598006DBD54 /* UserAuthService.swift in Sources */,
+				8300096929F905CA006DBD54 /* UserFetchingService.swift in Sources */,
+				830F479129E9311800697C34 /* FindTripVC.swift in Sources */,
 				832A841A29F01D360074DC14 /* Constant.swift in Sources */,
+				8300096D29F90612006DBD54 /* PictureService.swift in Sources */,
 				8323F6F029E5908600CBDFB5 /* User.swift in Sources */,
+				8300097529F90AA1006DBD54 /* FirebaseManager.swift in Sources */,
 				832A841829F018EB0074DC14 /* EditProfileVC.swift in Sources */,
-				8323F6EE29E58CBD00CBDFB5 /* UserService.swift in Sources */,
+				8323F6EE29E58CBD00CBDFB5 /* UserAuth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,9 +29,15 @@ class EditProfileVC: UIViewController {
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var saveProfileButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var errorMessageLabel: UILabel!
     
-    let userService = UserService.shared
+    let pictureService = PictureService()
+    let userUpdatingService = UserUpdatingService()
+    
+    let userAuth = UserAuth.shared
     var fromBanner = false
+    var bannerChanged = false
+    var profilePictureChanged = false
     var changedUser: User?
     weak var delegate: EditProfileVCDelegate?
     
@@ -43,7 +49,7 @@ class EditProfileVC: UIViewController {
     }
     
     @IBAction func saveProfileButtonTapped(_ sender: Any) {
-        saveUserProfile()
+        //saveUserProfile()
         
         /*let pngData = UIImage(data: (userService.user?.banner?.data)!)?.pngData()
         print("MKA - equalData : \(pngData == bannerImage.image?.pngData())")*/
@@ -59,20 +65,20 @@ class EditProfileVC: UIViewController {
     
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
-        if let bannerImageData = userService.user?.banner?.data {
+        if let bannerImageData = userAuth.user?.banner?.data {
             bannerImage.image = UIImage(data: bannerImageData)
         }
         
-        if let profilePictureImageData = userService.user?.profilePicture?.data {
+        if let profilePictureImageData = userAuth.user?.profilePicture?.data {
             profilePictureImage.image = UIImage(data: profilePictureImageData)
         }
 
         profilePictureImage.makeRounded()
         saveProfileButton.layer.cornerRadius = 10
-        lastnameTextField.text = userService.user?.lastname
-        firstnameTextField.text = userService.user?.firstname
+        lastnameTextField.text = userAuth.user?.lastname
+        firstnameTextField.text = userAuth.user?.firstname
         
-        switch userService.user?.gender {
+        switch userAuth.user?.gender {
         case .woman:
             genderSegmentedControl.selectedSegmentIndex = 0
         case .man:
@@ -81,20 +87,24 @@ class EditProfileVC: UIViewController {
             genderSegmentedControl.selectedSegmentIndex = 0
         }
         
-        if userService.user?.description == nil || userService.user?.description == "" {
+        if userAuth.user?.description == nil || userAuth.user?.description == "" {
             descriptionTextView.text = "No description."
         } else {
-            descriptionTextView.text = userService.user?.description
+            descriptionTextView.text = userAuth.user?.description
         }
     }
     
     private func fieldsControl() -> Bool {
         // We make sure the mandatory fields are filled.
-        let fields = [lastnameTextField.text,
-                      firstnameTextField.text,
-                      genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex)]
+        guard lastnameTextField.isEmpty, firstnameTextField.isEmpty else {
+            return false
+        }
         
-        return userService.emptyControl(fields: fields)
+        guard let _ = genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex) else {
+            return false
+        }
+        
+        return true
     }
     
     private func bannerImageChangingFlow() {
@@ -115,26 +125,25 @@ class EditProfileVC: UIViewController {
         present(imagePicker, animated: true)
     }
     
-    private func saveUserProfile() {
+    /*private func saveUserProfile() {
         toggleActivityIndicator(shown: true)
-        
-        guard let currentUser = userService.user else {
-            //TODO: demande à se relog
+
+        guard let currentUser = userAuth.user else {
+            presentAlert(with: "An error occured, please reconnect.")
             toggleActivityIndicator(shown: false)
             return
         }
         
         // First step -> we make sure the mandatory fields are filled.
         guard fieldsControl() else {
-            //TODO: Fields must not be empty
+            errorMessageLabel.text = "All fields must be filled."
             toggleActivityIndicator(shown: false)
             return
         }
-        
+                
         // Second step -> we instanciate the changedUser with potential new informations.
         let genderRawValue = genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex)!
         let gender = User.Gender(rawValue: genderRawValue)!
-        
         let bannerImageData = bannerImage.image?.pngData()
         let profilePictureImageData = profilePictureImage.image?.pngData()
 
@@ -148,49 +157,33 @@ class EditProfileVC: UIViewController {
                                banner: ImageInfos(data: profilePictureImageData))
         
         // Third step -> Let's get the potential modified properties
-        guard var modifiedProperties = userService.getModifiedProperties(from: changedUser!) else {
-            toggleActivityIndicator(shown: false)
-            //TODO: Rien à update
+        guard var modifiedProperties = userUpdatingService.getModifiedProperties(from: changedUser!) else {
+            dismiss(animated: true)
             return
         }
         
-        // Fourth step -> We need to upload the images first, because once they are uploaded in Storage, we need the URL in order to save it in Firestore.
-        if modifiedProperties[Constant.FirestoreTables.User.banner] != nil && modifiedProperties[Constant.FirestoreTables.User.profilePicture] != nil {
-            
-            userService.uploadPicture(picture: bannerImageData, type: Constant.FirestoreTables.User.banner) { [weak self] imagePath in
-                guard let bannerPath = imagePath else {
-                    self?.toggleActivityIndicator(shown: false)
-                    //TODO: Gérer l'erreur
-                    return
-                }
+        if bannerChanged && profilePictureChanged {
+            Task {
+                let bannerPath = try await pictureService.uploadPicture(picture: bannerImageData, type: Constant.FirestoreTables.User.banner)
+                let profilePicturePath = try await pictureService.uploadPicture(picture: profilePictureImageData, type: Constant.FirestoreTables.User.profilePicture)
                 
-                self?.userService.uploadPicture(picture: profilePictureImageData, type: Constant.FirestoreTables.User.profilePicture) { [weak self] imagePath in
-                    guard let profilePicturePath = imagePath else {
-                        self?.toggleActivityIndicator(shown: false)
-                        //TODO: Gérer l'erreur
-                        return
-                    }
-                    
-                    // Fifth step -> Once we have the paths, we add them in the modifiedProperties dictionnary.
-                    modifiedProperties[Constant.FirestoreTables.User.banner] = bannerPath
-                    modifiedProperties[Constant.FirestoreTables.User.profilePicture] = profilePicturePath
-
-                    // Last step -> We can save the user.
-                    self?.userService.updateUser(fields: modifiedProperties) { error in
-                        if let _ = error {
-                            self?.toggleActivityIndicator(shown: false)
-                            //TODO: Gérer l'erreur
-                            return
-                        }
-                        self?.userService.user = self?.changedUser
-                        self?.userService.user?.banner?.image = bannerPath
-                        self?.userService.user?.profilePicture?.image = profilePicturePath
-                        self?.dismiss(animated: true)
-                        return
-                    }
-                }
+                // Fifth step -> Once we have the paths, we add them in the modifiedProperties dictionnary.
+                modifiedProperties[Constant.FirestoreTables.User.banner] = bannerPath
+                modifiedProperties[Constant.FirestoreTables.User.profilePicture] = profilePicturePath
+                
+                try await userUpdatingService.updateUser(fields: modifiedProperties)
+                userAuth.user = changedUser
+                userAuth.user?.banner?.image = bannerPath
+                userAuth.user?.profilePicture?.image = profilePicturePath
+                dismiss(animated: true)
             }
-        } else {
+        }
+    
+        
+    }
+    
+    private func saveUserProfiler() {
+
             // Fourth step -> We need to upload the images first, because once they are uploaded in Storage, we need the URL in order to save it in Firestore.
             if modifiedProperties[Constant.FirestoreTables.User.banner] != nil {
                 userService.uploadPicture(picture: bannerImageData, type: Constant.FirestoreTables.User.banner) { [weak self] imagePath in
@@ -229,7 +222,7 @@ class EditProfileVC: UIViewController {
                 self?.dismiss(animated: true)
             }
         }
-    }
+    }*/
     
     private func toggleActivityIndicator(shown: Bool) {
         // If shown is true, then the button is hidden and we display the Activity Indicator
@@ -244,10 +237,19 @@ extension EditProfileVC: UIImagePickerControllerDelegate, UINavigationController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if fromBanner {
             bannerImage.image = info[.editedImage] as? UIImage
+            bannerChanged = true
         } else {
             profilePictureImage.image = info[.editedImage] as? UIImage
+            profilePictureChanged = true
         }
         dismiss(animated: true)
+    }
+}
+
+extension EditProfileVC: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        errorMessageLabel.isHidden = true
+        return true
     }
 }
 
