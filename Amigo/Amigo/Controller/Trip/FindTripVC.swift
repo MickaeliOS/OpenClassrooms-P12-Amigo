@@ -41,14 +41,11 @@ class FindTripVC: UIViewController {
             do {
                 try await userFetchingService.fetchUser()
                 setupInterface()
-                print("MKA - FIN TRY")
             } catch {
                 presentAlert(with: error.localizedDescription)
                 presentVCFullScreen(with: "WelcomeVC") // TODO: Ne fonctionne pas, seul l'alerte marche. Si pas d'alerte, ça marche.
             }
         }
-        
-        print("MKA - FIN LOGIN FLOW")
     }
     
     private func setupInterface() {

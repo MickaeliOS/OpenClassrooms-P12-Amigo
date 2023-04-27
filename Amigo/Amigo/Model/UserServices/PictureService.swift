@@ -34,10 +34,10 @@ class PictureService {
         let fileRef = firebaseStorage.child(savingPath)
 
         do {
-            let result = try await fileRef.putDataAsync(picture)
+            let _ = try await fileRef.putDataAsync(picture)
             return savingPath
         } catch {
-            throw UserError.DatabaseError.defaultError
+            throw UserError.DatabaseError.cannotUploadPicture
         }
     }
     

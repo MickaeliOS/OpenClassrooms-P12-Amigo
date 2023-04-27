@@ -31,12 +31,9 @@ class UserUpdatingService {
         }
     }
     
-    func getModifiedProperties(from changedUser: User) -> [String: Any]? {
-        guard let currentUser = UserAuth.shared.user else {
-            //TODO: Se relog
-            return nil
-        }
-        
+    func changedProperties(from currentUser: User, to changedUser: User) -> [String: Any] {
+        // We don't compare the pictures because it's impossible, you'll have to use a
+        // Bool to control if pictures changed inside wherever you are.
         var modifiedProperties: [String: Any] = [:]
         
         if currentUser.firstname != changedUser.firstname {
@@ -53,14 +50,6 @@ class UserUpdatingService {
         
         if currentUser.description != changedUser.description {
             modifiedProperties[Constant.FirestoreTables.User.description] = changedUser.description
-        }
-        
-        if currentUser.profilePicture?.data != changedUser.profilePicture?.data {
-            modifiedProperties[Constant.FirestoreTables.User.profilePicture] = ""
-        }
-        
-        if currentUser.banner?.data != changedUser.banner?.data {
-            modifiedProperties[Constant.FirestoreTables.User.banner] = ""
         }
         
         return modifiedProperties

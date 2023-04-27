@@ -65,6 +65,7 @@ struct UserError {
     enum DatabaseError: Error {
         case noDocument
         case cannotGetDocument
+        case cannotUploadPicture
         case defaultError
         
         var localizedDescription: String {
@@ -73,6 +74,8 @@ struct UserError {
                 return "No document found."
             case .cannotGetDocument:
                 return "We couldn't retrieve your document, try to log in again."
+            case .cannotUploadPicture:
+                return "We couldn't upload your picture, please try with another one."
             case .defaultError:
                 return "An database error occurred, please try again."
             }
