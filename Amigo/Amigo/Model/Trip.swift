@@ -8,9 +8,10 @@
 import Foundation
 
 struct Trip {
+    var user: User
     var startDate: Date
     var endDate: Date
     var destination: String
-    var womanOnly: Bool
     var description: String
+    var womanOnly: Bool?
 }

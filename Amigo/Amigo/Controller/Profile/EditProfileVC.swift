@@ -68,6 +68,8 @@ class EditProfileVC: UIViewController {
         saveProfileButton.layer.cornerRadius = 10
         lastnameTextField.text = userAuth.user?.lastname
         firstnameTextField.text = userAuth.user?.firstname
+        lastnameTextField.addLeftSystemImage(image: UIImage(systemName: "person.fill")!)
+        firstnameTextField.addLeftSystemImage(image: UIImage(systemName: "person.fill")!)
         
         switch userAuth.user?.gender {
         case .woman:
@@ -152,7 +154,7 @@ class EditProfileVC: UIViewController {
         let changedUser = getChangedUser(currentUser: currentUser)
         
         // Third step -> Let's get the potential modified properties.
-        var modifiedProperties = userUpdatingService.changedProperties(from: currentUser, to: changedUser)
+        let modifiedProperties = userUpdatingService.changedProperties(from: currentUser, to: changedUser)
         
         if modifiedProperties.isEmpty, !bannerChanged, !profilePictureChanged {
             // Nothing to change, we can head back to ProfileVC.

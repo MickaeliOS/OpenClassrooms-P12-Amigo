@@ -17,6 +17,7 @@ struct User {
     var globalNote: Double?
     var profilePicture: ImageInfos?
     var banner: ImageInfos?
+    var trips: [Trip]?
     
     enum Gender: String {
         case man = "Man"

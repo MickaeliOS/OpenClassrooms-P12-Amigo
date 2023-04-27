@@ -65,6 +65,15 @@ extension UITextField {
     }
 }
 
+extension UITextView {
+    var isEmpty: Bool {
+        if let text = text, !text.isEmpty {
+            return false
+        }
+        return true
+    }
+}
+
 extension UILabel {
     func displayErrorMessage(message: String) {
         isHidden = false

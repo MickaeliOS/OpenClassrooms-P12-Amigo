@@ -720,10 +720,10 @@
                                 <rect key="frame" x="0.0" y="91" width="375" height="638"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G9u-d3-3Sh">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="633.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0wK-r7-Q0E">
-                                                <rect key="frame" x="10" y="0.0" width="355" height="633.33333333333337"/>
+                                                <rect key="frame" x="10" y="0.0" width="355" height="603"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="TQj-j2-ITT">
                                                         <rect key="frame" x="0.0" y="0.0" width="355" height="78.333333333333329"/>
@@ -778,26 +778,25 @@
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QNC-Ie-4uT">
-                                                        <rect key="frame" x="0.0" y="182.66666666666669" width="355" height="61.333333333333343"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QNC-Ie-4uT">
+                                                        <rect key="frame" x="0.0" y="182.66666666666669" width="355" height="31"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fW-uO-isF">
-                                                                <rect key="frame" x="0.0" y="0.0" width="355" height="20.333333333333332"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Woman Only" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fW-uO-isF">
+                                                                <rect key="frame" x="0.0" y="0.0" width="296" height="31"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="cEm-Cy-QQh">
-                                                                <rect key="frame" x="0.0" y="30.333333333333314" width="355" height="32"/>
-                                                                <segments>
-                                                                    <segment title="Woman"/>
-                                                                    <segment title="Man"/>
-                                                                </segments>
-                                                            </segmentedControl>
+                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wIR-E5-usP">
+                                                                <rect key="frame" x="306" y="0.0" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="womanOnlySwitchTapped:" destination="09R-yk-M0i" eventType="valueChanged" id="bYA-8g-FF4"/>
+                                                                </connections>
+                                                            </switch>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zzM-5W-cl6">
-                                                        <rect key="frame" x="0.0" y="264" width="355" height="285.66666666666674"/>
+                                                        <rect key="frame" x="0.0" y="233.66666666666666" width="355" height="285.66666666666674"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4Y-5V-1P9">
                                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="20.333333333333332"/>
@@ -811,18 +810,27 @@
                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="09R-yk-M0i" id="UPS-rg-Kf0"/>
+                                                                </connections>
                                                             </textView>
                                                         </subviews>
                                                     </stackView>
+                                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRl-ui-xxl">
+                                                        <rect key="frame" x="0.0" y="529.33333333333337" width="355" height="0.0"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                        <color key="textColor" systemColor="systemRedColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUJ-wQ-ok1">
-                                                        <rect key="frame" x="0.0" y="569.66666666666663" width="355" height="63.666666666666629"/>
+                                                        <rect key="frame" x="0.0" y="539.33333333333337" width="355" height="63.666666666666629"/>
                                                         <color key="backgroundColor" systemColor="tintColor"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="Find Your Trip">
+                                                        <buttonConfiguration key="configuration" style="plain" title="Add Trip">
                                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </buttonConfiguration>
                                                         <connections>
-                                                            <action selector="findTripButtonTapped:" destination="09R-yk-M0i" eventType="touchUpInside" id="dI4-63-CMk"/>
+                                                            <action selector="addTripButtonTapped:" destination="09R-yk-M0i" eventType="touchUpInside" id="Vrx-ya-aGS"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -849,6 +857,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="h8p-pl-jWi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="5zG-1A-2GE" firstAttribute="leading" secondItem="h8p-pl-jWi" secondAttribute="leading" id="6FQ-pF-gKz"/>
                             <constraint firstItem="h8p-pl-jWi" firstAttribute="trailing" secondItem="5zG-1A-2GE" secondAttribute="trailing" id="A9M-T0-Fnr"/>
@@ -858,15 +867,20 @@
                             <constraint firstItem="hAq-HB-9QU" firstAttribute="height" secondItem="h8p-pl-jWi" secondAttribute="height" multiplier="0.4" id="oJJ-dR-JBi"/>
                             <constraint firstItem="5zG-1A-2GE" firstAttribute="top" secondItem="h8p-pl-jWi" secondAttribute="top" id="z7n-XB-DM5"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="W38-T1-7Xm" appends="YES" id="vMQ-aH-Oq4"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="CVx-Nq-SjF"/>
                     <connections>
+                        <outlet property="addTripButton" destination="CUJ-wQ-ok1" id="68K-bi-NQm"/>
                         <outlet property="destinationTextField" destination="onC-zZ-UXb" id="JBA-Ir-iuA"/>
                         <outlet property="endDatePicker" destination="Rvo-uw-Ybp" id="e8f-lX-JQB"/>
-                        <outlet property="findTripButton" destination="CUJ-wQ-ok1" id="2I7-ry-Irf"/>
-                        <outlet property="genderSegmentedControl" destination="cEm-Cy-QQh" id="HJM-vv-Jv6"/>
+                        <outlet property="errorMessageLabel" destination="oRl-ui-xxl" id="qVK-lh-k1a"/>
                         <outlet property="startDatePicker" destination="oKe-M1-bGf" id="90M-ha-3ao"/>
                         <outlet property="tripDescriptionTextView" destination="hAq-HB-9QU" id="uJ5-Ku-imc"/>
+                        <outlet property="womanOnlyLabel" destination="2fW-uO-isF" id="Z5j-UU-0wk"/>
+                        <outlet property="womanOnlySwitch" destination="wIR-E5-usP" id="svK-DE-jFt"/>
                         <segue destination="K2d-qJ-EYg" kind="presentation" identifier="segueToDestinationPickerVC" id="DsR-s5-5g4"/>
                     </connections>
                 </viewController>
@@ -874,6 +888,11 @@
                 <tapGestureRecognizer id="wHt-xM-ENt">
                     <connections>
                         <action selector="destinationTextFieldTapped:" destination="09R-yk-M0i" id="X5R-uB-4R1"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="W38-T1-7Xm">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="09R-yk-M0i" id="Lqa-29-ihP"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

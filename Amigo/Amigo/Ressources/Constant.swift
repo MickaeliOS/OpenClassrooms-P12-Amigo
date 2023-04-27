@@ -24,5 +24,16 @@ struct Constant {
             static let profilePicture = "profilePicture"
             static let banner = "banner"
         }
+        
+        struct Trip {
+            static let tableName = "Trip"
+            
+            static let userID = "userID"
+            static let startDate = "startDate"
+            static let endDate = "endDate"
+            static let destination = "destination"
+            static let description = "description"
+            static let womanOnly = "womanOnly"
+        }
     }
 }

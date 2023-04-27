@@ -17,6 +17,7 @@
 		8300097129F907D2006DBD54 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097029F907D2006DBD54 /* UserError.swift */; };
 		8300097329F90960006DBD54 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097229F90960006DBD54 /* Utilities.swift */; };
 		8300097829FA96ED006DBD54 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097729FA96ED006DBD54 /* Trip.swift */; };
+		8300097B29FAA580006DBD54 /* TripCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097A29FAA580006DBD54 /* TripCreationService.swift */; };
 		830F479129E9311800697C34 /* FindTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F479029E9311800697C34 /* FindTripVC.swift */; };
 		8323F6EC29E587B800CBDFB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */; };
 		8323F6EE29E58CBD00CBDFB5 /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6ED29E58CBD00CBDFB5 /* UserAuth.swift */; };
@@ -54,6 +55,7 @@
 		8300097029F907D2006DBD54 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
 		8300097229F90960006DBD54 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		8300097729FA96ED006DBD54 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		8300097A29FAA580006DBD54 /* TripCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCreationService.swift; sourceTree = "<group>"; };
 		830F479029E9311800697C34 /* FindTripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTripVC.swift; sourceTree = "<group>"; };
 		8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8323F6ED29E58CBD00CBDFB5 /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
@@ -136,6 +138,14 @@
 			path = Trip;
 			sourceTree = "<group>";
 		};
+		8300097929FAA567006DBD54 /* TripServices */ = {
+			isa = PBXGroup;
+			children = (
+				8300097A29FAA580006DBD54 /* TripCreationService.swift */,
+			);
+			path = TripServices;
+			sourceTree = "<group>";
+		};
 		8361E02529E5522900EE7D2B = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				8300096329F8FE90006DBD54 /* UserServices */,
+				8300097929FAA567006DBD54 /* TripServices */,
 				8323F6EF29E5908600CBDFB5 /* User.swift */,
 				8300097729FA96ED006DBD54 /* Trip.swift */,
 				83C20F8D29EE6C54009B252B /* Theme.swift */,
@@ -301,6 +312,7 @@
 				8300096229F6BBD2006DBD54 /* DestinationPickerVC.swift in Sources */,
 				8300097129F907D2006DBD54 /* UserError.swift in Sources */,
 				8361E03229E5522900EE7D2B /* AppDelegate.swift in Sources */,
+				8300097B29FAA580006DBD54 /* TripCreationService.swift in Sources */,
 				83C20F8E29EE6C54009B252B /* Theme.swift in Sources */,
 				8388260E29E6931A003EBCC1 /* Extension.swift in Sources */,
 				8388260C29E68FBA003EBCC1 /* CreateAccountVC.swift in Sources */,
