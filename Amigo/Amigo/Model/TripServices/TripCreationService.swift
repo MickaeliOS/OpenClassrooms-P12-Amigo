@@ -19,7 +19,9 @@ class TripCreationService {
     
     // MARK: - FUNCTIONS
     func createTrip(trip: Trip, for user: User, completion: @escaping (Error?) -> Void) {
-        var tripData: [String : Any] = [tripTableConstants.userID: trip.user.userID,
+        guard let currentUser = UserAuth.shared.user else { return }
+        
+        var tripData: [String : Any] = [tripTableConstants.userID: currentUser.userID,
                                         tripTableConstants.startDate: trip.startDate,
                                         tripTableConstants.endDate: trip.endDate,
                                         tripTableConstants.destination: trip.destination,
@@ -34,7 +36,8 @@ class TripCreationService {
                 completion(UserError.DatabaseError.defaultError)
                 return
             }
-            
+                        
+            UserAuth.shared.user?.trips?.append(trip)
             completion(nil)
         }
     }

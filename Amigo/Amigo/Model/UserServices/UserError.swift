@@ -77,7 +77,7 @@ struct UserError {
             case .cannotUploadPicture:
                 return "We couldn't upload your picture, please try with another one."
             case .defaultError:
-                return "An database error occurred, please try again."
+                return "A database error occurred, please try again."
             }
         }
     }

@@ -109,7 +109,7 @@ class CreateTripVC: UIViewController {
         }
         
         // We can now safely create our trip, with womanOnly if our user is a female who wished for female only trip.
-        var trip = Trip(user: currentUser,
+        var trip = Trip(user: userAuth.user!,
                         startDate: startDatePicker.date,
                         endDate: endDatePicker.date,
                         destination: destinationTextField.text!,

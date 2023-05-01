@@ -18,6 +18,9 @@
 		8300097329F90960006DBD54 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097229F90960006DBD54 /* Utilities.swift */; };
 		8300097829FA96ED006DBD54 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097729FA96ED006DBD54 /* Trip.swift */; };
 		8300097B29FAA580006DBD54 /* TripCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097A29FAA580006DBD54 /* TripCreationService.swift */; };
+		8300097D29FB9EF6006DBD54 /* TripFetchingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097C29FB9EF6006DBD54 /* TripFetchingService.swift */; };
+		8300098129FFA1BC006DBD54 /* TripTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8300098029FFA1BC006DBD54 /* TripTableViewCell.xib */; };
+		8300098329FFB97A006DBD54 /* TripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300098229FFB97A006DBD54 /* TripTableViewCell.swift */; };
 		830F479129E9311800697C34 /* FindTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F479029E9311800697C34 /* FindTripVC.swift */; };
 		8323F6EC29E587B800CBDFB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */; };
 		8323F6EE29E58CBD00CBDFB5 /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6ED29E58CBD00CBDFB5 /* UserAuth.swift */; };
@@ -56,6 +59,9 @@
 		8300097229F90960006DBD54 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		8300097729FA96ED006DBD54 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		8300097A29FAA580006DBD54 /* TripCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCreationService.swift; sourceTree = "<group>"; };
+		8300097C29FB9EF6006DBD54 /* TripFetchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripFetchingService.swift; sourceTree = "<group>"; };
+		8300098029FFA1BC006DBD54 /* TripTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripTableViewCell.xib; sourceTree = "<group>"; };
+		8300098229FFB97A006DBD54 /* TripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableViewCell.swift; sourceTree = "<group>"; };
 		830F479029E9311800697C34 /* FindTripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindTripVC.swift; sourceTree = "<group>"; };
 		8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8323F6ED29E58CBD00CBDFB5 /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
@@ -142,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				8300097A29FAA580006DBD54 /* TripCreationService.swift */,
+				8300097C29FB9EF6006DBD54 /* TripFetchingService.swift */,
 			);
 			path = TripServices;
 			sourceTree = "<group>";
@@ -203,6 +210,8 @@
 			children = (
 				8361E03729E5522900EE7D2B /* Main.storyboard */,
 				8361E03C29E5522A00EE7D2B /* LaunchScreen.storyboard */,
+				8300098029FFA1BC006DBD54 /* TripTableViewCell.xib */,
+				8300098229FFB97A006DBD54 /* TripTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -292,6 +301,7 @@
 				8361E03E29E5522A00EE7D2B /* LaunchScreen.storyboard in Resources */,
 				8323F6EC29E587B800CBDFB5 /* GoogleService-Info.plist in Resources */,
 				8361E03B29E5522A00EE7D2B /* Assets.xcassets in Resources */,
+				8300098129FFA1BC006DBD54 /* TripTableViewCell.xib in Resources */,
 				8361E03929E5522900EE7D2B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,6 +317,7 @@
 				8300096029F6B4D7006DBD54 /* CreateTripVC.swift in Sources */,
 				8300097329F90960006DBD54 /* Utilities.swift in Sources */,
 				8388261029E6A2F9003EBCC1 /* ProfileVC.swift in Sources */,
+				8300097D29FB9EF6006DBD54 /* TripFetchingService.swift in Sources */,
 				8300097829FA96ED006DBD54 /* Trip.swift in Sources */,
 				83C20F8A29ED6B3A009B252B /* SettingsVC.swift in Sources */,
 				8300096229F6BBD2006DBD54 /* DestinationPickerVC.swift in Sources */,
@@ -324,6 +335,7 @@
 				830F479129E9311800697C34 /* FindTripVC.swift in Sources */,
 				832A841A29F01D360074DC14 /* Constant.swift in Sources */,
 				8300096D29F90612006DBD54 /* PictureService.swift in Sources */,
+				8300098329FFB97A006DBD54 /* TripTableViewCell.swift in Sources */,
 				8323F6F029E5908600CBDFB5 /* User.swift in Sources */,
 				832A841829F018EB0074DC14 /* EditProfileVC.swift in Sources */,
 				8323F6EE29E58CBD00CBDFB5 /* UserAuth.swift in Sources */,

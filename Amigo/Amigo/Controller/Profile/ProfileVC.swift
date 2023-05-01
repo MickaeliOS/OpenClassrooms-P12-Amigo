@@ -36,9 +36,9 @@ class ProfileVC: UIViewController {
     }
     
     private func setupUserInfos() {
-        // Retrieving images
-        getProfilePicture()
-        getBannerImage()
+        // Setup images
+        setupProfilePicture()
+        setupBannerImage()
         
         // Retrieving texts
         firstnameLabel.text = userAuth.user?.firstname
@@ -52,29 +52,15 @@ class ProfileVC: UIViewController {
         }
     }
     
-    private func getProfilePicture() {
-        guard let user = userAuth.user else {
-            presentAlert(with: "An error occured, please reconnect.")
-            return
-        }
-        
-        Task {
-            let result = try await pictureService.getImage(path: user.profilePicture?.image ?? "")
-            userAuth.user?.profilePicture?.data = result
-            profilePictureImage.image = UIImage(data: result)
+    private func setupProfilePicture() {
+        if let profilePictureData = userAuth.user?.profilePicture?.data {
+            profilePictureImage.image = UIImage(data: profilePictureData)
         }
     }
     
-    private func getBannerImage() {
-        guard let user = userAuth.user else {
-            presentAlert(with: "An error occured, please reconnect.")
-            return
-        }
-        
-        Task {
-            let result = try await pictureService.getImage(path: user.banner?.image ?? "")
-            userAuth.user?.banner?.data = result
-            bannerImage.image = UIImage(data: result)
+    private func setupBannerImage() {
+        if let bannerPictureData = userAuth.user?.banner?.data {
+            bannerImage.image = UIImage(data: bannerPictureData)
         }
     }
 }

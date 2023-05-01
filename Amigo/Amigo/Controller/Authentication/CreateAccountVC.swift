@@ -24,7 +24,7 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var createAccountButton: UIButton!
-
+    
     private let userCreationService = UserCreationService()
     private var isPasswordVisible = false
     
@@ -45,26 +45,24 @@ class CreateAccountVC: UIViewController {
     private func registerUser() {
         do {
             try userCreationService.creationAccountFormControl(email: emailTextField.text,
-                                                           password: passwordTextField.text,
-                                                           confirmPassword: confirmPasswordTextField.text,
-                                                           lastname: lastnameTextField.text,
-                                                           firstname: firstnameTextField.text,
-                                                           gender: genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex))
+                                                               password: passwordTextField.text,
+                                                               confirmPassword: confirmPasswordTextField.text,
+                                                               lastname: lastnameTextField.text,
+                                                               firstname: firstnameTextField.text,
+                                                               gender: genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex))
         } catch {
             errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
         }
         
         Task {
             do {
-                let firebaseUser = try await userCreationService.createUser(email: emailTextField.text!,
-                                                                            password: passwordTextField.text!)
-                
+                let firebaseUser = try await userCreationService.createUser(email: emailTextField.text!, password: passwordTextField.text!)
                 guard let user = createUserObject(authUser: firebaseUser) else { return }
                 try await userCreationService.saveUserInDatabase(user: user)
                 
                 // If all the create user process went good, we can go back on the TabBar.
                 performSegue(withIdentifier: "unwindToRootVC", sender: nil)
-
+                
             } catch {
                 errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
             }

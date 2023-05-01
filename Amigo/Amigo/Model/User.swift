@@ -7,25 +7,23 @@
 
 import Foundation
 
-struct User {
+struct User: Codable {
     var userID: String
     var firstname: String
     var lastname: String
     var gender: Gender
     var email: String
     var description: String?
-    var globalNote: Double?
     var profilePicture: ImageInfos?
     var banner: ImageInfos?
-    var trips: [Trip]?
     
-    enum Gender: String {
+    enum Gender: String, Codable {
         case man = "Man"
         case woman = "Woman"
     }
 }
 
-struct ImageInfos {
+struct ImageInfos: Codable {
     var image: String?
     var data: Data?
 }

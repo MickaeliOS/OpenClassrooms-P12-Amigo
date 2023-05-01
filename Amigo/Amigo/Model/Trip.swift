@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Trip {
-    var user: User
+struct Trip: Codable {
+    var userID: String
     var startDate: Date
     var endDate: Date
     var destination: String
