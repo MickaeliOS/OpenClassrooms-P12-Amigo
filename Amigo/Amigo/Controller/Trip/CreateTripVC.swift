@@ -31,7 +31,7 @@ class CreateTripVC: UIViewController {
     
     let userAuth = UserAuth.shared
     let tripCreationService = TripCreationService()
-    var countryName: String?
+    var destinationAddress: (String, String)?
     let descriptionPlaceHolder = "Enter your description."
     var womanOnly = false
     weak var delegate: CreateTripVCDelegate?
@@ -75,7 +75,8 @@ class CreateTripVC: UIViewController {
     }
     
     private func refreshCountryName() {
-        destinationTextField.text = countryName
+        // For more clarity, i'm only displaying the first part of the address.
+        destinationTextField.text = destinationAddress?.0
         
         // If we forgot to set the destination before, we need to hide the red message.
         if !errorMessageLabel.isHidden {

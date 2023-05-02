@@ -37,9 +37,7 @@ class FindTripVC: UIViewController {
     
     // MARK: - ACTIONS
     @IBAction func unwindToRootVC(segue: UIStoryboardSegue) {
-        if let _ = segue.source as? CreateAccountVC {
-            startLoginFlow()
-        } else if let _ = segue.source as? WelcomeVC {
+        if segue.source is CreateAccountVC || segue.source is WelcomeVC {
             startLoginFlow()
         }
     }
