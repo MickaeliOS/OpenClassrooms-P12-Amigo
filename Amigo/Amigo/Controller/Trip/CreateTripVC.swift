@@ -97,8 +97,6 @@ class CreateTripVC: UIViewController {
                 self?.presentAlert(with: error.localizedDescription)
                 return
             }
-            
-            self?.userAuth.user?.trips?.append(trip)
         }
     }
     
@@ -109,7 +107,7 @@ class CreateTripVC: UIViewController {
         }
         
         // We can now safely create our trip, with womanOnly if our user is a female who wished for female only trip.
-        var trip = Trip(user: userAuth.user!,
+        var trip = Trip(userID: userAuth.user!.userID,
                         startDate: startDatePicker.date,
                         endDate: endDatePicker.date,
                         destination: destinationTextField.text!,
@@ -117,7 +115,6 @@ class CreateTripVC: UIViewController {
         
         if userAuth.user?.gender == .woman {
             trip.womanOnly = womanOnly
-            return nil
         }
         
         return trip

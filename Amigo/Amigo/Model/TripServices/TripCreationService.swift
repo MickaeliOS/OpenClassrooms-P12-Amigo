@@ -37,7 +37,6 @@ class TripCreationService {
                 return
             }
                         
-            UserAuth.shared.user?.trips?.append(trip)
             completion(nil)
         }
     }

@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 class TripFetchingService {
     // MARK: - PROPERTIES & INIT
@@ -22,19 +23,22 @@ class TripFetchingService {
     
      func fetchUserTrips() async throws -> [Trip] {
         //TODO: Gérer proprement les erreurs
-        guard var currentUser = UserAuth.shared.user else {
+        guard let currentUser = UserAuth.shared.user else {
             throw UserError.CommonError.noUser
         }
         
         var trips: [Trip] = []
-        
+         
         do {
-            let result = try await firestoreDatabase.collection(tripTableConstants.tableName).whereField(tripTableConstants.userID, isEqualTo: currentUser.userID).getDocuments()
-                        
+            // We need the user's trips, each trip we fetch must have the same userID
+            let tripTable = firestoreDatabase.collection(tripTableConstants.tableName)
+            let query = tripTable.whereField(tripTableConstants.userID, isEqualTo: currentUser.userID)
+            let result = try await query.getDocuments()
+            
+            // Transforming the [QueryDocumentSnapshot] with Codable
             try result.documents.forEach { document in
-                let jsonData = try JSONSerialization.data(withJSONObject: document.data(), options: [])
-                let decodedTrip = try JSONDecoder().decode(Trip.self, from: jsonData)
-                trips.append(decodedTrip)
+                let trip = try document.data(as: Trip.self)
+                trips.append(trip)
             }
             
             return trips
@@ -43,32 +47,4 @@ class TripFetchingService {
             throw UserError.DatabaseError.defaultError
         }
     }
-    
-    /*func fetchUserTrips() async throws {
-        //TODO: Gérer proprement les erreurs, pour l'instant j'ai mis defaulterror en bas mais regarde si on peut pas être plus précis
-        guard var currentUser = UserAuth.shared.user else {
-            throw UserError.CommonError.noUser
-        }
-        
-        var trips: [Trip] = []
-        
-        do {
-            let result = try await firestoreDatabase.collection(tripTableConstants.tableName).whereField(tripTableConstants.userID, isEqualTo: currentUser.userID).getDocuments()
-                        
-            result.documents.forEach { document in
-                let tripData = document.data()
-                let trip = Trip(userID: tripData[tripTableConstants.userID] as? String ?? "",
-                                startDate: tripData[tripTableConstants.startDate] as? Date ?? Date(),
-                                endDate: tripData[tripTableConstants.endDate] as? Date ?? Date(),
-                                destination: tripData[tripTableConstants.destination] as? String ?? "",
-                                description: tripData[tripTableConstants.description] as? String ?? "")
-                trips.append(trip)
-            }
-            
-            UserAuth.shared.user?.trips = trips
-            
-        } catch {
-            throw UserError.DatabaseError.defaultError
-        }
-    }*/
 }
