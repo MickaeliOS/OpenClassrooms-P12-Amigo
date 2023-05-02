@@ -91,10 +91,10 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="destinationLabel" destination="ycj-Y7-bXF" id="Xk2-sA-sLR"/>
+                <outlet property="endDate" destination="PXU-h3-ulQ" id="j1k-3E-vO2"/>
                 <outlet property="findTripImage" destination="aD7-1L-iLo" id="9gX-v0-3FT"/>
-                <outlet property="fromDate" destination="GOA-5o-JEU" id="r2C-1y-pjR"/>
                 <outlet property="profilePictureImage" destination="wzI-pt-vaE" id="cAz-Zi-4gf"/>
-                <outlet property="toDate" destination="PXU-h3-ulQ" id="59y-BX-Um2"/>
+                <outlet property="startDate" destination="GOA-5o-JEU" id="x3t-2w-8w7"/>
             </connections>
             <point key="canvasLocation" x="303.81679389312978" y="8.0985915492957758"/>
         </tableViewCell>

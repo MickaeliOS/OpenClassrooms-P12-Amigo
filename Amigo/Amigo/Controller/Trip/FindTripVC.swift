@@ -13,8 +13,8 @@ class FindTripVC: UIViewController {
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-        startLoginFlow()
         setupCell()
+        startLoginFlow()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,10 +29,20 @@ class FindTripVC: UIViewController {
     private let userFetchingService = UserFetchingService()
     private let pictureService = PictureService()
     private let tripFetchingService = TripFetchingService()
-    private var trips: [Trip]?
+    var trips: [LocalTrip]? {
+        didSet {
+            tripTableView.reloadData()
+        }
+    }
     
     // MARK: - ACTIONS
-    @IBAction func unwindToRootVC(segue: UIStoryboardSegue) {}
+    @IBAction func unwindToRootVC(segue: UIStoryboardSegue) {
+        if let _ = segue.source as? CreateAccountVC {
+            startLoginFlow()
+        } else if let _ = segue.source as? WelcomeVC {
+            startLoginFlow()
+        }
+    }
     
     // MARK: - PRIVATE FUNCTIONS
     private func startLoginFlow() {
@@ -45,40 +55,47 @@ class FindTripVC: UIViewController {
 
         Task {
             do {
+                // First, we fetch the user from Firestore
                 try await userFetchingService.fetchUser()
                 
-                if let profilePicture = userAuth.user?.profilePicture?.image {
-                    userAuth.user?.profilePicture?.data = try await pictureService.getImage(path: profilePicture)
-                }
+                // Then, we need to retrieve his pictures from Storage
+                await fetchImages()
                 
-                if let bannerPicture = userAuth.user?.banner?.image {
-                    userAuth.user?.banner?.data = try await pictureService.getImage(path: bannerPicture)
-                }
-                
+                // Once we have the complete user, we need to fetch his trips to display them in the tripTableView
                 await fetchTrips()
-                setupInterface()
+                activityIndicator.isHidden = true
+
             } catch {
-                presentAlert(with: error.localizedDescription)
-                presentVCFullScreen(with: "WelcomeVC") // TODO: Ne fonctionne pas, seul l'alerte marche. Si pas d'alerte, ça marche.
+                presentVCFullScreen(with: "WelcomeVC") // TODO: Ne fonctionne pas, seule l'alerte marche. Si pas d'alerte, ça marche.
             }
         }
-    }
-    
-    private func setupInterface() {
-        self.activityIndicator.isHidden = true
     }
     
     private func fetchTrips() async {
         do {
             trips = try await tripFetchingService.fetchUserTrips()
-            tripTableView.reloadData()
+        } catch {
+            presentAlert(with: error.localizedDescription)
+        }
+    }
+    
+    private func fetchImages() async {
+        do {
+            if let bannerPicture = userAuth.user?.banner?.image {
+                userAuth.user?.banner?.data = try await pictureService.getImage(path: bannerPicture)
+            }
+            
+            if let profilePicture = userAuth.user?.profilePicture?.image {
+                userAuth.user?.profilePicture?.data = try await pictureService.getImage(path: profilePicture)
+            }
         } catch {
             presentAlert(with: error.localizedDescription)
         }
     }
     
     private func setupCell() {
-        self.tripTableView.register(UINib(nibName: "TripTableViewCell", bundle: nil), forCellReuseIdentifier: "tripCell")
+        self.tripTableView.register(UINib(nibName: Constant.TableViewCell.nibName, bundle: nil),
+                                    forCellReuseIdentifier: Constant.TableViewCell.tripCell)
     }
 }
 
@@ -88,7 +105,8 @@ extension FindTripVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "tripCell", for: indexPath) as? TripTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constant.TableViewCell.tripCell,
+                                                       for: indexPath) as? TripTableViewCell else {
             return UITableViewCell()
         }
         
@@ -101,5 +119,19 @@ extension FindTripVC: UITableViewDelegate, UITableViewDataSource {
                            fromDate: trip.startDate,
                            toDate: trip.endDate)
         return cell
+    }
+}
+
+extension FindTripVC: CreateTripVCDelegate {
+    func passCreatedTripToFindTripVC(trip: LocalTrip) {
+        trips?.append(trip)
+    }
+}
+
+extension FindTripVC {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let createTripVC = segue.destination as? CreateTripVC {
+            createTripVC.delegate = self
+        }
     }
 }

@@ -46,7 +46,7 @@ class PictureService {
             let result = try await firebaseStorage.child(path).data(maxSize: 5 * 1024 * 1024)
             return result
         } catch {
-            throw UserError.DatabaseError.defaultError
+            throw UserError.DatabaseError.cannotGetPicture
         }
     }
 }

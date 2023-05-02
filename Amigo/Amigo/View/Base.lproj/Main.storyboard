@@ -121,9 +121,11 @@
                         <outlet property="errorMessageLabel" destination="0jh-xL-ezu" id="a2E-t4-hHp"/>
                         <outlet property="loginButton" destination="2IU-KH-FLX" id="BmQ-4q-Bne"/>
                         <outlet property="passwordTextField" destination="RtS-am-i6P" id="wVa-kv-WQk"/>
+                        <segue destination="ZQf-Rd-Inh" kind="unwind" identifier="unwindToRootVC" unwindAction="unwindToRootVCWithSegue:" id="S2f-xt-Mok"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="ZQf-Rd-Inh" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="vge-Lt-Hkk">
                     <connections>
                         <action selector="dismissKeyboard:" destination="BYZ-38-t0r" id="b6X-Xj-Sds"/>
@@ -662,7 +664,7 @@
                                                     <outlet property="delegate" destination="fiB-l9-GTN" id="EUd-es-60Y"/>
                                                 </connections>
                                             </tableView>
-                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="6A4-zu-xcl">
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="6A4-zu-xcl">
                                                 <rect key="frame" x="159" y="243.66666666666669" width="37" height="37"/>
                                                 <color key="color" systemColor="labelColor"/>
                                             </activityIndicatorView>
@@ -698,6 +700,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="lyB-SX-z43"/>
                     <navigationItem key="navigationItem" id="H4r-4K-lFI">
+                        <barButtonItem key="backBarButtonItem" title="Find Trip" id="IJi-7h-FBc"/>
                         <barButtonItem key="rightBarButtonItem" title="Add Trip" image="plus" catalog="system" id="6Nu-rJ-D9Y">
                             <connections>
                                 <segue destination="09R-yk-M0i" kind="show" id="dug-WW-jPl"/>

@@ -16,6 +16,7 @@ struct User: Codable {
     var description: String?
     var profilePicture: ImageInfos?
     var banner: ImageInfos?
+    //var trips: [Trip]?
     
     enum Gender: String, Codable {
         case man = "Man"

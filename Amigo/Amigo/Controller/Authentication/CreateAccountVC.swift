@@ -50,8 +50,12 @@ class CreateAccountVC: UIViewController {
                                                                lastname: lastnameTextField.text,
                                                                firstname: firstnameTextField.text,
                                                                gender: genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex))
-        } catch {
+        } catch let error as UserError.CreateAccountError {
             errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
+            return
+        } catch {
+            presentAlert(with: UserError.CommonError.defaultError.localizedDescription)
+            return
         }
         
         Task {
@@ -61,10 +65,13 @@ class CreateAccountVC: UIViewController {
                 try await userCreationService.saveUserInDatabase(user: user)
                 
                 // If all the create user process went good, we can go back on the TabBar.
+                //TODO: Comme tu as déplacé startLoginFlow() de FindTripVC dans VDL, il n'est plus redéclenché quand tu retourne là abs
                 performSegue(withIdentifier: "unwindToRootVC", sender: nil)
                 
-            } catch {
+            } catch let error as UserError.CreateAccountError {
                 errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
+            } catch {
+                presentAlert(with: UserError.CommonError.defaultError.localizedDescription)
             }
         }
     }

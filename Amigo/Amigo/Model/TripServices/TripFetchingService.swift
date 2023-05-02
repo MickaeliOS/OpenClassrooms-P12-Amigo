@@ -21,23 +21,24 @@ class TripFetchingService {
         self.firestoreDatabase = firestoreDatabase
     }
     
-     func fetchUserTrips() async throws -> [Trip] {
+     func fetchUserTrips() async throws -> [LocalTrip] {
         //TODO: Gérer proprement les erreurs
         guard let currentUser = UserAuth.shared.user else {
             throw UserError.CommonError.noUser
         }
         
-        var trips: [Trip] = []
+        var trips: [LocalTrip] = []
          
         do {
             // We need the user's trips, each trip we fetch must have the same userID
             let tripTable = firestoreDatabase.collection(tripTableConstants.tableName)
             let query = tripTable.whereField(tripTableConstants.userID, isEqualTo: currentUser.userID)
+            
             let result = try await query.getDocuments()
             
             // Transforming the [QueryDocumentSnapshot] with Codable
             try result.documents.forEach { document in
-                let trip = try document.data(as: Trip.self)
+                let trip = try document.data(as: LocalTrip.self)
                 trips.append(trip)
             }
             

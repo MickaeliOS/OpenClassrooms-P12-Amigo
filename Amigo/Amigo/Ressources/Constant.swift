@@ -36,4 +36,9 @@ struct Constant {
             static let womanOnly = "womanOnly"
         }
     }
+    
+    struct TableViewCell {
+        static let nibName = "TripTableViewCell"
+        static let tripCell = "tripCell"
+    }
 }

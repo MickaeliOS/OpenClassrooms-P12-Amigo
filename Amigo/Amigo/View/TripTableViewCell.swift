@@ -17,8 +17,8 @@ class TripTableViewCell: UITableViewCell {
     
     @IBOutlet weak var profilePictureImage: UIImageView!
     @IBOutlet weak var destinationLabel: UILabel!
-    @IBOutlet weak var fromDate: UILabel!
-    @IBOutlet weak var toDate: UILabel!
+    @IBOutlet weak var startDate: UILabel!
+    @IBOutlet weak var endDate: UILabel!
     @IBOutlet weak var findTripImage: UIImageView!
     
 
@@ -36,7 +36,7 @@ class TripTableViewCell: UITableViewCell {
         }
         
         destinationLabel.text = destination
-        self.fromDate.text = fromDate.dateToString()
-        self.toDate.text = toDate.dateToString()
+        self.startDate.text = fromDate.dateToString()
+        self.endDate.text = toDate.dateToString()
     }
 }

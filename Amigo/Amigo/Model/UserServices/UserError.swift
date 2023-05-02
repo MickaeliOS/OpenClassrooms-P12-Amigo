@@ -66,6 +66,7 @@ struct UserError {
         case noDocument
         case cannotGetDocument
         case cannotUploadPicture
+        case cannotGetPicture
         case defaultError
         
         var localizedDescription: String {
@@ -73,9 +74,11 @@ struct UserError {
             case .noDocument:
                 return "No document found."
             case .cannotGetDocument:
-                return "We couldn't retrieve your document, try to log in again."
+                return "We couldn't retrieve your document, please try to log in again."
             case .cannotUploadPicture:
                 return "We couldn't upload your picture, please try with another one."
+            case .cannotGetPicture:
+                return "We couldn't get your picture, please try to log in again."
             case .defaultError:
                 return "A database error occurred, please try again."
             }

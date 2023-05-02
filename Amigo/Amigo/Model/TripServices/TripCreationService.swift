@@ -18,7 +18,7 @@ class TripCreationService {
     }
     
     // MARK: - FUNCTIONS
-    func createTrip(trip: Trip, for user: User, completion: @escaping (Error?) -> Void) {
+    func createTrip(trip: LocalTrip, for user: User, completion: @escaping (Error?) -> Void) {
         guard let currentUser = UserAuth.shared.user else { return }
         
         var tripData: [String : Any] = [tripTableConstants.userID: currentUser.userID,

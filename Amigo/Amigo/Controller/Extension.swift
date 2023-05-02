@@ -109,7 +109,6 @@ extension Date {
     func dateToString() -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
-        formatter.timeStyle = .short
         let dateString = formatter.string(from: self)
 
         return dateString

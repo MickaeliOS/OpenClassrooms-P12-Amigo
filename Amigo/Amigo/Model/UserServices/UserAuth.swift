@@ -7,8 +7,6 @@
 
 import Foundation
 import FirebaseAuth
-import FirebaseFirestore
-import FirebaseStorage
 
 class UserAuth {
     // MARK: - SINGLETON

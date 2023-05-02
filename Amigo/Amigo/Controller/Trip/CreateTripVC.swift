@@ -15,6 +15,10 @@ class CreateTripVC: UIViewController {
         setupInterface()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
@@ -30,6 +34,7 @@ class CreateTripVC: UIViewController {
     var countryName: String?
     let descriptionPlaceHolder = "Enter your description."
     var womanOnly = false
+    weak var delegate: CreateTripVCDelegate?
     
     // MARK: - ACTIONS
     @IBAction func unwindToCreateTripVC(segue: UIStoryboardSegue) {}
@@ -37,7 +42,7 @@ class CreateTripVC: UIViewController {
     @IBAction func dismissKeyboard(_ sender: Any) {
         tripDescriptionTextView.resignFirstResponder()
     }
-
+    
     @IBAction func addTripButtonTapped(_ sender: Any) {
         addTripFlow()
     }
@@ -76,17 +81,11 @@ class CreateTripVC: UIViewController {
         if !errorMessageLabel.isHidden {
             errorMessageLabel.isHidden = true
         }
-
+        
     }
     
     private func addTripFlow() {
-        // We first make sure the mandatory fields are filled.
-        guard fieldsControl() else {
-            errorMessageLabel.displayErrorMessage(message: "These fields must be filled : \n - Destination \n - Description")
-            return
-        }
-        
-        // Then, we can create our Trip object.
+        // We first try to create our Trip object.
         guard let trip = createTrip() else {
             return
         }
@@ -97,17 +96,27 @@ class CreateTripVC: UIViewController {
                 self?.presentAlert(with: error.localizedDescription)
                 return
             }
+            
+            // We head back to the previous screen
+            self?.delegate?.passCreatedTripToFindTripVC(trip: trip)
+            self?.navigationController?.popViewController(animated: true)
         }
     }
     
-    private func createTrip() -> Trip? {
-        guard let currentUser = userAuth.user else {
+    private func createTrip() -> LocalTrip? {
+        guard let _ = userAuth.user else {
             presentAlert(with: "An error occured, please reconnect.")
             return nil
         }
         
+        // We first make sure the mandatory fields are filled.
+        guard fieldsControl() else {
+            errorMessageLabel.displayErrorMessage(message: "These fields must be filled : \n - Destination \n - Description")
+            return nil
+        }
+        
         // We can now safely create our trip, with womanOnly if our user is a female who wished for female only trip.
-        var trip = Trip(userID: userAuth.user!.userID,
+        var trip = LocalTrip(userID: userAuth.user!.userID,
                         startDate: startDatePicker.date,
                         endDate: endDatePicker.date,
                         destination: destinationTextField.text!,
@@ -121,7 +130,9 @@ class CreateTripVC: UIViewController {
     }
     
     private func fieldsControl() -> Bool {
-        guard !destinationTextField.isEmpty, !tripDescriptionTextView.isEmpty else {
+        guard !destinationTextField.isEmpty,
+              !tripDescriptionTextView.isEmpty,
+              tripDescriptionTextView.text != descriptionPlaceHolder else {
             return false
         }
         return true
@@ -154,7 +165,7 @@ extension CreateTripVC: UITextFieldDelegate {
 extension CreateTripVC: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         errorMessageLabel.isHidden = true
-
+        
         if textView.textColor == UIColor.placeholderText {
             textView.text = nil
             textView.textColor = UIColor.label
@@ -167,4 +178,8 @@ extension CreateTripVC: UITextViewDelegate {
             textView.textColor = UIColor.placeholderText
         }
     }
+}
+
+protocol CreateTripVCDelegate: AnyObject {
+    func passCreatedTripToFindTripVC(trip: LocalTrip)
 }
