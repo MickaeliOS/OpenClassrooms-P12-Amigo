@@ -18,26 +18,20 @@ class TripCreationService {
     }
     
     // MARK: - FUNCTIONS
-    func createTrip(trip: LocalTrip, for user: User, completion: @escaping (Error?) -> Void) {
-        guard let currentUser = UserAuth.shared.user else { return }
-        
-        var tripData: [String : Any] = [tripTableConstants.userID: currentUser.userID,
-                                        tripTableConstants.startDate: trip.startDate,
-                                        tripTableConstants.endDate: trip.endDate,
-                                        tripTableConstants.destination: trip.destination,
-                                        tripTableConstants.description: trip.description]
-        
-        if user.gender == .woman {
-            tripData[tripTableConstants.womanOnly] = trip.womanOnly
-        }
-        
-        firestoreDatabase.collection(tripTableConstants.tableName).addDocument(data: tripData) { error in
-            if error != nil {
-                completion(UserError.DatabaseError.defaultError)
-                return
+    func createTrip(trip: LocalTrip, completion: @escaping (Error?) -> Void) {
+        guard let _ = UserAuth.shared.user else { return }
+
+        do {
+            let _ = try firestoreDatabase.collection(tripTableConstants.tableName).addDocument(from: trip.self) { error in
+                if error != nil {
+                    completion(UserError.DatabaseError.defaultError)
+                    return
+                }
+                            
+                completion(nil)
             }
-                        
-            completion(nil)
+        } catch {
+            completion(UserError.DatabaseError.defaultError)
         }
     }
 }

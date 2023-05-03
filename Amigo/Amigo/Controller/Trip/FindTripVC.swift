@@ -113,7 +113,7 @@ extension FindTripVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.configureCell(profilePicture: userAuth.user?.profilePicture?.data,
-                           destination: trip.destination,
+                           destination: trip.firstPartAddress,
                            fromDate: trip.startDate,
                            toDate: trip.endDate)
         return cell

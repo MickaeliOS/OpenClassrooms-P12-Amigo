@@ -11,12 +11,13 @@ struct LocalTrip: Codable, FirestoreTrip {
     var userID: String
     var startDate: Date
     var endDate: Date
-    var destination: String
+    var firstPartAddress: String
+    var secondPartAddress: String?
     var description: String
     var womanOnly: Bool?
     
     // User is optional so when we decode a Trip from Firestore,
-    // it doesn't crash since the Table doesn't have a User.
+    // it doesn't crash since the Firestore Table doesn't have a User.
     var user: User?
     
     /*func getUser() {
@@ -30,7 +31,8 @@ protocol FirestoreTrip {
     var userID: String { get }
     var startDate: Date { get }
     var endDate: Date { get }
-    var destination: String { get }
+    var firstPartAddress: String { get }
+    var secondPartAddress: String? { get }
     var description: String { get }
     var womanOnly: Bool? { get }
 }

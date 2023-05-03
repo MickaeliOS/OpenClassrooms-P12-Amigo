@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 extension UIViewController {
     func presentVCFullScreen(with identifier: String) {
@@ -39,7 +40,7 @@ extension UITextField {
         imageView.contentMode = .scaleAspectFit // If the image isn't squared, we keep the aspect ratio.
         imageView.tintColor = UIColor.placeholderText
         imageView.image = image
-
+        
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 25))
         view.addSubview(imageView)
         
@@ -99,18 +100,35 @@ extension UIImage {
     }
 }
 
-extension Locale {
-    static var countryList: [String] {
-        Locale.isoRegionCodes.compactMap { Locale.current.localizedString(forRegionCode: $0) }
-    }
-}
-
 extension Date {
     func dateToString() -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         let dateString = formatter.string(from: self)
-
+        
         return dateString
+    }
+}
+
+extension MKLocalSearch {
+    static func getCountryFromAddress(address: String, completion: @escaping (String?, Error?) -> Void) {
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = address
+        
+        let search = MKLocalSearch(request: request)
+        search.start { response, error in
+            if error != nil {
+                completion(nil, UserError.CommonError.defaultError)
+            }
+            
+            guard let mapItems = response?.mapItems, !mapItems.isEmpty else {
+                completion(nil, nil)
+                return
+            }
+            
+            for item in mapItems {
+                completion(item.placemark.country, nil)
+            }
+        }
     }
 }

@@ -40,7 +40,7 @@ extension DestinationPickerVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "unwindToCreateTripVC" {
             let createTripVC = segue.destination as? CreateTripVC
-            let countryName = sender as? (String, String)
+            let countryName = sender as? (String, String?)
             createTripVC?.destinationAddress = countryName
         }
     }
@@ -66,6 +66,19 @@ extension DestinationPickerVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let firstPartAddress = searchResult[indexPath.row].title
         let secondPartAddress = searchResult[indexPath.row].subtitle
+        let fullAddress = firstPartAddress + " " + secondPartAddress
+        
+        MKLocalSearch.getCountryFromAddress(address: fullAddress) { country, error in
+            if error != nil {
+                return
+            }
+            
+            guard let country = country else {
+                return
+            }
+            
+            print("MKA - COUNTRY NAME : \(country)")
+        }
 
         performSegue(withIdentifier: "unwindToCreateTripVC", sender: (firstPartAddress, secondPartAddress))
     }

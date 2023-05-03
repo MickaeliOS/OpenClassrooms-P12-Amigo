@@ -914,17 +914,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="755"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3af-Yf-zvX">
-                                <rect key="frame" x="4.9999999999999964" y="52" width="62.666666666666657" height="32"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Close">
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleSubhead"/>
-                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <segue destination="gfy-GO-UGB" kind="unwind" identifier="unwindToCreateTripVC" unwindAction="unwindToCreateTripVCWithSegue:" id="n3Q-ej-Prf"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ZIL-MV-T1W">
+                                <rect key="frame" x="0.0" y="47" width="375" height="32"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3af-Yf-zvX">
+                                        <rect key="frame" x="0.0" y="0.0" width="62.666666666666664" height="32"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Close">
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <color key="baseForegroundColor" systemColor="labelColor"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="gfy-GO-UGB" kind="unwind" identifier="unwindToCreateTripVC" unwindAction="unwindToCreateTripVCWithSegue:" id="n3Q-ej-Prf"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick your destination" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpX-OD-qN1">
                                 <rect key="frame" x="10" y="94" width="355" height="33.666666666666657"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
@@ -942,22 +947,22 @@
                                 <rect key="frame" x="10" y="188.66666666666669" width="355" height="556.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="countryCell" textLabel="3tA-0c-Opo" detailTextLabel="dyJ-lw-vSX" style="IBUITableViewCellStyleSubtitle" id="YgA-df-SZ4">
-                                        <rect key="frame" x="0.0" y="50" width="355" height="43.666667938232422"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="countryCell" textLabel="3tA-0c-Opo" detailTextLabel="dyJ-lw-vSX" rowHeight="73" style="IBUITableViewCellStyleSubtitle" id="YgA-df-SZ4">
+                                        <rect key="frame" x="0.0" y="50" width="355" height="73"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YgA-df-SZ4" id="89A-2C-YAm">
-                                            <rect key="frame" x="0.0" y="0.0" width="355" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="355" height="73"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3tA-0c-Opo">
-                                                    <rect key="frame" x="20" y="0.0" width="41" height="26.333333333333332"/>
+                                                    <rect key="frame" x="20" y="11.999999999999998" width="41" height="26.333333333333332"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dyJ-lw-vSX">
-                                                    <rect key="frame" x="19.999999999999996" y="26.333333333333329" width="52.666666666666664" height="18"/>
+                                                    <rect key="frame" x="19.999999999999996" y="41.333333333333329" width="52.666666666666664" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <nil key="textColor"/>
@@ -976,15 +981,16 @@
                         <viewLayoutGuide key="safeArea" id="5qV-yP-Pli"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="bpX-OD-qN1" firstAttribute="top" secondItem="3af-Yf-zvX" secondAttribute="bottom" constant="10" id="3np-5j-hUH"/>
+                            <constraint firstItem="ZIL-MV-T1W" firstAttribute="leading" secondItem="5qV-yP-Pli" secondAttribute="leading" id="6NW-Ls-7sP"/>
+                            <constraint firstItem="5qV-yP-Pli" firstAttribute="trailing" secondItem="ZIL-MV-T1W" secondAttribute="trailing" id="Gtn-5g-idT"/>
                             <constraint firstItem="bpX-OD-qN1" firstAttribute="leading" secondItem="5qV-yP-Pli" secondAttribute="leading" constant="10" id="HQf-Cc-4LK"/>
                             <constraint firstItem="ILx-Uc-a4o" firstAttribute="leading" secondItem="5qV-yP-Pli" secondAttribute="leading" constant="10" id="HvT-Tu-IXn"/>
                             <constraint firstItem="ILx-Uc-a4o" firstAttribute="top" secondItem="bpX-OD-qN1" secondAttribute="bottom" constant="5" id="LUM-Fy-4t5"/>
+                            <constraint firstItem="bpX-OD-qN1" firstAttribute="top" secondItem="ZIL-MV-T1W" secondAttribute="bottom" constant="15" id="NJk-wU-WZN"/>
                             <constraint firstItem="5qV-yP-Pli" firstAttribute="trailing" secondItem="ILx-Uc-a4o" secondAttribute="trailing" constant="10" id="O00-Zi-cPx"/>
                             <constraint firstItem="5qV-yP-Pli" firstAttribute="bottom" secondItem="hOR-x9-7Ik" secondAttribute="bottom" constant="10" id="TJC-6p-4Nm"/>
+                            <constraint firstItem="ZIL-MV-T1W" firstAttribute="top" secondItem="5qV-yP-Pli" secondAttribute="top" id="eyV-bo-lps"/>
                             <constraint firstItem="hOR-x9-7Ik" firstAttribute="leading" secondItem="5qV-yP-Pli" secondAttribute="leading" constant="10" id="mmG-lY-hVY"/>
-                            <constraint firstItem="3af-Yf-zvX" firstAttribute="top" secondItem="5qV-yP-Pli" secondAttribute="top" constant="5" id="teM-Xv-0aL"/>
-                            <constraint firstItem="3af-Yf-zvX" firstAttribute="leading" secondItem="5qV-yP-Pli" secondAttribute="leading" constant="5" id="vMb-LL-dcb"/>
                             <constraint firstItem="5qV-yP-Pli" firstAttribute="trailing" secondItem="bpX-OD-qN1" secondAttribute="trailing" constant="10" id="y2g-X8-KQG"/>
                             <constraint firstItem="5qV-yP-Pli" firstAttribute="trailing" secondItem="hOR-x9-7Ik" secondAttribute="trailing" constant="10" id="z2a-Kn-ItI"/>
                             <constraint firstItem="hOR-x9-7Ik" firstAttribute="top" secondItem="ILx-Uc-a4o" secondAttribute="bottom" id="zDV-LV-zfe"/>

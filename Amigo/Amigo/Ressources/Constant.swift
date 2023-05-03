@@ -31,7 +31,8 @@ struct Constant {
             static let userID = "userID"
             static let startDate = "startDate"
             static let endDate = "endDate"
-            static let destination = "destination"
+            static let firstPartAddress = "firstPartAddress"
+            static let secondPartAddress = "secondPartAddress"
             static let description = "description"
             static let womanOnly = "womanOnly"
         }

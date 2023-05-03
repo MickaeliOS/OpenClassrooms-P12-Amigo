@@ -31,7 +31,7 @@ class CreateTripVC: UIViewController {
     
     let userAuth = UserAuth.shared
     let tripCreationService = TripCreationService()
-    var destinationAddress: (String, String)?
+    var destinationAddress: (String, String?)?
     let descriptionPlaceHolder = "Enter your description."
     var womanOnly = false
     weak var delegate: CreateTripVCDelegate?
@@ -64,10 +64,10 @@ class CreateTripVC: UIViewController {
         tripDescriptionTextView.textColor = UIColor.placeholderText
         
         destinationTextField.addLeftSystemImage(image: UIImage(systemName: "airplane.departure")!)
-        displayWomanOnlyInterface()
+        displayGenderSpecificInterface()
     }
     
-    private func displayWomanOnlyInterface() {
+    private func displayGenderSpecificInterface() {
         if userAuth.user?.gender != .woman {
             womanOnlyLabel.isHidden = true
             womanOnlySwitch.isHidden = true
@@ -78,7 +78,9 @@ class CreateTripVC: UIViewController {
         // For more clarity, i'm only displaying the first part of the address.
         destinationTextField.text = destinationAddress?.0
         
-        // If we forgot to set the destination before, we need to hide the red message.
+        // If we forgot to set the destination before pressing the Add Trip Button,
+        // the red error message is displayed, and when we set the destination, we
+        // make it disapear.
         if !errorMessageLabel.isHidden {
             errorMessageLabel.isHidden = true
         }
@@ -92,7 +94,7 @@ class CreateTripVC: UIViewController {
         }
         
         // We can save the trip inside the Firestore database.
-        tripCreationService.createTrip(trip: trip, for: userAuth.user!) { [weak self] error in
+        tripCreationService.createTrip(trip: trip) { [weak self] error in
             if let error = error {
                 self?.presentAlert(with: error.localizedDescription)
                 return
@@ -118,10 +120,14 @@ class CreateTripVC: UIViewController {
         
         // We can now safely create our trip, with womanOnly if our user is a female who wished for female only trip.
         var trip = LocalTrip(userID: userAuth.user!.userID,
-                        startDate: startDatePicker.date,
-                        endDate: endDatePicker.date,
-                        destination: destinationTextField.text!,
-                        description: tripDescriptionTextView.text!)
+                             startDate: startDatePicker.date,
+                             endDate: endDatePicker.date,
+                             firstPartAddress: destinationAddress!.0,
+                             description: tripDescriptionTextView.text!)
+        
+        if let secondPartAddress = destinationAddress!.1, !secondPartAddress.isEmpty {
+            trip.secondPartAddress = secondPartAddress
+        }
         
         if userAuth.user?.gender == .woman {
             trip.womanOnly = womanOnly
@@ -131,7 +137,7 @@ class CreateTripVC: UIViewController {
     }
     
     private func fieldsControl() -> Bool {
-        guard !destinationTextField.isEmpty,
+        guard destinationAddress != nil,
               !tripDescriptionTextView.isEmpty,
               tripDescriptionTextView.text != descriptionPlaceHolder else {
             return false
@@ -163,10 +169,12 @@ extension CreateTripVC: UITextFieldDelegate {
         return true
     }
 }
+
 extension CreateTripVC: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         errorMessageLabel.isHidden = true
         
+        // Manual gestion of placeHolder for our textView
         if textView.textColor == UIColor.placeholderText {
             textView.text = nil
             textView.textColor = UIColor.label
@@ -174,6 +182,7 @@ extension CreateTripVC: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        // Manual gestion of placeHolder for our textView
         if textView.text.isEmpty {
             textView.text = descriptionPlaceHolder
             textView.textColor = UIColor.placeholderText
