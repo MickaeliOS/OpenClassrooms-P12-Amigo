@@ -18,7 +18,7 @@ class TripCreationService {
     }
     
     // MARK: - FUNCTIONS
-    func createTrip(trip: LocalTrip, completion: @escaping (Error?) -> Void) {
+    func createTrip(trip: Trip, completion: @escaping (Error?) -> Void) {
         guard let _ = UserAuth.shared.user else { return }
 
         do {
@@ -27,7 +27,7 @@ class TripCreationService {
                     completion(UserError.DatabaseError.defaultError)
                     return
                 }
-                            
+
                 completion(nil)
             }
         } catch {

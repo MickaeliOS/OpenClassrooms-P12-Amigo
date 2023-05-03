@@ -7,16 +7,17 @@
 
 import Foundation
 
-struct Destination: FirestoreDestination {
+struct Destination: FirestoreDestination, Codable {
+    // A destination, at least, have a country.
     var country: String
     var address: String?
-    var postalCode: Int?
+    var postalCode: String?
     var city: String?
 }
 
 protocol FirestoreDestination {
     var country: String { get }
     var address: String? { get }
-    var postalCode: Int? { get }
+    var postalCode: String? { get }
     var city: String? { get }
 }

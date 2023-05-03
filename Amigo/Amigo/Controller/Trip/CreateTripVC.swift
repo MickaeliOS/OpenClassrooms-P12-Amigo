@@ -31,8 +31,9 @@ class CreateTripVC: UIViewController {
     
     let userAuth = UserAuth.shared
     let tripCreationService = TripCreationService()
-    var destinationAddress: (String, String?)?
     let descriptionPlaceHolder = "Enter your description."
+    
+    var tripDestination: Destination?
     var womanOnly = false
     weak var delegate: CreateTripVCDelegate?
     
@@ -76,7 +77,7 @@ class CreateTripVC: UIViewController {
     
     private func refreshCountryName() {
         // For more clarity, i'm only displaying the first part of the address.
-        destinationTextField.text = destinationAddress?.0
+        destinationTextField.text = tripDestination?.address
         
         // If we forgot to set the destination before pressing the Add Trip Button,
         // the red error message is displayed, and when we set the destination, we
@@ -88,8 +89,8 @@ class CreateTripVC: UIViewController {
     }
     
     private func addTripFlow() {
-        // We first try to create our Trip object.
         guard let trip = createTrip() else {
+            presentAlert(with: UserError.CommonError.defaultError.localizedDescription)
             return
         }
         
@@ -99,14 +100,14 @@ class CreateTripVC: UIViewController {
                 self?.presentAlert(with: error.localizedDescription)
                 return
             }
-            
-            // We head back to the previous screen
+
+            // We head back to the previous screen.
             self?.delegate?.passCreatedTripToFindTripVC(trip: trip)
             self?.navigationController?.popViewController(animated: true)
         }
     }
     
-    private func createTrip() -> LocalTrip? {
+    private func createTrip() -> Trip? {
         guard let _ = userAuth.user else {
             presentAlert(with: "An error occured, please reconnect.")
             return nil
@@ -117,17 +118,13 @@ class CreateTripVC: UIViewController {
             errorMessageLabel.displayErrorMessage(message: "These fields must be filled : \n - Destination \n - Description")
             return nil
         }
-        
-        // We can now safely create our trip, with womanOnly if our user is a female who wished for female only trip.
-        var trip = LocalTrip(userID: userAuth.user!.userID,
-                             startDate: startDatePicker.date,
-                             endDate: endDatePicker.date,
-                             firstPartAddress: destinationAddress!.0,
-                             description: tripDescriptionTextView.text!)
-        
-        if let secondPartAddress = destinationAddress!.1, !secondPartAddress.isEmpty {
-            trip.secondPartAddress = secondPartAddress
-        }
+            
+        // We can now safely create our trip, with womanOnly if our user is a female who wished for a female only trip.
+        var trip = Trip(userID: userAuth.user!.userID,
+                        startDate: startDatePicker.date,
+                        endDate: endDatePicker.date,
+                        description: tripDescriptionTextView.text!,
+                        destination: tripDestination!)
         
         if userAuth.user?.gender == .woman {
             trip.womanOnly = womanOnly
@@ -137,7 +134,7 @@ class CreateTripVC: UIViewController {
     }
     
     private func fieldsControl() -> Bool {
-        guard destinationAddress != nil,
+        guard tripDestination != nil,
               !tripDescriptionTextView.isEmpty,
               tripDescriptionTextView.text != descriptionPlaceHolder else {
             return false
@@ -191,5 +188,5 @@ extension CreateTripVC: UITextViewDelegate {
 }
 
 protocol CreateTripVCDelegate: AnyObject {
-    func passCreatedTripToFindTripVC(trip: LocalTrip)
+    func passCreatedTripToFindTripVC(trip: Trip)
 }

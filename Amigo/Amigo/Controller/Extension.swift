@@ -111,7 +111,7 @@ extension Date {
 }
 
 extension MKLocalSearch {
-    static func getCountryFromAddress(address: String, completion: @escaping (String?, Error?) -> Void) {
+    static func getPartsFromAddress(address: String, completion: @escaping (MKMapItem?, Error?) -> Void) {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = address
         
@@ -127,7 +127,7 @@ extension MKLocalSearch {
             }
             
             for item in mapItems {
-                completion(item.placemark.country, nil)
+                completion(item, nil)
             }
         }
     }

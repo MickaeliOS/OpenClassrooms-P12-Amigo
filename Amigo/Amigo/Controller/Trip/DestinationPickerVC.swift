@@ -40,8 +40,8 @@ extension DestinationPickerVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "unwindToCreateTripVC" {
             let createTripVC = segue.destination as? CreateTripVC
-            let countryName = sender as? (String, String?)
-            createTripVC?.destinationAddress = countryName
+            let destination = sender as? Destination
+            createTripVC?.tripDestination = destination
         }
     }
 }
@@ -68,19 +68,23 @@ extension DestinationPickerVC: UITableViewDelegate, UITableViewDataSource {
         let secondPartAddress = searchResult[indexPath.row].subtitle
         let fullAddress = firstPartAddress + " " + secondPartAddress
         
-        MKLocalSearch.getCountryFromAddress(address: fullAddress) { country, error in
+        MKLocalSearch.getPartsFromAddress(address: fullAddress) { [weak self] item, error in
             if error != nil {
                 return
             }
             
-            guard let country = country else {
+            guard let item = item else {
                 return
             }
             
-            print("MKA - COUNTRY NAME : \(country)")
+            // I'm forcing unwraping here because country will never be nil
+            // since the address come from MKLocalSearchCompleter
+            let destination = Destination(country: item.placemark.country!,
+                                          address: item.name,
+                                          postalCode: item.placemark.postalCode,
+                                          city: item.placemark.locality)
+            self?.performSegue(withIdentifier: "unwindToCreateTripVC", sender: destination)
         }
-
-        performSegue(withIdentifier: "unwindToCreateTripVC", sender: (firstPartAddress, secondPartAddress))
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

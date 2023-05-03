@@ -28,14 +28,14 @@ class TripTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func configureCell(profilePicture: Data?, destination: String, fromDate: Date, toDate: Date) {
+    func configureCell(profilePicture: Data?, address: String, fromDate: Date, toDate: Date) {
         if let profilePicture = profilePicture {
             profilePictureImage.image = UIImage(data: profilePicture)
         } else {
             profilePictureImage.image = UIImage(systemName: "person.fill")
         }
         
-        destinationLabel.text = destination
+        destinationLabel.text = address
         self.startDate.text = fromDate.dateToString()
         self.endDate.text = toDate.dateToString()
     }

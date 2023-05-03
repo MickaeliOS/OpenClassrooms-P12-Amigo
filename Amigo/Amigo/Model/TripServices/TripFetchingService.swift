@@ -21,13 +21,13 @@ class TripFetchingService {
         self.firestoreDatabase = firestoreDatabase
     }
     
-     func fetchUserTrips() async throws -> [LocalTrip] {
+     func fetchUserTrips() async throws -> [Trip] {
         //TODO: Gérer proprement les erreurs
         guard let currentUser = UserAuth.shared.user else {
             throw UserError.CommonError.noUser
         }
         
-        var trips: [LocalTrip] = []
+        var trips: [Trip] = []
          
         do {
             // We need the user's trips, each trip we fetch must have the same userID
@@ -38,7 +38,7 @@ class TripFetchingService {
             
             // Transforming the [QueryDocumentSnapshot] with Codable
             try result.documents.forEach { document in
-                let trip = try document.data(as: LocalTrip.self)
+                let trip = try document.data(as: Trip.self)
                 trips.append(trip)
             }
             

@@ -44,6 +44,8 @@
 		8388260E29E6931A003EBCC1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260D29E6931A003EBCC1 /* Extension.swift */; };
 		8388261029E6A2F9003EBCC1 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260F29E6A2F9003EBCC1 /* ProfileVC.swift */; };
 		83B4F8E82A025BAE00A1A4FC /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8E72A025BAE00A1A4FC /* Destination.swift */; };
+		83B4F8EB2A027B0300A1A4FC /* DestinationCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8EA2A027B0300A1A4FC /* DestinationCreationService.swift */; };
+		83B4F8ED2A02913000A1A4FC /* DestinationFetchingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8EC2A02913000A1A4FC /* DestinationFetchingService.swift */; };
 		83C20F8A29ED6B3A009B252B /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8929ED6B3A009B252B /* SettingsVC.swift */; };
 		83C20F8E29EE6C54009B252B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8D29EE6C54009B252B /* Theme.swift */; };
 /* End PBXBuildFile section */
@@ -81,6 +83,8 @@
 		8388260D29E6931A003EBCC1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		8388260F29E6A2F9003EBCC1 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		83B4F8E72A025BAE00A1A4FC /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
+		83B4F8EA2A027B0300A1A4FC /* DestinationCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationCreationService.swift; sourceTree = "<group>"; };
+		83B4F8EC2A02913000A1A4FC /* DestinationFetchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationFetchingService.swift; sourceTree = "<group>"; };
 		83C20F8929ED6B3A009B252B /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		83C20F8D29EE6C54009B252B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -200,6 +204,7 @@
 			children = (
 				8300096329F8FE90006DBD54 /* UserServices */,
 				8300097929FAA567006DBD54 /* TripServices */,
+				83B4F8E92A027ADD00A1A4FC /* DestinationServices */,
 				8323F6EF29E5908600CBDFB5 /* User.swift */,
 				8300097729FA96ED006DBD54 /* Trip.swift */,
 				83C20F8D29EE6C54009B252B /* Theme.swift */,
@@ -229,6 +234,15 @@
 				8388260D29E6931A003EBCC1 /* Extension.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		83B4F8E92A027ADD00A1A4FC /* DestinationServices */ = {
+			isa = PBXGroup;
+			children = (
+				83B4F8EA2A027B0300A1A4FC /* DestinationCreationService.swift */,
+				83B4F8EC2A02913000A1A4FC /* DestinationFetchingService.swift */,
+			);
+			path = DestinationServices;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,6 +336,7 @@
 				8388261029E6A2F9003EBCC1 /* ProfileVC.swift in Sources */,
 				8300097D29FB9EF6006DBD54 /* TripFetchingService.swift in Sources */,
 				8300097829FA96ED006DBD54 /* Trip.swift in Sources */,
+				83B4F8EB2A027B0300A1A4FC /* DestinationCreationService.swift in Sources */,
 				83C20F8A29ED6B3A009B252B /* SettingsVC.swift in Sources */,
 				8300096229F6BBD2006DBD54 /* DestinationPickerVC.swift in Sources */,
 				8300097129F907D2006DBD54 /* UserError.swift in Sources */,
@@ -332,6 +347,7 @@
 				8388260C29E68FBA003EBCC1 /* CreateAccountVC.swift in Sources */,
 				8300096B29F905EB006DBD54 /* UserUpdatingService.swift in Sources */,
 				8300096529F8FF2F006DBD54 /* UserCreationService.swift in Sources */,
+				83B4F8ED2A02913000A1A4FC /* DestinationFetchingService.swift in Sources */,
 				8361E03429E5522900EE7D2B /* SceneDelegate.swift in Sources */,
 				8300096729F90598006DBD54 /* UserAuthService.swift in Sources */,
 				8300096929F905CA006DBD54 /* UserFetchingService.swift in Sources */,

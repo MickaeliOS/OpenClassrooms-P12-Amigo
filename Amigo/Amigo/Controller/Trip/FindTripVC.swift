@@ -29,7 +29,7 @@ class FindTripVC: UIViewController {
     private let userFetchingService = UserFetchingService()
     private let pictureService = PictureService()
     private let tripFetchingService = TripFetchingService()
-    var trips: [LocalTrip]? {
+    var trips: [Trip]? {
         didSet {
             tripTableView.reloadData()
         }
@@ -72,6 +72,8 @@ class FindTripVC: UIViewController {
     private func fetchTrips() async {
         do {
             trips = try await tripFetchingService.fetchUserTrips()
+            
+            
         } catch {
             presentAlert(with: error.localizedDescription)
         }
@@ -113,7 +115,7 @@ extension FindTripVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.configureCell(profilePicture: userAuth.user?.profilePicture?.data,
-                           destination: trip.firstPartAddress,
+                           address: trip.destination.address ?? "",
                            fromDate: trip.startDate,
                            toDate: trip.endDate)
         return cell
@@ -121,7 +123,7 @@ extension FindTripVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension FindTripVC: CreateTripVCDelegate {
-    func passCreatedTripToFindTripVC(trip: LocalTrip) {
+    func passCreatedTripToFindTripVC(trip: Trip) {
         trips?.append(trip)
     }
 }
