@@ -57,7 +57,7 @@ class WelcomeVC: UIViewController {
             do {
                 try await userAuthService.signIn(email: emailTextField.text!, password: passwordTextField.text!)
                 performSegue(withIdentifier: "unwindToRootVC", sender: nil)
-            } catch {
+            } catch let error as Errors.SignInError {
                 errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
             }
         }

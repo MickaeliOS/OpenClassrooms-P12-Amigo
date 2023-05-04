@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserError {
+struct Errors {
     enum CreateAccountError: Error {
         case emailAlreadyInUse
         case badlyFormattedEmail

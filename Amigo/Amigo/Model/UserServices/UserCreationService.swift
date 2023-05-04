@@ -9,7 +9,7 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-class UserCreationService {
+final class UserCreationService {
     // MARK: - PROPERTIES & INIT
     private let userTableConstants = Constant.FirestoreTables.User.self
     private let firebaseAuth: Auth
@@ -31,9 +31,9 @@ class UserCreationService {
         } catch let error as NSError {
             switch error.code {
             case AuthErrorCode.emailAlreadyInUse.rawValue:
-                throw UserError.CreateAccountError.emailAlreadyInUse
+                throw Errors.CreateAccountError.emailAlreadyInUse
             default:
-                throw UserError.CreateAccountError.defaultError
+                throw Errors.CreateAccountError.defaultError
             }
         }
     }
@@ -48,7 +48,7 @@ class UserCreationService {
         do {
             try await firestoreDatabase.collection(userTableConstants.tableName).document(user.userID).setData(userData)
         } catch {
-            throw UserError.DatabaseError.defaultError
+            throw Errors.DatabaseError.defaultError
         }
     }
     
@@ -60,19 +60,19 @@ class UserCreationService {
                                     gender: String?) throws {
         
         guard emptyControl(fields: [email, password, confirmPassword, lastname, firstname, gender]) else {
-            throw UserError.CreateAccountError.emptyFields
+            throw Errors.CreateAccountError.emptyFields
         }
         
         guard Utilities.isValidEmail(email!) else {
-            throw UserError.CreateAccountError.badlyFormattedEmail
+            throw Errors.CreateAccountError.badlyFormattedEmail
         }
         
         guard passwordEqualityCheck(password: password!, confirmPassword: confirmPassword!) else {
-            throw UserError.CreateAccountError.passwordsNotEquals
+            throw Errors.CreateAccountError.passwordsNotEquals
         }
         
         guard Utilities.isValidPassword(password!) else {
-            throw UserError.CreateAccountError.weakPassword
+            throw Errors.CreateAccountError.weakPassword
         }
     }
     

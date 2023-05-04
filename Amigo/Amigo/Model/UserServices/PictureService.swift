@@ -27,7 +27,7 @@ class PictureService {
         //TODO: la fonction getImage() parce qu'elle est trop grosse, ça pose un problème.
         
         guard let currentUser = UserAuth.shared.user else {
-            throw UserError.CommonError.noUser
+            throw Errors.CommonError.noUser
         }
         
         let savingPath = "\(currentUser.userID)/images/\(type)"
@@ -37,7 +37,7 @@ class PictureService {
             let _ = try await fileRef.putDataAsync(picture)
             return savingPath
         } catch {
-            throw UserError.DatabaseError.cannotUploadPicture
+            throw Errors.DatabaseError.cannotUploadPicture
         }
     }
     
@@ -46,7 +46,7 @@ class PictureService {
             let result = try await firebaseStorage.child(path).data(maxSize: 5 * 1024 * 1024)
             return result
         } catch {
-            throw UserError.DatabaseError.cannotGetPicture
+            throw Errors.DatabaseError.cannotGetPicture
         }
     }
 }

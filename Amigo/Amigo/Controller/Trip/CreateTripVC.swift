@@ -64,7 +64,7 @@ class CreateTripVC: UIViewController {
         tripDescriptionTextView.text = descriptionPlaceHolder
         tripDescriptionTextView.textColor = UIColor.placeholderText
         
-        destinationTextField.addLeftSystemImage(image: UIImage(systemName: "airplane.departure")!)
+        destinationTextField.addLeftSystemImage(image: UIImage(systemName: "airplane.circle")!)
         displayGenderSpecificInterface()
     }
     
@@ -85,12 +85,11 @@ class CreateTripVC: UIViewController {
         if !errorMessageLabel.isHidden {
             errorMessageLabel.isHidden = true
         }
-        
     }
     
     private func addTripFlow() {
         guard let trip = createTrip() else {
-            presentAlert(with: UserError.CommonError.defaultError.localizedDescription)
+            presentAlert(with: Errors.CommonError.defaultError.localizedDescription)
             return
         }
         
@@ -143,7 +142,7 @@ class CreateTripVC: UIViewController {
     }
 }
 
-// MARK: - EXTENSIONS
+// MARK: - EXTENSIONS & PROTOCOLS
 extension CreateTripVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destinationPickerVC = segue.destination as? DestinationPickerVC {
@@ -167,11 +166,11 @@ extension CreateTripVC: UITextFieldDelegate {
     }
 }
 
+// Manual gestion of placeHolder for our textView
 extension CreateTripVC: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         errorMessageLabel.isHidden = true
         
-        // Manual gestion of placeHolder for our textView
         if textView.textColor == UIColor.placeholderText {
             textView.text = nil
             textView.textColor = UIColor.label
@@ -179,7 +178,6 @@ extension CreateTripVC: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        // Manual gestion of placeHolder for our textView
         if textView.text.isEmpty {
             textView.text = descriptionPlaceHolder
             textView.textColor = UIColor.placeholderText

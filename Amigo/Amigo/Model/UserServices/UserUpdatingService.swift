@@ -20,14 +20,14 @@ class UserUpdatingService {
     // MARK: - FUNCTIONS
     func updateUser(fields: [String:Any]) async throws {
         guard let currentUser = UserAuth.shared.user else {
-            throw UserError.CommonError.noUser
+            throw Errors.CommonError.noUser
         }
         
         do {
             try await firestoreDatabase.collection(Constant.FirestoreTables.User.tableName).document(currentUser.userID).updateData(fields)
 
         } catch {
-            throw UserError.CommonError.defaultError
+            throw Errors.CommonError.defaultError
         }
     }
     

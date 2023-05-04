@@ -10,6 +10,7 @@ import Foundation
 struct Destination: FirestoreDestination, Codable {
     // A destination, at least, have a country.
     var country: String
+    var countryCode: String
     var address: String?
     var postalCode: String?
     var city: String?
@@ -17,6 +18,7 @@ struct Destination: FirestoreDestination, Codable {
 
 protocol FirestoreDestination {
     var country: String { get }
+    var countryCode: String { get }
     var address: String? { get }
     var postalCode: String? { get }
     var city: String? { get }

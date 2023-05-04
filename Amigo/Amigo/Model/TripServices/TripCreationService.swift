@@ -24,14 +24,14 @@ class TripCreationService {
         do {
             let _ = try firestoreDatabase.collection(tripTableConstants.tableName).addDocument(from: trip.self) { error in
                 if error != nil {
-                    completion(UserError.DatabaseError.defaultError)
+                    completion(Errors.DatabaseError.defaultError)
                     return
                 }
 
                 completion(nil)
             }
         } catch {
-            completion(UserError.DatabaseError.defaultError)
+            completion(Errors.DatabaseError.defaultError)
         }
     }
 }

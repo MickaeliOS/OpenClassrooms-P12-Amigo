@@ -23,14 +23,14 @@ class UserFetchingService {
     // MARK: - FUNCTIONS
     func fetchUser() async throws {
         guard let currentUserID = firebaseAuth.currentUser?.uid else {
-            throw UserError.CommonError.noUser
+            throw Errors.CommonError.noUser
         }
         
         do {
             let result = try await firestoreDatabase.collection(userTableConstants.tableName).document(currentUserID).getDocument()
             
             guard let data = result.data() else {
-                throw UserError.DatabaseError.noDocument
+                throw Errors.DatabaseError.noDocument
             }
             
             let genderString = data[userTableConstants.gender] as? String ?? ""
@@ -48,7 +48,7 @@ class UserFetchingService {
             
             UserAuth.shared.user = user
         } catch {
-            throw UserError.DatabaseError.cannotGetDocument
+            throw Errors.DatabaseError.cannotGetDocument
         }
     }
 }

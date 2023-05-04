@@ -118,7 +118,7 @@ extension MKLocalSearch {
         let search = MKLocalSearch(request: request)
         search.start { response, error in
             if error != nil {
-                completion(nil, UserError.CommonError.defaultError)
+                completion(nil, Errors.CommonError.defaultError)
             }
             
             guard let mapItems = response?.mapItems, !mapItems.isEmpty else {
@@ -126,9 +126,16 @@ extension MKLocalSearch {
                 return
             }
             
-            for item in mapItems {
-                completion(item, nil)
-            }
+            // I return the first element of the collection, because an address is unique.
+            completion(mapItems.first, nil)
         }
+    }
+}
+
+extension String {
+    static func countryFlag(countryCode: String) -> String {
+      return String(String.UnicodeScalarView(
+         countryCode.unicodeScalars.compactMap(
+           { UnicodeScalar(127397 + $0.value) })))
     }
 }

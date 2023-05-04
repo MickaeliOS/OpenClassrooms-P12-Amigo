@@ -80,6 +80,7 @@ extension DestinationPickerVC: UITableViewDelegate, UITableViewDataSource {
             // I'm forcing unwraping here because country will never be nil
             // since the address come from MKLocalSearchCompleter
             let destination = Destination(country: item.placemark.country!,
+                                          countryCode: item.placemark.countryCode!,
                                           address: item.name,
                                           postalCode: item.placemark.postalCode,
                                           city: item.placemark.locality)

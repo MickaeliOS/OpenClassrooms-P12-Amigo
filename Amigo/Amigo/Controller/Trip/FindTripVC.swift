@@ -23,12 +23,14 @@ class FindTripVC: UIViewController {
 
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var tripTableView: UITableView!
+    @IBOutlet weak var noTripLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var userAuth = UserAuth.shared
     private let userFetchingService = UserFetchingService()
-    private let pictureService = PictureService()
     private let tripFetchingService = TripFetchingService()
+    private let tripDeletionService = TripDeletionService()
+    private let pictureService = PictureService()
     var trips: [Trip]? {
         didSet {
             tripTableView.reloadData()
@@ -63,6 +65,7 @@ class FindTripVC: UIViewController {
                 await fetchTrips()
                 activityIndicator.isHidden = true
 
+                noTripLabel.isHidden = trips != nil ? true : false
             } catch {
                 presentVCFullScreen(with: "WelcomeVC") // TODO: Ne fonctionne pas, seule l'alerte marche. Si pas d'alerte, ça marche.
             }
@@ -72,7 +75,6 @@ class FindTripVC: UIViewController {
     private func fetchTrips() async {
         do {
             trips = try await tripFetchingService.fetchUserTrips()
-            
             
         } catch {
             presentAlert(with: error.localizedDescription)
@@ -114,17 +116,46 @@ extension FindTripVC: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.configureCell(profilePicture: userAuth.user?.profilePicture?.data,
-                           address: trip.destination.address ?? "",
+        cell.configureCell(address: trip.destination.address ?? "",
+                           countryCode: trip.destination.countryCode,
                            fromDate: trip.startDate,
                            toDate: trip.endDate)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(100)
+    }
+    
+    /*func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            Task {
+                do {
+                    // Always remove the data first
+                    do {
+                        let tripID = trips[indexPath.row].d
+                        try await tripDeletionService.deleteTrip(tripID: <#T##String#>)
+                    }
+            }
+                
+
+                
+                // Then, the cell
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            } catch let error as IngredientConfiguration.IngredientsErrors {
+                presentAlert(with: error.localizedDescription)
+            } catch {
+                presentAlert(with: "An error occured.")
+            }
+        }
+    }*/
 }
 
 extension FindTripVC: CreateTripVCDelegate {
     func passCreatedTripToFindTripVC(trip: Trip) {
         trips?.append(trip)
+        noTripLabel.isHidden = true
     }
 }
 

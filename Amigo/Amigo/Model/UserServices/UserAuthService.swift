@@ -20,7 +20,7 @@ class UserAuthService {
     // MARK: - FUNCTIONS
     func signIn(email: String, password: String) async throws {
         guard Utilities.isValidEmail(email) else {
-            throw UserError.SignInError.badlyFormattedEmail
+            throw Errors.SignInError.badlyFormattedEmail
         }
         
         do {
@@ -31,9 +31,9 @@ class UserAuthService {
             switch error.code {
             case AuthErrorCode.wrongPassword.rawValue,
                 AuthErrorCode.userNotFound.rawValue:
-                throw UserError.SignInError.incorrectLogs
+                throw Errors.SignInError.incorrectLogs
             default:
-                throw UserError.SignInError.defaultError
+                throw Errors.SignInError.defaultError
             }
         }
     }
@@ -42,7 +42,7 @@ class UserAuthService {
         do {
             try Auth.auth().signOut()
         } catch {
-            throw UserError.SignOutError.cannotSignOut
+            throw Errors.SignOutError.cannotSignOut
         }
     }
 }

@@ -14,8 +14,7 @@ class TripTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    
-    @IBOutlet weak var profilePictureImage: UIImageView!
+    @IBOutlet weak var flagIconLabel: UILabel!
     @IBOutlet weak var destinationLabel: UILabel!
     @IBOutlet weak var startDate: UILabel!
     @IBOutlet weak var endDate: UILabel!
@@ -28,15 +27,12 @@ class TripTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func configureCell(profilePicture: Data?, address: String, fromDate: Date, toDate: Date) {
-        if let profilePicture = profilePicture {
-            profilePictureImage.image = UIImage(data: profilePicture)
-        } else {
-            profilePictureImage.image = UIImage(systemName: "person.fill")
-        }
+    func configureCell(address: String, countryCode: String, fromDate: Date, toDate: Date) {
+        // I retrieve the country's flag to display it.
+        flagIconLabel.text = String.countryFlag(countryCode: countryCode)
         
         destinationLabel.text = address
-        self.startDate.text = fromDate.dateToString()
-        self.endDate.text = toDate.dateToString()
+        self.startDate.text = "From: \(fromDate.dateToString())"
+        self.endDate.text = "To: \(toDate.dateToString())"
     }
 }

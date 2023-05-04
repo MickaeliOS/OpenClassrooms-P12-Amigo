@@ -14,7 +14,7 @@
 		8300096929F905CA006DBD54 /* UserFetchingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300096829F905CA006DBD54 /* UserFetchingService.swift */; };
 		8300096B29F905EB006DBD54 /* UserUpdatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300096A29F905EB006DBD54 /* UserUpdatingService.swift */; };
 		8300096D29F90612006DBD54 /* PictureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300096C29F90612006DBD54 /* PictureService.swift */; };
-		8300097129F907D2006DBD54 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097029F907D2006DBD54 /* UserError.swift */; };
+		8300097129F907D2006DBD54 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097029F907D2006DBD54 /* Errors.swift */; };
 		8300097329F90960006DBD54 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097229F90960006DBD54 /* Utilities.swift */; };
 		8300097829FA96ED006DBD54 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097729FA96ED006DBD54 /* Trip.swift */; };
 		8300097B29FAA580006DBD54 /* TripCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300097A29FAA580006DBD54 /* TripCreationService.swift */; };
@@ -46,6 +46,7 @@
 		83B4F8E82A025BAE00A1A4FC /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8E72A025BAE00A1A4FC /* Destination.swift */; };
 		83B4F8EB2A027B0300A1A4FC /* DestinationCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8EA2A027B0300A1A4FC /* DestinationCreationService.swift */; };
 		83B4F8ED2A02913000A1A4FC /* DestinationFetchingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8EC2A02913000A1A4FC /* DestinationFetchingService.swift */; };
+		83B4F8EF2A02FE9600A1A4FC /* TripDeletionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8EE2A02FE9600A1A4FC /* TripDeletionService.swift */; };
 		83C20F8A29ED6B3A009B252B /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8929ED6B3A009B252B /* SettingsVC.swift */; };
 		83C20F8E29EE6C54009B252B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8D29EE6C54009B252B /* Theme.swift */; };
 /* End PBXBuildFile section */
@@ -58,7 +59,7 @@
 		8300096829F905CA006DBD54 /* UserFetchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFetchingService.swift; sourceTree = "<group>"; };
 		8300096A29F905EB006DBD54 /* UserUpdatingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUpdatingService.swift; sourceTree = "<group>"; };
 		8300096C29F90612006DBD54 /* PictureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureService.swift; sourceTree = "<group>"; };
-		8300097029F907D2006DBD54 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
+		8300097029F907D2006DBD54 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8300097229F90960006DBD54 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		8300097729FA96ED006DBD54 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		8300097A29FAA580006DBD54 /* TripCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCreationService.swift; sourceTree = "<group>"; };
@@ -85,6 +86,7 @@
 		83B4F8E72A025BAE00A1A4FC /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
 		83B4F8EA2A027B0300A1A4FC /* DestinationCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationCreationService.swift; sourceTree = "<group>"; };
 		83B4F8EC2A02913000A1A4FC /* DestinationFetchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationFetchingService.swift; sourceTree = "<group>"; };
+		83B4F8EE2A02FE9600A1A4FC /* TripDeletionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDeletionService.swift; sourceTree = "<group>"; };
 		83C20F8929ED6B3A009B252B /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		83C20F8D29EE6C54009B252B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,7 +136,6 @@
 				8300096829F905CA006DBD54 /* UserFetchingService.swift */,
 				8300096A29F905EB006DBD54 /* UserUpdatingService.swift */,
 				8300096C29F90612006DBD54 /* PictureService.swift */,
-				8300097029F907D2006DBD54 /* UserError.swift */,
 				8300097229F90960006DBD54 /* Utilities.swift */,
 			);
 			path = UserServices;
@@ -155,6 +156,7 @@
 			children = (
 				8300097A29FAA580006DBD54 /* TripCreationService.swift */,
 				8300097C29FB9EF6006DBD54 /* TripFetchingService.swift */,
+				83B4F8EE2A02FE9600A1A4FC /* TripDeletionService.swift */,
 			);
 			path = TripServices;
 			sourceTree = "<group>";
@@ -205,6 +207,7 @@
 				8300096329F8FE90006DBD54 /* UserServices */,
 				8300097929FAA567006DBD54 /* TripServices */,
 				83B4F8E92A027ADD00A1A4FC /* DestinationServices */,
+				8300097029F907D2006DBD54 /* Errors.swift */,
 				8323F6EF29E5908600CBDFB5 /* User.swift */,
 				8300097729FA96ED006DBD54 /* Trip.swift */,
 				83C20F8D29EE6C54009B252B /* Theme.swift */,
@@ -339,9 +342,10 @@
 				83B4F8EB2A027B0300A1A4FC /* DestinationCreationService.swift in Sources */,
 				83C20F8A29ED6B3A009B252B /* SettingsVC.swift in Sources */,
 				8300096229F6BBD2006DBD54 /* DestinationPickerVC.swift in Sources */,
-				8300097129F907D2006DBD54 /* UserError.swift in Sources */,
+				8300097129F907D2006DBD54 /* Errors.swift in Sources */,
 				8361E03229E5522900EE7D2B /* AppDelegate.swift in Sources */,
 				8300097B29FAA580006DBD54 /* TripCreationService.swift in Sources */,
+				83B4F8EF2A02FE9600A1A4FC /* TripDeletionService.swift in Sources */,
 				83C20F8E29EE6C54009B252B /* Theme.swift in Sources */,
 				8388260E29E6931A003EBCC1 /* Extension.swift in Sources */,
 				8388260C29E68FBA003EBCC1 /* CreateAccountVC.swift in Sources */,
