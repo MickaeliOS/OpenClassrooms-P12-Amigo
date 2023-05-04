@@ -1,5 +1,5 @@
 //
-//  FindTripVC.swift
+//  AddTripVC.swift
 //  Amigo
 //
 //  Created by Mickaël Horn on 14/04/2023.
@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class FindTripVC: UIViewController {
+class AddTripVC: UIViewController {
     
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
@@ -66,8 +66,10 @@ class FindTripVC: UIViewController {
                 activityIndicator.isHidden = true
 
                 noTripLabel.isHidden = trips != nil ? true : false
-            } catch {
-                presentVCFullScreen(with: "WelcomeVC") // TODO: Ne fonctionne pas, seule l'alerte marche. Si pas d'alerte, ça marche.
+            } catch let error as Errors.DatabaseError {
+                presentAlert(with: error.localizedDescription) {
+                    self.presentVCFullScreen(with: "WelcomeVC")
+                }
             }
         }
     }
@@ -99,9 +101,13 @@ class FindTripVC: UIViewController {
         self.tripTableView.register(UINib(nibName: Constant.TableViewCell.nibName, bundle: nil),
                                     forCellReuseIdentifier: Constant.TableViewCell.tripCell)
     }
+    
+    private func setupConfirmationVCDelegate() {
+        
+    }
 }
 
-extension FindTripVC: UITableViewDelegate, UITableViewDataSource {
+extension AddTripVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return trips?.count ?? 0
     }
@@ -116,8 +122,8 @@ extension FindTripVC: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.configureCell(address: trip.destination.address ?? "",
-                           countryCode: trip.destination.countryCode,
+        cell.configureCell(country: trip.destination.country,
+                           countryCode: trip.destination.countryCode ?? "",
                            fromDate: trip.startDate,
                            toDate: trip.endDate)
         return cell
@@ -150,19 +156,4 @@ extension FindTripVC: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }*/
-}
-
-extension FindTripVC: CreateTripVCDelegate {
-    func passCreatedTripToFindTripVC(trip: Trip) {
-        trips?.append(trip)
-        noTripLabel.isHidden = true
-    }
-}
-
-extension FindTripVC {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let createTripVC = segue.destination as? CreateTripVC {
-            createTripVC.delegate = self
-        }
-    }
 }

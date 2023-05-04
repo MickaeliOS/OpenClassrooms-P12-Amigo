@@ -27,11 +27,11 @@ class TripTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func configureCell(address: String, countryCode: String, fromDate: Date, toDate: Date) {
+    func configureCell(country: String, countryCode: String, fromDate: Date, toDate: Date) {
         // I retrieve the country's flag to display it.
         flagIconLabel.text = String.countryFlag(countryCode: countryCode)
         
-        destinationLabel.text = address
+        destinationLabel.text = country
         self.startDate.text = "From: \(fromDate.dateToString())"
         self.endDate.text = "To: \(toDate.dateToString())"
     }

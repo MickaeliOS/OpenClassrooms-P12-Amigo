@@ -23,6 +23,16 @@ extension UIViewController {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
+    
+    func presentAlert(with error: String, completion: @escaping () -> Void) {
+        let alert: UIAlertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .cancel) { action in
+            completion()
+        }
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension UITextField {
@@ -134,8 +144,26 @@ extension MKLocalSearch {
 
 extension String {
     static func countryFlag(countryCode: String) -> String {
-      return String(String.UnicodeScalarView(
-         countryCode.unicodeScalars.compactMap(
-           { UnicodeScalar(127397 + $0.value) })))
+        return String(String.UnicodeScalarView(
+            countryCode.unicodeScalars.compactMap(
+                { UnicodeScalar(127397 + $0.value) })))
+    }
+}
+
+extension Locale {
+    static var countryList: [String] {
+        Locale.isoRegionCodes.compactMap { Locale.current.localizedString(forRegionCode: $0) }
+    }
+    
+    static func countryCode(forCountryName name: String) -> String? {
+        for code in Locale.isoRegionCodes {
+            guard let countryName = Locale.current.localizedString(forRegionCode: code) else {
+                continue
+            }
+            if countryName.lowercased() == name.lowercased() {
+                return code
+            }
+        }
+        return nil
     }
 }

@@ -23,10 +23,7 @@ class CreateTripVC: UIViewController {
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
     @IBOutlet weak var destinationTextField: UITextField!
-    @IBOutlet weak var tripDescriptionTextView: UITextView!
     @IBOutlet weak var addTripButton: UIButton!
-    @IBOutlet weak var womanOnlyLabel: UILabel!
-    @IBOutlet weak var womanOnlySwitch: UISwitch!
     @IBOutlet weak var errorMessageLabel: UILabel!
     
     let userAuth = UserAuth.shared
@@ -35,23 +32,14 @@ class CreateTripVC: UIViewController {
     
     var tripDestination: Destination?
     var womanOnly = false
-    weak var delegate: CreateTripVCDelegate?
     
     // MARK: - ACTIONS
     @IBAction func unwindToCreateTripVC(segue: UIStoryboardSegue) {}
     
-    @IBAction func dismissKeyboard(_ sender: Any) {
-        tripDescriptionTextView.resignFirstResponder()
-    }
-    
     @IBAction func addTripButtonTapped(_ sender: Any) {
         addTripFlow()
     }
-    
-    @IBAction func womanOnlySwitchTapped(_ sender: Any) {
-        womanOnly = womanOnlySwitch.isOn ? true : false
-    }
-    
+
     @IBAction func destinationTextFieldTapped(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: "segueToDestinationPickerVC", sender: nil)
     }
@@ -59,25 +47,11 @@ class CreateTripVC: UIViewController {
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
         addTripButton.layer.cornerRadius = 10
-        
-        // The text view's place holder
-        tripDescriptionTextView.text = descriptionPlaceHolder
-        tripDescriptionTextView.textColor = UIColor.placeholderText
-        
         destinationTextField.addLeftSystemImage(image: UIImage(systemName: "airplane.circle")!)
-        displayGenderSpecificInterface()
-    }
-    
-    private func displayGenderSpecificInterface() {
-        if userAuth.user?.gender != .woman {
-            womanOnlyLabel.isHidden = true
-            womanOnlySwitch.isHidden = true
-        }
     }
     
     private func refreshCountryName() {
-        // For more clarity, i'm only displaying the first part of the address.
-        destinationTextField.text = tripDestination?.address
+        destinationTextField.text = tripDestination?.country
         
         // If we forgot to set the destination before pressing the Add Trip Button,
         // the red error message is displayed, and when we set the destination, we
@@ -100,9 +74,8 @@ class CreateTripVC: UIViewController {
                 return
             }
 
-            // We head back to the previous screen.
-            self?.delegate?.passCreatedTripToFindTripVC(trip: trip)
-            self?.navigationController?.popViewController(animated: true)
+            // We can go to the ConfirmationVC screen.
+            self?.performSegue(withIdentifier: "segueToConfirmationTripVC", sender: trip)
         }
     }
     
@@ -114,28 +87,20 @@ class CreateTripVC: UIViewController {
         
         // We first make sure the mandatory fields are filled.
         guard fieldsControl() else {
-            errorMessageLabel.displayErrorMessage(message: "These fields must be filled : \n - Destination \n - Description")
+            errorMessageLabel.displayErrorMessage(message: "Destination field must be filled.")
             return nil
         }
             
-        // We can now safely create our trip, with womanOnly if our user is a female who wished for a female only trip.
+        // We can now safely create our trip
         var trip = Trip(userID: userAuth.user!.userID,
                         startDate: startDatePicker.date,
                         endDate: endDatePicker.date,
-                        description: tripDescriptionTextView.text!,
                         destination: tripDestination!)
-        
-        if userAuth.user?.gender == .woman {
-            trip.womanOnly = womanOnly
-        }
-        
         return trip
     }
     
     private func fieldsControl() -> Bool {
-        guard tripDestination != nil,
-              !tripDescriptionTextView.isEmpty,
-              tripDescriptionTextView.text != descriptionPlaceHolder else {
+        guard tripDestination != nil else {
             return false
         }
         return true
@@ -145,8 +110,15 @@ class CreateTripVC: UIViewController {
 // MARK: - EXTENSIONS & PROTOCOLS
 extension CreateTripVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationPickerVC = segue.destination as? DestinationPickerVC {
-            destinationPickerVC.delegate = self
+        if segue.identifier == "segueToConfirmationTripVC" {
+            let confirmationTripVC = segue.destination as? ConfirmationTripVC
+            let destination = sender as? Trip
+            confirmationTripVC?.trip = destination
+        }
+        
+        if segue.identifier == "segueToDestinationPickerVC" {
+            let destinationPickerVC = segue.destination as? DestinationPickerVC
+            destinationPickerVC?.delegate = self
         }
     }
 }
@@ -183,8 +155,4 @@ extension CreateTripVC: UITextViewDelegate {
             textView.textColor = UIColor.placeholderText
         }
     }
-}
-
-protocol CreateTripVCDelegate: AnyObject {
-    func passCreatedTripToFindTripVC(trip: Trip)
 }

@@ -23,7 +23,7 @@ class UserFetchingService {
     // MARK: - FUNCTIONS
     func fetchUser() async throws {
         guard let currentUserID = firebaseAuth.currentUser?.uid else {
-            throw Errors.CommonError.noUser
+            throw Errors.DatabaseError.noUser
         }
         
         do {

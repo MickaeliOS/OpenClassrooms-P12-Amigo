@@ -11,8 +11,6 @@ struct Trip: Codable, FirestoreTrip {
     var userID: String
     var startDate: Date
     var endDate: Date
-    var description: String
-    var womanOnly: Bool?
     var destination: Destination
     
     // User is optional so when we decode a Trip from Firestore,
@@ -30,7 +28,5 @@ protocol FirestoreTrip {
     var userID: String { get }
     var startDate: Date { get }
     var endDate: Date { get }
-    var description: String { get }
-    var womanOnly: Bool? { get }
     var destination: Destination { get }
 }

@@ -63,6 +63,7 @@ struct Errors {
     }
     
     enum DatabaseError: Error {
+        case noUser
         case noDocument
         case cannotGetDocument
         case cannotUploadPicture
@@ -71,6 +72,8 @@ struct Errors {
         
         var localizedDescription: String {
             switch self {
+            case .noUser:
+                return "Unfortunately, we were unable to retrieve your information due to a disconnection. Please log in again."
             case .noDocument:
                 return "No document found."
             case .cannotGetDocument:
