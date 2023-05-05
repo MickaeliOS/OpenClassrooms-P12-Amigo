@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class CreateTripVC: UIViewController {
     
@@ -15,10 +16,6 @@ class CreateTripVC: UIViewController {
         setupInterface()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
@@ -26,12 +23,11 @@ class CreateTripVC: UIViewController {
     @IBOutlet weak var addTripButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
     
-    let userAuth = UserAuth.shared
-    let tripCreationService = TripCreationService()
-    let descriptionPlaceHolder = "Enter your description."
+    private let userAuth = UserAuth.shared
+    private let tripCreationService = TripCreationService()
+    private let descriptionPlaceHolder = "Enter your description."
     
     var tripDestination: Destination?
-    var womanOnly = false
     
     // MARK: - ACTIONS
     @IBAction func unwindToCreateTripVC(segue: UIStoryboardSegue) {}
@@ -63,7 +59,6 @@ class CreateTripVC: UIViewController {
     
     private func addTripFlow() {
         guard let trip = createTrip() else {
-            presentAlert(with: Errors.CommonError.defaultError.localizedDescription)
             return
         }
         
@@ -80,30 +75,25 @@ class CreateTripVC: UIViewController {
     }
     
     private func createTrip() -> Trip? {
-        guard let _ = userAuth.user else {
-            presentAlert(with: "An error occured, please reconnect.")
+        guard let currentUserID = userAuth.currentUser?.uid else {
+            presentAlert(with: "You are disconnected, please log in again.") {
+                self.presentVCFullScreen(with: "WelcomeVC")
+            }
             return nil
         }
         
-        // We first make sure the mandatory fields are filled.
-        guard fieldsControl() else {
+        // We first make sure that we have a destination.
+        guard let tripDestination = tripDestination else {
             errorMessageLabel.displayErrorMessage(message: "Destination field must be filled.")
             return nil
         }
             
         // We can now safely create our trip
-        var trip = Trip(userID: userAuth.user!.userID,
+        let trip = Trip(userID: currentUserID,
                         startDate: startDatePicker.date,
                         endDate: endDatePicker.date,
-                        destination: tripDestination!)
+                        destination: tripDestination)
         return trip
-    }
-    
-    private func fieldsControl() -> Bool {
-        guard tripDestination != nil else {
-            return false
-        }
-        return true
     }
 }
 

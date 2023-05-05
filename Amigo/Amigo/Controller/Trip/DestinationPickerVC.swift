@@ -57,7 +57,7 @@ extension DestinationPickerVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let countryName = filteredCountryList[indexPath.row]
         let countryCode = Locale.countryCode(forCountryName: countryName)
-        let destination = Destination(country: countryName, countryCode: countryCode)
+        let destination = Destination(country: countryName, countryCode: countryCode ?? "N/A")
         
         performSegue(withIdentifier: "unwindToCreateTripVC", sender: destination)
     }

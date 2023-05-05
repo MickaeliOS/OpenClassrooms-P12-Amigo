@@ -36,7 +36,6 @@ class UserFetchingService {
             let genderString = data[userTableConstants.gender] as? String ?? ""
             let gender = User.Gender(rawValue: genderString) ?? .woman
             let user = User(
-                userID: data[userTableConstants.userID] as? String ?? "",
                 firstname: data[userTableConstants.firstname] as? String ?? "",
                 lastname: data[userTableConstants.lastname] as? String ?? "",
                 gender: gender,
@@ -48,7 +47,7 @@ class UserFetchingService {
             
             UserAuth.shared.user = user
         } catch {
-            throw Errors.DatabaseError.cannotGetDocument
+            throw Errors.DatabaseError.cannotGetDocuments
         }
     }
 }

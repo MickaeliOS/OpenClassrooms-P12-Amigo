@@ -39,16 +39,19 @@ final class UserCreationService {
     }
     
     func saveUserInDatabase(user: User) async throws {
-        let userData = [userTableConstants.userID: user.userID,
-                        userTableConstants.firstname: user.firstname,
+        // Il faudra trouver un moyen pour que l'utilisateur soit sauvegardé dans la base après sa création dans l'Auth, car sinon il va réappuyer sur le bouton pour créer son compte et ça marchera pas, ça lui dira email déjà utilisé. Du coup les throws ne servent probablement pas.
+        guard let currentUserID = UserAuth.shared.currentUser?.uid else {
+            throw Errors.DatabaseError.noUser
+        }
+        let userData = [userTableConstants.firstname: user.firstname,
                         userTableConstants.lastname: user.lastname,
                         userTableConstants.gender: user.gender.rawValue,
                         userTableConstants.email: user.email]
         
         do {
-            try await firestoreDatabase.collection(userTableConstants.tableName).document(user.userID).setData(userData)
+            try await firestoreDatabase.collection(userTableConstants.tableName).document(currentUserID).setData(userData)
         } catch {
-            throw Errors.DatabaseError.defaultError
+            throw Errors.DatabaseError.cannotSaveUser
         }
     }
     

@@ -20,7 +20,6 @@ class TripTableViewCell: UITableViewCell {
     @IBOutlet weak var endDate: UILabel!
     @IBOutlet weak var findTripImage: UIImageView!
     
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

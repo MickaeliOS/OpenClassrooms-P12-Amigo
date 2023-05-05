@@ -26,11 +26,11 @@ class PictureService {
         //TODO: Il faudrait dire à l'utilisateur de pas dépasser 5 Mo, parce que s'il upload une photo de 10 Mo par exemple, et qu'il peut pas la récupérer dans
         //TODO: la fonction getImage() parce qu'elle est trop grosse, ça pose un problème.
         
-        guard let currentUser = UserAuth.shared.user else {
+        guard let currentUserID = UserAuth.shared.currentUser?.uid else {
             throw Errors.CommonError.noUser
         }
         
-        let savingPath = "\(currentUser.userID)/images/\(type)"
+        let savingPath = "\(currentUserID)/images/\(type)"
         let fileRef = firebaseStorage.child(savingPath)
 
         do {

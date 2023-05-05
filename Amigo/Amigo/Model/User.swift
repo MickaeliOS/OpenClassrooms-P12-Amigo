@@ -8,7 +8,6 @@
 import Foundation
 
 struct User: Codable {
-    var userID: String
     var firstname: String
     var lastname: String
     var gender: Gender
@@ -20,7 +19,7 @@ struct User: Codable {
     
     enum Gender: String, Codable {
         case man = "Man"
-        case woman = "Woman"
+        case woman = "Woman"        
     }
 }
 

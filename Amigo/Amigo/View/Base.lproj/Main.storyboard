@@ -259,7 +259,7 @@
                         <barButtonItem key="backBarButtonItem" title="My Trips" id="IJi-7h-FBc"/>
                         <barButtonItem key="rightBarButtonItem" title="Add Trip" image="plus" catalog="system" id="6Nu-rJ-D9Y">
                             <connections>
-                                <segue destination="09R-yk-M0i" kind="show" identifier="" id="dug-WW-jPl"/>
+                                <segue destination="09R-yk-M0i" kind="show" identifier="segueToCreateTripVC" id="dug-WW-jPl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

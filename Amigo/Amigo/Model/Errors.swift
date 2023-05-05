@@ -65,9 +65,10 @@ struct Errors {
     enum DatabaseError: Error {
         case noUser
         case noDocument
-        case cannotGetDocument
+        case cannotGetDocuments
         case cannotUploadPicture
         case cannotGetPicture
+        case cannotSaveUser
         case defaultError
         
         var localizedDescription: String {
@@ -76,12 +77,14 @@ struct Errors {
                 return "Unfortunately, we were unable to retrieve your information due to a disconnection. Please log in again."
             case .noDocument:
                 return "No document found."
-            case .cannotGetDocument:
-                return "We couldn't retrieve your document, please try to log in again."
+            case .cannotGetDocuments:
+                return "We couldn't retrieve your document(s), please try to log in again."
             case .cannotUploadPicture:
                 return "We couldn't upload your picture, please try with another one."
             case .cannotGetPicture:
                 return "We couldn't get your picture, please try to log in again."
+            case .cannotSaveUser:
+                return "We couldn't save your informations, please try again."
             case .defaultError:
                 return "A database error occurred, please try again."
             }

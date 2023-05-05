@@ -61,6 +61,7 @@ class CreateAccountVC: UIViewController {
         Task {
             do {
                 let firebaseUser = try await userCreationService.createUser(email: emailTextField.text!, password: passwordTextField.text!)
+                
                 guard let user = createUserObject(authUser: firebaseUser) else { return }
                 try await userCreationService.saveUserInDatabase(user: user)
                 
@@ -69,8 +70,8 @@ class CreateAccountVC: UIViewController {
                 
             } catch let error as Errors.CreateAccountError {
                 errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
-            } catch {
-                presentAlert(with: Errors.CommonError.defaultError.localizedDescription)
+            } catch let error as Errors.DatabaseError {
+                errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
             }
         }
     }
@@ -81,8 +82,7 @@ class CreateAccountVC: UIViewController {
             return nil
         }
         
-        let user = User(userID: authUser.uid,
-                        firstname: firstnameTextField.text!,
+        let user = User(firstname: firstnameTextField.text!,
                         lastname: lastnameTextField.text!,
                         gender: gender,
                         email: authUser.email!)

@@ -202,6 +202,7 @@
 				8300097729FA96ED006DBD54 /* Trip.swift */,
 				83C20F8D29EE6C54009B252B /* Theme.swift */,
 				83B4F8E72A025BAE00A1A4FC /* Destination.swift */,
+				8388260D29E6931A003EBCC1 /* Extension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -223,7 +224,6 @@
 				8300095D29F6B42E006DBD54 /* Authentication */,
 				8300097629FA95A0006DBD54 /* Trip */,
 				83C20F8929ED6B3A009B252B /* SettingsVC.swift */,
-				8388260D29E6931A003EBCC1 /* Extension.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

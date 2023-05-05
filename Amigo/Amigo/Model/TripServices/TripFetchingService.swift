@@ -24,8 +24,8 @@ class TripFetchingService {
     //MARK: - FUNCTIONS
     func fetchUserTrips() async throws -> [Trip] {
         //TODO: Gérer proprement les erreurs
-        guard let currentUser = UserAuth.shared.user else {
-            throw Errors.CommonError.noUser
+        guard let currentUserID = UserAuth.shared.currentUser?.uid else {
+            throw Errors.DatabaseError.noUser
         }
         
         var trips: [Trip] = []
@@ -33,7 +33,7 @@ class TripFetchingService {
         do {
             // We need the user's trips, each trip we fetch must have the same userID
             let tripTable = firestoreDatabase.collection(tripTableConstants.tableName)
-            let query = tripTable.whereField(tripTableConstants.userID, isEqualTo: currentUser.userID)
+            let query = tripTable.whereField(tripTableConstants.userID, isEqualTo: currentUserID)
             
             let result = try await query.getDocuments()
             
@@ -46,7 +46,7 @@ class TripFetchingService {
             return trips
             
         } catch {
-            throw Errors.DatabaseError.defaultError
+            throw Errors.DatabaseError.cannotGetDocuments
         }
     }
 }

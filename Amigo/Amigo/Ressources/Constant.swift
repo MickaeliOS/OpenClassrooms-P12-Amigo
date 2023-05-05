@@ -14,7 +14,6 @@ struct Constant {
         struct User {
             static let tableName = "User"
             
-            static let userID = "userID"
             static let firstname = "firstname"
             static let lastname = "lastname"
             static let gender = "gender"

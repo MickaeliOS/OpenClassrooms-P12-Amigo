@@ -30,7 +30,7 @@ class AddTripVC: UIViewController {
     private let userFetchingService = UserFetchingService()
     private let tripFetchingService = TripFetchingService()
     private let tripDeletionService = TripDeletionService()
-    private let pictureService = PictureService()
+    //private let pictureService = PictureService()
     var trips: [Trip]? {
         didSet {
             tripTableView.reloadData()
@@ -59,13 +59,13 @@ class AddTripVC: UIViewController {
                 try await userFetchingService.fetchUser()
                 
                 // Then, we need to retrieve his pictures from Storage
-                await fetchImages()
+                //await fetchImages()
                 
                 // Once we have the complete user, we need to fetch his trips to display them in the tripTableView
                 await fetchTrips()
                 activityIndicator.isHidden = true
-
                 noTripLabel.isHidden = trips != nil ? true : false
+                
             } catch let error as Errors.DatabaseError {
                 presentAlert(with: error.localizedDescription) {
                     self.presentVCFullScreen(with: "WelcomeVC")
@@ -78,12 +78,14 @@ class AddTripVC: UIViewController {
         do {
             trips = try await tripFetchingService.fetchUserTrips()
             
+        } catch let error as Errors.DatabaseError {
+            presentAlert(with: error.localizedDescription)
         } catch {
             presentAlert(with: error.localizedDescription)
         }
     }
     
-    private func fetchImages() async {
+    /*private func fetchImages() async {
         do {
             if let bannerPicture = userAuth.user?.banner?.image {
                 userAuth.user?.banner?.data = try await pictureService.getImage(path: bannerPicture)
@@ -95,15 +97,11 @@ class AddTripVC: UIViewController {
         } catch {
             presentAlert(with: error.localizedDescription)
         }
-    }
+    }*/
     
     private func setupCell() {
         self.tripTableView.register(UINib(nibName: Constant.TableViewCell.nibName, bundle: nil),
                                     forCellReuseIdentifier: Constant.TableViewCell.tripCell)
-    }
-    
-    private func setupConfirmationVCDelegate() {
-        
     }
 }
 
@@ -123,7 +121,7 @@ extension AddTripVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.configureCell(country: trip.destination.country,
-                           countryCode: trip.destination.countryCode ?? "",
+                           countryCode: trip.destination.countryCode,
                            fromDate: trip.startDate,
                            toDate: trip.endDate)
         return cell

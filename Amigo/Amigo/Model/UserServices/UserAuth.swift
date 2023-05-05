@@ -15,6 +15,9 @@ class UserAuth {
     
     // MARK: - USER
     var user: User?
+    var currentUser: FirebaseAuth.User? {
+        Auth.auth().currentUser
+    }
     var currentlyLoggedIn: Bool {
         Auth.auth().currentUser != nil
     }
