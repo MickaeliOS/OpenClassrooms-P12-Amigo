@@ -1,5 +1,5 @@
 //
-//  AddTripVC.swift
+//  TripVC.swift
 //  Amigo
 //
 //  Created by Mickaël Horn on 14/04/2023.
@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class AddTripVC: UIViewController {
+class TripVC: UIViewController {
     
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
@@ -42,8 +42,8 @@ class AddTripVC: UIViewController {
     
     // MARK: - PRIVATE FUNCTIONS
     private func setupCell() {
-        self.tripTableView.register(UINib(nibName: Constant.TableViewCell.nibName, bundle: nil),
-                                    forCellReuseIdentifier: Constant.TableViewCell.tripCell)
+        self.tripTableView.register(UINib(nibName: Constant.TableViewCells.tripNibName, bundle: nil),
+                                    forCellReuseIdentifier: Constant.TableViewCells.tripCell)
     }
     
     private func startLoginFlow() {
@@ -77,13 +77,23 @@ class AddTripVC: UIViewController {
 }
 
 // MARK: - EXTENSIONS
-extension AddTripVC: UITableViewDelegate, UITableViewDataSource {
+extension TripVC {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constant.SegueID.segueToTripDetailVC {
+            let tripDetailVC = segue.destination as? TripDetailVC
+            let trip = sender as? Trip
+            tripDetailVC?.trip = trip
+        }
+    }
+}
+
+extension TripVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return trips?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constant.TableViewCell.tripCell,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constant.TableViewCells.tripCell,
                                                        for: indexPath) as? TripTableViewCell else {
             return UITableViewCell()
         }
@@ -92,11 +102,16 @@ extension AddTripVC: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.configureCell(country: trip.destination.country,
-                           countryCode: trip.destination.countryCode,
+        cell.configureCell(country: trip.country,
+                           countryCode: trip.countryCode,
                            fromDate: trip.startDate,
                            toDate: trip.endDate)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let trip = trips?[indexPath.row]
+        performSegue(withIdentifier: Constant.SegueID.segueToTripDetailVC, sender: trip)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

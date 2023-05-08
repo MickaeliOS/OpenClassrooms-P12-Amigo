@@ -1,5 +1,5 @@
 //
-//  DestinationPickerVC.swift
+//  CountryPickerVC.swift
 //  Amigo
 //
 //  Created by Mickaël Horn on 24/04/2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DestinationPickerVC: UIViewController {
+class CountryPickerVC: UIViewController {
     
     // MARK: - VIEW LIFE CYCLE
     override func viewWillDisappear(_ animated: Bool) {
@@ -25,17 +25,17 @@ class DestinationPickerVC: UIViewController {
 }
 
 // MARK: - EXTENSIONS & PROTOCOL
-extension DestinationPickerVC {
+extension CountryPickerVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constant.SegueID.unwindToCreateTripVC {
             let createTripVC = segue.destination as? CreateTripVC
-            let destination = sender as? Destination
-            createTripVC?.tripDestination = destination
+            let countryInformations = sender as? (String, String)
+            createTripVC?.countryInformations = countryInformations
         }
     }
 }
 
-extension DestinationPickerVC: UITableViewDelegate, UITableViewDataSource {
+extension CountryPickerVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -53,9 +53,9 @@ extension DestinationPickerVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let countryName = filteredCountryList[indexPath.row]
         let countryCode = Locale.countryCode(forCountryName: countryName)
-        let destination = Destination(country: countryName, countryCode: countryCode ?? "N/A")
+        let countryInformations = (countryName, countryCode ?? "N/A")
         
-        performSegue(withIdentifier: Constant.SegueID.unwindToCreateTripVC, sender: destination)
+        performSegue(withIdentifier: Constant.SegueID.unwindToCreateTripVC, sender: countryInformations)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -63,7 +63,7 @@ extension DestinationPickerVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension DestinationPickerVC: UISearchBarDelegate {
+extension CountryPickerVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
             filteredCountryList = countryList

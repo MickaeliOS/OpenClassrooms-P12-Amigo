@@ -17,10 +17,21 @@ struct Constant {
         // Classic segues.
         static let segueToDestinationPickerVC = "segueToDestinationPickerVC"
         static let segueToConfirmationTripVC = "segueToConfirmationTripVC"
+        static let segueToTripDetailVC = "segueToTripDetailVC"
+        static let segueToTripJourneyVC = "segueToTripJourneyVC"
     }
     
     struct TableViewCells {
+        // Trip
+        static let tripNibName = "TripTableViewCell"
+        static let tripCell = "tripCell"
+        
+        // Country
         static let countryCell = "countryCell"
+        
+        // Journey
+        static let journeyNibName = "JourneyTableViewCell"
+        static let journeyCell = "journeyCell"
     }
     
     struct FirestoreTables {
@@ -45,10 +56,5 @@ struct Constant {
             static let description = "description"
             static let womanOnly = "womanOnly"
         }
-    }
-    
-    struct TableViewCell {
-        static let nibName = "TripTableViewCell"
-        static let tripCell = "tripCell"
     }
 }

@@ -27,7 +27,7 @@ class CreateTripVC: UIViewController {
     private let tripCreationService = TripCreationService()
     private let descriptionPlaceHolder = "Enter your description."
     
-    var tripDestination: Destination?
+    var countryInformations: (String, String)?
     
     // MARK: - ACTIONS
     @IBAction func unwindToCreateTripVC(segue: UIStoryboardSegue) {}
@@ -44,6 +44,8 @@ class CreateTripVC: UIViewController {
     private func setupInterface() {
         addTripButton.layer.cornerRadius = 10
         destinationTextField.addLeftSystemImage(image: UIImage(systemName: "airplane.circle")!)
+        startDatePicker.minimumDate = Date()
+        endDatePicker.minimumDate = Date()
     }
     
     private func addTripFlow() {
@@ -82,7 +84,7 @@ class CreateTripVC: UIViewController {
         }
         
         // We make sure that we have a destination.
-        guard let tripDestination = tripDestination else {
+        guard let countryInformations = countryInformations else {
             errorMessageLabel.displayErrorMessage(message: "Please select a destination.")
             return nil
         }
@@ -91,12 +93,13 @@ class CreateTripVC: UIViewController {
         let trip = Trip(userID: currentUserID,
                         startDate: startDatePicker.date,
                         endDate: endDatePicker.date,
-                        destination: tripDestination)
+                        country: countryInformations.0,
+                        countryCode: countryInformations.1)
         return trip
     }
     
     private func refreshCountryName() {
-        destinationTextField.text = tripDestination?.country
+        destinationTextField.text = countryInformations?.0
         
         // If we forgot to set the destination before pressing the Add Trip Button,
         // the red error message is displayed, and when we set the destination, we
@@ -112,12 +115,12 @@ extension CreateTripVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constant.SegueID.segueToConfirmationTripVC {
             let confirmationTripVC = segue.destination as? ConfirmationTripVC
-            let destination = sender as? Trip
-            confirmationTripVC?.trip = destination
+            let trip = sender as? Trip
+            confirmationTripVC?.trip = trip
         }
         
         if segue.identifier == Constant.SegueID.segueToDestinationPickerVC {
-            let destinationPickerVC = segue.destination as? DestinationPickerVC
+            let destinationPickerVC = segue.destination as? CountryPickerVC
             destinationPickerVC?.delegate = self
         }
     }
