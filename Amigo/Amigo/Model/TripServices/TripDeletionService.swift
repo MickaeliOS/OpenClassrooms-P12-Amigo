@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-class TripDeletionService {
+final class TripDeletionService {
     // MARK: - PROPERTIES & INIT
     private let tripTableConstants = Constant.FirestoreTables.Trip.self
     private let firestoreDatabase: Firestore
@@ -22,7 +22,7 @@ class TripDeletionService {
         do {
             try await firestoreDatabase.collection(tripTableConstants.tableName).document(tripID).delete()
         } catch {
-            throw Errors.DatabaseError.defaultError
+            throw Errors.DatabaseError.cannotDeleteTrip
         }
     }
 }

@@ -47,19 +47,24 @@ class CreateTripVC: UIViewController {
     }
     
     private func addTripFlow() {
-        guard let trip = createTrip() else {
+        guard var trip = createTrip() else {
             return
         }
         
         // We can save the trip inside the Firestore database.
-        tripCreationService.createTrip(trip: trip) { [weak self] error in
-            if let error = error {
-                self?.presentAlert(with: error.localizedDescription)
-                return
-            }
-
+        do {
+            let tripID = try tripCreationService.createTrip(trip: trip)
+            
+            // The retrieval of the tripID is essential for any future editing or deletion of the corresponding trip.
+            trip.tripID = tripID
+            
             // We can go to the ConfirmationVC screen.
-            self?.performSegue(withIdentifier: Constant.SegueID.segueToConfirmationTripVC, sender: trip)
+            performSegue(withIdentifier: Constant.SegueID.segueToConfirmationTripVC, sender: trip)
+            
+        } catch let error as Errors.DatabaseError {
+            presentAlert(with: error.localizedDescription)
+        } catch {
+            presentAlert(with: Errors.CommonError.defaultError.localizedDescription)
         }
     }
     

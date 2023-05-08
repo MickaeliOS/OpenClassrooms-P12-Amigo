@@ -189,7 +189,141 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nhj-s5-SrV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2271" y="505"/>
+            <point key="canvasLocation" x="1404" y="797"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="rkP-yE-efR">
+            <objects>
+                <viewController id="Ktz-LG-Qti" customClass="TripDetailVC" customModule="Amigo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JA1-oU-Acs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="kq6-gb-y2S">
+                                <rect key="frame" x="10" y="101" width="355" height="528.66666666666663"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4ht-ak-ffe">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="93.666666666666671"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COUNTRY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KPd-sd-RpA">
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="33.666666666666664"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="v0p-zr-jer">
+                                                <rect key="frame" x="0.0" y="43.666666666666657" width="355" height="50"/>
+                                                <subviews>
+                                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="rjM-GS-eM7">
+                                                        <rect key="frame" x="0.0" y="0.0" width="177.66666666666666" height="50"/>
+                                                    </datePicker>
+                                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="GbV-9T-IZI">
+                                                        <rect key="frame" x="177.66666666666663" y="0.0" width="177.33333333333337" height="50"/>
+                                                    </datePicker>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Tmp-IU-doA">
+                                        <rect key="frame" x="0.0" y="173.66666666666669" width="355" height="355.00000000000006"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yAL-PJ-PQA">
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="172.66666666666666"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gbx-Pe-XXL">
+                                                        <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="172.66666666666666"/>
+                                                        <color key="backgroundColor" systemColor="tintColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="Gbx-Pe-XXL" secondAttribute="height" id="iJ3-k2-LYn"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="Journey">
+                                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
+                                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="journeyButtonTapped:" destination="Ktz-LG-Qti" eventType="touchUpInside" id="q4A-M3-zxH"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZ1-mP-xYz">
+                                                        <rect key="frame" x="182.66666666666663" y="0.0" width="172.33333333333337" height="172.66666666666666"/>
+                                                        <color key="backgroundColor" systemColor="tintColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="wZ1-mP-xYz" secondAttribute="height" multiplier="1:1" id="N7c-sN-Sgg"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="Money Spent">
+                                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
+                                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="moneySpentButtonTapped:" destination="Ktz-LG-Qti" eventType="touchUpInside" id="QPK-SK-gfx"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kcI-oA-M2P">
+                                                <rect key="frame" x="0.0" y="182.66666666666663" width="355" height="172.33333333333337"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psK-eV-zyg">
+                                                        <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="172.33333333333334"/>
+                                                        <color key="backgroundColor" systemColor="tintColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="psK-eV-zyg" secondAttribute="height" multiplier="1:1" id="La8-4x-Gnh"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="To Do List">
+                                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
+                                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="toDoListButtonTapped:" destination="Ktz-LG-Qti" eventType="touchUpInside" id="Tsq-ql-LEJ"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wFK-OO-pLZ">
+                                                        <rect key="frame" x="182.66666666666663" y="0.0" width="172.33333333333337" height="172.33333333333334"/>
+                                                        <color key="backgroundColor" systemColor="tintColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="wFK-OO-pLZ" secondAttribute="height" id="T0N-gh-bUx"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="Ticket(s)">
+                                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
+                                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="ticketsButtonTapped:" destination="Ktz-LG-Qti" eventType="touchUpInside" id="Jjs-6f-bfy"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="a9D-Kj-ApO"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kq6-gb-y2S" secondAttribute="trailing" constant="10" id="0zF-C1-bN0"/>
+                            <constraint firstItem="kq6-gb-y2S" firstAttribute="top" secondItem="a9D-Kj-ApO" secondAttribute="top" constant="10" id="aXE-x7-nWI"/>
+                            <constraint firstItem="kq6-gb-y2S" firstAttribute="leading" secondItem="JA1-oU-Acs" secondAttribute="leading" constant="10" id="nlf-Oh-MqD"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="eDu-l5-J5Z"/>
+                    <navigationItem key="navigationItem" id="oTi-OY-KpA"/>
+                    <connections>
+                        <outlet property="endDatePicker" destination="GbV-9T-IZI" id="7VE-EL-gkN"/>
+                        <outlet property="journeyButton" destination="Gbx-Pe-XXL" id="MZ5-zc-ePX"/>
+                        <outlet property="moneySpentButton" destination="wZ1-mP-xYz" id="7LB-D6-hAM"/>
+                        <outlet property="startDatePicker" destination="rjM-GS-eM7" id="2ae-Md-ldD"/>
+                        <outlet property="ticketsButton" destination="wFK-OO-pLZ" id="Z00-9s-n7g"/>
+                        <outlet property="toDoListButton" destination="psK-eV-zyg" id="uBY-F5-nEz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pOb-UL-TpA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4767" y="-396"/>
         </scene>
         <!--My Trips-->
         <scene sceneID="ddJ-uK-hhc">
@@ -267,6 +401,7 @@
                         <outlet property="activityIndicator" destination="6A4-zu-xcl" id="ZbB-h2-n2R"/>
                         <outlet property="noTripLabel" destination="nh8-0c-0Yt" id="VXY-06-fzq"/>
                         <outlet property="tripTableView" destination="fD3-57-EQm" id="TVn-rI-CPV"/>
+                        <segue destination="Ktz-LG-Qti" kind="show" identifier="segueToTripDetailVC" id="pcQ-tB-o1H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wkl-qd-fie" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -390,7 +525,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4125.6000000000004" y="-859.35960591133005"/>
+            <point key="canvasLocation" x="4767" y="-1578"/>
         </scene>
         <!--Confirmation TripVC-->
         <scene sceneID="xW3-cm-Cjn">
@@ -448,7 +583,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Woq-7M-joM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="6Oi-wW-Vh0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5260" y="-458"/>
+            <point key="canvasLocation" x="5902" y="-1177"/>
         </scene>
         <!--Destination PickerVC-->
         <scene sceneID="mIA-g7-w6G">
@@ -541,7 +676,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eel-oY-s76" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="gfy-GO-UGB" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5260" y="-1313"/>
+            <point key="canvasLocation" x="5902" y="-2032"/>
         </scene>
         <!--Find Trip-->
         <scene sceneID="apq-vP-EWN">

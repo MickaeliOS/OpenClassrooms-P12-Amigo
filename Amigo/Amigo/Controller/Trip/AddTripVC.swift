@@ -26,17 +26,17 @@ class AddTripVC: UIViewController {
     private let userFetchingService = UserFetchingService()
     private let tripFetchingService = TripFetchingService()
     private let tripDeletionService = TripDeletionService()
-
-    var trips: [Trip]? {
-        didSet {
-            tripTableView.reloadData()
-        }
-    }
+    
+    var trips: [Trip]?
     
     // MARK: - ACTIONS
     @IBAction func unwindToRootVC(segue: UIStoryboardSegue) {
         if segue.source is CreateAccountVC || segue.source is WelcomeVC {
             startLoginFlow()
+        }
+        
+        if segue.source is ConfirmationTripVC {
+            tripTableView.reloadData()
         }
     }
     
@@ -53,7 +53,7 @@ class AddTripVC: UIViewController {
         }
         
         activityIndicator.isHidden = false
-
+        
         Task {
             do {
                 // First, we fetch the user from Firestore
@@ -61,6 +61,7 @@ class AddTripVC: UIViewController {
                 
                 // Once we have the complete user, we need to fetch his trips to display them in the tripTableView
                 trips = try await tripFetchingService.fetchUserTrips()
+                tripTableView.reloadData()
                 activityIndicator.isHidden = true
                 noTripLabel.isHidden = trips != nil ? true : false
                 
@@ -102,27 +103,26 @@ extension AddTripVC: UITableViewDelegate, UITableViewDataSource {
         return CGFloat(100)
     }
     
-    /*func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
             Task {
                 do {
-                    // Always remove the data first
-                    do {
-                        let tripID = trips[indexPath.row].d
-                        try await tripDeletionService.deleteTrip(tripID: <#T##String#>)
+                    guard let tripID = trips?[indexPath.row].tripID else {
+                        presentAlert(with: Errors.DatabaseError.noTripID.localizedDescription)
+                        return
                     }
-            }
-                
-
-                
-                // Then, the cell
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            } catch let error as IngredientConfiguration.IngredientsErrors {
-                presentAlert(with: error.localizedDescription)
-            } catch {
-                presentAlert(with: "An error occured.")
+                    
+                    // Always remove the data first
+                    try await tripDeletionService.deleteTrip(tripID: tripID)
+                    trips?.remove(at: indexPath.row)
+                    
+                    // Then, the cell
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                } catch let error as Errors.DatabaseError {
+                    presentAlert(with: error.localizedDescription)
+                }
             }
         }
-    }*/
+    }
 }

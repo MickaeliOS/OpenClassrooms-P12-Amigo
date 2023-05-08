@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
 struct Trip: Codable, FirestoreTrip {
+    @DocumentID var tripID: String?
     var userID: String
     var startDate: Date
     var endDate: Date

@@ -47,6 +47,7 @@
 		83B4F8F12A03A43D00A1A4FC /* ConfirmationTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8F02A03A43D00A1A4FC /* ConfirmationTripVC.swift */; };
 		83C20F8A29ED6B3A009B252B /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8929ED6B3A009B252B /* SettingsVC.swift */; };
 		83C20F8E29EE6C54009B252B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8D29EE6C54009B252B /* Theme.swift */; };
+		83D881FE2A0931410056A324 /* TripDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D881FD2A0931410056A324 /* TripDetailVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		83B4F8F02A03A43D00A1A4FC /* ConfirmationTripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationTripVC.swift; sourceTree = "<group>"; };
 		83C20F8929ED6B3A009B252B /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		83C20F8D29EE6C54009B252B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		83D881FD2A0931410056A324 /* TripDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +136,7 @@
 				8300095F29F6B4D7006DBD54 /* CreateTripVC.swift */,
 				8300096129F6BBD2006DBD54 /* DestinationPickerVC.swift */,
 				83B4F8F02A03A43D00A1A4FC /* ConfirmationTripVC.swift */,
+				83D881FD2A0931410056A324 /* TripDetailVC.swift */,
 			);
 			path = Trip;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				8300096929F905CA006DBD54 /* UserFetchingService.swift in Sources */,
 				830F479129E9311800697C34 /* AddTripVC.swift in Sources */,
 				832A841A29F01D360074DC14 /* Constant.swift in Sources */,
+				83D881FE2A0931410056A324 /* TripDetailVC.swift in Sources */,
 				8300096D29F90612006DBD54 /* PictureService.swift in Sources */,
 				8300098329FFB97A006DBD54 /* TripTableViewCell.swift in Sources */,
 				83B4F8E82A025BAE00A1A4FC /* Destination.swift in Sources */,

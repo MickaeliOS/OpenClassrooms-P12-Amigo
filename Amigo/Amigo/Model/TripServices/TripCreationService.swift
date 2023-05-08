@@ -18,18 +18,12 @@ final class TripCreationService {
     }
     
     // MARK: - FUNCTIONS
-    func createTrip(trip: Trip, completion: @escaping (Error?) -> Void) {
+    func createTrip(trip: Trip) throws -> String {
         do {
-            let _ = try firestoreDatabase.collection(tripTableConstants.tableName).addDocument(from: trip.self) { error in
-                if error != nil {
-                    completion(Errors.DatabaseError.defaultError)
-                    return
-                }
-
-                completion(nil)
-            }
+            let docRef = try firestoreDatabase.collection(tripTableConstants.tableName).addDocument(from: trip.self)
+            return docRef.documentID
         } catch {
-            completion(Errors.DatabaseError.defaultError)
+            throw Errors.DatabaseError.defaultError
         }
     }
 }
