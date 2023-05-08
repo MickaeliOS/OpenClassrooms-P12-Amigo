@@ -8,7 +8,7 @@
 import Foundation
 
 struct Destination: FirestoreDestination, Codable {
-    // A destination, at least, have a country.
+    // A destination, at least, have a country and a countryCode.
     var country: String
     var countryCode: String
     var address: String?

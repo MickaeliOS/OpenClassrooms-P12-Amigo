@@ -12,9 +12,6 @@ struct User: Codable {
     var lastname: String
     var gender: Gender
     var email: String
-    var description: String?
-    var profilePicture: ImageInfos?
-    var banner: ImageInfos?
     //var trips: [Trip]?
     
     enum Gender: String, Codable {

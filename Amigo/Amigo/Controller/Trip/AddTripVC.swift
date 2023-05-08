@@ -17,10 +17,6 @@ class AddTripVC: UIViewController {
         startLoginFlow()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var tripTableView: UITableView!
     @IBOutlet weak var noTripLabel: UILabel!
@@ -30,7 +26,7 @@ class AddTripVC: UIViewController {
     private let userFetchingService = UserFetchingService()
     private let tripFetchingService = TripFetchingService()
     private let tripDeletionService = TripDeletionService()
-    //private let pictureService = PictureService()
+
     var trips: [Trip]? {
         didSet {
             tripTableView.reloadData()
@@ -45,6 +41,11 @@ class AddTripVC: UIViewController {
     }
     
     // MARK: - PRIVATE FUNCTIONS
+    private func setupCell() {
+        self.tripTableView.register(UINib(nibName: Constant.TableViewCell.nibName, bundle: nil),
+                                    forCellReuseIdentifier: Constant.TableViewCell.tripCell)
+    }
+    
     private func startLoginFlow() {
         guard userAuth.currentlyLoggedIn else {
             presentVCFullScreen(with: "WelcomeVC")
@@ -58,53 +59,23 @@ class AddTripVC: UIViewController {
                 // First, we fetch the user from Firestore
                 try await userFetchingService.fetchUser()
                 
-                // Then, we need to retrieve his pictures from Storage
-                //await fetchImages()
-                
                 // Once we have the complete user, we need to fetch his trips to display them in the tripTableView
-                await fetchTrips()
+                trips = try await tripFetchingService.fetchUserTrips()
                 activityIndicator.isHidden = true
                 noTripLabel.isHidden = trips != nil ? true : false
                 
-            } catch let error as Errors.DatabaseError {
+            } catch let error as Errors.DatabaseError where error == .noUser {
                 presentAlert(with: error.localizedDescription) {
                     self.presentVCFullScreen(with: "WelcomeVC")
                 }
+            } catch let error as Errors.DatabaseError {
+                presentAlert(with: error.localizedDescription)
             }
         }
-    }
-    
-    private func fetchTrips() async {
-        do {
-            trips = try await tripFetchingService.fetchUserTrips()
-            
-        } catch let error as Errors.DatabaseError {
-            presentAlert(with: error.localizedDescription)
-        } catch {
-            presentAlert(with: error.localizedDescription)
-        }
-    }
-    
-    /*private func fetchImages() async {
-        do {
-            if let bannerPicture = userAuth.user?.banner?.image {
-                userAuth.user?.banner?.data = try await pictureService.getImage(path: bannerPicture)
-            }
-            
-            if let profilePicture = userAuth.user?.profilePicture?.image {
-                userAuth.user?.profilePicture?.data = try await pictureService.getImage(path: profilePicture)
-            }
-        } catch {
-            presentAlert(with: error.localizedDescription)
-        }
-    }*/
-    
-    private func setupCell() {
-        self.tripTableView.register(UINib(nibName: Constant.TableViewCell.nibName, bundle: nil),
-                                    forCellReuseIdentifier: Constant.TableViewCell.tripCell)
     }
 }
 
+// MARK: - EXTENSIONS
 extension AddTripVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return trips?.count ?? 0

@@ -10,7 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-class TripFetchingService {
+final class TripFetchingService {
     // MARK: - PROPERTIES & INIT
     private let tripTableConstants = Constant.FirestoreTables.Trip.self
     private let firebaseAuth: Auth
@@ -32,8 +32,8 @@ class TripFetchingService {
         
         do {
             // We need the user's trips, each trip we fetch must have the same userID
-            let tripTable = firestoreDatabase.collection(tripTableConstants.tableName)
-            let query = tripTable.whereField(tripTableConstants.userID, isEqualTo: currentUserID)
+            let tripTableRef = firestoreDatabase.collection(tripTableConstants.tableName)
+            let query = tripTableRef.whereField(tripTableConstants.userID, isEqualTo: currentUserID)
             
             let result = try await query.getDocuments()
             

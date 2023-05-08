@@ -30,7 +30,7 @@ class CreateAccountVC: UIViewController {
     
     // MARK: - ACTIONS
     @IBAction func createAccountButtonTapped(_ sender: Any) {
-        registerUser()
+        createUserFlow()
     }
     
     @IBAction func dismissKeyboard(_ sender: Any) {
@@ -42,15 +42,43 @@ class CreateAccountVC: UIViewController {
     }
     
     // MARK: - PRIVATE FUNCTIONS
-    private func registerUser() {
+    private func setupInterface() {
+        setupTextFields()
+        createAccountButton.layer.cornerRadius = 10
+    }
+    
+    private func setupTextFields() {
+        guard let personImage = UIImage(systemName: "person.fill"),
+              let envelopeImage = UIImage(systemName: "envelope.fill"),
+              let passwordLockImage = UIImage(systemName: "lock.fill") else { return }
+        
+        // We incorporated small icons within our TextFields to enhance the overall design aesthetics.
+        lastnameTextField.addLeftSystemImage(image: personImage)
+        firstnameTextField.addLeftSystemImage(image: personImage)
+        emailTextField.addLeftSystemImage(image: envelopeImage)
+        passwordTextField.addLeftSystemImage(image: passwordLockImage)
+        confirmPasswordTextField.addLeftSystemImage(image: passwordLockImage)
+        confirmPasswordTextField.addPasswordToggleImage(target: self, action: #selector(togglePasswordVisibility))
+    }
+    
+    private func createUserFlow() {
         do {
-            try userCreationService.creationAccountFormControl(email: emailTextField.text,
+            try userCreationService.emptyFieldsFormControl(email: emailTextField.text,
                                                                password: passwordTextField.text,
                                                                confirmPassword: confirmPasswordTextField.text,
                                                                lastname: lastnameTextField.text,
                                                                firstname: firstnameTextField.text,
                                                                gender: genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex))
-        } catch let error as Errors.CreateAccountError {
+            
+            try userCreationService.checkingLogs(email: emailTextField.text!,
+                                                 password: passwordTextField.text!,
+                                                 confirmPassword: confirmPasswordTextField.text!)
+            
+        } catch let error as Errors.CommonError {
+            errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
+            return
+        }
+        catch let error as Errors.CreateAccountError {
             errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
             return
         } catch {
@@ -62,51 +90,31 @@ class CreateAccountVC: UIViewController {
             do {
                 let firebaseUser = try await userCreationService.createUser(email: emailTextField.text!, password: passwordTextField.text!)
                 
-                guard let user = createUserObject(authUser: firebaseUser) else { return }
+                // Creating our User object to save it in Firestore.
+                let genderRawValue = genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex)
+                let gender = User.Gender(rawValue: genderRawValue ?? User.Gender.man.rawValue)
+                
+                let user = User(firstname: firstnameTextField.text!,
+                                lastname: lastnameTextField.text!,
+                                gender: gender!,
+                                email: firebaseUser.email!)
+                
                 try await userCreationService.saveUserInDatabase(user: user)
                 
                 // If all the create user process went good, we can go back on the TabBar.
-                performSegue(withIdentifier: "unwindToRootVC", sender: nil)
+                performSegue(withIdentifier: Constant.SegueID.unwindToRootVC, sender: nil)
                 
             } catch let error as Errors.CreateAccountError {
                 errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
             } catch let error as Errors.DatabaseError {
                 errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
+            } catch let error as Errors.CommonError {
+                errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
             }
         }
     }
     
-    private func createUserObject(authUser: FirebaseAuth.User) -> User? {
-        guard let genderRawValue = genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex),
-              let gender = User.Gender(rawValue: genderRawValue) else {
-            return nil
-        }
-        
-        let user = User(firstname: firstnameTextField.text!,
-                        lastname: lastnameTextField.text!,
-                        gender: gender,
-                        email: authUser.email!)
-        return user
-    }
-    
-    private func setupInterface() {
-        setupTextFields()
-        createAccountButton.layer.cornerRadius = 10
-    }
-    
-    private func setupTextFields() {
-        guard let personImage = UIImage(systemName: "person.fill"),
-              let envelopeImage = UIImage(systemName: "envelope.fill"),
-              let passwordLockImage = UIImage(systemName: "lock.fill") else { return }
-        
-        lastnameTextField.addLeftSystemImage(image: personImage)
-        firstnameTextField.addLeftSystemImage(image: personImage)
-        emailTextField.addLeftSystemImage(image: envelopeImage)
-        passwordTextField.addLeftSystemImage(image: passwordLockImage)
-        confirmPasswordTextField.addLeftSystemImage(image: passwordLockImage)
-        confirmPasswordTextField.addPasswordToggleImage(target: self, action: #selector(togglePasswordVisibility))
-    }
-    
+    // MARK: - OBJC FUNCTIONS
     @objc func togglePasswordVisibility(_ sender: UIButton) {
         isPasswordVisible.toggle()
         
@@ -120,6 +128,7 @@ class CreateAccountVC: UIViewController {
     }
 }
 
+// MARK: - EXTENSIONS
 extension CreateAccountVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         errorMessageLabel.isHidden = true

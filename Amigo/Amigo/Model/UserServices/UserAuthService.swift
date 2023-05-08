@@ -8,9 +8,8 @@
 import Foundation
 import FirebaseAuth
 
-class UserAuthService {
+final class UserAuthService {
     // MARK: - PROPERTIES & INIT
-    private let userTableConstants = Constant.FirestoreTables.User.self
     private let firebaseAuth: Auth
 
     init(firebaseAuth: Auth = Auth.auth()) {
@@ -19,8 +18,8 @@ class UserAuthService {
     
     // MARK: - FUNCTIONS
     func signIn(email: String, password: String) async throws {
-        guard Utilities.isValidEmail(email) else {
-            throw Errors.SignInError.badlyFormattedEmail
+        guard String.isValidEmail(email) else {
+            throw Errors.CommonError.badlyFormattedEmail
         }
         
         do {
@@ -33,7 +32,7 @@ class UserAuthService {
                 AuthErrorCode.userNotFound.rawValue:
                 throw Errors.SignInError.incorrectLogs
             default:
-                throw Errors.SignInError.defaultError
+                throw Errors.CommonError.defaultError
             }
         }
     }

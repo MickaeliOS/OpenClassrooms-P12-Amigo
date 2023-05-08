@@ -8,19 +8,13 @@
 import UIKit
 
 class ConfirmationTripVC: UIViewController {
-    
-    // MARK: - VIEW LIFE CYCLE
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var myListButton: UIButton!
     var trip: Trip?
 
     // MARK: - ACTIONS
     @IBAction func myListButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "unwindToRootVC", sender: trip)
+        performSegue(withIdentifier: Constant.SegueID.unwindToRootVC, sender: trip)
     }
     
     // MARK: - PRIVATE FUNCTIONS
@@ -32,10 +26,10 @@ class ConfirmationTripVC: UIViewController {
 // MARK: - EXTENSIONS & PROTOCOL
 extension ConfirmationTripVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "unwindToRootVC" {
+        if segue.identifier == Constant.SegueID.unwindToRootVC {
+            guard let trip = sender as? Trip else { return }
             let rootVC = segue.destination as? AddTripVC
-            let trip = sender as? Trip
-            rootVC?.trips?.append(trip!)//TODO: déballage forcé, j'aime pas
+            rootVC?.trips?.append(trip)
         }
     }
 }

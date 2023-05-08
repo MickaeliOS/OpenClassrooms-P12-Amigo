@@ -9,6 +9,20 @@ import Foundation
 
 struct Constant {
     
+    struct SegueID {
+        // Unwind segues.
+        static let unwindToRootVC = "unwindToRootVC"
+        static let unwindToCreateTripVC = "unwindToCreateTripVC"
+        
+        // Classic segues.
+        static let segueToDestinationPickerVC = "segueToDestinationPickerVC"
+        static let segueToConfirmationTripVC = "segueToConfirmationTripVC"
+    }
+    
+    struct TableViewCells {
+        static let countryCell = "countryCell"
+    }
+    
     struct FirestoreTables {
         
         struct User {
@@ -18,10 +32,6 @@ struct Constant {
             static let lastname = "lastname"
             static let gender = "gender"
             static let email = "email"
-            static let description = "description"
-            static let globalNote = "globalNote"
-            static let profilePicture = "profilePicture"
-            static let banner = "banner"
         }
         
         struct Trip {

@@ -16,12 +16,6 @@ struct Trip: Codable, FirestoreTrip {
     // User is optional so when we decode a Trip from Firestore,
     // it doesn't crash since the Firestore Table doesn't have a User.
     var user: User?
-
-    /*func getUser() {
-        guard let user = user else { return }
-        
-        //TODO: Fetch l'user, mais ça va à l'encontre du MVC d'utiliser une méthode d'un autre Model alors que je suis déjà dans un Model
-    }*/
 }
 
 protocol FirestoreTrip {

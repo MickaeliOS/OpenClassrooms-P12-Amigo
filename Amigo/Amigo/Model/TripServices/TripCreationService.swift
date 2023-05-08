@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-class TripCreationService {
+final class TripCreationService {
     // MARK: - PROPERTIES & INIT
     private let tripTableConstants = Constant.FirestoreTables.Trip.self
     private let firestoreDatabase: Firestore
@@ -19,8 +19,6 @@ class TripCreationService {
     
     // MARK: - FUNCTIONS
     func createTrip(trip: Trip, completion: @escaping (Error?) -> Void) {
-        guard let _ = UserAuth.shared.user else { return }
-
         do {
             let _ = try firestoreDatabase.collection(tripTableConstants.tableName).addDocument(from: trip.self) { error in
                 if error != nil {

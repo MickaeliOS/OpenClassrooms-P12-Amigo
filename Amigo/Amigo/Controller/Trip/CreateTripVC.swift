@@ -37,24 +37,13 @@ class CreateTripVC: UIViewController {
     }
 
     @IBAction func destinationTextFieldTapped(_ sender: UITapGestureRecognizer) {
-        performSegue(withIdentifier: "segueToDestinationPickerVC", sender: nil)
+        performSegue(withIdentifier: Constant.SegueID.segueToDestinationPickerVC, sender: nil)
     }
     
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
         addTripButton.layer.cornerRadius = 10
         destinationTextField.addLeftSystemImage(image: UIImage(systemName: "airplane.circle")!)
-    }
-    
-    private func refreshCountryName() {
-        destinationTextField.text = tripDestination?.country
-        
-        // If we forgot to set the destination before pressing the Add Trip Button,
-        // the red error message is displayed, and when we set the destination, we
-        // make it disapear.
-        if !errorMessageLabel.isHidden {
-            errorMessageLabel.isHidden = true
-        }
     }
     
     private func addTripFlow() {
@@ -70,24 +59,29 @@ class CreateTripVC: UIViewController {
             }
 
             // We can go to the ConfirmationVC screen.
-            self?.performSegue(withIdentifier: "segueToConfirmationTripVC", sender: trip)
+            self?.performSegue(withIdentifier: Constant.SegueID.segueToConfirmationTripVC, sender: trip)
         }
     }
     
+    private func destinationControl() -> Bool {
+        return destinationTextField.isEmpty
+    }
+    
     private func createTrip() -> Trip? {
+        // We need to control if we have a user logged in.
         guard let currentUserID = userAuth.currentUser?.uid else {
-            presentAlert(with: "You are disconnected, please log in again.") {
+            presentAlert(with: Errors.CommonError.noUser.localizedDescription) {
                 self.presentVCFullScreen(with: "WelcomeVC")
             }
             return nil
         }
         
-        // We first make sure that we have a destination.
+        // We make sure that we have a destination.
         guard let tripDestination = tripDestination else {
-            errorMessageLabel.displayErrorMessage(message: "Destination field must be filled.")
+            errorMessageLabel.displayErrorMessage(message: "Please select a destination.")
             return nil
         }
-            
+        
         // We can now safely create our trip
         let trip = Trip(userID: currentUserID,
                         startDate: startDatePicker.date,
@@ -95,29 +89,32 @@ class CreateTripVC: UIViewController {
                         destination: tripDestination)
         return trip
     }
+    
+    private func refreshCountryName() {
+        destinationTextField.text = tripDestination?.country
+        
+        // If we forgot to set the destination before pressing the Add Trip Button,
+        // the red error message is displayed, and when we set the destination, we
+        // make it disapear.
+        if !errorMessageLabel.isHidden {
+            errorMessageLabel.isHidden = true
+        }
+    }
 }
 
 // MARK: - EXTENSIONS & PROTOCOLS
 extension CreateTripVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToConfirmationTripVC" {
+        if segue.identifier == Constant.SegueID.segueToConfirmationTripVC {
             let confirmationTripVC = segue.destination as? ConfirmationTripVC
             let destination = sender as? Trip
             confirmationTripVC?.trip = destination
         }
         
-        if segue.identifier == "segueToDestinationPickerVC" {
+        if segue.identifier == Constant.SegueID.segueToDestinationPickerVC {
             let destinationPickerVC = segue.destination as? DestinationPickerVC
             destinationPickerVC?.delegate = self
         }
-    }
-}
-
-extension CreateTripVC: DestinationPickerVCDelegate {
-    func destinationPickerVCDidDismiss() {
-        // When DestinationPickerVC disappear, it communicates the new country name.
-        // We refresh the country name inside our UILabel to be displayed.
-        refreshCountryName()
     }
 }
 
@@ -144,5 +141,13 @@ extension CreateTripVC: UITextViewDelegate {
             textView.text = descriptionPlaceHolder
             textView.textColor = UIColor.placeholderText
         }
+    }
+}
+
+extension CreateTripVC: DestinationPickerVCDelegate {
+    func destinationPickerVCDidDismiss() {
+        // When DestinationPickerVC disappear, it communicates the new country name.
+        // We refresh the country name inside our UILabel to be displayed.
+        refreshCountryName()
     }
 }

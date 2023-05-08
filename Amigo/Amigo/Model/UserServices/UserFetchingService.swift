@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 
-class UserFetchingService {
+final class UserFetchingService {
     // MARK: - PROPERTIES & INIT
     private let userTableConstants = Constant.FirestoreTables.User.self
     private let firestoreDatabase: Firestore
@@ -27,24 +27,8 @@ class UserFetchingService {
         }
         
         do {
-            let result = try await firestoreDatabase.collection(userTableConstants.tableName).document(currentUserID).getDocument()
-            
-            guard let data = result.data() else {
-                throw Errors.DatabaseError.noDocument
-            }
-            
-            let genderString = data[userTableConstants.gender] as? String ?? ""
-            let gender = User.Gender(rawValue: genderString) ?? .woman
-            let user = User(
-                firstname: data[userTableConstants.firstname] as? String ?? "",
-                lastname: data[userTableConstants.lastname] as? String ?? "",
-                gender: gender,
-                email: data[userTableConstants.email] as? String ?? "",
-                description: data[userTableConstants.description] as? String,
-                profilePicture: ImageInfos(image: data[userTableConstants.profilePicture] as? String),
-                banner: ImageInfos(image: data[userTableConstants.banner] as? String)
-            )
-            
+            let userTableRef = firestoreDatabase.collection(userTableConstants.tableName).document(currentUserID)
+            let user = try await userTableRef.getDocument(as: User.self)
             UserAuth.shared.user = user
         } catch {
             throw Errors.DatabaseError.cannotGetDocuments

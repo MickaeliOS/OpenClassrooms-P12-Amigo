@@ -34,43 +34,45 @@ class WelcomeVC: UIViewController {
         passwordTextField.resignFirstResponder()
     }
     
-    
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
-        loginButton.layer.cornerRadius = 10
         setupTextFields()
+        loginButton.layer.cornerRadius = 10
     }
     
     private func setupTextFields() {
         guard let emailImage = UIImage(systemName: "envelope.fill"),
               let passwordLeftImage = UIImage(systemName: "lock.fill") else { return }
         
+        // We incorporated small icons within our TextFields to enhance the overall design aesthetics.
         emailTextField.addLeftSystemImage(image: emailImage)
         passwordTextField.addLeftSystemImage(image: passwordLeftImage)
         passwordTextField.addPasswordToggleImage(target: self, action: #selector(togglePasswordVisibility))
     }
     
     private func loginFlow() {
-        guard fieldsControl() else { return }
+        if fieldsControl() {
+            errorMessageLabel.displayErrorMessage(message: Errors.CommonError.emptyFields.localizedDescription)
+            return
+        }
         
         Task {
             do {
                 try await userAuthService.signIn(email: emailTextField.text!, password: passwordTextField.text!)
-                performSegue(withIdentifier: "unwindToRootVC", sender: nil)
+                performSegue(withIdentifier: Constant.SegueID.unwindToRootVC, sender: nil)
             } catch let error as Errors.SignInError {
+                errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
+            } catch let error as Errors.CommonError {
                 errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
             }
         }
     }
     
     private func fieldsControl() -> Bool {
-        if emailTextField.isEmpty || passwordTextField.isEmpty {
-            errorMessageLabel.displayErrorMessage(message: "All fields must be filled.")
-            return false
-        }
-        return true
+        return (emailTextField.isEmpty || passwordTextField.isEmpty)
     }
     
+    // MARK: - OBJC FUNCTIONS
     @objc func togglePasswordVisibility(_ sender: UIButton) {
         isPasswordVisible.toggle()
         

@@ -48,10 +48,6 @@ class UserUpdatingService {
             modifiedProperties[Constant.FirestoreTables.User.gender] = changedUser.gender.rawValue
         }
         
-        if currentUser.description != changedUser.description {
-            modifiedProperties[Constant.FirestoreTables.User.description] = changedUser.description
-        }
-        
         return modifiedProperties
     }
 }

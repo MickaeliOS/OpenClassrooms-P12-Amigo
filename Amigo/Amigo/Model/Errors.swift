@@ -10,9 +10,7 @@ import Foundation
 struct Errors {
     enum CreateAccountError: Error {
         case emailAlreadyInUse
-        case badlyFormattedEmail
         case weakPassword
-        case emptyFields
         case passwordsNotEquals
         case defaultError
         
@@ -20,12 +18,8 @@ struct Errors {
             switch self {
             case .emailAlreadyInUse:
                 return "Email already in use. Please choose a different one."
-            case .badlyFormattedEmail:
-                return "Badly formatted email, please provide a correct one."
             case .weakPassword:
                 return "Your password is too weak. It must be : \n - At least 7 characters long \n - At least one uppercase letter \n - At least one number"
-            case .emptyFields:
-                return "All fields must be filled."
             case .passwordsNotEquals:
                 return "Passwords must be equals."
             case .defaultError:
@@ -36,17 +30,11 @@ struct Errors {
     
     enum SignInError: Error {
         case incorrectLogs
-        case badlyFormattedEmail
-        case defaultError
         
         var localizedDescription: String {
             switch self {
             case .incorrectLogs:
                 return "Incorrect Email or Password."
-            case .badlyFormattedEmail:
-                return "Badly formatted email, please provide a correct one."
-            case .defaultError:
-                return "An error occurred, please try again."
             }
         }
     }
@@ -64,7 +52,6 @@ struct Errors {
     
     enum DatabaseError: Error {
         case noUser
-        case noDocument
         case cannotGetDocuments
         case cannotUploadPicture
         case cannotGetPicture
@@ -75,8 +62,6 @@ struct Errors {
             switch self {
             case .noUser:
                 return "Unfortunately, we were unable to retrieve your information due to a disconnection. Please log in again."
-            case .noDocument:
-                return "No document found."
             case .cannotGetDocuments:
                 return "We couldn't retrieve your document(s), please try to log in again."
             case .cannotUploadPicture:
@@ -93,12 +78,18 @@ struct Errors {
     
     enum CommonError: Error {
         case noUser
+        case emptyFields
+        case badlyFormattedEmail
         case defaultError
         
         var localizedDescription: String {
             switch self {
             case .noUser:
                 return "You are not logged in, please log in again."
+            case .emptyFields:
+                return "All fields must be filled."
+            case .badlyFormattedEmail:
+                return "Badly formatted email, please provide a correct one."
             case .defaultError:
                 return "Something went wrong, please try again."
             }

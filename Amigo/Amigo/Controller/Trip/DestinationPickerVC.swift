@@ -10,10 +10,6 @@ import UIKit
 class DestinationPickerVC: UIViewController {
     
     // MARK: - VIEW LIFE CYCLE
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         delegate?.destinationPickerVCDidDismiss()
@@ -31,7 +27,7 @@ class DestinationPickerVC: UIViewController {
 // MARK: - EXTENSIONS & PROTOCOL
 extension DestinationPickerVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "unwindToCreateTripVC" {
+        if segue.identifier == Constant.SegueID.unwindToCreateTripVC {
             let createTripVC = segue.destination as? CreateTripVC
             let destination = sender as? Destination
             createTripVC?.tripDestination = destination
@@ -49,7 +45,7 @@ extension DestinationPickerVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "countryCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constant.TableViewCells.countryCell, for: indexPath)
         cell.textLabel?.text = filteredCountryList[indexPath.row]
         return cell
     }
@@ -59,7 +55,7 @@ extension DestinationPickerVC: UITableViewDelegate, UITableViewDataSource {
         let countryCode = Locale.countryCode(forCountryName: countryName)
         let destination = Destination(country: countryName, countryCode: countryCode ?? "N/A")
         
-        performSegue(withIdentifier: "unwindToCreateTripVC", sender: destination)
+        performSegue(withIdentifier: Constant.SegueID.unwindToCreateTripVC, sender: destination)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

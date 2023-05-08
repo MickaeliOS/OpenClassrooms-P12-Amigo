@@ -33,7 +33,7 @@ final class UserCreationService {
             case AuthErrorCode.emailAlreadyInUse.rawValue:
                 throw Errors.CreateAccountError.emailAlreadyInUse
             default:
-                throw Errors.CreateAccountError.defaultError
+                throw Errors.CommonError.defaultError
             }
         }
     }
@@ -43,6 +43,7 @@ final class UserCreationService {
         guard let currentUserID = UserAuth.shared.currentUser?.uid else {
             throw Errors.DatabaseError.noUser
         }
+        
         let userData = [userTableConstants.firstname: user.firstname,
                         userTableConstants.lastname: user.lastname,
                         userTableConstants.gender: user.gender.rawValue,
@@ -55,40 +56,35 @@ final class UserCreationService {
         }
     }
     
-    func creationAccountFormControl(email: String?,
+    func emptyFieldsFormControl(email: String?,
                                     password: String?,
                                     confirmPassword: String?,
                                     lastname: String?,
                                     firstname: String?,
                                     gender: String?) throws {
         
-        guard emptyControl(fields: [email, password, confirmPassword, lastname, firstname, gender]) else {
-            throw Errors.CreateAccountError.emptyFields
+        // Empty control.
+        guard String.emptyControl(fields: [email, password, confirmPassword, lastname, firstname, gender]) else {
+            throw Errors.CommonError.emptyFields
+        }
+    }
+    
+    func checkingLogs(email: String, password: String, confirmPassword: String) throws {
+        // Mail and Password check.
+        guard String.isValidEmail(email) else {
+            throw Errors.CommonError.badlyFormattedEmail
         }
         
-        guard Utilities.isValidEmail(email!) else {
-            throw Errors.CreateAccountError.badlyFormattedEmail
-        }
-        
-        guard passwordEqualityCheck(password: password!, confirmPassword: confirmPassword!) else {
-            throw Errors.CreateAccountError.passwordsNotEquals
-        }
-        
-        guard Utilities.isValidPassword(password!) else {
+        guard String.isValidPassword(password) else {
             throw Errors.CreateAccountError.weakPassword
+        }
+        
+        guard passwordEqualityCheck(password: password, confirmPassword: confirmPassword) else {
+            throw Errors.CreateAccountError.passwordsNotEquals
         }
     }
     
     // MARK: - PRIVATE FUNCTIONS
-    private func emptyControl(fields: [String?]) -> Bool {
-        for field in fields {
-            guard let field = field, !field.isEmpty else {
-                return false
-            }
-        }
-        return true
-    }
-    
     private func passwordEqualityCheck(password: String, confirmPassword: String) -> Bool {
         return password == confirmPassword
     }
