@@ -37,7 +37,7 @@ class CreateTripVC: UIViewController {
     }
 
     @IBAction func destinationTextFieldTapped(_ sender: UITapGestureRecognizer) {
-        performSegue(withIdentifier: Constant.SegueID.segueToDestinationPickerVC, sender: nil)
+        performSegue(withIdentifier: Constant.SegueID.segueToCountryPickerVC, sender: nil)
     }
     
     // MARK: - PRIVATE FUNCTIONS
@@ -119,7 +119,7 @@ extension CreateTripVC {
             confirmationTripVC?.trip = trip
         }
         
-        if segue.identifier == Constant.SegueID.segueToDestinationPickerVC {
+        if segue.identifier == Constant.SegueID.segueToCountryPickerVC {
             let destinationPickerVC = segue.destination as? CountryPickerVC
             destinationPickerVC?.delegate = self
         }
@@ -152,8 +152,8 @@ extension CreateTripVC: UITextViewDelegate {
     }
 }
 
-extension CreateTripVC: DestinationPickerVCDelegate {
-    func destinationPickerVCDidDismiss() {
+extension CreateTripVC: CountryPickerVCDelegate {
+    func refreshCountryNameFromPicker() {
         // When DestinationPickerVC disappear, it communicates the new country name.
         // We refresh the country name inside our UILabel to be displayed.
         refreshCountryName()

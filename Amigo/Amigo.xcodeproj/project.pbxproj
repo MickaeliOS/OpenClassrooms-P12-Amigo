@@ -44,7 +44,7 @@
 		8361E05729E585A400EE7D2B /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8361E05629E585A400EE7D2B /* FirebaseStorage */; };
 		8388260C29E68FBA003EBCC1 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260B29E68FBA003EBCC1 /* CreateAccountVC.swift */; };
 		8388260E29E6931A003EBCC1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260D29E6931A003EBCC1 /* Extension.swift */; };
-		83B4F8E82A025BAE00A1A4FC /* Destination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8E72A025BAE00A1A4FC /* Destination.swift */; };
+		83B4F8E82A025BAE00A1A4FC /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8E72A025BAE00A1A4FC /* Journey.swift */; };
 		83B4F8EB2A027B0300A1A4FC /* DestinationCreationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8EA2A027B0300A1A4FC /* DestinationCreationService.swift */; };
 		83B4F8ED2A02913000A1A4FC /* DestinationFetchingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8EC2A02913000A1A4FC /* DestinationFetchingService.swift */; };
 		83B4F8EF2A02FE9600A1A4FC /* TripDeletionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8EE2A02FE9600A1A4FC /* TripDeletionService.swift */; };
@@ -87,7 +87,7 @@
 		8361E03F29E5522A00EE7D2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8388260B29E68FBA003EBCC1 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountVC.swift; sourceTree = "<group>"; };
 		8388260D29E6931A003EBCC1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		83B4F8E72A025BAE00A1A4FC /* Destination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destination.swift; sourceTree = "<group>"; };
+		83B4F8E72A025BAE00A1A4FC /* Journey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
 		83B4F8EA2A027B0300A1A4FC /* DestinationCreationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationCreationService.swift; sourceTree = "<group>"; };
 		83B4F8EC2A02913000A1A4FC /* DestinationFetchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationFetchingService.swift; sourceTree = "<group>"; };
 		83B4F8EE2A02FE9600A1A4FC /* TripDeletionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDeletionService.swift; sourceTree = "<group>"; };
@@ -224,12 +224,12 @@
 			children = (
 				8300096329F8FE90006DBD54 /* UserServices */,
 				8300097929FAA567006DBD54 /* TripServices */,
-				83B4F8E92A027ADD00A1A4FC /* DestinationServices */,
+				83B4F8E92A027ADD00A1A4FC /* JourneyServices */,
 				8300097029F907D2006DBD54 /* Errors.swift */,
 				8323F6EF29E5908600CBDFB5 /* User.swift */,
 				8300097729FA96ED006DBD54 /* Trip.swift */,
 				83C20F8D29EE6C54009B252B /* Theme.swift */,
-				83B4F8E72A025BAE00A1A4FC /* Destination.swift */,
+				83B4F8E72A025BAE00A1A4FC /* Journey.swift */,
 				8388260D29E6931A003EBCC1 /* Extension.swift */,
 			);
 			path = Model;
@@ -256,13 +256,13 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		83B4F8E92A027ADD00A1A4FC /* DestinationServices */ = {
+		83B4F8E92A027ADD00A1A4FC /* JourneyServices */ = {
 			isa = PBXGroup;
 			children = (
 				83B4F8EA2A027B0300A1A4FC /* DestinationCreationService.swift */,
 				83B4F8EC2A02913000A1A4FC /* DestinationFetchingService.swift */,
 			);
-			path = DestinationServices;
+			path = JourneyServices;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -380,7 +380,7 @@
 				8356871B2A0980FB000A65F8 /* JourneyTableViewCell.swift in Sources */,
 				8300096D29F90612006DBD54 /* PictureService.swift in Sources */,
 				8300098329FFB97A006DBD54 /* TripTableViewCell.swift in Sources */,
-				83B4F8E82A025BAE00A1A4FC /* Destination.swift in Sources */,
+				83B4F8E82A025BAE00A1A4FC /* Journey.swift in Sources */,
 				8323F6F029E5908600CBDFB5 /* User.swift in Sources */,
 				8323F6EE29E58CBD00CBDFB5 /* UserAuth.swift in Sources */,
 			);

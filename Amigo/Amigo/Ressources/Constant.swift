@@ -13,12 +13,16 @@ struct Constant {
         // Unwind segues.
         static let unwindToRootVC = "unwindToRootVC"
         static let unwindToCreateTripVC = "unwindToCreateTripVC"
+        static let unwindToTripJourneyVC = "unwindToTripJourneyVC"
         
-        // Classic segues.
-        static let segueToDestinationPickerVC = "segueToDestinationPickerVC"
+        // Adding trip segues.
+        static let segueToCountryPickerVC = "segueToCountryPickerVC"
         static let segueToConfirmationTripVC = "segueToConfirmationTripVC"
+        
+        // Trip Management segues.
         static let segueToTripDetailVC = "segueToTripDetailVC"
         static let segueToTripJourneyVC = "segueToTripJourneyVC"
+        static let segueToCreateJourneyVC = "segueToCreateJourneyVC"
     }
     
     struct TableViewCells {
@@ -32,6 +36,7 @@ struct Constant {
         // Journey
         static let journeyNibName = "JourneyTableViewCell"
         static let journeyCell = "journeyCell"
+        static let journeyDestinationCell = "journeyDestinationCell"
     }
     
     struct FirestoreTables {

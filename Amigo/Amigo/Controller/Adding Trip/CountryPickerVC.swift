@@ -8,11 +8,10 @@
 import UIKit
 
 class CountryPickerVC: UIViewController {
-    
     // MARK: - VIEW LIFE CYCLE
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        delegate?.destinationPickerVCDidDismiss()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        countrySearchBar.becomeFirstResponder()
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -21,7 +20,12 @@ class CountryPickerVC: UIViewController {
     
     private let countryList = Locale.countryList
     private var filteredCountryList = [String]()
-    weak var delegate: DestinationPickerVCDelegate?
+    weak var delegate: CountryPickerVCDelegate?
+    
+    // MARK: - ACTIONS
+    @IBAction func closeButtonTapped(_ sender: Any) {
+        dismiss(animated: true)
+    }
 }
 
 // MARK: - EXTENSIONS & PROTOCOL
@@ -31,6 +35,9 @@ extension CountryPickerVC {
             let createTripVC = segue.destination as? CreateTripVC
             let countryInformations = sender as? (String, String)
             createTripVC?.countryInformations = countryInformations
+            
+            // We refresh the countryName in the previous VC.
+            delegate?.refreshCountryNameFromPicker()
         }
     }
 }
@@ -75,6 +82,6 @@ extension CountryPickerVC: UISearchBarDelegate {
     }
 }
 
-protocol DestinationPickerVCDelegate: AnyObject {
-    func destinationPickerVCDidDismiss()
+protocol CountryPickerVCDelegate: AnyObject {
+    func refreshCountryNameFromPicker()
 }

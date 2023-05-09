@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import MapKit
 
+// MARK: - CONTROLLER EXTENSIONS
 extension UIViewController {
     func presentVCFullScreen(with identifier: String) {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
@@ -110,6 +111,7 @@ extension UIImage {
     }
 }
 
+// MARK: - MODEL EXTENSIONS
 extension Date {
     func dateToString() -> String {
         let formatter = DateFormatter()

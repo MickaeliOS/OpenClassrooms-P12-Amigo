@@ -19,8 +19,3 @@ struct User: Codable {
         case woman = "Woman"        
     }
 }
-
-struct ImageInfos: Codable {
-    var image: String?
-    var data: Data?
-}

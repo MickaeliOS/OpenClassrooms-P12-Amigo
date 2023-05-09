@@ -15,7 +15,7 @@ struct Trip: Codable, FirestoreTrip {
     var endDate: Date
     var country: String
     var countryCode: String
-    var destination: [Destination]?
+    var journeyList: [Journey]?
     
     // User is optional so when we decode a Trip from Firestore,
     // it doesn't crash since the Firestore Table doesn't have a User.
@@ -28,5 +28,5 @@ protocol FirestoreTrip {
     var endDate: Date { get }
     var country: String { get }
     var countryCode: String { get }
-    var destination: [Destination]? { get }
+    var journeyList: [Journey]? { get }
 }

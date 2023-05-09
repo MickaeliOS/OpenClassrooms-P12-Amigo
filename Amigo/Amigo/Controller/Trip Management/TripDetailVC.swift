@@ -16,8 +16,8 @@ class TripDetailVC: UIViewController {
     
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var countryNameLabel: UILabel!
-    @IBOutlet weak var startDatePicker: UIDatePicker!
-    @IBOutlet weak var endDatePicker: UIDatePicker!
+    @IBOutlet weak var startDateLabel: UILabel!
+    @IBOutlet weak var endDateLabel: UILabel!
     @IBOutlet weak var journeyButton: UIButton!
     @IBOutlet weak var moneySpentButton: UIButton!
     @IBOutlet weak var toDoListButton: UIButton!
@@ -44,13 +44,12 @@ class TripDetailVC: UIViewController {
         guard let trip = trip else { return }
         
         countryNameLabel.text = trip.country
-        startDatePicker.date = trip.startDate
-        endDatePicker.date = trip.endDate
-        startDatePicker.minimumDate = Date()
-        endDatePicker.minimumDate = Date()
+        startDateLabel.text = trip.startDate.dateToString()
+        endDateLabel.text = trip.endDate.dateToString()
     }
 }
 
+// MARK: - EXTENSIONS
 extension TripDetailVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constant.SegueID.segueToTripJourneyVC {
