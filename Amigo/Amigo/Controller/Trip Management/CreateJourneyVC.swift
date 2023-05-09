@@ -19,7 +19,7 @@ class CreateJourneyVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        performSegue(withIdentifier: Constant.SegueID.unwindToTripJourneyVC, sender: editedTrip)
+        performSegue(withIdentifier: Constant.SegueID.unwindToTripJourneyVC, sender: journey)
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -29,7 +29,8 @@ class CreateJourneyVC: UIViewController {
     @IBOutlet weak var journeyTableView: UITableView!
     @IBOutlet weak var addJourneyButton: UIButton!
     
-    var editedTrip: Trip?
+    var trip: Trip?
+    var journey: Journey?
     private var searchCompleter = MKLocalSearchCompleter()
     private var searchResults = [MKLocalSearchCompletion]()
     weak var delegate: CreateJourneyVCDelegate?
@@ -44,12 +45,12 @@ class CreateJourneyVC: UIViewController {
     }
     
     private func setupInterface() {
-        guard let editedTrip = editedTrip else { return }
+        guard let trip = trip else { return }
         
-        startDatePicker.minimumDate = editedTrip.startDate
-        startDatePicker.maximumDate = editedTrip.endDate
-        endDatePicker.minimumDate = editedTrip.startDate
-        endDatePicker.maximumDate = editedTrip.endDate
+        startDatePicker.minimumDate = trip.startDate
+        startDatePicker.maximumDate = trip.endDate
+        endDatePicker.minimumDate = trip.startDate
+        endDatePicker.maximumDate = trip.endDate
         
         journeySearchBar.becomeFirstResponder()
         addJourneyButton.layer.cornerRadius = 10
@@ -67,18 +68,18 @@ class CreateJourneyVC: UIViewController {
                 return
             }
             
-            let journey = Journey(address: result.placemark.name ?? "N/A",
+            let location = Location(address: result.placemark.name ?? "N/A",
                                   postalCode: result.placemark.postalCode ?? "N/A",
                                   city: result.placemark.locality ?? "N/A",
                                   startDate: (self?.startDatePicker.date)!,
                                   endDate: (self?.endDatePicker.date)!)
             
-            if self?.editedTrip?.journeyList == nil {
-                var journeyList = [Journey]()
-                journeyList.append(journey)
-                self?.editedTrip?.journeyList = journeyList
+            if self?.journey?.locations == nil {
+                var locations = [Location]()
+                locations.append(location)
+                self?.journey?.locations = locations
             } else {
-                self?.editedTrip?.journeyList?.append(journey)
+                self?.journey?.locations?.append(location)
             }
 
             // We empty our interface.
@@ -94,11 +95,11 @@ extension CreateJourneyVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constant.SegueID.unwindToTripJourneyVC {
             let tripJourneyVC = segue.destination as? TripJourneyVC
-            let editedTrip = sender as? Trip
-            tripJourneyVC?.editedTrip = editedTrip
+            let journey = sender as? Journey
+            tripJourneyVC?.journey = journey
             
             // After adding a Journey, we need to refresh the list from previous Controler.
-            delegate?.refreshJourneyList()
+            delegate?.refreshJourney()
         }
     }
 }
@@ -155,5 +156,5 @@ extension CreateJourneyVC: MKLocalSearchCompleterDelegate {
 }
 
 protocol CreateJourneyVCDelegate: AnyObject {
-    func refreshJourneyList()
+    func refreshJourney()
 }

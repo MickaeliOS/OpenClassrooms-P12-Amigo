@@ -58,7 +58,25 @@ struct Constant {
             static let endDate = "endDate"
             static let country = "country"
             static let countryCode = "countryCode"
-            static let journeyList = "journeyList"
+            static let journey = "journey"
+        }
+        
+        struct Location {
+            static let tableName = "Location"
+            
+            static let address = "address"
+            static let postalCode = "postalCode"
+            static let city = "city"
+            static let startDate = "startDate"
+            static let endDate = "endDate"
+            static let tripID = "tripID"
+        }
+        
+        struct Journey {
+            static let tableName = "Journey"
+
+            static let tripID = "tripID"
+            static let locations = "locations"
         }
     }
 }

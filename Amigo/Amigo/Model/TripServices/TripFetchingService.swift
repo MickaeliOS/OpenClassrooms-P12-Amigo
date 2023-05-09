@@ -6,18 +6,15 @@
 //
 
 import Foundation
-import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final class TripFetchingService {
     // MARK: - PROPERTIES & INIT
     private let tripTableConstants = Constant.FirestoreTables.Trip.self
-    private let firebaseAuth: Auth
     private let firestoreDatabase: Firestore
     
-    init(firebaseAuth: Auth = Auth.auth(), firestoreDatabase: Firestore = Firestore.firestore()) {
-        self.firebaseAuth = firebaseAuth
+    init(firestoreDatabase: Firestore = Firestore.firestore()) {
         self.firestoreDatabase = firestoreDatabase
     }
     

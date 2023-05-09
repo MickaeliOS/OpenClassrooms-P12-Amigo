@@ -8,7 +8,17 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct Trip: Codable, Equatable, FirestoreTrip {
+struct Trip: Codable, Equatable {
+    @DocumentID var tripID: String?
+    var userID: String
+    var startDate: Date
+    var endDate: Date
+    var country: String
+    var countryCode: String
+    var journey: [Location]?
+}
+
+extension Trip {
     static func == (lhs: Trip, rhs: Trip) -> Bool {
         return lhs.tripID == rhs.tripID
         && lhs.userID == rhs.userID
@@ -16,23 +26,6 @@ struct Trip: Codable, Equatable, FirestoreTrip {
         && lhs.endDate == rhs.endDate
         && lhs.country == rhs.country
         && lhs.countryCode == rhs.countryCode
-        && lhs.journeyList == rhs.journeyList
+        && lhs.journey == rhs.journey
     }
-    
-    @DocumentID var tripID: String?
-    var userID: String
-    var startDate: Date
-    var endDate: Date
-    var country: String
-    var countryCode: String
-    var journeyList: [Journey]?
-}
-
-protocol FirestoreTrip {
-    var userID: String { get }
-    var startDate: Date { get }
-    var endDate: Date { get }
-    var country: String { get }
-    var countryCode: String { get }
-    var journeyList: [Journey]? { get }
 }

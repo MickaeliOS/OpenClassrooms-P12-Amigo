@@ -54,7 +54,7 @@ struct Errors {
         case noUser
         case cannotGetDocuments
         case cannotUploadPicture
-        case cannotUploadJourneyList
+        case cannotUploadDocuments
         case cannotGetPicture
         case cannotSaveUser
         case cannotDeleteTrip
@@ -69,8 +69,8 @@ struct Errors {
                 return "We couldn't retrieve your document(s), please try to log in again."
             case .cannotUploadPicture:
                 return "We couldn't upload your picture, please try with another one."
-            case .cannotUploadJourneyList:
-                return "We couldn't upload your journey list, please try again."
+            case .cannotUploadDocuments:
+                return "We couldn't upload your document(s), please try again."
             case .cannotGetPicture:
                 return "We couldn't get your picture, please try to log in again."
             case .cannotSaveUser:
