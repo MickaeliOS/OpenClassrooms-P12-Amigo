@@ -59,6 +59,7 @@ class CreateTripVC: UIViewController {
             
             // The retrieval of the tripID is essential for any future editing or deletion of the corresponding trip.
             trip.tripID = tripID
+            userAuth.user?.trips?.append(trip)
             
             // We can go to the ConfirmationVC screen.
             performSegue(withIdentifier: Constant.SegueID.segueToConfirmationTripVC, sender: trip)

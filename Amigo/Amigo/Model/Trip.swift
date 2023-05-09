@@ -8,7 +8,17 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct Trip: Codable, FirestoreTrip {
+struct Trip: Codable, Equatable, FirestoreTrip {
+    static func == (lhs: Trip, rhs: Trip) -> Bool {
+        return lhs.tripID == rhs.tripID
+        && lhs.userID == rhs.userID
+        && lhs.startDate == rhs.startDate
+        && lhs.endDate == rhs.endDate
+        && lhs.country == rhs.country
+        && lhs.countryCode == rhs.countryCode
+        && lhs.journeyList == rhs.journeyList
+    }
+    
     @DocumentID var tripID: String?
     var userID: String
     var startDate: Date
@@ -16,10 +26,6 @@ struct Trip: Codable, FirestoreTrip {
     var country: String
     var countryCode: String
     var journeyList: [Journey]?
-    
-    // User is optional so when we decode a Trip from Firestore,
-    // it doesn't crash since the Firestore Table doesn't have a User.
-    var user: User?
 }
 
 protocol FirestoreTrip {

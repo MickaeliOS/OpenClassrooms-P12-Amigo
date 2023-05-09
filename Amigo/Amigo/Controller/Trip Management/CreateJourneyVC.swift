@@ -13,6 +13,7 @@ class CreateJourneyVC: UIViewController {
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupInterface()
         setupMapKitAutocompletion()
     }
     
@@ -46,7 +47,10 @@ class CreateJourneyVC: UIViewController {
         guard let editedTrip = editedTrip else { return }
         
         startDatePicker.minimumDate = editedTrip.startDate
-        endDatePicker.minimumDate = editedTrip.endDate
+        startDatePicker.maximumDate = editedTrip.endDate
+        endDatePicker.minimumDate = editedTrip.startDate
+        endDatePicker.maximumDate = editedTrip.endDate
+        
         journeySearchBar.becomeFirstResponder()
         addJourneyButton.layer.cornerRadius = 10
     }
@@ -75,8 +79,12 @@ class CreateJourneyVC: UIViewController {
                 self?.editedTrip?.journeyList = journeyList
             } else {
                 self?.editedTrip?.journeyList?.append(journey)
-                self?.journeySearchBar.text = ""
             }
+
+            // We empty our interface.
+            self?.journeySearchBar.text = ""
+            self?.searchResults.removeAll()
+            self?.journeyTableView.reloadData()
         }
     }
 }

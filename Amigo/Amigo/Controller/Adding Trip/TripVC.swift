@@ -26,9 +26,7 @@ class TripVC: UIViewController {
     private let userFetchingService = UserFetchingService()
     private let tripFetchingService = TripFetchingService()
     private let tripDeletionService = TripDeletionService()
-    
-    var trips: [Trip]?
-    
+        
     // MARK: - ACTIONS
     @IBAction func unwindToRootVC(segue: UIStoryboardSegue) {
         if segue.source is CreateAccountVC || segue.source is WelcomeVC {
@@ -60,10 +58,10 @@ class TripVC: UIViewController {
                 try await userFetchingService.fetchUser()
                 
                 // Once we have the complete user, we need to fetch his trips to display them in the tripTableView
-                trips = try await tripFetchingService.fetchUserTrips()
+                userAuth.user?.trips = try await tripFetchingService.fetchUserTrips()
                 tripTableView.reloadData()
                 activityIndicator.isHidden = true
-                noTripLabel.isHidden = trips != nil ? true : false
+                noTripLabel.isHidden = userAuth.user?.trips != nil ? true : false
                 
             } catch let error as Errors.DatabaseError where error == .noUser {
                 presentAlert(with: error.localizedDescription) {
@@ -89,7 +87,7 @@ extension TripVC {
 
 extension TripVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return trips?.count ?? 0
+        return userAuth.user?.trips?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,7 +96,7 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        guard let trip = trips?[indexPath.row] else {
+        guard let trip = userAuth.user?.trips?[indexPath.row] else {
             return UITableViewCell()
         }
         
@@ -110,7 +108,7 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let trip = trips?[indexPath.row]
+        let trip = userAuth.user?.trips?[indexPath.row]
         performSegue(withIdentifier: Constant.SegueID.segueToTripDetailVC, sender: trip)
     }
     
@@ -123,14 +121,14 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
             
             Task {
                 do {
-                    guard let tripID = trips?[indexPath.row].tripID else {
+                    guard let tripID = userAuth.user?.trips?[indexPath.row].tripID else {
                         presentAlert(with: Errors.DatabaseError.noTripID.localizedDescription)
                         return
                     }
                     
                     // Always remove the data first
                     try await tripDeletionService.deleteTrip(tripID: tripID)
-                    trips?.remove(at: indexPath.row)
+                    userAuth.user?.trips?.remove(at: indexPath.row)
                     
                     // Then, the cell
                     tableView.deleteRows(at: [indexPath], with: .automatic)

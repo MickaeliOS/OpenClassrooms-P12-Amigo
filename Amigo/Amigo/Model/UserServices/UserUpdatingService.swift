@@ -24,7 +24,7 @@ class UserUpdatingService {
         }
         
         do {
-            try await firestoreDatabase.collection(Constant.FirestoreTables.User.tableName).document(currentUserID).updateData(fields)
+            try await firestoreDatabase.collection(userTableConstants.tableName).document(currentUserID).updateData(fields)
 
         } catch {
             throw Errors.CommonError.defaultError

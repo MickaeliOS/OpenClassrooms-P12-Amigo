@@ -12,7 +12,7 @@ struct User: Codable {
     var lastname: String
     var gender: Gender
     var email: String
-    //var trips: [Trip]?
+    var trips: [Trip]?
     
     enum Gender: String, Codable {
         case man = "Man"

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Journey: FirestoreJourney, Codable {
+struct Journey: FirestoreJourney, Equatable, Codable {
     var address: String
     var postalCode: String
     var city: String

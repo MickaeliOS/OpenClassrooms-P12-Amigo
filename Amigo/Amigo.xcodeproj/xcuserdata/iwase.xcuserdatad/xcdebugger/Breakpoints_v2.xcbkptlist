@@ -7,314 +7,185 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "30D0291B-995D-4C8D-A8C4-D1D3683769BC"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Trip Management/CreateJourneyVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "closeButtonTapped(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "732C222B-9668-418C-A3B7-537A77852B83"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Trip Management/TripJourneyVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7454D73D-A9A4-45F2-B914-A22A6C2B8A89"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Trip Management/TripJourneyVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "refreshJourneyList()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5146B2F6-3D4A-4524-BB92-7852D8FAC70E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Trip Management/TripJourneyVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "6F4D38E3-4952-4C96-98A2-09EBE0AA82E5"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Trip Management/CreateJourneyVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
-            landmarkName = "saveJourney()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "6F4D38E3-4952-4C96-98A2-09EBE0AA82E5 - bbf44e793e2842a1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Amigo.CreateJourneyVC.saveJourney() -&gt; ()"
-                  moduleName = "Amigo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/CreateJourneyVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "76">
-               </Location>
-               <Location
-                  uuid = "6F4D38E3-4952-4C96-98A2-09EBE0AA82E5 - bbf44e793e2842a1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Amigo.CreateJourneyVC.saveJourney() -&gt; ()"
-                  moduleName = "Amigo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/CreateJourneyVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "59"
-                  endingLineNumber = "59"
-                  offsetFromSymbolStart = "280">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9B620796-B3E2-47B8-9FA5-58E8862FC749"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Trip Management/CreateJourneyVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "saveJourney()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9B620796-B3E2-47B8-9FA5-58E8862FC749 - bbf44e793e2842e3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Amigo.CreateJourneyVC.saveJourney() -&gt; ()"
-                  moduleName = "Amigo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/CreateJourneyVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "424">
-               </Location>
-               <Location
-                  uuid = "9B620796-B3E2-47B8-9FA5-58E8862FC749 - 78dec58c0fa60c0c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.MKMapItem&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Amigo.CreateJourneyVC.saveJourney() -&gt; ()"
-                  moduleName = "Amigo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/CreateJourneyVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "292">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "773BDEFE-D9C8-4231-90F0-B5C5B490EB01"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Trip Management/CreateJourneyVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "saveJourney()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "773BDEFE-D9C8-4231-90F0-B5C5B490EB01 - 78dec58c0fa60ded"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.MKMapItem&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Amigo.CreateJourneyVC.saveJourney() -&gt; ()"
-                  moduleName = "Amigo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/CreateJourneyVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "364">
-               </Location>
-               <Location
-                  uuid = "773BDEFE-D9C8-4231-90F0-B5C5B490EB01 - 78dec58c0fa60ded"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.MKMapItem&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Amigo.CreateJourneyVC.saveJourney() -&gt; ()"
-                  moduleName = "Amigo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/CreateJourneyVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "464">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7C37F598-333E-4B59-9E8A-AB2722F075D9"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Trip Management/TripJourneyVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "addJourneyTapped(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D666B5B9-75A7-4D78-9497-79D198429E65"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Trip Management/CreateJourneyVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "prepare(for:sender:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "77D4EB57-2222-4653-BF0C-9461F349D47E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Trip Management/TripJourneyVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "refreshJourneyList()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D69E330B-3849-4F15-B3F6-C2CEDD2674E6"
+            uuid = "1F87C1CB-240C-4A78-BD6A-E8E22FC50A1B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Adding Trip/TripVC.swift"
+            filePath = "Amigo/Controller/Trip Management/TripJourneyVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "startLoginFlow()"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "saveEditedTrip()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B516F46E-727D-4E34-AF10-2F0E8C46C3D2"
+            uuid = "F271071A-4381-4775-A251-4317A7E60668"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Adding Trip/TripVC.swift"
+            filePath = "Amigo/Controller/Trip Management/TripJourneyVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "saveEditedTrip()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9281D183-ABB7-4EA8-BEEB-FAB7089E2C1F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Controller/Trip Management/TripJourneyVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "saveEditedTrip()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9281D183-ABB7-4EA8-BEEB-FAB7089E2C1F - f7ec4574baccb0ac"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Amigo.TripJourneyVC.saveEditedTrip() -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/TripJourneyVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "792">
+               </Location>
+               <Location
+                  uuid = "9281D183-ABB7-4EA8-BEEB-FAB7089E2C1F - f7ec4574baccb0ac"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Amigo.TripJourneyVC.saveEditedTrip() -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/TripJourneyVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "1340">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F5D797BB-2FB4-4546-9C1E-869F0AF4945F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Controller/Trip Management/TripJourneyVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "saveEditedTrip()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F5D797BB-2FB4-4546-9C1E-869F0AF4945F - f7ec4574baccb0d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Amigo.TripJourneyVC.saveEditedTrip() -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/TripJourneyVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "864">
+               </Location>
+               <Location
+                  uuid = "F5D797BB-2FB4-4546-9C1E-869F0AF4945F - f7ec4574baccb0d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Amigo.TripJourneyVC.saveEditedTrip() -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/TripJourneyVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "904">
+               </Location>
+               <Location
+                  uuid = "F5D797BB-2FB4-4546-9C1E-869F0AF4945F - f7ec4574baccb0d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Amigo.TripJourneyVC.saveEditedTrip() -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/TripJourneyVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "980">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7B5E7F35-F37A-42F9-964E-C0CBA209919B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Controller/Trip Management/TripJourneyVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
             endingLineNumber = "57"
-            landmarkName = "startLoginFlow()"
+            landmarkName = "saveEditedTrip()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "B516F46E-727D-4E34-AF10-2F0E8C46C3D2 - 48d5596ddb9ec80e"
+                  uuid = "7B5E7F35-F37A-42F9-964E-C0CBA209919B - f7ec4574baccb010"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Amigo.TripVC.startLoginFlow() -&gt; ()"
+                  symbolName = "Amigo.TripJourneyVC.saveEditedTrip() -&gt; ()"
                   moduleName = "Amigo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Adding%20Trip/TripVC.swift"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/TripJourneyVC.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "372">
+                  offsetFromSymbolStart = "1104">
                </Location>
                <Location
-                  uuid = "B516F46E-727D-4E34-AF10-2F0E8C46C3D2 - d555cd68d1f0cf68"
+                  uuid = "7B5E7F35-F37A-42F9-964E-C0CBA209919B - 1d6d7fbbc161c1b6"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable () async throws -&gt; () in Amigo.TripVC.startLoginFlow() -&gt; ()"
+                  symbolName = "closure #1 @Sendable () async throws -&gt; () in Amigo.TripJourneyVC.saveEditedTrip() -&gt; ()"
                   moduleName = "Amigo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Adding%20Trip/TripVC.swift"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/TripJourneyVC.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
@@ -327,61 +198,266 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1519F8B1-078A-4E9B-BAA1-C04814D867F0"
+            uuid = "B1CE3C3F-E180-4F5C-AB09-5FD8EFCC63E6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Adding Trip/TripVC.swift"
+            filePath = "Amigo/Controller/Trip Management/TripJourneyVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "58"
             endingLineNumber = "58"
-            landmarkName = "startLoginFlow()"
+            landmarkName = "saveEditedTrip()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "1519F8B1-078A-4E9B-BAA1-C04814D867F0 - ab32b61edb783618"
+                  uuid = "B1CE3C3F-E180-4F5C-AB09-5FD8EFCC63E6 - 772bb43d305e79b3"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.TripVC.startLoginFlow() -&gt; ()"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.TripJourneyVC.saveEditedTrip() -&gt; ()"
                   moduleName = "Amigo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Adding%20Trip/TripVC.swift"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/TripJourneyVC.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "80">
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "96">
                </Location>
                <Location
-                  uuid = "1519F8B1-078A-4E9B-BAA1-C04814D867F0 - 8c54a8f99fa43d86"
+                  uuid = "B1CE3C3F-E180-4F5C-AB09-5FD8EFCC63E6 - 9b26acfa0fdf5175"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.TripVC.startLoginFlow() -&gt; ()"
+                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.TripJourneyVC.saveEditedTrip() -&gt; ()"
                   moduleName = "Amigo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Adding%20Trip/TripVC.swift"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/TripJourneyVC.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
                   offsetFromSymbolStart = "44">
                </Location>
                <Location
-                  uuid = "1519F8B1-078A-4E9B-BAA1-C04814D867F0 - d5bb8e036f98e817"
+                  uuid = "B1CE3C3F-E180-4F5C-AB09-5FD8EFCC63E6 - ceceb8ab01ca45bd"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(6) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.TripVC.startLoginFlow() -&gt; ()"
+                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.TripJourneyVC.saveEditedTrip() -&gt; ()"
                   moduleName = "Amigo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Adding%20Trip/TripVC.swift"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/TripJourneyVC.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6C8B9888-6EFC-4A79-B60B-057F0447F1A1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Controller/Trip Management/TripJourneyVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "saveEditedTrip()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6C8B9888-6EFC-4A79-B60B-057F0447F1A1 - 772bb43d305e79b3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.TripJourneyVC.saveEditedTrip() -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/TripJourneyVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "96">
+               </Location>
+               <Location
+                  uuid = "6C8B9888-6EFC-4A79-B60B-057F0447F1A1 - 9b26acfa0fdf5175"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.TripJourneyVC.saveEditedTrip() -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/TripJourneyVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "6C8B9888-6EFC-4A79-B60B-057F0447F1A1 - ceceb8ab01ca45bd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.TripJourneyVC.saveEditedTrip() -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Trip%20Management/TripJourneyVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "270CC862-3CEB-4880-92EB-0BCFD54A2C59"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Model/TripServices/TripUpdateService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "updateJourneyList(journeyList:for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "270CC862-3CEB-4880-92EB-0BCFD54A2C59 - dab04e73422a25eb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Amigo.TripUpdateService.updateJourneyList(journeyList: Swift.Array&lt;Amigo.Journey&gt;, for: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/TripServices/TripUpdateService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "144">
+               </Location>
+               <Location
+                  uuid = "270CC862-3CEB-4880-92EB-0BCFD54A2C59 - b2aee9817367b233"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Amigo.TripUpdateService.updateJourneyList(journeyList: Swift.Array&lt;Amigo.Journey&gt;, for: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/TripServices/TripUpdateService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "44">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "34B00029-A881-4753-A8BC-33372CE80E53"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Model/TripServices/TripUpdateService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "updateJourneyList(journeyList:for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "16A70847-40DE-4575-8955-F86120541129"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Model/TripServices/TripUpdateService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "updateJourneyList(journeyList:for:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "16A70847-40DE-4575-8955-F86120541129 - b2aee9817367b2af"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Amigo.TripUpdateService.updateJourneyList(journeyList: Swift.Array&lt;Amigo.Journey&gt;, for: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/TripServices/TripUpdateService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "264">
+               </Location>
+               <Location
+                  uuid = "16A70847-40DE-4575-8955-F86120541129 - 4e09a01adb014b70"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for Amigo.TripUpdateService.updateJourneyList(journeyList: Swift.Array&lt;Amigo.Journey&gt;, for: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/TripServices/TripUpdateService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "16A70847-40DE-4575-8955-F86120541129 - e210f047c7192ab3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Amigo.TripUpdateService.updateJourneyList(journeyList: Swift.Array&lt;Amigo.Journey&gt;, for: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/TripServices/TripUpdateService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "132">
+               </Location>
+               <Location
+                  uuid = "16A70847-40DE-4575-8955-F86120541129 - 35c9f46b61f266b1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Amigo.TripUpdateService.updateJourneyList(journeyList: Swift.Array&lt;Amigo.Journey&gt;, for: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/TripServices/TripUpdateService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
                   offsetFromSymbolStart = "72">
                </Location>
             </Locations>
@@ -390,80 +466,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3A043475-1236-45F7-9C48-B420C4399B8B"
+            uuid = "575C3CAE-1F8E-4D95-92C1-4ED5AD3C733B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Adding Trip/TripVC.swift"
+            filePath = "Amigo/Model/TripServices/TripUpdateService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "startLoginFlow()"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "updateJourneyList(journeyList:for:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "3A043475-1236-45F7-9C48-B420C4399B8B - ab32b61edb783618"
+                  uuid = "575C3CAE-1F8E-4D95-92C1-4ED5AD3C733B - e210f047c7192b71"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.TripVC.startLoginFlow() -&gt; ()"
+                  symbolName = "(3) suspend resume partial function for Amigo.TripUpdateService.updateJourneyList(journeyList: Swift.Array&lt;Amigo.Journey&gt;, for: Swift.String) async throws -&gt; ()"
                   moduleName = "Amigo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Adding%20Trip/TripVC.swift"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/TripServices/TripUpdateService.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "80">
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "196">
                </Location>
                <Location
-                  uuid = "3A043475-1236-45F7-9C48-B420C4399B8B - 8c54a8f99fa43d86"
+                  uuid = "575C3CAE-1F8E-4D95-92C1-4ED5AD3C733B - c77d2763039930bd"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.TripVC.startLoginFlow() -&gt; ()"
+                  symbolName = "closure #1 (Amigo.Trip) -&gt; Swift.Bool in Amigo.TripUpdateService.updateJourneyList(journeyList: Swift.Array&lt;Amigo.Journey&gt;, for: Swift.String) async throws -&gt; ()"
                   moduleName = "Amigo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Adding%20Trip/TripVC.swift"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/TripServices/TripUpdateService.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "3A043475-1236-45F7-9C48-B420C4399B8B - d5bb8e036f98e817"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(6) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.TripVC.startLoginFlow() -&gt; ()"
-                  moduleName = "Amigo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Adding%20Trip/TripVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "72">
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "120">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8BEF8430-0A75-486D-8794-C977CB7A55D7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Amigo/Controller/Adding Trip/TripVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "startLoginFlow()"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

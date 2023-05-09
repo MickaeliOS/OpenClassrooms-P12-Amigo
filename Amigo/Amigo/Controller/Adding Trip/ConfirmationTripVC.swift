@@ -14,7 +14,7 @@ class ConfirmationTripVC: UIViewController {
 
     // MARK: - ACTIONS
     @IBAction func myListButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: Constant.SegueID.unwindToRootVC, sender: trip)
+        performSegue(withIdentifier: Constant.SegueID.unwindToRootVC, sender: nil)
     }
     
     // MARK: - PRIVATE FUNCTIONS
@@ -24,7 +24,7 @@ class ConfirmationTripVC: UIViewController {
 }
 
 // MARK: - EXTENSIONS & PROTOCOL
-extension ConfirmationTripVC {
+/*extension ConfirmationTripVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constant.SegueID.unwindToRootVC {
             guard let trip = sender as? Trip else { return }
@@ -32,4 +32,4 @@ extension ConfirmationTripVC {
             rootVC?.trips?.append(trip)
         }
     }
-}
+}*/

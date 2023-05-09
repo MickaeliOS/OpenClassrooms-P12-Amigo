@@ -22,11 +22,13 @@ class TripJourneyVC: UIViewController {
     
     var trip: Trip?
     var editedTrip: Trip?
+    private let tripUpdateService = TripUpdateService()
     
     // MARK: - ACTIONS
     @IBAction func unwindToTripJourneyVC(segue: UIStoryboardSegue) {}
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        saveEditedTrip()
     }
     
     @IBAction func addJourneyTapped(_ sender: Any) {
@@ -43,6 +45,22 @@ class TripJourneyVC: UIViewController {
     private func setupCell() {
         self.journeyTableView.register(UINib(nibName: Constant.TableViewCells.journeyNibName, bundle: nil),
                                     forCellReuseIdentifier: Constant.TableViewCells.journeyCell)
+    }
+    
+    private func saveEditedTrip() {
+        // Nothing to save.
+        guard trip != editedTrip else { return }
+        guard let editedTrip = editedTrip else { return }
+        
+        guard let journeyList = editedTrip.journeyList, let tripID = editedTrip.tripID else { return }
+        
+        Task {
+            do {
+                try await tripUpdateService.updateJourneyList(journeyList: journeyList, for: tripID)
+            } catch let error as Errors.DatabaseError {
+                presentAlert(with: error.localizedDescription)
+            }
+        }
     }
 }
 
