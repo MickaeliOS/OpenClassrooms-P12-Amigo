@@ -15,17 +15,6 @@ struct Trip: Codable, Equatable {
     var endDate: Date
     var country: String
     var countryCode: String
-    var journey: [Location]?
-}
-
-extension Trip {
-    static func == (lhs: Trip, rhs: Trip) -> Bool {
-        return lhs.tripID == rhs.tripID
-        && lhs.userID == rhs.userID
-        && lhs.startDate == rhs.startDate
-        && lhs.endDate == rhs.endDate
-        && lhs.country == rhs.country
-        && lhs.countryCode == rhs.countryCode
-        && lhs.journey == rhs.journey
-    }
+    var toDoList: [String]?
+    //var journey: [Location]?
 }

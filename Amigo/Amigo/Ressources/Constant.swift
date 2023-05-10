@@ -9,22 +9,27 @@ import Foundation
 
 struct Constant {
     
+    //MARK: - SEGUES
     struct SegueID {
         // Unwind segues.
         static let unwindToRootVC = "unwindToRootVC"
         static let unwindToCreateTripVC = "unwindToCreateTripVC"
         static let unwindToTripJourneyVC = "unwindToTripJourneyVC"
         
-        // Adding trip segues.
+        // Trip segues.
         static let segueToCountryPickerVC = "segueToCountryPickerVC"
         static let segueToConfirmationTripVC = "segueToConfirmationTripVC"
-        
-        // Trip Management segues.
         static let segueToTripDetailVC = "segueToTripDetailVC"
+        
+        // Journey segues.
         static let segueToTripJourneyVC = "segueToTripJourneyVC"
         static let segueToCreateJourneyVC = "segueToCreateJourneyVC"
+        
+        // To Do List segues.
+        static let segueToToDoList = "segueToToDoList"
     }
     
+    //MARK: - CELLS
     struct TableViewCells {
         // Trip
         static let tripNibName = "TripTableViewCell"
@@ -36,9 +41,14 @@ struct Constant {
         // Journey
         static let journeyNibName = "JourneyTableViewCell"
         static let journeyCell = "journeyCell"
-        static let journeyDestinationCell = "journeyDestinationCell"
+        static let journeyLocationCell = "journeyLocationCell"
     }
     
+    struct CollectionViewCells {
+        static let toDoCell = "toDoCell"
+    }
+    
+    //MARK: - DATABASE
     struct FirestoreTables {
         
         struct User {
@@ -58,7 +68,8 @@ struct Constant {
             static let endDate = "endDate"
             static let country = "country"
             static let countryCode = "countryCode"
-            static let journey = "journey"
+            static let toDoList = "toDoList"
+            //static let journey = "journey"
         }
         
         struct Journey {

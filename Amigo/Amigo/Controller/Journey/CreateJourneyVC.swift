@@ -84,7 +84,7 @@ class CreateJourneyVC: UIViewController {
             }
             
             // We empty our interface.
-            self?.journeySearchBar.text = ""
+            self?.journeySearchBar.text = "Another one ?"
             self?.searchResults.removeAll()
             self?.journeyTableView.reloadData()
         }
@@ -125,7 +125,7 @@ extension CreateJourneyVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let searchResults = searchResults[indexPath.row]
-        let cell = journeyTableView.dequeueReusableCell(withIdentifier: Constant.TableViewCells.journeyDestinationCell, for: indexPath)
+        let cell = journeyTableView.dequeueReusableCell(withIdentifier: Constant.TableViewCells.journeyLocationCell, for: indexPath)
         
         // We get the address of the journey.
         cell.textLabel?.text = searchResults.title

@@ -56,6 +56,8 @@
 		83C20F8A29ED6B3A009B252B /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8929ED6B3A009B252B /* SettingsVC.swift */; };
 		83C20F8E29EE6C54009B252B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8D29EE6C54009B252B /* Theme.swift */; };
 		83D881FE2A0931410056A324 /* TripDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D881FD2A0931410056A324 /* TripDetailVC.swift */; };
+		83FED4072A0C1B0800B0B231 /* ToDoListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FED4062A0C1B0800B0B231 /* ToDoListVC.swift */; };
+		83FED40A2A0C229900B0B231 /* ToDoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FED4092A0C229900B0B231 /* ToDoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +105,8 @@
 		83C20F8929ED6B3A009B252B /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		83C20F8D29EE6C54009B252B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		83D881FD2A0931410056A324 /* TripDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailVC.swift; sourceTree = "<group>"; };
+		83FED4062A0C1B0800B0B231 /* ToDoListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoListVC.swift; sourceTree = "<group>"; };
+		83FED4092A0C229900B0B231 /* ToDoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,7 @@
 				8300095F29F6B4D7006DBD54 /* CreateTripVC.swift */,
 				8300096129F6BBD2006DBD54 /* CountryPickerVC.swift */,
 				83B4F8F02A03A43D00A1A4FC /* ConfirmationTripVC.swift */,
+				83D881FD2A0931410056A324 /* TripDetailVC.swift */,
 			);
 			path = "Adding Trip";
 			sourceTree = "<group>";
@@ -204,14 +209,13 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
-		835687142A097E1A000A65F8 /* Trip Management */ = {
+		835687142A097E1A000A65F8 /* Journey */ = {
 			isa = PBXGroup;
 			children = (
-				83D881FD2A0931410056A324 /* TripDetailVC.swift */,
 				835687152A097E34000A65F8 /* JourneyVC.swift */,
 				8356871C2A0989B0000A65F8 /* CreateJourneyVC.swift */,
 			);
-			path = "Trip Management";
+			path = Journey;
 			sourceTree = "<group>";
 		};
 		835687172A0980B4000A65F8 /* TableViewCells */ = {
@@ -292,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				835687172A0980B4000A65F8 /* TableViewCells */,
+				83FED4082A0C222500B0B231 /* CollectionViewCells */,
 				8361E03729E5522900EE7D2B /* Main.storyboard */,
 				8361E03C29E5522A00EE7D2B /* LaunchScreen.storyboard */,
 			);
@@ -303,10 +308,27 @@
 			children = (
 				8300095D29F6B42E006DBD54 /* Authentication */,
 				8300097629FA95A0006DBD54 /* Adding Trip */,
-				835687142A097E1A000A65F8 /* Trip Management */,
+				835687142A097E1A000A65F8 /* Journey */,
+				83FED4052A0C1AF200B0B231 /* To Do List */,
 				83C20F8929ED6B3A009B252B /* SettingsVC.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		83FED4052A0C1AF200B0B231 /* To Do List */ = {
+			isa = PBXGroup;
+			children = (
+				83FED4062A0C1B0800B0B231 /* ToDoListVC.swift */,
+			);
+			path = "To Do List";
+			sourceTree = "<group>";
+		};
+		83FED4082A0C222500B0B231 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				83FED4092A0C229900B0B231 /* ToDoCollectionViewCell.swift */,
+			);
+			path = CollectionViewCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,6 +435,7 @@
 				835687292A0ACF2B000A65F8 /* Journey.swift in Sources */,
 				8356872B2A0AD1DA000A65F8 /* JourneyFetchingService.swift in Sources */,
 				83C20F8E29EE6C54009B252B /* Theme.swift in Sources */,
+				83FED40A2A0C229900B0B231 /* ToDoCollectionViewCell.swift in Sources */,
 				8388260E29E6931A003EBCC1 /* Extension.swift in Sources */,
 				8388260C29E68FBA003EBCC1 /* CreateAccountVC.swift in Sources */,
 				8300096B29F905EB006DBD54 /* UserUpdatingService.swift in Sources */,
@@ -420,6 +443,7 @@
 				83B4F8F12A03A43D00A1A4FC /* ConfirmationTripVC.swift in Sources */,
 				8361E03429E5522900EE7D2B /* SceneDelegate.swift in Sources */,
 				8300096729F90598006DBD54 /* UserAuthService.swift in Sources */,
+				83FED4072A0C1B0800B0B231 /* ToDoListVC.swift in Sources */,
 				8300096929F905CA006DBD54 /* UserFetchingService.swift in Sources */,
 				830F479129E9311800697C34 /* TripVC.swift in Sources */,
 				832A841A29F01D360074DC14 /* Constant.swift in Sources */,

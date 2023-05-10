@@ -34,6 +34,7 @@ class TripDetailVC: UIViewController {
     }
     
     @IBAction func toDoListButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: Constant.SegueID.segueToToDoList, sender: trip)
     }
     
     @IBAction func ticketsButtonTapped(_ sender: Any) {
@@ -56,6 +57,12 @@ extension TripDetailVC {
             let tripJourneyVC = segue.destination as? JourneyVC
             let trip = sender as? Trip
             tripJourneyVC?.trip = trip
+        }
+        
+        if segue.identifier == Constant.SegueID.segueToToDoList {
+            let toDoListVC = segue.destination as? ToDoListVC
+            let trip = sender as? Trip
+            toDoListVC?.trip = trip
         }
     }
 }
