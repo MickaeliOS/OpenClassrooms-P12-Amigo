@@ -59,6 +59,11 @@ class TripVC: UIViewController {
                 
                 // Once we have the complete user, we need to fetch his trips to display them in the tripTableView
                 userAuth.user?.trips = try await tripFetchingService.fetchUserTrips()
+                
+                // It's necessary to display the trips in ascending order based on the date, starting from the oldest.
+                guard let trips = userAuth.user?.trips, !trips.isEmpty else { return }
+                userAuth.user?.trips = TripManagement.sortTripsByDateAscending(trips: trips)
+                
                 tripTableView.reloadData()
                 activityIndicator.isHidden = true
                 noTripLabel.isHidden = userAuth.user?.trips != nil ? true : false

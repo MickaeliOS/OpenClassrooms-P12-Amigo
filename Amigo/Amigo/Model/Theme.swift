@@ -9,12 +9,7 @@ import Foundation
 import UIKit
 
 enum Theme: Int {
-    // MARK: - SINGLETON
-    static let shared = Theme()
-    private init() {
-        self = .unspecified
-    }
-    
+    //MARK: - CASES & VARIABLES
     case unspecified
     case light
     case dark
@@ -30,11 +25,12 @@ enum Theme: Int {
         }
     }    
     
+    //MARK: - FUNCTIONS
     func saveMode(sender: UISegmentedControl) {
         UserDefaults.standard.set(sender.selectedSegmentIndex, forKey: "theme")
     }
     
-    func changeMode(mode: UIUserInterfaceStyle) {
+    static func changeMode(mode: UIUserInterfaceStyle) {
         UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .first?.windows

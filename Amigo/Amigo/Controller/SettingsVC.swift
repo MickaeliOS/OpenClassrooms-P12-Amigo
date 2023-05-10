@@ -20,7 +20,7 @@ class SettingsVC: UIViewController {
     
     private let userAuth = UserAuth.shared
     private let userAuthService = UserAuthService()
-    private let theme = Theme.shared
+    //private let theme = Theme.shared
     
     var currentTheme: Theme {
         return Theme(rawValue: UserDefaults.standard.integer(forKey: "theme")) ?? .unspecified
@@ -28,8 +28,8 @@ class SettingsVC: UIViewController {
     
     // MARK: - ACTIONS
     @IBAction func toggleSegmentedControl(_ sender: UISegmentedControl) {
-        theme.saveMode(sender: sender)
-        theme.changeMode(mode: currentTheme.interfaceStyle)
+        currentTheme.saveMode(sender: sender)
+        Theme.changeMode(mode: currentTheme.interfaceStyle)
     }
     
     @IBAction func signOutButtonTapped(_ sender: Any) {

@@ -61,6 +61,10 @@ class CreateTripVC: UIViewController {
             trip.tripID = tripID
             userAuth.user?.trips?.append(trip)
             
+            // Again, we must sort the Trip table from the oldes date to the newest.
+            guard let trips = userAuth.user?.trips, !trips.isEmpty else { return }
+            userAuth.user?.trips = TripManagement.sortTripsByDateAscending(trips: trips)
+            
             // We can go to the ConfirmationVC screen.
             performSegue(withIdentifier: Constant.SegueID.segueToConfirmationTripVC, sender: trip)
             

@@ -27,6 +27,7 @@
 		832A841A29F01D360074DC14 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832A841929F01D360074DC14 /* Constant.swift */; };
 		83489A342A0BBD16002974E1 /* LocationManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489A332A0BBD16002974E1 /* LocationManagement.swift */; };
 		83489A362A0BC135002974E1 /* TripDeletionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489A352A0BC135002974E1 /* TripDeletionService.swift */; };
+		83489A382A0C1574002974E1 /* TripManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489A372A0C1574002974E1 /* TripManagement.swift */; };
 		835687162A097E34000A65F8 /* JourneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835687152A097E34000A65F8 /* JourneyVC.swift */; };
 		835687192A0980DD000A65F8 /* JourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835687182A0980DD000A65F8 /* JourneyTableViewCell.xib */; };
 		8356871B2A0980FB000A65F8 /* JourneyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8356871A2A0980FB000A65F8 /* JourneyTableViewCell.swift */; };
@@ -78,6 +79,7 @@
 		832A841929F01D360074DC14 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		83489A332A0BBD16002974E1 /* LocationManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagement.swift; sourceTree = "<group>"; };
 		83489A352A0BC135002974E1 /* TripDeletionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDeletionService.swift; sourceTree = "<group>"; };
+		83489A372A0C1574002974E1 /* TripManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripManagement.swift; sourceTree = "<group>"; };
 		835687152A097E34000A65F8 /* JourneyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyVC.swift; sourceTree = "<group>"; };
 		835687182A0980DD000A65F8 /* JourneyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JourneyTableViewCell.xib; sourceTree = "<group>"; };
 		8356871A2A0980FB000A65F8 /* JourneyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyTableViewCell.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			children = (
 				83489A2F2A0BBC74002974E1 /* TripServices */,
 				8300097729FA96ED006DBD54 /* Trip.swift */,
+				83489A372A0C1574002974E1 /* TripManagement.swift */,
 			);
 			path = Trip;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				8300097D29FB9EF6006DBD54 /* TripFetchingService.swift in Sources */,
 				8300097829FA96ED006DBD54 /* Trip.swift in Sources */,
 				83C20F8A29ED6B3A009B252B /* SettingsVC.swift in Sources */,
+				83489A382A0C1574002974E1 /* TripManagement.swift in Sources */,
 				83489A362A0BC135002974E1 /* TripDeletionService.swift in Sources */,
 				8300096229F6BBD2006DBD54 /* CountryPickerVC.swift in Sources */,
 				835687212A0A78BD000A65F8 /* TripUpdateService.swift in Sources */,
