@@ -20,17 +20,6 @@ final class JourneyUpdateService {
     }
     
     //MARK: - FUNCTIONS
-    /*func updateJourney(journey: [Location], for tripID: String) async throws {
-        do {
-            try await firestoreDatabase.collection(locationTableConstants.tableName).document(tripID).updateData(modifiedJourney)
-            
-            guard let tripIndex = userAuth.user?.trips?.firstIndex(where: { $0.tripID == tripID }) else { return }
-            userAuth.user?.trips?[tripIndex].journey = journey
-        } catch {
-            throw Errors.DatabaseError.cannotUploadJourneyList
-        }
-    }*/
-    
     func updateJourney(journey: Journey, for tripID: String) throws {
         do {
             let tableRef = firestoreDatabase.collection(journeyTableConstants.tableName).document(tripID)

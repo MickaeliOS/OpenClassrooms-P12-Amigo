@@ -15,7 +15,7 @@ struct Location: Equatable, Codable {
     var endDate: Date
 }
 
-extension Location {
+/*extension Location {
     // It's impossible to update a custom Array in Firestore.
     // I have to convert it into a [String:Any].
     var firestoreLocation: [String: Any] {
@@ -27,4 +27,4 @@ extension Location {
             "endDate": endDate
         ]
     }
-}
+}*/

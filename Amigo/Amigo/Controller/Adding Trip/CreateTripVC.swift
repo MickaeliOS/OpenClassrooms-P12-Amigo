@@ -53,8 +53,8 @@ class CreateTripVC: UIViewController {
             return
         }
         
-        // We can save the trip inside the Firestore database.
         do {
+            // We can save the trip inside the Firestore database.
             let tripID = try tripCreationService.createTrip(trip: trip)
             
             // The retrieval of the tripID is essential for any future editing or deletion of the corresponding trip.

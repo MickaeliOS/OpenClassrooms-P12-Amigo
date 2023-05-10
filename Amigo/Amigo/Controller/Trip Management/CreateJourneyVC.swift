@@ -19,7 +19,7 @@ class CreateJourneyVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        performSegue(withIdentifier: Constant.SegueID.unwindToTripJourneyVC, sender: journey)
+        prepareForRefreshJourney()
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -31,9 +31,9 @@ class CreateJourneyVC: UIViewController {
     
     var trip: Trip?
     var journey: Journey?
+    weak var delegate: CreateJourneyVCDelegate?
     private var searchCompleter = MKLocalSearchCompleter()
     private var searchResults = [MKLocalSearchCompletion]()
-    weak var delegate: CreateJourneyVCDelegate?
     
     // MARK: - ACTIONS
     @IBAction func addJourneyTapped(_ sender: Any) {
@@ -47,6 +47,7 @@ class CreateJourneyVC: UIViewController {
     private func setupInterface() {
         guard let trip = trip else { return }
         
+        // We restrict the date range within the scope of the trip.
         startDatePicker.minimumDate = trip.startDate
         startDatePicker.maximumDate = trip.endDate
         endDatePicker.minimumDate = trip.startDate
@@ -69,10 +70,10 @@ class CreateJourneyVC: UIViewController {
             }
             
             let location = Location(address: result.placemark.name ?? "N/A",
-                                  postalCode: result.placemark.postalCode ?? "N/A",
-                                  city: result.placemark.locality ?? "N/A",
-                                  startDate: (self?.startDatePicker.date)!,
-                                  endDate: (self?.endDatePicker.date)!)
+                                    postalCode: result.placemark.postalCode ?? "N/A",
+                                    city: result.placemark.locality ?? "N/A",
+                                    startDate: (self?.startDatePicker.date)!,
+                                    endDate: (self?.endDatePicker.date)!)
             
             if self?.journey?.locations == nil {
                 var locations = [Location]()
@@ -81,12 +82,21 @@ class CreateJourneyVC: UIViewController {
             } else {
                 self?.journey?.locations?.append(location)
             }
-
+            
             // We empty our interface.
             self?.journeySearchBar.text = ""
             self?.searchResults.removeAll()
             self?.journeyTableView.reloadData()
         }
+    }
+    
+    private func prepareForRefreshJourney() {
+        if var journey = self.journey, let locations = journey.locations {
+            let orderedJourney = LocationManagement.sortLocationsByDateAscending(locations: locations)
+            journey.locations = orderedJourney
+            self.journey = journey
+        }
+        performSegue(withIdentifier: Constant.SegueID.unwindToTripJourneyVC, sender: journey)
     }
 }
 
@@ -94,7 +104,7 @@ class CreateJourneyVC: UIViewController {
 extension CreateJourneyVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constant.SegueID.unwindToTripJourneyVC {
-            let tripJourneyVC = segue.destination as? TripJourneyVC
+            let tripJourneyVC = segue.destination as? JourneyVC
             let journey = sender as? Journey
             tripJourneyVC?.journey = journey
             

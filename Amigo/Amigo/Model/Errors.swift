@@ -57,7 +57,7 @@ struct Errors {
         case cannotUploadDocuments
         case cannotGetPicture
         case cannotSaveUser
-        case cannotDeleteTrip
+        case cannotDeleteDocuments
         case noTripID
         case defaultError
         
@@ -75,8 +75,8 @@ struct Errors {
                 return "We couldn't get your picture, please try to log in again."
             case .cannotSaveUser:
                 return "We couldn't save your informations, please try again."
-            case .cannotDeleteTrip:
-                return "We couldn't delete your trip, please try again."
+            case .cannotDeleteDocuments:
+                return "We couldn't delete your document(s), please try again."
             case .noTripID:
                 return "An Unexpected error occured, try to log in again to delete your Trip."
             case .defaultError:

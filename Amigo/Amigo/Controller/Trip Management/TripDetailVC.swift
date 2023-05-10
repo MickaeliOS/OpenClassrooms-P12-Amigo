@@ -53,7 +53,7 @@ class TripDetailVC: UIViewController {
 extension TripDetailVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constant.SegueID.segueToTripJourneyVC {
-            let tripJourneyVC = segue.destination as? TripJourneyVC
+            let tripJourneyVC = segue.destination as? JourneyVC
             let trip = sender as? Trip
             tripJourneyVC?.trip = trip
         }

@@ -22,14 +22,3 @@ class ConfirmationTripVC: UIViewController {
         myListButton.layer.cornerRadius = 10
     }
 }
-
-// MARK: - EXTENSIONS & PROTOCOL
-/*extension ConfirmationTripVC {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constant.SegueID.unwindToRootVC {
-            guard let trip = sender as? Trip else { return }
-            let rootVC = segue.destination as? TripVC
-            rootVC?.trips?.append(trip)
-        }
-    }
-}*/

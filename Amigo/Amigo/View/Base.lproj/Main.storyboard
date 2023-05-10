@@ -214,7 +214,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="v0p-zr-jer">
                                                 <rect key="frame" x="0.0" y="53.666666666666664" width="355" height="26.333333333333336"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rht-dE-FKX">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="startDate" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rht-dE-FKX">
                                                         <rect key="frame" x="0.0" y="0.0" width="118.33333333333333" height="26.333333333333332"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                         <nil key="textColor"/>
@@ -226,7 +226,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aH1-FO-Tjt">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="endDate" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aH1-FO-Tjt">
                                                         <rect key="frame" x="236.66666666666666" y="0.0" width="118.33333333333334" height="26.333333333333332"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                         <nil key="textColor"/>
@@ -341,14 +341,17 @@
             </objects>
             <point key="canvasLocation" x="5102" y="4"/>
         </scene>
-        <!--Trip JourneyVC-->
+        <!--JourneyVC-->
         <scene sceneID="JXU-Ck-inN">
             <objects>
-                <viewController id="cg4-D8-dG3" customClass="TripJourneyVC" customModule="Amigo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cg4-D8-dG3" customClass="JourneyVC" customModule="Amigo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aeF-7z-2by">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="KSS-i6-T3T">
+                                <rect key="frame" x="169" y="387.66666666666669" width="37" height="37"/>
+                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DJ5-rs-q5G">
                                 <rect key="frame" x="0.0" y="91" width="375" height="564.33333333333337"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -378,9 +381,11 @@
                             <constraint firstItem="DJ5-rs-q5G" firstAttribute="leading" secondItem="1Ex-Wc-uav" secondAttribute="leading" id="7IV-v5-IHT"/>
                             <constraint firstItem="QxW-m4-ZSa" firstAttribute="height" secondItem="1Ex-Wc-uav" secondAttribute="height" multiplier="0.1" id="DXD-AD-aBH"/>
                             <constraint firstItem="1Ex-Wc-uav" firstAttribute="trailing" secondItem="QxW-m4-ZSa" secondAttribute="trailing" constant="10" id="HEA-PD-Amf"/>
+                            <constraint firstItem="KSS-i6-T3T" firstAttribute="centerY" secondItem="aeF-7z-2by" secondAttribute="centerY" id="Nfr-Xf-eQR"/>
                             <constraint firstItem="QxW-m4-ZSa" firstAttribute="bottom" secondItem="1Ex-Wc-uav" secondAttribute="bottom" id="V6T-eC-gxr"/>
                             <constraint firstItem="QxW-m4-ZSa" firstAttribute="leading" secondItem="1Ex-Wc-uav" secondAttribute="leading" constant="10" id="VuO-v0-Sn7"/>
                             <constraint firstItem="DJ5-rs-q5G" firstAttribute="top" secondItem="1Ex-Wc-uav" secondAttribute="top" id="XvD-OQ-nhc"/>
+                            <constraint firstItem="KSS-i6-T3T" firstAttribute="centerX" secondItem="aeF-7z-2by" secondAttribute="centerX" id="bpc-L1-ieK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Hiq-7p-6EW">
@@ -391,6 +396,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="KSS-i6-T3T" id="eYW-f4-LMB"/>
                         <outlet property="journeyTableView" destination="DJ5-rs-q5G" id="Jym-Sp-Mqb"/>
                         <outlet property="saveButton" destination="QxW-m4-ZSa" id="fov-uO-A10"/>
                         <segue destination="OpC-KT-iJB" kind="presentation" identifier="segueToCreateJourneyVC" id="IHS-Ac-DfU"/>
@@ -427,25 +433,25 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tKb-x9-uFS">
                                 <rect key="frame" x="10" y="89" width="355" height="656"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hzD-yh-gzb">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="hzD-yh-gzb">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="106.33333333333333"/>
                                         <subviews>
                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="pmr-pY-Zn4">
-                                                <rect key="frame" x="0.0" y="0.0" width="118" height="106"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="162" height="106.33333333333333"/>
                                             </datePicker>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7s-NJ-FM3">
-                                                <rect key="frame" x="118.33333333333334" y="0.0" width="118.33333333333334" height="106.33333333333333"/>
+                                                <rect key="frame" x="162" y="0.0" width="31" height="106.33333333333333"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="XhA-PA-yvZ">
-                                                <rect key="frame" x="236" y="0.0" width="119" height="106"/>
+                                                <rect key="frame" x="193" y="0.0" width="162" height="106.33333333333333"/>
                                             </datePicker>
                                         </subviews>
                                     </stackView>
                                     <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="yWx-EX-XDE">
-                                        <rect key="frame" x="0.0" y="106" width="355" height="56"/>
+                                        <rect key="frame" x="0.0" y="106.33333333333334" width="355" height="56"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <outlet property="delegate" destination="OpC-KT-iJB" id="Mbv-ze-sda"/>
