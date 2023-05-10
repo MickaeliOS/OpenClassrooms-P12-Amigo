@@ -30,6 +30,24 @@ final class JourneyFetchingService {
         }
     }
     
+    func fetchTripJourney2(tripID: String, completion: @escaping (Journey?, Errors.DatabaseError?) -> Void) {
+        let tableRef = firestoreDatabase.collection(journeyTableConstants.tableName).document(tripID)
+        tableRef.getDocument { document, error in
+            if error != nil {
+                completion(nil, .cannotGetDocuments)
+                return
+            }
+            
+            if let document = document, document.exists {
+                let convertedJourney = try? document.data(as: Journey.self)
+                completion(convertedJourney, nil)
+                return
+            }
+            
+            completion(nil, nil)
+        }
+    }
+    
     /*func fetchTripJourney2(tripID: String, completion: @escaping (Journey?) -> Void) {
         let tableRef = firestoreDatabase.collection("Journey").document(tripID)
         tableRef.collection(journeyTableConstants.tableName).document(tripID).getDocument { result, error in

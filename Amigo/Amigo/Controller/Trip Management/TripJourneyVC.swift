@@ -54,7 +54,21 @@ class TripJourneyVC: UIViewController {
     private func fetchJourney() {
         guard let tripID = trip?.tripID else { return }
         
-        Task {
+        journeyFetchingService.fetchTripJourney2(tripID: tripID) { [weak self] journey, error in
+            if let error = error {
+                self?.presentAlert(with: error.localizedDescription)
+                return
+            }
+            
+            if let journey = journey {
+                self?.journey = journey
+                self?.journeyTableView.reloadData()
+                return
+            }
+            
+            self?.journey = Journey()
+        }
+        /*Task {
             do {
                 let journey = try await journeyFetchingService.fetchTripJourney(tripID: tripID)
                 self.journey = journey
@@ -62,7 +76,7 @@ class TripJourneyVC: UIViewController {
             } catch let error as Errors.DatabaseError {
                 presentAlert(with: error.localizedDescription)
             }
-        }
+        }*/
     }
     
     private func saveJourney() {
