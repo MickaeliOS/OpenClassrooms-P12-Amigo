@@ -7,10 +7,11 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 final class JourneyUpdateService {
     // MARK: - PROPERTIES & INIT
-    private let locationTableConstants = Constant.FirestoreTables.Location.self
+    private let journeyTableConstants = Constant.FirestoreTables.Journey.self
     private let firestoreDatabase: Firestore
     private var userAuth = UserAuth.shared
     
@@ -29,4 +30,13 @@ final class JourneyUpdateService {
             throw Errors.DatabaseError.cannotUploadJourneyList
         }
     }*/
+    
+    func updateJourney(journey: Journey, for tripID: String) throws {
+        do {
+            let tableRef = firestoreDatabase.collection(journeyTableConstants.tableName).document(tripID)
+            try tableRef.setData(from: journey.self)
+        } catch {
+            throw Errors.DatabaseError.cannotUploadDocuments
+        }
+    }
 }

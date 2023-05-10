@@ -75,7 +75,6 @@ struct Constant {
         struct Journey {
             static let tableName = "Journey"
 
-            static let tripID = "tripID"
             static let locations = "locations"
         }
     }

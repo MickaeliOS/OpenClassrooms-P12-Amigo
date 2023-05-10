@@ -33,12 +33,12 @@ class TripJourneyVC: UIViewController {
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         //saveEditedTrip()
+        saveJourney()
     }
     
     @IBAction func addJourneyTapped(_ sender: Any) {
         performSegue(withIdentifier: Constant.SegueID.segueToCreateJourneyVC, sender: nil)
     }
-    
     
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
@@ -58,9 +58,23 @@ class TripJourneyVC: UIViewController {
             do {
                 let journey = try await journeyFetchingService.fetchTripJourney(tripID: tripID)
                 self.journey = journey
+                journeyTableView.reloadData()
             } catch let error as Errors.DatabaseError {
                 presentAlert(with: error.localizedDescription)
             }
+        }
+    }
+    
+    private func saveJourney() {
+        guard let journey = journey, let tripID = trip?.tripID else { return }
+        
+        do {
+            try journeyUpdateService.updateJourney(journey: journey, for: tripID)
+
+        } catch let error as Errors.DatabaseError {
+            presentAlert(with: error.localizedDescription)
+        } catch {
+            presentAlert(with: Errors.CommonError.defaultError.localizedDescription)
         }
     }
     
