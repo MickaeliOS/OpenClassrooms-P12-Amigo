@@ -18,4 +18,14 @@ final class TripUpdateService {
     init(firestoreDatabase: Firestore = Firestore.firestore()) {
         self.firestoreDatabase = firestoreDatabase
     }
+    
+    // MARK: - FUNCTIONS
+    func updateTrip(with tripID: String, fields: [String:Any]) async throws {
+        do {
+            try await firestoreDatabase.collection(tripTableConstants.tableName).document(tripID).updateData(fields)
+
+        } catch {
+            throw Errors.DatabaseError.cannotUploadDocuments
+        }
+    }
 }

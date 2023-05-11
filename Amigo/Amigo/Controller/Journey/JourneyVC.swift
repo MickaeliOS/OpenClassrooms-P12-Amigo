@@ -59,7 +59,7 @@ class JourneyVC: UIViewController {
             self?.activityIndicator.isHidden = true
             
             if let error = error {
-                self?.presentAlert(with: error.localizedDescription)
+                self?.presentErrorAlert(with: error.localizedDescription)
                 return
             }
             
@@ -83,11 +83,11 @@ class JourneyVC: UIViewController {
         
         do {
             try journeyUpdateService.updateJourney(journey: journey, for: tripID)
-
+            navigationController?.popViewController(animated: true)
         } catch let error as Errors.DatabaseError {
-            presentAlert(with: error.localizedDescription)
+            presentErrorAlert(with: error.localizedDescription)
         } catch {
-            presentAlert(with: Errors.CommonError.defaultError.localizedDescription)
+            presentErrorAlert(with: Errors.CommonError.defaultError.localizedDescription)
         }
     }
 }

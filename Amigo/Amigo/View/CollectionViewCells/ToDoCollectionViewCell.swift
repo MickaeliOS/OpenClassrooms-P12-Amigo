@@ -11,14 +11,21 @@ class ToDoCollectionViewCell: UICollectionViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.layer.cornerRadius = 20
-        contentView.layer.shadowRadius = 20
-        contentView.layer.shadowOpacity = 10
-        contentView.layer.shadowColor = UIColor.label.cgColor
+        setupInterface()
     }
+    
     @IBOutlet weak var toDoLabel: UILabel!
+    var deleteThisCell: (() -> Void)?
+
+    @IBAction func deleteItemButtonTapped(_ sender: Any) {
+        deleteThisCell?()
+    }
     
     func configureCell(toDo: String) {
         toDoLabel.text = toDo
+    }
+    
+    private func setupInterface() {
+        contentView.layer.cornerRadius = 15
     }
 }

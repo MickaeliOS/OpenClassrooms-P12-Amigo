@@ -61,19 +61,20 @@ class TripVC: UIViewController {
                 userAuth.user?.trips = try await tripFetchingService.fetchUserTrips()
                 
                 // It's necessary to display the trips in ascending order based on the date, starting from the oldest.
-                guard let trips = userAuth.user?.trips, !trips.isEmpty else { return }
-                userAuth.user?.trips = TripManagement.sortTripsByDateAscending(trips: trips)
+                if let trips = userAuth.user?.trips, !trips.isEmpty {
+                    userAuth.user?.trips = TripManagement.sortTripsByDateAscending(trips: trips)
+                    tripTableView.reloadData()
+                }
                 
-                tripTableView.reloadData()
                 activityIndicator.isHidden = true
                 noTripLabel.isHidden = userAuth.user?.trips != nil ? true : false
                 
             } catch let error as Errors.DatabaseError where error == .noUser {
-                presentAlert(with: error.localizedDescription) {
+                presentErrorAlert(with: error.localizedDescription) {
                     self.presentVCFullScreen(with: "WelcomeVC")
                 }
             } catch let error as Errors.DatabaseError {
-                presentAlert(with: error.localizedDescription)
+                presentErrorAlert(with: error.localizedDescription)
             }
         }
     }
@@ -127,7 +128,7 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
             Task {
                 do {
                     guard let tripID = userAuth.user?.trips?[indexPath.row].tripID else {
-                        presentAlert(with: Errors.DatabaseError.noTripID.localizedDescription)
+                        presentErrorAlert(with: Errors.DatabaseError.noTripID.localizedDescription)
                         return
                     }
                     
@@ -138,7 +139,7 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
                     // Then, the cell
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch let error as Errors.DatabaseError {
-                    presentAlert(with: error.localizedDescription)
+                    presentErrorAlert(with: error.localizedDescription)
                 }
             }
         }

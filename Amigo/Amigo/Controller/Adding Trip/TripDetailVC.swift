@@ -63,6 +63,13 @@ extension TripDetailVC {
             let toDoListVC = segue.destination as? ToDoListVC
             let trip = sender as? Trip
             toDoListVC?.trip = trip
+            toDoListVC?.delegate = self
         }
+    }
+}
+
+extension TripDetailVC: ToDoListVCDelegate {
+    func getTripFromToDoListVC(trip: Trip) {
+        self.trip = trip
     }
 }

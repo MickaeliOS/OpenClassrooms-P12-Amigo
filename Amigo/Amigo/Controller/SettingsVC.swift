@@ -37,7 +37,7 @@ class SettingsVC: UIViewController {
             try userAuthService.signOut()
             presentVCFullScreen(with: "WelcomeVC")
         } catch (let error) {
-            presentAlert(with: error.localizedDescription)
+            presentErrorAlert(with: error.localizedDescription)
         }
     }
     

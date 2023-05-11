@@ -18,19 +18,26 @@ extension UIViewController {
         present(vc, animated:true)
     }
     
-    func presentAlert(with error: String) {
+    func presentErrorAlert(with error: String) {
         let alert: UIAlertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
     
-    func presentAlert(with error: String, completion: @escaping () -> Void) {
+    func presentErrorAlert(with error: String, completion: @escaping () -> Void) {
         let alert: UIAlertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
         
         let action = UIAlertAction(title: "OK", style: .cancel) { action in
             completion()
         }
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func presentAlert(with message: String) {
+        let alert: UIAlertController = UIAlertController(title: "Information", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }

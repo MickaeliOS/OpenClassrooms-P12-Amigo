@@ -69,9 +69,9 @@ class CreateTripVC: UIViewController {
             performSegue(withIdentifier: Constant.SegueID.segueToConfirmationTripVC, sender: trip)
             
         } catch let error as Errors.DatabaseError {
-            presentAlert(with: error.localizedDescription)
+            presentErrorAlert(with: error.localizedDescription)
         } catch {
-            presentAlert(with: Errors.CommonError.defaultError.localizedDescription)
+            presentErrorAlert(with: Errors.CommonError.defaultError.localizedDescription)
         }
     }
     
@@ -82,7 +82,7 @@ class CreateTripVC: UIViewController {
     private func createTrip() -> Trip? {
         // We need to control if we have a user logged in.
         guard let currentUserID = userAuth.currentUser?.uid else {
-            presentAlert(with: Errors.CommonError.noUser.localizedDescription) {
+            presentErrorAlert(with: Errors.CommonError.noUser.localizedDescription) {
                 self.presentVCFullScreen(with: "WelcomeVC")
             }
             return nil

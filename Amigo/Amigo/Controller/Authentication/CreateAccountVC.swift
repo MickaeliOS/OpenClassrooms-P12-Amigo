@@ -82,7 +82,7 @@ class CreateAccountVC: UIViewController {
             errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
             return
         } catch {
-            presentAlert(with: Errors.CommonError.defaultError.localizedDescription)
+            presentErrorAlert(with: Errors.CommonError.defaultError.localizedDescription)
             return
         }
         

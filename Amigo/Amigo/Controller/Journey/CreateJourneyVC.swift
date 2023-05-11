@@ -84,7 +84,8 @@ class CreateJourneyVC: UIViewController {
             }
             
             // We empty our interface.
-            self?.journeySearchBar.text = "Another one ?"
+            self?.journeySearchBar.text = ""
+            self?.journeySearchBar.placeholder = "Another one ?"
             self?.searchResults.removeAll()
             self?.journeyTableView.reloadData()
         }

@@ -422,7 +422,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2vh-eW-mOW">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="63.666666666666664"/>
                                         <subviews>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="To Do!" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bMg-r9-jU5">
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a task!" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bMg-r9-jU5">
                                                 <rect key="frame" x="0.0" y="0.0" width="266.33333333333331" height="63.666666666666664"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -463,10 +463,10 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="toDoCell" id="nMP-sp-d5z" customClass="ToDoCollectionViewCell" customModule="Amigo" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="104.33333333333334" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="148.33333333333337" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="CpM-RW-cLO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="104.33333333333334" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="148.33333333333337" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ToDoItem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zfY-AT-vwg">
@@ -475,15 +475,35 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mrb-Ua-pyt">
+                                                            <rect key="frame" x="104.33333333333333" y="0.0" width="43.999999999999986" height="44"/>
+                                                            <color key="backgroundColor" systemColor="labelColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="Mrb-Ua-pyt" secondAttribute="height" id="rf9-xR-tjz"/>
+                                                            </constraints>
+                                                            <state key="normal" title="Button"/>
+                                                            <buttonConfiguration key="configuration" style="plain" title="X">
+                                                                <color key="baseForegroundColor" systemColor="systemRedColor"/>
+                                                            </buttonConfiguration>
+                                                            <connections>
+                                                                <action selector="deleteItemButtonTapped:" destination="nMP-sp-d5z" eventType="touchUpInside" id="Yr6-et-Z4p"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="tintColor"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
-                                                        <constraint firstItem="zfY-AT-vwg" firstAttribute="top" secondItem="CpM-RW-cLO" secondAttribute="top" constant="10" id="5Fh-fT-hkg"/>
-                                                        <constraint firstAttribute="trailing" secondItem="zfY-AT-vwg" secondAttribute="trailing" constant="10" id="9yA-Fk-dte"/>
-                                                        <constraint firstItem="zfY-AT-vwg" firstAttribute="leading" secondItem="CpM-RW-cLO" secondAttribute="leading" constant="10" id="Uqm-2m-wqk"/>
-                                                        <constraint firstAttribute="bottom" secondItem="zfY-AT-vwg" secondAttribute="bottom" constant="10" id="v0L-B0-Z4k"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Mrb-Ua-pyt" secondAttribute="bottom" id="7ys-Ie-NQ9"/>
+                                                        <constraint firstAttribute="bottom" secondItem="zfY-AT-vwg" secondAttribute="bottom" constant="10" id="AX8-7o-2eH"/>
+                                                        <constraint firstItem="Mrb-Ua-pyt" firstAttribute="leading" secondItem="zfY-AT-vwg" secondAttribute="trailing" constant="10" id="Fku-6U-r2L"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Mrb-Ua-pyt" secondAttribute="trailing" id="W5f-R8-BwT"/>
+                                                        <constraint firstItem="Mrb-Ua-pyt" firstAttribute="top" secondItem="CpM-RW-cLO" secondAttribute="top" id="cC5-Bp-alO"/>
+                                                        <constraint firstItem="zfY-AT-vwg" firstAttribute="leading" secondItem="CpM-RW-cLO" secondAttribute="leading" constant="10" id="gQH-6I-bIa"/>
+                                                        <constraint firstItem="zfY-AT-vwg" firstAttribute="top" secondItem="CpM-RW-cLO" secondAttribute="top" constant="10" id="hBe-7w-r0P"/>
+                                                        <constraint firstItem="Mrb-Ua-pyt" firstAttribute="height" secondItem="CpM-RW-cLO" secondAttribute="height" id="p3Z-25-907"/>
                                                     </constraints>
                                                 </collectionViewCellContentView>
+                                                <gestureRecognizers/>
                                                 <connections>
                                                     <outlet property="toDoLabel" destination="zfY-AT-vwg" id="GqB-Dv-SFM"/>
                                                 </connections>
@@ -498,7 +518,7 @@
                                         <rect key="frame" x="0.0" y="574.33333333333337" width="355" height="63.666666666666629"/>
                                         <color key="backgroundColor" systemColor="tintColor"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Button">
+                                        <buttonConfiguration key="configuration" style="plain" title="Save List">
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </buttonConfiguration>
                                         <connections>
@@ -523,7 +543,13 @@
                             <outletCollection property="gestureRecognizers" destination="pyl-YV-w60" appends="YES" id="B23-Wk-dsm"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="hGc-1U-bqU"/>
+                    <navigationItem key="navigationItem" id="hGc-1U-bqU">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="questionmark.circle" catalog="system" id="TKc-XA-NJs">
+                            <connections>
+                                <action selector="helpButtonTapped:" destination="9DV-9x-YeN" id="WiA-nU-2Rb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="exe-cH-lif" id="8Nn-vo-QHh"/>
                         <outlet property="errorMessageLabel" destination="1PS-EU-8W9" id="4kk-WR-G48"/>
@@ -539,7 +565,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="6089" y="797"/>
+            <point key="canvasLocation" x="6088.8000000000002" y="796.55172413793105"/>
         </scene>
         <!--Create JourneyVC-->
         <scene sceneID="KNf-fS-P35">
@@ -1239,6 +1265,7 @@
         <image name="airplane" catalog="system" width="128" height="115"/>
         <image name="gear" catalog="system" width="128" height="122"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
