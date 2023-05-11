@@ -69,7 +69,6 @@ struct Constant {
             static let country = "country"
             static let countryCode = "countryCode"
             static let toDoList = "toDoList"
-            //static let journey = "journey"
         }
         
         struct Journey {

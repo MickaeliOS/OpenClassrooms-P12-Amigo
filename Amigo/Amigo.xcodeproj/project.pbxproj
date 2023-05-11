@@ -146,7 +146,7 @@
 			path = User;
 			sourceTree = "<group>";
 		};
-		8300097629FA95A0006DBD54 /* Adding Trip */ = {
+		8300097629FA95A0006DBD54 /* Trip */ = {
 			isa = PBXGroup;
 			children = (
 				830F479029E9311800697C34 /* TripVC.swift */,
@@ -155,7 +155,7 @@
 				83B4F8F02A03A43D00A1A4FC /* ConfirmationTripVC.swift */,
 				83D881FD2A0931410056A324 /* TripDetailVC.swift */,
 			);
-			path = "Adding Trip";
+			path = Trip;
 			sourceTree = "<group>";
 		};
 		8300097929FAA567006DBD54 /* Trip */ = {
@@ -307,7 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				8300095D29F6B42E006DBD54 /* Authentication */,
-				8300097629FA95A0006DBD54 /* Adding Trip */,
+				8300097629FA95A0006DBD54 /* Trip */,
 				835687142A097E1A000A65F8 /* Journey */,
 				83FED4052A0C1AF200B0B231 /* To Do List */,
 				83C20F8929ED6B3A009B252B /* SettingsVC.swift */,

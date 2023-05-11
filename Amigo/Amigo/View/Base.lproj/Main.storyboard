@@ -192,6 +192,22 @@
             </objects>
             <point key="canvasLocation" x="1404" y="797"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="VIW-UI-AA3">
+            <objects>
+                <viewController id="qhl-dq-C3D" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EXE-gR-qep">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Rpb-gO-Ok6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="fGN-xn-7wg"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TZi-2M-tCg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6089" y="1535"/>
+        </scene>
         <!--Item-->
         <scene sceneID="rkP-yE-efR">
             <objects>
@@ -306,6 +322,7 @@
                                                         </buttonConfiguration>
                                                         <connections>
                                                             <action selector="ticketsButtonTapped:" destination="Ktz-LG-Qti" eventType="touchUpInside" id="Jjs-6f-bfy"/>
+                                                            <segue destination="qhl-dq-C3D" kind="show" id="DyE-4H-PIT"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -438,7 +455,7 @@
                                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </buttonConfiguration>
                                                 <connections>
-                                                    <action selector="addButtonTapped:" destination="9DV-9x-YeN" eventType="touchUpInside" id="b6R-8I-hbu"/>
+                                                    <action selector="addToDoItemButtonTapped:" destination="9DV-9x-YeN" eventType="touchUpInside" id="jXu-7z-lyE"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -543,15 +560,9 @@
                             <outletCollection property="gestureRecognizers" destination="pyl-YV-w60" appends="YES" id="B23-Wk-dsm"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="hGc-1U-bqU">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="questionmark.circle" catalog="system" id="TKc-XA-NJs">
-                            <connections>
-                                <action selector="helpButtonTapped:" destination="9DV-9x-YeN" id="WiA-nU-2Rb"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="hGc-1U-bqU"/>
                     <connections>
-                        <outlet property="addButton" destination="exe-cH-lif" id="8Nn-vo-QHh"/>
+                        <outlet property="addToDoItemButton" destination="exe-cH-lif" id="D50-4I-KyX"/>
                         <outlet property="errorMessageLabel" destination="1PS-EU-8W9" id="4kk-WR-G48"/>
                         <outlet property="saveToDoListButton" destination="A0I-oX-Axo" id="Bh0-lM-ars"/>
                         <outlet property="toDoCollectionView" destination="b8K-mq-uSp" id="OLe-wH-IDa"/>
@@ -1265,7 +1276,6 @@
         <image name="airplane" catalog="system" width="128" height="115"/>
         <image name="gear" catalog="system" width="128" height="122"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="questionmark.circle" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

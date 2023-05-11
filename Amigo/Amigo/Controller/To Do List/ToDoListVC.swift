@@ -9,13 +9,15 @@ import UIKit
 
 class ToDoListVC: UIViewController {
 
+    // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInterface()
     }
     
+    // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var toDoLabel: UITextField!
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var addToDoItemButton: UIButton!
     @IBOutlet weak var toDoCollectionView: UICollectionView!
     @IBOutlet weak var saveToDoListButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
@@ -25,7 +27,8 @@ class ToDoListVC: UIViewController {
     private var userAuth = UserAuth.shared
     private let tripUpdateService = TripUpdateService()
     
-    @IBAction func addButtonTapped(_ sender: Any) {
+    // MARK: - ACTIONS
+    @IBAction func addToDoItemButtonTapped(_ sender: Any) {
         addToDoItem()
     }
     
@@ -37,12 +40,9 @@ class ToDoListVC: UIViewController {
         toDoLabel.resignFirstResponder()
     }
     
-    @IBAction func helpButtonTapped(_ sender: Any) {
-        presentAlert(with: "To remove a task, simply tap on it and it will go away!")
-    }
-    
+    // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
-        addButton.layer.cornerRadius = 10
+        addToDoItemButton.layer.cornerRadius = 10
         saveToDoListButton.layer.cornerRadius = 10
         toDoLabel.becomeFirstResponder()
     }
@@ -56,6 +56,8 @@ class ToDoListVC: UIViewController {
             return
         }
         
+        // In case the user doesn't have a to-do list, the list will be nil and appending elements to it won't be possible.
+        // Therefore, it's crucial to handle this scenario properly.
         if trip.toDoList == nil {
             var toDoList = [String]()
             toDoList.append(task)
@@ -103,6 +105,7 @@ class ToDoListVC: UIViewController {
     }
 }
 
+// MARK: - EXTENSIONS & PROTOCOL
 extension ToDoListVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return trip?.toDoList?.count ?? 0
@@ -144,6 +147,10 @@ extension ToDoListVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         toDoLabel.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        errorMessageLabel.isHidden = true
     }
 }
 

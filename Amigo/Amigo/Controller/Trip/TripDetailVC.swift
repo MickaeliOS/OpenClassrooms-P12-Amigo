@@ -14,6 +14,11 @@ class TripDetailVC: UIViewController {
         setupInterface()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        delegate?.refreshTrip()
+    }
+    
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var countryNameLabel: UILabel!
     @IBOutlet weak var startDateLabel: UILabel!
@@ -23,6 +28,7 @@ class TripDetailVC: UIViewController {
     @IBOutlet weak var toDoListButton: UIButton!
     @IBOutlet weak var ticketsButton: UIButton!
     
+    weak var delegate: TripDetailVCDelegate?
     var trip: Trip?
     
     // MARK: - ACTIONS
@@ -53,17 +59,18 @@ class TripDetailVC: UIViewController {
 // MARK: - EXTENSIONS
 extension TripDetailVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constant.SegueID.segueToTripJourneyVC {
+        switch segue.identifier {
+        case Constant.SegueID.segueToTripJourneyVC:
             let tripJourneyVC = segue.destination as? JourneyVC
             let trip = sender as? Trip
             tripJourneyVC?.trip = trip
-        }
-        
-        if segue.identifier == Constant.SegueID.segueToToDoList {
+        case Constant.SegueID.segueToToDoList:
             let toDoListVC = segue.destination as? ToDoListVC
             let trip = sender as? Trip
             toDoListVC?.trip = trip
             toDoListVC?.delegate = self
+        default:
+            return
         }
     }
 }
@@ -72,4 +79,8 @@ extension TripDetailVC: ToDoListVCDelegate {
     func getTripFromToDoListVC(trip: Trip) {
         self.trip = trip
     }
+}
+
+protocol TripDetailVCDelegate: AnyObject {
+    func refreshTrip()
 }
