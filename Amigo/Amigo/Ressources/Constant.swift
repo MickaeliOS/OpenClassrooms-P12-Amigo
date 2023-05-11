@@ -27,6 +27,9 @@ struct Constant {
         
         // To Do List segues.
         static let segueToToDoList = "segueToToDoList"
+        
+        // Expenses segues.
+        static let segueToExpensesVC = "segueToExpensesVC"
     }
     
     //MARK: - CELLS
@@ -42,6 +45,10 @@ struct Constant {
         static let journeyNibName = "JourneyTableViewCell"
         static let journeyCell = "journeyCell"
         static let journeyLocationCell = "journeyLocationCell"
+        
+        // Expense
+        static let expenseNibName = "ExpenseTableViewCell"
+        static let expenseCell = "expenseCell"
     }
     
     struct CollectionViewCells {
@@ -69,6 +76,7 @@ struct Constant {
             static let country = "country"
             static let countryCode = "countryCode"
             static let toDoList = "toDoList"
+            static let expenses = "expenses"
         }
         
         struct Journey {

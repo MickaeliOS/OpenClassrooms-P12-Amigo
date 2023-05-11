@@ -3,4 +3,415 @@
    uuid = "6F3E657E-4531-4BA0-9BB6-019F1223672E"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "54AD21E8-8415-42AE-B218-4D9704B3A2A7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Controller/Expenses/ExpensesVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "saveExpensesButtonTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "54AD21E8-8415-42AE-B218-4D9704B3A2A7 - 7e71e81226ee9db0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Amigo.ExpensesVC.saveExpensesButtonTapped(Any) -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Expenses/ExpensesVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "688">
+               </Location>
+               <Location
+                  uuid = "54AD21E8-8415-42AE-B218-4D9704B3A2A7 - dbab508920f55a12"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable () async throws -&gt; () in Amigo.ExpensesVC.saveExpensesButtonTapped(Any) -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Expenses/ExpensesVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "58272C8A-770D-4907-AC2D-07F47739FD37"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Controller/Expenses/ExpensesVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "saveExpensesButtonTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "58272C8A-770D-4907-AC2D-07F47739FD37 - 3f55f38bea7a9007"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.ExpensesVC.saveExpensesButtonTapped(Any) -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Expenses/ExpensesVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  uuid = "58272C8A-770D-4907-AC2D-07F47739FD37 - c556087a14b9fb5d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.ExpensesVC.saveExpensesButtonTapped(Any) -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Expenses/ExpensesVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "58272C8A-770D-4907-AC2D-07F47739FD37 - 2afe04251ad4ea3a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.ExpensesVC.saveExpensesButtonTapped(Any) -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Expenses/ExpensesVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C9571DD3-BEE4-44BE-B982-126F4CCC9D28"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Controller/Expenses/ExpensesVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "saveExpensesButtonTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C9571DD3-BEE4-44BE-B982-126F4CCC9D28 - 3f55f38bea7a9007"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.ExpensesVC.saveExpensesButtonTapped(Any) -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Expenses/ExpensesVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  uuid = "C9571DD3-BEE4-44BE-B982-126F4CCC9D28 - c556087a14b9fb5d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.ExpensesVC.saveExpensesButtonTapped(Any) -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Expenses/ExpensesVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "C9571DD3-BEE4-44BE-B982-126F4CCC9D28 - 2afe04251ad4ea3a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.ExpensesVC.saveExpensesButtonTapped(Any) -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Expenses/ExpensesVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A3C6CAB9-DD0A-4382-8AD9-C9F7CA253515"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Controller/Expenses/ExpensesVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "saveExpensesButtonTapped(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A3C6CAB9-DD0A-4382-8AD9-C9F7CA253515 - 431b791f1f634cff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.ExpensesVC.saveExpensesButtonTapped(Any) -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Expenses/ExpensesVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "160">
+               </Location>
+               <Location
+                  uuid = "A3C6CAB9-DD0A-4382-8AD9-C9F7CA253515 - 431b791f1f634cff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Amigo.ExpensesVC.saveExpensesButtonTapped(Any) -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Expenses/ExpensesVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "604">
+               </Location>
+               <Location
+                  uuid = "A3C6CAB9-DD0A-4382-8AD9-C9F7CA253515 - e32221bb06304d69"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Amigo.Trip) -&gt; Swift.Bool in closure #1 @Sendable () async throws -&gt; () in Amigo.ExpensesVC.saveExpensesButtonTapped(Any) -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Controller/Expenses/ExpensesVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "120">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "12874A72-B3B7-42CE-A71C-F05CF4D31D69"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Model/Trip/TripServices/TripUpdateService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "updateTrip(with:fields:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "12874A72-B3B7-42CE-A71C-F05CF4D31D69 - 8bd5aa9f4453cc2a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Amigo.TripUpdateService.updateTrip(with: Swift.String, fields: Swift.Dictionary&lt;Swift.String, Any&gt;) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/Trip/TripServices/TripUpdateService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  uuid = "12874A72-B3B7-42CE-A71C-F05CF4D31D69 - b034b32a8afaa877"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for Amigo.TripUpdateService.updateTrip(with: Swift.String, fields: Swift.Dictionary&lt;Swift.String, Any&gt;) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/Trip/TripServices/TripUpdateService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "12874A72-B3B7-42CE-A71C-F05CF4D31D69 - 8a835e7b1fbd1014"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Amigo.TripUpdateService.updateTrip(with: Swift.String, fields: Swift.Dictionary&lt;Swift.String, Any&gt;) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/Trip/TripServices/TripUpdateService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "12874A72-B3B7-42CE-A71C-F05CF4D31D69 - d29abc50c89f617"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Amigo.TripUpdateService.updateTrip(with: Swift.String, fields: Swift.Dictionary&lt;Swift.String, Any&gt;) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/Trip/TripServices/TripUpdateService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "424706B6-CBE0-4726-B10D-08C638F53684"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Model/Trip/TripServices/TripUpdateService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "updateTrip(with:fields:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "424706B6-CBE0-4726-B10D-08C638F53684 - 8bd5aa9f4453cc2a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Amigo.TripUpdateService.updateTrip(with: Swift.String, fields: Swift.Dictionary&lt;Swift.String, Any&gt;) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/Trip/TripServices/TripUpdateService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  uuid = "424706B6-CBE0-4726-B10D-08C638F53684 - b034b32a8afaa877"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for Amigo.TripUpdateService.updateTrip(with: Swift.String, fields: Swift.Dictionary&lt;Swift.String, Any&gt;) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/Trip/TripServices/TripUpdateService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "424706B6-CBE0-4726-B10D-08C638F53684 - 8a835e7b1fbd1014"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Amigo.TripUpdateService.updateTrip(with: Swift.String, fields: Swift.Dictionary&lt;Swift.String, Any&gt;) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/Trip/TripServices/TripUpdateService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "424706B6-CBE0-4726-B10D-08C638F53684 - d29abc50c89f617"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Amigo.TripUpdateService.updateTrip(with: Swift.String, fields: Swift.Dictionary&lt;Swift.String, Any&gt;) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/Trip/TripServices/TripUpdateService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "05B6B18C-B6AC-4555-8913-0DEC8724DB35"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Model/Trip/TripServices/TripUpdateService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "updateTrip(with:fields:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

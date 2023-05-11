@@ -192,21 +192,132 @@
             </objects>
             <point key="canvasLocation" x="1404" y="797"/>
         </scene>
-        <!--View Controller-->
+        <!--ExpensesVC-->
         <scene sceneID="VIW-UI-AA3">
             <objects>
-                <viewController id="qhl-dq-C3D" sceneMemberID="viewController">
+                <viewController id="qhl-dq-C3D" customClass="ExpensesVC" customModule="Amigo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EXE-gR-qep">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="pfi-ow-Y7z">
+                                <rect key="frame" x="10" y="91" width="355" height="638"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvw-1M-1cR">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="33.666666666666664"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PDU-bT-979">
+                                        <rect key="frame" x="0.0" y="33.666666666666671" width="355" height="63.666666666666671"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your expense here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hxf-Dk-V8Z">
+                                                <rect key="frame" x="0.0" y="0.0" width="248.66666666666666" height="63.666666666666664"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="qhl-dq-C3D" id="vBZ-Dm-uTF"/>
+                                                </connections>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfe-mA-yC0">
+                                                <rect key="frame" x="248.66666666666671" y="0.0" width="106.33333333333334" height="63.666666666666664"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="qhl-dq-C3D" id="MDb-vR-CfN"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="hxf-Dk-V8Z" firstAttribute="width" secondItem="PDU-bT-979" secondAttribute="width" multiplier="0.7" id="12r-ew-eOm"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="A8Y-7P-aLS">
+                                        <rect key="frame" x="0.0" y="97.333333333333343" width="355" height="64"/>
+                                        <subviews>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="m5T-AM-2ph">
+                                                <rect key="frame" x="0.0" y="0.0" width="178" height="64"/>
+                                            </datePicker>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mTd-yb-bYR">
+                                                <rect key="frame" x="177.66666666666663" y="0.0" width="177.33333333333337" height="64"/>
+                                                <color key="backgroundColor" systemColor="tintColor"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Add">
+                                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="addExpensesButtonTapped:" destination="qhl-dq-C3D" eventType="touchUpInside" id="dTf-WD-0LP"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Message Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bF-mJ-0O0">
+                                        <rect key="frame" x="0.0" y="161.33333333333334" width="355" height="0.0"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                        <color key="textColor" systemColor="systemRedColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="v0D-95-quP">
+                                        <rect key="frame" x="0.0" y="161.33333333333337" width="355" height="413"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="qhl-dq-C3D" id="WgO-zq-syd"/>
+                                            <outlet property="delegate" destination="qhl-dq-C3D" id="W7v-8u-LpH"/>
+                                        </connections>
+                                    </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdh-QF-7IG">
+                                        <rect key="frame" x="0.0" y="574.33333333333337" width="355" height="63.666666666666629"/>
+                                        <color key="backgroundColor" systemColor="tintColor"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Save Expenses">
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="saveExpensesButtonTapped:" destination="qhl-dq-C3D" eventType="touchUpInside" id="dPH-ld-IAL"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Rpb-gO-Ok6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="Rpb-gO-Ok6" firstAttribute="bottom" secondItem="pfi-ow-Y7z" secondAttribute="bottom" id="2AR-9a-acF"/>
+                            <constraint firstItem="pfi-ow-Y7z" firstAttribute="leading" secondItem="Rpb-gO-Ok6" secondAttribute="leading" constant="10" id="74p-P0-Ex9"/>
+                            <constraint firstItem="Rpb-gO-Ok6" firstAttribute="trailing" secondItem="pfi-ow-Y7z" secondAttribute="trailing" constant="10" id="KOm-rv-gP4"/>
+                            <constraint firstItem="zdh-QF-7IG" firstAttribute="height" secondItem="Rpb-gO-Ok6" secondAttribute="height" multiplier="0.1" id="MN1-1Y-Luv"/>
+                            <constraint firstItem="mTd-yb-bYR" firstAttribute="height" secondItem="Rpb-gO-Ok6" secondAttribute="height" multiplier="0.1" id="Z8A-71-5nz"/>
+                            <constraint firstItem="pfi-ow-Y7z" firstAttribute="top" secondItem="Rpb-gO-Ok6" secondAttribute="top" id="c09-uP-qr6"/>
+                            <constraint firstItem="hxf-Dk-V8Z" firstAttribute="height" secondItem="Rpb-gO-Ok6" secondAttribute="height" multiplier="0.1" id="gn5-9F-qy8"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="jH6-uZ-Gua" appends="YES" id="exk-FV-Tz0"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="fGN-xn-7wg"/>
+                    <connections>
+                        <outlet property="addExpenseButton" destination="mTd-yb-bYR" id="UpF-e7-VK6"/>
+                        <outlet property="amountTextField" destination="bfe-mA-yC0" id="4xe-hj-Rf7"/>
+                        <outlet property="errorMessageLabel" destination="6bF-mJ-0O0" id="oDW-7i-1Eb"/>
+                        <outlet property="expenseDatePicker" destination="m5T-AM-2ph" id="bUH-ZA-sXk"/>
+                        <outlet property="expenseTextField" destination="hxf-Dk-V8Z" id="2zT-O3-8R3"/>
+                        <outlet property="expensesTableView" destination="v0D-95-quP" id="bOS-TT-Lkg"/>
+                        <outlet property="saveExpensesButton" destination="zdh-QF-7IG" id="1DU-sE-nhA"/>
+                        <outlet property="totalLabel" destination="vvw-1M-1cR" id="U1Z-WG-rXf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TZi-2M-tCg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="jH6-uZ-Gua">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="qhl-dq-C3D" id="WSJ-Fc-cPs"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="6089" y="1535"/>
+            <point key="canvasLocation" x="5102" y="797"/>
         </scene>
         <!--Item-->
         <scene sceneID="rkP-yE-efR">
@@ -217,7 +328,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="kq6-gb-y2S">
-                                <rect key="frame" x="10" y="101" width="355" height="515"/>
+                                <rect key="frame" x="10" y="100.99999999999997" width="355" height="425.33333333333326"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4ht-ak-ffe">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="80"/>
@@ -254,17 +365,14 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Tmp-IU-doA">
-                                        <rect key="frame" x="0.0" y="160" width="355" height="355"/>
+                                        <rect key="frame" x="0.0" y="159.99999999999997" width="355" height="265.33333333333326"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yAL-PJ-PQA">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="172.66666666666666"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="127.66666666666667"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gbx-Pe-XXL">
-                                                        <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="172.66666666666666"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="127.66666666666667"/>
                                                         <color key="backgroundColor" systemColor="tintColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="Gbx-Pe-XXL" secondAttribute="height" id="iJ3-k2-LYn"/>
-                                                        </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="Journey">
                                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
@@ -275,13 +383,10 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wZ1-mP-xYz">
-                                                        <rect key="frame" x="182.66666666666663" y="0.0" width="172.33333333333337" height="172.66666666666666"/>
+                                                        <rect key="frame" x="182.66666666666663" y="0.0" width="172.33333333333337" height="127.66666666666667"/>
                                                         <color key="backgroundColor" systemColor="tintColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="wZ1-mP-xYz" secondAttribute="height" multiplier="1:1" id="N7c-sN-Sgg"/>
-                                                        </constraints>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="Money Spent">
+                                                        <buttonConfiguration key="configuration" style="plain" title="Expenses">
                                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
                                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </buttonConfiguration>
@@ -292,14 +397,11 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kcI-oA-M2P">
-                                                <rect key="frame" x="0.0" y="182.66666666666669" width="355" height="172.33333333333331"/>
+                                                <rect key="frame" x="0.0" y="137.66666666666669" width="355" height="127.66666666666669"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psK-eV-zyg">
-                                                        <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="172.33333333333334"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="355" height="127.66666666666667"/>
                                                         <color key="backgroundColor" systemColor="tintColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="psK-eV-zyg" secondAttribute="height" multiplier="1:1" id="La8-4x-Gnh"/>
-                                                        </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="To Do List">
                                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
@@ -307,22 +409,6 @@
                                                         </buttonConfiguration>
                                                         <connections>
                                                             <action selector="toDoListButtonTapped:" destination="Ktz-LG-Qti" eventType="touchUpInside" id="Tsq-ql-LEJ"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wFK-OO-pLZ">
-                                                        <rect key="frame" x="182.66666666666663" y="0.0" width="172.33333333333337" height="172.33333333333334"/>
-                                                        <color key="backgroundColor" systemColor="tintColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="wFK-OO-pLZ" secondAttribute="height" id="T0N-gh-bUx"/>
-                                                        </constraints>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" title="Ticket(s)">
-                                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle2"/>
-                                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </buttonConfiguration>
-                                                        <connections>
-                                                            <action selector="ticketsButtonTapped:" destination="Ktz-LG-Qti" eventType="touchUpInside" id="Jjs-6f-bfy"/>
-                                                            <segue destination="qhl-dq-C3D" kind="show" id="DyE-4H-PIT"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -336,8 +422,10 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="kq6-gb-y2S" secondAttribute="trailing" constant="10" id="0zF-C1-bN0"/>
+                            <constraint firstItem="psK-eV-zyg" firstAttribute="height" secondItem="a9D-Kj-ApO" secondAttribute="height" multiplier="0.2" id="5by-1i-oDF"/>
                             <constraint firstItem="kq6-gb-y2S" firstAttribute="top" secondItem="a9D-Kj-ApO" secondAttribute="top" constant="10" id="aXE-x7-nWI"/>
                             <constraint firstItem="kq6-gb-y2S" firstAttribute="leading" secondItem="JA1-oU-Acs" secondAttribute="leading" constant="10" id="nlf-Oh-MqD"/>
+                            <constraint firstItem="Gbx-Pe-XXL" firstAttribute="height" secondItem="a9D-Kj-ApO" secondAttribute="height" multiplier="0.2" id="vux-XB-nA9"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="eDu-l5-J5Z"/>
@@ -350,10 +438,10 @@
                         <outlet property="journeyButton" destination="Gbx-Pe-XXL" id="MZ5-zc-ePX"/>
                         <outlet property="moneySpentButton" destination="wZ1-mP-xYz" id="7LB-D6-hAM"/>
                         <outlet property="startDateLabel" destination="Rht-dE-FKX" id="7Ie-23-p9J"/>
-                        <outlet property="ticketsButton" destination="wFK-OO-pLZ" id="Z00-9s-n7g"/>
                         <outlet property="toDoListButton" destination="psK-eV-zyg" id="uBY-F5-nEz"/>
                         <segue destination="cg4-D8-dG3" kind="show" identifier="segueToTripJourneyVC" id="958-4J-3bI"/>
                         <segue destination="9DV-9x-YeN" kind="show" identifier="segueToToDoList" id="TQb-dN-zk9"/>
+                        <segue destination="qhl-dq-C3D" kind="show" identifier="segueToExpensesVC" id="jsQ-bO-px2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pOb-UL-TpA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

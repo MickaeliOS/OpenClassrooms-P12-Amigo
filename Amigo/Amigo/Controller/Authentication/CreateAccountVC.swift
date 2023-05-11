@@ -62,32 +62,19 @@ class CreateAccountVC: UIViewController {
     }
     
     private func createUserFlow() {
-        do {
-            try userCreationService.emptyFieldsFormControl(email: emailTextField.text,
-                                                               password: passwordTextField.text,
-                                                               confirmPassword: confirmPasswordTextField.text,
-                                                               lastname: lastnameTextField.text,
-                                                               firstname: firstnameTextField.text,
-                                                               gender: genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex))
-            
-            try userCreationService.checkingLogs(email: emailTextField.text!,
-                                                 password: passwordTextField.text!,
-                                                 confirmPassword: confirmPasswordTextField.text!)
-            
-        } catch let error as Errors.CommonError {
-            errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
-            return
-        }
-        catch let error as Errors.CreateAccountError {
-            errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
-            return
-        } catch {
-            presentErrorAlert(with: Errors.CommonError.defaultError.localizedDescription)
-            return
-        }
-        
         Task {
             do {
+                try userCreationService.emptyFieldsFormControl(email: emailTextField.text,
+                                                                   password: passwordTextField.text,
+                                                                   confirmPassword: confirmPasswordTextField.text,
+                                                                   lastname: lastnameTextField.text,
+                                                                   firstname: firstnameTextField.text,
+                                                                   gender: genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex))
+                
+                try userCreationService.checkingLogs(email: emailTextField.text!,
+                                                     password: passwordTextField.text!,
+                                                     confirmPassword: confirmPasswordTextField.text!)
+                
                 let firebaseUser = try await userCreationService.createUser(email: emailTextField.text!, password: passwordTextField.text!)
                 
                 // Creating our User object to save it in Firestore.

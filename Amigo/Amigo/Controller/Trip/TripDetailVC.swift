@@ -37,15 +37,13 @@ class TripDetailVC: UIViewController {
     }
     
     @IBAction func moneySpentButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: Constant.SegueID.segueToExpensesVC, sender: trip)
     }
     
     @IBAction func toDoListButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: Constant.SegueID.segueToToDoList, sender: trip)
     }
-    
-    @IBAction func ticketsButtonTapped(_ sender: Any) {
-    }
-    
+
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
         guard let trip = trip else { return }
@@ -59,16 +57,23 @@ class TripDetailVC: UIViewController {
 // MARK: - EXTENSIONS
 extension TripDetailVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let trip = sender as? Trip
+
         switch segue.identifier {
+            
         case Constant.SegueID.segueToTripJourneyVC:
             let tripJourneyVC = segue.destination as? JourneyVC
-            let trip = sender as? Trip
             tripJourneyVC?.trip = trip
+            
         case Constant.SegueID.segueToToDoList:
             let toDoListVC = segue.destination as? ToDoListVC
-            let trip = sender as? Trip
             toDoListVC?.trip = trip
             toDoListVC?.delegate = self
+            
+        case Constant.SegueID.segueToExpensesVC:
+            let expensesVC = segue.destination as? ExpensesVC
+            expensesVC?.trip = trip
+            expensesVC?.delegate = self
         default:
             return
         }
@@ -77,6 +82,12 @@ extension TripDetailVC {
 
 extension TripDetailVC: ToDoListVCDelegate {
     func getTripFromToDoListVC(trip: Trip) {
+        self.trip = trip
+    }
+}
+
+extension TripDetailVC: ExpensesVCDelegate {
+    func getTripFromExpensesVC(trip: Trip) {
         self.trip = trip
     }
 }

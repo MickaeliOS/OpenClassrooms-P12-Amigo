@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct Trip: Codable, Equatable {
+struct Trip: Codable {
     @DocumentID var tripID: String?
     var userID: String
     var startDate: Date
@@ -16,5 +16,6 @@ struct Trip: Codable, Equatable {
     var country: String
     var countryCode: String
     var toDoList: [String]?
+    var expenses: [Expense]?
     //var journey: [Location]?
 }

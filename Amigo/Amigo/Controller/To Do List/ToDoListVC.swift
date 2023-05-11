@@ -145,7 +145,7 @@ extension ToDoListVC: UICollectionViewDelegateFlowLayout {
 
 extension ToDoListVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        toDoLabel.resignFirstResponder()
+        textField.resignFirstResponder()
         return true
     }
     
