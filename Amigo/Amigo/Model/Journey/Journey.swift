@@ -15,3 +15,11 @@ struct Journey: Codable {
     // in order to prevent decoding errors from Firestore, we have marked the location property as optional.
     var locations: [Location]?
 }
+
+struct Location: Equatable, Codable {
+    var address: String
+    var postalCode: String
+    var city: String
+    var startDate: Date
+    var endDate: Date
+}

@@ -54,11 +54,12 @@ class TripDetailVC: UIViewController {
     }
 }
 
-// MARK: - EXTENSIONS
+// MARK: - EXTENSIONS & PROTOCOLS
 extension TripDetailVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let trip = sender as? Trip
 
+        // Before accessing any of the available features, it is necessary to pass the relevant Trip object.
         switch segue.identifier {
             
         case Constant.SegueID.segueToTripJourneyVC:

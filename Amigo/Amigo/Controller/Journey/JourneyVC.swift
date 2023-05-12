@@ -74,6 +74,8 @@ class JourneyVC: UIViewController {
                 return
             }
             
+            // I am implementing this because if the Trip does not have a journey, and journey is equal to nil,
+            // the user won't be able to add locations to the trip's journey from the CreateJourneyVC.
             self?.journey = Journey()
         }
     }

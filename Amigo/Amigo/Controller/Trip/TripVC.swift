@@ -170,6 +170,8 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
 
 extension TripVC: TripDetailVCDelegate {
     func refreshTrip() {
+        // In the rare case where the trip has been deleted by an external actor,
+        // we re-fetch them to have the latest ones.
         Task {
             await fetchUserTrips()
             noTripLabel.isHidden = isUserTripsEmpty()

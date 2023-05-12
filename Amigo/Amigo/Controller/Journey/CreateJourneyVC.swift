@@ -45,6 +45,9 @@ class CreateJourneyVC: UIViewController {
     }
     
     private func setupInterface() {
+        journeySearchBar.becomeFirstResponder()
+        addJourneyButton.layer.cornerRadius = 10
+        
         guard let trip = trip else { return }
         
         // We restrict the date range within the scope of the trip.
@@ -52,9 +55,6 @@ class CreateJourneyVC: UIViewController {
         startDatePicker.maximumDate = trip.endDate
         endDatePicker.minimumDate = trip.startDate
         endDatePicker.maximumDate = trip.endDate
-        
-        journeySearchBar.becomeFirstResponder()
-        addJourneyButton.layer.cornerRadius = 10
     }
     
     private func setupMapKitAutocompletion() {

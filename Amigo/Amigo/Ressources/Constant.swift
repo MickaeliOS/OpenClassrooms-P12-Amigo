@@ -76,13 +76,20 @@ struct Constant {
             static let country = "country"
             static let countryCode = "countryCode"
             static let toDoList = "toDoList"
-            static let expenses = "expenses"
         }
         
         struct Journey {
             static let tableName = "Journey"
 
             static let locations = "locations"
+        }
+        
+        struct Expense {
+            static let tableName = "Expense"
+            
+            static let title = "title"
+            static let amount = "amount"
+            static let date = "date"
         }
     }
 }

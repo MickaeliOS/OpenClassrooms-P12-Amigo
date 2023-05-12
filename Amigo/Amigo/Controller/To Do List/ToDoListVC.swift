@@ -90,7 +90,6 @@ class ToDoListVC: UIViewController {
                     navigationController?.popViewController(animated: true)
                 }
                 
-
             } catch let error as Errors.DatabaseError {
                 presentErrorAlert(with: error.localizedDescription)
             }

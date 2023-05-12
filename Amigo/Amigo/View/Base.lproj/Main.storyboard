@@ -248,7 +248,7 @@
                                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </buttonConfiguration>
                                                 <connections>
-                                                    <action selector="addExpensesButtonTapped:" destination="qhl-dq-C3D" eventType="touchUpInside" id="dTf-WD-0LP"/>
+                                                    <action selector="addExpenseItemButtonTapped:" destination="qhl-dq-C3D" eventType="touchUpInside" id="JpC-oF-8gw"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -300,7 +300,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="fGN-xn-7wg"/>
                     <connections>
-                        <outlet property="addExpenseButton" destination="mTd-yb-bYR" id="UpF-e7-VK6"/>
+                        <outlet property="addExpenseItemButton" destination="mTd-yb-bYR" id="pBv-K3-fcm"/>
                         <outlet property="amountTextField" destination="bfe-mA-yC0" id="4xe-hj-Rf7"/>
                         <outlet property="errorMessageLabel" destination="6bF-mJ-0O0" id="oDW-7i-1Eb"/>
                         <outlet property="expenseDatePicker" destination="m5T-AM-2ph" id="bUH-ZA-sXk"/>
