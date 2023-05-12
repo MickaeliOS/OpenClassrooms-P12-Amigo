@@ -29,6 +29,10 @@ class CreateAccountVC: UIViewController {
     private var isPasswordVisible = false
     
     // MARK: - ACTIONS
+    @IBAction func closeButtonTapped(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
     @IBAction func createAccountButtonTapped(_ sender: Any) {
         createUserFlow()
     }
