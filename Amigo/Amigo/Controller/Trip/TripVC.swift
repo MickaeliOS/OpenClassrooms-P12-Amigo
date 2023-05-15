@@ -26,6 +26,9 @@ class TripVC: UIViewController {
     private let userFetchingService = UserFetchingService()
     private let tripFetchingService = TripFetchingService()
     private let tripDeletionService = TripDeletionService()
+    private let journeyDeletionService = JourneyDeletionService()
+    private let expenseDeletionService = ExpenseDeletionService()
+
     
     // MARK: - ACTIONS
     @IBAction func unwindToRootVC(segue: UIStoryboardSegue) {
@@ -145,23 +148,28 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
-            Task {
-                do {
-                    guard let tripID = userAuth.user?.trips?[indexPath.row].tripID else {
-                        presentErrorAlert(with: Errors.DatabaseError.noTripID.localizedDescription)
-                        return
+            presentDestructiveAlert(with: "Are you sure you want to delete your Trip ?") {
+                Task {
+                    do {
+                        guard let tripID = self.userAuth.user?.trips?[indexPath.row].tripID else {
+                            self.presentErrorAlert(with: Errors.DatabaseError.noTripID.localizedDescription)
+                            return
+                        }
+                        
+                        // Always remove the data first
+                        try await self.tripDeletionService.deleteTrip(tripID: tripID)
+                        try await self.journeyDeletionService.deleteJourney(tripID: tripID)
+                        try await self.expenseDeletionService.deleteExpense(tripID: tripID)
+
+                        self.userAuth.user?.trips?.remove(at: indexPath.row)
+                        
+                        // Then, the cell
+                        tableView.deleteRows(at: [indexPath], with: .automatic)
+                        
+                        self.noTripLabel.isHidden = self.isUserTripsEmpty()
+                    } catch let error as Errors.DatabaseError {
+                        self.presentErrorAlert(with: error.localizedDescription)
                     }
-                    
-                    // Always remove the data first
-                    try await tripDeletionService.deleteTrip(tripID: tripID)
-                    userAuth.user?.trips?.remove(at: indexPath.row)
-                    
-                    // Then, the cell
-                    tableView.deleteRows(at: [indexPath], with: .automatic)
-                    
-                    noTripLabel.isHidden = isUserTripsEmpty()
-                } catch let error as Errors.DatabaseError {
-                    presentErrorAlert(with: error.localizedDescription)
                 }
             }
         }

@@ -53,7 +53,6 @@ struct Errors {
     enum DatabaseError: Error {
         case noUser
         case cannotGetDocuments
-        case cannotUploadPicture
         case cannotUploadDocuments
         case cannotGetPicture
         case cannotSaveUser
@@ -67,8 +66,6 @@ struct Errors {
                 return "Unfortunately, we were unable to retrieve your information due to a disconnection. Please log in again."
             case .cannotGetDocuments:
                 return "We couldn't retrieve your document(s), please try to log in again."
-            case .cannotUploadPicture:
-                return "We couldn't upload your picture, please try with another one."
             case .cannotUploadDocuments:
                 return "We couldn't upload your document(s), please try again."
             case .cannotGetPicture:

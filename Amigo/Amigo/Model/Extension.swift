@@ -31,14 +31,41 @@ extension UIViewController {
         let action = UIAlertAction(title: "OK", style: .cancel) { action in
             completion()
         }
+        
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
     
-    func presentAlert(with message: String) {
+    func presentInformationAlert(with message: String) {
         let alert: UIAlertController = UIAlertController(title: "Information", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func presentInformationAlert(with message: String, completion: @escaping () -> Void) {
+        let alert: UIAlertController = UIAlertController(title: "Information", message: message, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .cancel) { action in
+            completion()
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func presentDestructiveAlert(with message: String, completion: @escaping () -> Void) {
+        let alert: UIAlertController = UIAlertController(title: "Attention", message: message, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .destructive) { action in
+            completion()
+        }
+       
+        alert.addAction(action)
+        
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelButton)
+
         present(alert, animated: true, completion: nil)
     }
 }

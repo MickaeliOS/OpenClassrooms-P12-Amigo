@@ -28,8 +28,8 @@ class ExpensesVC: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     
     var trip: Trip?
-    private var expenses: Expense?
     weak var delegate: ExpensesVCDelegate?
+    private var expenses: Expense?
     private var userAuth = UserAuth.shared
     private let expenseFetchingService = ExpenseFetchingService()
     private let expenseUpdateService = ExpenseUpdateService()
@@ -46,7 +46,9 @@ class ExpensesVC: UIViewController {
     
         do {
             try expenseUpdateService.updateExpense(expenses: expenses, for: tripID)
-            navigationController?.popViewController(animated: true)
+            presentInformationAlert(with: "Your expenses has been saved.") {
+                self.navigationController?.popViewController(animated: true)
+            }
             
         } catch let error as Errors.DatabaseError {
             presentErrorAlert(with: error.localizedDescription)
@@ -83,15 +85,15 @@ class ExpensesVC: UIViewController {
         }
         
         let expenseItem = ExpenseItem(title: expenseTextField.text!, amount: amount, date: expenseDatePicker.date)
-        
+
         if expenses?.expenseItems == nil {
-            var expenseItems = [ExpenseItem]()
-            expenseItems.append(expenseItem)
-            expenses?.expenseItems = expenseItems
+            expenses?.expenseItems = [expenseItem]
         } else {
             expenses?.expenseItems?.append(expenseItem)
         }
-        
+
+        refreshTotalAmount()
+        clearTextFields()
         expensesTableView.reloadData()
     }
 
@@ -111,6 +113,7 @@ class ExpensesVC: UIViewController {
                 
                 // Since we have the journey data available, we can display it in the TableView.
                 self?.expenses = expenses
+                self?.refreshTotalAmount()
                 self?.expensesTableView.reloadData()
                 return
             }
@@ -119,6 +122,19 @@ class ExpensesVC: UIViewController {
             // the user won't be able to add expenseItems.
             self?.expenses = Expense()
         }
+    }
+    
+    private func refreshTotalAmount() {
+        guard let expenses = expenses, let expenseItems = expenses.expenseItems else {
+            return
+        }
+        
+        totalLabel.text = "Total: \(ExpenseManagement.getTotalAmount(expenses: expenseItems))"
+    }
+    
+    private func clearTextFields() {
+        expenseTextField.text = ""
+        amountTextField.text = ""
     }
 }
 
@@ -148,6 +164,7 @@ extension ExpensesVC: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             expenses?.expenseItems?.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            refreshTotalAmount()
         }
     }
     
@@ -160,6 +177,10 @@ extension ExpensesVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        errorMessageLabel.isHidden = true
     }
 }
 

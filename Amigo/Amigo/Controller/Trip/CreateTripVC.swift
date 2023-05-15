@@ -40,6 +40,14 @@ class CreateTripVC: UIViewController {
         performSegue(withIdentifier: Constant.SegueID.segueToCountryPickerVC, sender: nil)
     }
     
+    @IBAction func startDateTapped(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
+    @IBAction func endDateTapped(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
         addTripButton.layer.cornerRadius = 10
@@ -91,6 +99,12 @@ class CreateTripVC: UIViewController {
         // We make sure that we have a destination.
         guard let countryInformations = countryInformations else {
             errorMessageLabel.displayErrorMessage(message: "Please select a destination.")
+            return nil
+        }
+        
+        // startDate should be < to endDate
+        guard startDatePicker.date <= endDatePicker.date else {
+            errorMessageLabel.displayErrorMessage(message: "Please select a correct interval of dates.")
             return nil
         }
         

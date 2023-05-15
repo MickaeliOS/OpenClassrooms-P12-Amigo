@@ -21,6 +21,8 @@ class ToDoListVC: UIViewController {
     @IBOutlet weak var toDoCollectionView: UICollectionView!
     @IBOutlet weak var saveToDoListButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
+    @IBOutlet weak var noListLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var trip: Trip?
     weak var delegate: ToDoListVCDelegate?
@@ -42,6 +44,8 @@ class ToDoListVC: UIViewController {
     
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
+        showNoListLabelIfNil()
+        
         addToDoItemButton.layer.cornerRadius = 10
         saveToDoListButton.layer.cornerRadius = 10
         toDoLabel.becomeFirstResponder()
@@ -67,6 +71,7 @@ class ToDoListVC: UIViewController {
         }
         
         toDoLabel.text = ""
+        noListLabel.isHidden = true
         toDoCollectionView.reloadData()
     }
     
@@ -74,6 +79,8 @@ class ToDoListVC: UIViewController {
         guard let tripID = trip?.tripID, let toDoList = trip?.toDoList else {
             return
         }
+        
+        toggleActivityIndicator(shown: true)
         
         Task {
             do {
@@ -87,11 +94,17 @@ class ToDoListVC: UIViewController {
                     
                     // Third step -> It's also essential to update the trip variable and propagate the changes to the TripDetailVC, to maintain synchronization across all data points.
                     sendTripToPresentingController()
-                    navigationController?.popViewController(animated: true)
+                    
+                    toggleActivityIndicator(shown: false)
+                    
+                    presentInformationAlert(with: "Your list has been saved.") {
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }
                 
             } catch let error as Errors.DatabaseError {
                 presentErrorAlert(with: error.localizedDescription)
+                toggleActivityIndicator(shown: false)
             }
         }
     }
@@ -101,6 +114,19 @@ class ToDoListVC: UIViewController {
         
         // We need to communicate eventuals changes.
         delegate?.getTripFromToDoListVC(trip: trip)
+    }
+    
+    private func showNoListLabelIfNil() {
+        if trip?.toDoList == nil || trip?.toDoList?.isEmpty == true {
+            noListLabel.isHidden = false
+        }
+    }
+    
+    private func toggleActivityIndicator(shown: Bool) {
+        // If shown is true, then the refresh button is hidden and we display the Activity Indicator
+        // If not, we hide the Activity Indicator and show the refresh button
+        saveToDoListButton.isHidden = shown
+        activityIndicator.isHidden = !shown
     }
 }
 
@@ -123,6 +149,7 @@ extension ToDoListVC: UICollectionViewDelegate, UICollectionViewDataSource {
             if let indexPath = collectionView.indexPath(for: cell) {
                 self.trip?.toDoList?.remove(at: indexPath.row)
                 collectionView.deleteItems(at: [indexPath])
+                self.showNoListLabelIfNil()
             }
         }
         

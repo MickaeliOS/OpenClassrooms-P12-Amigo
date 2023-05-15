@@ -44,10 +44,7 @@ final class UserCreationService {
             throw Errors.DatabaseError.noUser
         }
         
-        let userData = [userTableConstants.firstname: user.firstname,
-                        userTableConstants.lastname: user.lastname,
-                        userTableConstants.gender: user.gender.rawValue,
-                        userTableConstants.email: user.email]
+        let userData = [userTableConstants.email: user.email]
         
         do {
             try await firestoreDatabase.collection(userTableConstants.tableName).document(currentUserID).setData(userData)
@@ -56,15 +53,10 @@ final class UserCreationService {
         }
     }
     
-    func emptyFieldsFormControl(email: String?,
-                                    password: String?,
-                                    confirmPassword: String?,
-                                    lastname: String?,
-                                    firstname: String?,
-                                    gender: String?) throws {
+    func emptyFieldsFormControl(email: String?, password: String?, confirmPassword: String?) throws {
         
         // Empty control.
-        guard String.emptyControl(fields: [email, password, confirmPassword, lastname, firstname, gender]) else {
+        guard String.emptyControl(fields: [email, password, confirmPassword]) else {
             throw Errors.CommonError.emptyFields
         }
     }

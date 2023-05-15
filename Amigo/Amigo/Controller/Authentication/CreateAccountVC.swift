@@ -16,9 +16,6 @@ class CreateAccountVC: UIViewController {
     }
     
     // MARK: - OUTLETS & PROPERTIES
-    @IBOutlet weak var lastnameTextField: UITextField!
-    @IBOutlet weak var firstnameTextField: UITextField!
-    @IBOutlet weak var genderSegmentedControl: UISegmentedControl!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
@@ -38,8 +35,6 @@ class CreateAccountVC: UIViewController {
     }
     
     @IBAction func dismissKeyboard(_ sender: Any) {
-        lastnameTextField.resignFirstResponder()
-        firstnameTextField.resignFirstResponder()
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         confirmPasswordTextField.resignFirstResponder()
@@ -52,13 +47,10 @@ class CreateAccountVC: UIViewController {
     }
     
     private func setupTextFields() {
-        guard let personImage = UIImage(systemName: "person.fill"),
-              let envelopeImage = UIImage(systemName: "envelope.fill"),
+        guard let envelopeImage = UIImage(systemName: "envelope.fill"),
               let passwordLockImage = UIImage(systemName: "lock.fill") else { return }
         
         // We incorporated small icons within our TextFields to enhance the overall design aesthetics.
-        lastnameTextField.addLeftSystemImage(image: personImage)
-        firstnameTextField.addLeftSystemImage(image: personImage)
         emailTextField.addLeftSystemImage(image: envelopeImage)
         passwordTextField.addLeftSystemImage(image: passwordLockImage)
         confirmPasswordTextField.addLeftSystemImage(image: passwordLockImage)
@@ -69,11 +61,8 @@ class CreateAccountVC: UIViewController {
         Task {
             do {
                 try userCreationService.emptyFieldsFormControl(email: emailTextField.text,
-                                                                   password: passwordTextField.text,
-                                                                   confirmPassword: confirmPasswordTextField.text,
-                                                                   lastname: lastnameTextField.text,
-                                                                   firstname: firstnameTextField.text,
-                                                                   gender: genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex))
+                                                               password: passwordTextField.text,
+                                                               confirmPassword: confirmPasswordTextField.text)
                 
                 try userCreationService.checkingLogs(email: emailTextField.text!,
                                                      password: passwordTextField.text!,
@@ -81,14 +70,7 @@ class CreateAccountVC: UIViewController {
                 
                 let firebaseUser = try await userCreationService.createUser(email: emailTextField.text!, password: passwordTextField.text!)
                 
-                // Creating our User object to save it in Firestore.
-                let genderRawValue = genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex)
-                let gender = User.Gender(rawValue: genderRawValue ?? User.Gender.man.rawValue)
-                
-                let user = User(firstname: firstnameTextField.text!,
-                                lastname: lastnameTextField.text!,
-                                gender: gender!,
-                                email: firebaseUser.email!)
+                let user = User(email: firebaseUser.email!)
                 
                 try await userCreationService.saveUserInDatabase(user: user)
                 

@@ -28,6 +28,7 @@ class CreateJourneyVC: UIViewController {
     @IBOutlet weak var journeySearchBar: UISearchBar!
     @IBOutlet weak var journeyTableView: UITableView!
     @IBOutlet weak var addJourneyButton: UIButton!
+    @IBOutlet weak var errorMessageLabel: UILabel!
     
     var trip: Trip?
     var journey: Journey?
@@ -59,10 +60,21 @@ class CreateJourneyVC: UIViewController {
     
     private func setupMapKitAutocompletion() {
         searchCompleter.delegate = self
+        searchCompleter.resultTypes = [.address, .pointOfInterest]
     }
     
     private func saveJourney() {
-        guard let completeAddress = journeySearchBar.text else { return }
+        guard let completeAddress = journeySearchBar.text, !completeAddress.isEmpty else {
+            errorMessageLabel.isHidden = false
+            errorMessageLabel.displayErrorMessage(message: "Please choose at least one destination.")
+            return
+        }
+        
+        guard startDatePicker.date <= endDatePicker.date else {
+            errorMessageLabel.isHidden = false
+            errorMessageLabel.displayErrorMessage(message: "Please select a correct interval of dates.")
+            return
+        }
         
         MKLocalSearch.getPartsFromAddress(address: completeAddress) { [weak self] result, error in
             guard error == nil, let result = result else {
@@ -85,9 +97,9 @@ class CreateJourneyVC: UIViewController {
             
             // We empty our interface.
             self?.journeySearchBar.text = ""
+            self?.errorMessageLabel.isHidden = true
             self?.journeySearchBar.placeholder = "Another one ?"
-            self?.searchResults.removeAll()
-            self?.journeyTableView.reloadData()
+            self?.emptyTableView()
         }
     }
     
@@ -98,6 +110,11 @@ class CreateJourneyVC: UIViewController {
             self.journey = journey
         }
         performSegue(withIdentifier: Constant.SegueID.unwindToTripJourneyVC, sender: journey)
+    }
+    
+    private func emptyTableView() {
+        searchResults.removeAll()
+        journeyTableView.reloadData()
     }
 }
 
@@ -151,6 +168,13 @@ extension CreateJourneyVC: UITableViewDelegate, UITableViewDataSource {
 
 extension CreateJourneyVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            emptyTableView()
+            return
+        }
+        
+        errorMessageLabel.isHidden = true
+
         // We put searchText (our String we need completion for) inside queryFragment for completion.
         searchCompleter.queryFragment = searchText
     }

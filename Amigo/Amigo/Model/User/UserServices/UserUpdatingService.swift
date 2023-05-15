@@ -20,34 +20,14 @@ class UserUpdatingService {
     // MARK: - FUNCTIONS
     func updateUser(fields: [String:Any]) async throws {
         guard let currentUserID = UserAuth.shared.currentUser?.uid else {
-            throw Errors.CommonError.noUser
+            throw Errors.DatabaseError.noUser
         }
         
         do {
             try await firestoreDatabase.collection(userTableConstants.tableName).document(currentUserID).updateData(fields)
 
         } catch {
-            throw Errors.CommonError.defaultError
+            throw Errors.DatabaseError.cannotUploadDocuments
         }
-    }
-    
-    func changedProperties(from currentUser: User, to changedUser: User) -> [String: Any] {
-        // We don't compare the pictures because it's impossible, you'll have to use a
-        // Bool to control if pictures changed inside wherever you are.
-        var modifiedProperties: [String: Any] = [:]
-        
-        if currentUser.firstname != changedUser.firstname {
-            modifiedProperties[Constant.FirestoreTables.User.firstname] = changedUser.firstname
-        }
-        
-        if currentUser.lastname != changedUser.lastname {
-            modifiedProperties[Constant.FirestoreTables.User.lastname] = changedUser.lastname
-        }
-        
-        if currentUser.gender != changedUser.gender {
-            modifiedProperties[Constant.FirestoreTables.User.gender] = changedUser.gender.rawValue
-        }
-        
-        return modifiedProperties
     }
 }

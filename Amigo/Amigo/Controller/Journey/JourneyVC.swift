@@ -21,6 +21,7 @@ class JourneyVC: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var journeyTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var noJourneyLabel: UILabel!
     
     var trip: Trip?
     var journey: Journey?
@@ -56,14 +57,14 @@ class JourneyVC: UIViewController {
         activityIndicator.isHidden = false
         
         journeyFetchingService.fetchTripJourney(tripID: tripID) { [weak self] journey, error in
-            self?.activityIndicator.isHidden = true
-            
             if let error = error {
+                self?.noJourneyLabel.isHidden = false
+                self?.activityIndicator.isHidden = true
                 self?.presentErrorAlert(with: error.localizedDescription)
                 return
             }
             
-            if var journey = journey, let locations = journey.locations {
+            if var journey = journey, let locations = journey.locations, !locations.isEmpty {
                 // I am sorting the dates in ascending order, from the oldest to the newest.
                 let dateOrderedJourney = LocationManagement.sortLocationsByDateAscending(locations: locations)
                 journey.locations = dateOrderedJourney
@@ -71,12 +72,14 @@ class JourneyVC: UIViewController {
                 // Since we have the journey data available, we can display it in the TableView.
                 self?.journey = journey
                 self?.journeyTableView.reloadData()
-                return
+            } else {
+                // I am implementing this because if the Trip does not have a journey, and journey is equal to nil,
+                // the user won't be able to add locations to the trip's journey from the CreateJourneyVC.
+                self?.journey = Journey()
+                self?.noJourneyLabel.isHidden = false
             }
             
-            // I am implementing this because if the Trip does not have a journey, and journey is equal to nil,
-            // the user won't be able to add locations to the trip's journey from the CreateJourneyVC.
-            self?.journey = Journey()
+            self?.activityIndicator.isHidden = true
         }
     }
     
@@ -85,7 +88,9 @@ class JourneyVC: UIViewController {
         
         do {
             try journeyUpdateService.updateJourney(journey: journey, for: tripID)
-            navigationController?.popViewController(animated: true)
+            presentInformationAlert(with: "Your journey has been saved.") {
+                self.navigationController?.popViewController(animated: true)
+            }
         } catch let error as Errors.DatabaseError {
             presentErrorAlert(with: error.localizedDescription)
         } catch {
@@ -131,6 +136,10 @@ extension JourneyVC: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             journey?.locations?.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            if let locations = journey?.locations, locations.isEmpty {
+                noJourneyLabel.isHidden = false
+            }
         }
     }
     
@@ -141,6 +150,11 @@ extension JourneyVC: UITableViewDelegate, UITableViewDataSource {
 
 extension JourneyVC: CreateJourneyVCDelegate {
     func refreshJourney() {
+        guard let locations = journey?.locations, !locations.isEmpty else {
+            noJourneyLabel.isHidden = false
+            return
+        }
+        noJourneyLabel.isHidden = true
         journeyTableView.reloadData()
     }
 }
