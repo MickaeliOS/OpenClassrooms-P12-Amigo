@@ -39,6 +39,8 @@ struct Constant {
         static let tripCell = "tripCell"
         
         // Country
+        static let countryNibName = "CountryTableViewCell"
+
         static let countryCell = "countryCell"
         
         // Journey

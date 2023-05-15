@@ -8,6 +8,13 @@
 import UIKit
 
 class ConfirmationTripVC: UIViewController {
+    
+    // MARK: - VIEW LIFE CYCLE
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupInterface()
+    }
+    
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var myListButton: UIButton!
     var trip: Trip?

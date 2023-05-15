@@ -24,9 +24,8 @@ class TripDetailVC: UIViewController {
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
     @IBOutlet weak var journeyButton: UIButton!
-    @IBOutlet weak var moneySpentButton: UIButton!
+    @IBOutlet weak var expensesButton: UIButton!
     @IBOutlet weak var toDoListButton: UIButton!
-    @IBOutlet weak var ticketsButton: UIButton!
     
     weak var delegate: TripDetailVCDelegate?
     var trip: Trip?
@@ -36,7 +35,7 @@ class TripDetailVC: UIViewController {
         performSegue(withIdentifier: Constant.SegueID.segueToTripJourneyVC, sender: trip)
     }
     
-    @IBAction func moneySpentButtonTapped(_ sender: Any) {
+    @IBAction func expensesButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: Constant.SegueID.segueToExpensesVC, sender: trip)
     }
     
@@ -48,9 +47,16 @@ class TripDetailVC: UIViewController {
     private func setupInterface() {
         guard let trip = trip else { return }
         
-        countryNameLabel.text = trip.country
+        // Labels
+        let countryFlag = String.countryFlag(countryCode: trip.countryCode)
+        countryNameLabel.text = countryFlag + " " + trip.country
         startDateLabel.text = trip.startDate.dateToString()
         endDateLabel.text = trip.endDate.dateToString()
+        
+        // Buttons
+        journeyButton.layer.cornerRadius = 10
+        expensesButton.layer.cornerRadius = 10
+        toDoListButton.layer.cornerRadius = 10
     }
 }
 

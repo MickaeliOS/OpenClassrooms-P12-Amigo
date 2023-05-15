@@ -62,6 +62,10 @@ class ExpensesVC: UIViewController {
         amountTextField.resignFirstResponder()
     }
     
+    @IBAction func expenseDatePickerTapped(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
         addExpenseItemButton.layer.cornerRadius = 10

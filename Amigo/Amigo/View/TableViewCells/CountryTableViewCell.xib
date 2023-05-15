@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="countryCell" rowHeight="182" id="S6l-wR-NkY" customClass="CountryTableViewCell" customModule="Amigo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="632" height="182"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="S6l-wR-NkY" id="20h-3U-ano">
+                <rect key="frame" x="0.0" y="0.0" width="632" height="182"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CountryFlag" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7No-eD-BrA">
+                        <rect key="frame" x="0.0" y="0.0" width="182" height="182"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="7No-eD-BrA" secondAttribute="height" id="QMS-En-9cA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CountryName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0Y-1b-GXF">
+                        <rect key="frame" x="182" y="11" width="430" height="160"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="G0Y-1b-GXF" secondAttribute="trailing" id="0AQ-BJ-QCB"/>
+                    <constraint firstItem="G0Y-1b-GXF" firstAttribute="top" secondItem="20h-3U-ano" secondAttribute="topMargin" id="A8B-I4-FQt"/>
+                    <constraint firstItem="G0Y-1b-GXF" firstAttribute="leading" secondItem="7No-eD-BrA" secondAttribute="trailing" id="LS4-io-DbC"/>
+                    <constraint firstAttribute="bottom" secondItem="7No-eD-BrA" secondAttribute="bottom" id="Ori-1M-yhu"/>
+                    <constraint firstItem="7No-eD-BrA" firstAttribute="leading" secondItem="20h-3U-ano" secondAttribute="leading" id="P1L-6R-fgN"/>
+                    <constraint firstItem="7No-eD-BrA" firstAttribute="height" secondItem="20h-3U-ano" secondAttribute="height" id="Pqj-rD-UvY"/>
+                    <constraint firstItem="7No-eD-BrA" firstAttribute="top" secondItem="20h-3U-ano" secondAttribute="top" id="W8C-76-5FN"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="G0Y-1b-GXF" secondAttribute="bottom" id="xxl-Gc-PxT"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="countryFlag" destination="7No-eD-BrA" id="GJR-gj-C43"/>
+                <outlet property="countryName" destination="G0Y-1b-GXF" id="ylt-bh-8oI"/>
+            </connections>
+            <point key="canvasLocation" x="293.12977099236639" y="98.591549295774655"/>
+        </tableViewCell>
+    </objects>
+</document>

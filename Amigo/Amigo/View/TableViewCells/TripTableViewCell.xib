@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina6_12" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,14 +23,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pzc-WZ-9uu">
                                 <rect key="frame" x="0.0" y="0.0" width="157" height="157"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OqH-wW-Z8v">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flag" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OqH-wW-Z8v">
                                         <rect key="frame" x="0.0" y="0.0" width="157" height="157"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="OqH-wW-Z8v" secondAttribute="trailing" id="3vi-41-VEE"/>
                                     <constraint firstAttribute="bottom" secondItem="OqH-wW-Z8v" secondAttribute="bottom" id="FOv-3B-wb6"/>
@@ -67,9 +67,10 @@
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowshape.turn.up.forward" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="aD7-1L-iLo">
                                         <rect key="frame" x="5" y="6.6666666666666572" width="68.333333333333329" height="144"/>
+                                        <color key="tintColor" name="UIElement1"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="aD7-1L-iLo" secondAttribute="bottom" constant="5" id="LJc-4F-UnV"/>
                                     <constraint firstAttribute="trailing" secondItem="aD7-1L-iLo" secondAttribute="trailing" constant="5" id="PjC-Yr-m9M"/>
@@ -85,6 +86,7 @@
                         </constraints>
                     </stackView>
                 </subviews>
+                <color key="backgroundColor" name="Background"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="ZCb-tc-KU9" secondAttribute="bottom" constant="5" id="AUZ-rM-eeb"/>
                     <constraint firstAttribute="trailing" secondItem="ZCb-tc-KU9" secondAttribute="trailing" constant="5" id="Qw4-Bd-uDp"/>
@@ -104,8 +106,11 @@
     </objects>
     <resources>
         <image name="arrowshape.turn.up.forward" catalog="system" width="128" height="104"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="Background">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="UIElement1">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

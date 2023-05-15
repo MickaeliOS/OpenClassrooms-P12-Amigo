@@ -12,6 +12,7 @@ class CountryPickerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         countrySearchBar.becomeFirstResponder()
+        setupCell()
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -25,6 +26,12 @@ class CountryPickerVC: UIViewController {
     // MARK: - ACTIONS
     @IBAction func closeButtonTapped(_ sender: Any) {
         dismiss(animated: true)
+    }
+    
+    // MARK: - FUNCTIONS
+    private func setupCell() {
+        self.countryTableView.register(UINib(nibName: Constant.TableViewCells.countryNibName, bundle: nil),
+                                    forCellReuseIdentifier: Constant.TableViewCells.countryCell)
     }
 }
 
@@ -52,8 +59,16 @@ extension CountryPickerVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Constant.TableViewCells.countryCell, for: indexPath)
-        cell.textLabel?.text = filteredCountryList[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constant.TableViewCells.countryCell, for: indexPath) as? CountryTableViewCell else {
+            return UITableViewCell()
+        }
+        
+        // Let's get the country's flag.
+        let countryCode = Locale.countryCode(forCountryName: filteredCountryList[indexPath.row])
+        let countryFlag = String.countryFlag(countryCode: countryCode ?? "N/A")
+        
+        // We will present the country name in conjunction with its corresponding national flag.
+        cell.configureCell(flag: countryFlag, country: filteredCountryList[indexPath.row])
         return cell
     }
     
