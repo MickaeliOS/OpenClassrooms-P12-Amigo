@@ -46,6 +46,15 @@ class CreateJourneyVC: UIViewController {
         dismiss(animated: true)
     }
     
+    @IBAction func startDatePickerTapped(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
+    @IBAction func endDatePickerTapped(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
+    // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
         journeySearchBar.becomeFirstResponder()
         addJourneyButton.layer.cornerRadius = 10
@@ -60,8 +69,14 @@ class CreateJourneyVC: UIViewController {
     }
     
     private func setupMapKitAutocompletion() {
+        guard let trip = trip else { return }
         searchCompleter.delegate = self
         searchCompleter.resultTypes = [.address, .pointOfInterest]
+
+        LocationManagement.filterLocationByRegion(region: trip.country, completion: { [weak self] region in
+            guard let region = region else { return }
+            self?.searchCompleter.region = region
+        })
     }
     
     private func saveJourney() {
@@ -102,6 +117,10 @@ class CreateJourneyVC: UIViewController {
             self?.journeySearchBar.placeholder = "Another one ?"
             self?.emptyTableView()
         }
+    }
+    
+    private func filterByRegion() {
+
     }
     
     private func prepareForRefreshJourney() {

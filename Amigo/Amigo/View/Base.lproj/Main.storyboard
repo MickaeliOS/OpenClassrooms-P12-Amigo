@@ -300,7 +300,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="213" height="63.666666666666664"/>
                                                 <color key="backgroundColor" name="Background"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="qhl-dq-C3D" id="vBZ-Dm-uTF"/>
                                                 </connections>
@@ -854,6 +854,9 @@
                                             </label>
                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="pmr-pY-Zn4">
                                                 <rect key="frame" x="88.666666666666686" y="0.0" width="89" height="106.33333333333333"/>
+                                                <connections>
+                                                    <action selector="startDatePickerTapped:" destination="OpC-KT-iJB" eventType="valueChanged" id="rg9-yh-8gA"/>
+                                                </connections>
                                             </datePicker>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b7s-NJ-FM3">
                                                 <rect key="frame" x="177.66666666666666" y="0.0" width="88.666666666666657" height="106.33333333333333"/>
@@ -863,6 +866,9 @@
                                             </label>
                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="XhA-PA-yvZ">
                                                 <rect key="frame" x="266.33333333333331" y="0.0" width="88.666666666666686" height="106.33333333333333"/>
+                                                <connections>
+                                                    <action selector="endDatePickerTapped:" destination="OpC-KT-iJB" eventType="valueChanged" id="0Bw-8T-CHG"/>
+                                                </connections>
                                             </datePicker>
                                         </subviews>
                                     </stackView>

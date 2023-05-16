@@ -147,6 +147,8 @@ class ExpensesVC: UIViewController {
     private func clearTextFields() {
         expenseTextField.text = ""
         amountTextField.text = ""
+        expenseTextField.resignFirstResponder()
+        amountTextField.resignFirstResponder()
     }
     
     private func setupVoiceOver() {

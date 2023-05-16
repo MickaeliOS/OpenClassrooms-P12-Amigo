@@ -16,6 +16,11 @@ class SettingsVC: UIViewController {
         setupVoiceOver()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupPersonalInformations()
+    }
+    
     // MARK: - OUTLETS, VARIABLES & ENUMS
     @IBOutlet weak var themeLabel: UILabel!
     @IBOutlet weak var themeSegmentedControl: UISegmentedControl!
@@ -75,9 +80,14 @@ class SettingsVC: UIViewController {
                               Constant.FirestoreTables.User.firstname: firstnameTextField.text!,
                               Constant.FirestoreTables.User.gender: genderRawValue ?? User.Gender.woman.rawValue]
                 
-                // Finally, we can save our user.
+                // Finally, we can save our user locally and remotely.
                 try await userUpdatingService.updateUser(fields: fields)
+                userAuth.user?.lastname = lastnameTextField.text!
+                userAuth.user?.firstname = firstnameTextField.text!
+                userAuth.user?.gender = User.Gender(rawValue: genderRawValue ?? User.Gender.woman.rawValue)
                 
+                refreshInterface()
+                setupPersonalInformations()
                 presentInformationAlert(with: "Your profile has been saved.")
             } catch let error as Errors.DatabaseError {
                 presentErrorAlert(with: error.localizedDescription)
@@ -93,7 +103,16 @@ class SettingsVC: UIViewController {
     
     private func setupInterface() {
         saveProfileButton.layer.cornerRadius = 10
-        
+    }
+    
+    private func refreshInterface() {
+        lastnameTextField.text = ""
+        firstnameTextField.text = ""
+        lastnameTextField.resignFirstResponder()
+        firstnameTextField.resignFirstResponder()
+    }
+    
+    private func setupPersonalInformations() {
         guard let name = userAuth.user?.lastname, let firstname = userAuth.user?.firstname else {
             return
         }
@@ -142,5 +161,9 @@ extension SettingsVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        errorMessageLabel.isHidden = true
     }
 }
