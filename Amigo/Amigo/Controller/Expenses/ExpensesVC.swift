@@ -31,7 +31,6 @@ class ExpensesVC: UIViewController {
     var trip: Trip?
     weak var delegate: ExpensesVCDelegate?
     private var expenses: Expense?
-    private var userAuth = UserAuth.shared
     private let expenseFetchingService = ExpenseFetchingService()
     private let expenseUpdateService = ExpenseUpdateService()
 

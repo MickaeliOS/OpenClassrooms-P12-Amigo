@@ -18,14 +18,13 @@ class UserUpdatingService {
     }
     
     // MARK: - FUNCTIONS
-    func updateUser(fields: [String:Any]) async throws {
-        guard let currentUserID = UserAuth.shared.currentUser?.uid else {
+    func updateUser(fields: [String:Any], userID: String) async throws {
+        /*guard let currentUserID = UserAuth.shared.currentUser?.uid else {
             throw Errors.DatabaseError.noUser
-        }
+        }*/
         
         do {
-            try await firestoreDatabase.collection(userTableConstants.tableName).document(currentUserID).updateData(fields)
-
+            try await firestoreDatabase.collection(userTableConstants.tableName).document(userID).updateData(fields)
         } catch {
             throw Errors.DatabaseError.cannotUploadDocuments
         }

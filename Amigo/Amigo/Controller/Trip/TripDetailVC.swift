@@ -17,7 +17,8 @@ class TripDetailVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        delegate?.refreshTrip()
+        guard let trip = trip else { return }
+        delegate?.refreshTrip(trip: trip)
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -116,5 +117,5 @@ extension TripDetailVC: ExpensesVCDelegate {
 }
 
 protocol TripDetailVCDelegate: AnyObject {
-    func refreshTrip()
+    func refreshTrip(trip: Trip)
 }

@@ -21,7 +21,6 @@
 		8300098329FFB97A006DBD54 /* TripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300098229FFB97A006DBD54 /* TripTableViewCell.swift */; };
 		830F479129E9311800697C34 /* TripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F479029E9311800697C34 /* TripVC.swift */; };
 		8323F6EC29E587B800CBDFB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */; };
-		8323F6EE29E58CBD00CBDFB5 /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6ED29E58CBD00CBDFB5 /* UserAuth.swift */; };
 		8323F6F029E5908600CBDFB5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6EF29E5908600CBDFB5 /* User.swift */; };
 		832A841A29F01D360074DC14 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832A841929F01D360074DC14 /* Constant.swift */; };
 		83489A342A0BBD16002974E1 /* LocationManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489A332A0BBD16002974E1 /* LocationManagement.swift */; };
@@ -60,6 +59,7 @@
 		8388260C29E68FBA003EBCC1 /* CreateAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260B29E68FBA003EBCC1 /* CreateAccountVC.swift */; };
 		8388260E29E6931A003EBCC1 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260D29E6931A003EBCC1 /* Extension.swift */; };
 		838861742A13659E0028B7D7 /* ToDoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838861732A13659E0028B7D7 /* ToDoCollectionViewCell.xib */; };
+		838861762A14214D0028B7D7 /* MyTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838861752A14214D0028B7D7 /* MyTabBarVC.swift */; };
 		83B4F8F12A03A43D00A1A4FC /* ConfirmationTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8F02A03A43D00A1A4FC /* ConfirmationTripVC.swift */; };
 		83C20F8A29ED6B3A009B252B /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8929ED6B3A009B252B /* SettingsVC.swift */; };
 		83C20F8E29EE6C54009B252B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8D29EE6C54009B252B /* Theme.swift */; };
@@ -85,7 +85,6 @@
 		8300098229FFB97A006DBD54 /* TripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableViewCell.swift; sourceTree = "<group>"; };
 		830F479029E9311800697C34 /* TripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripVC.swift; sourceTree = "<group>"; };
 		8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8323F6ED29E58CBD00CBDFB5 /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
 		8323F6EF29E5908600CBDFB5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		832A841929F01D360074DC14 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		83489A332A0BBD16002974E1 /* LocationManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagement.swift; sourceTree = "<group>"; };
@@ -119,6 +118,7 @@
 		8388260B29E68FBA003EBCC1 /* CreateAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountVC.swift; sourceTree = "<group>"; };
 		8388260D29E6931A003EBCC1 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		838861732A13659E0028B7D7 /* ToDoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToDoCollectionViewCell.xib; sourceTree = "<group>"; };
+		838861752A14214D0028B7D7 /* MyTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarVC.swift; sourceTree = "<group>"; };
 		83B4F8F02A03A43D00A1A4FC /* ConfirmationTripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationTripVC.swift; sourceTree = "<group>"; };
 		83C20F8929ED6B3A009B252B /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		83C20F8D29EE6C54009B252B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -161,7 +161,6 @@
 			children = (
 				83489A2E2A0BBC4A002974E1 /* UserServices */,
 				8323F6EF29E5908600CBDFB5 /* User.swift */,
-				8323F6ED29E58CBD00CBDFB5 /* UserAuth.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -336,6 +335,7 @@
 				83FED4052A0C1AF200B0B231 /* To Do List */,
 				838296BC2A0D732C00B4E9D3 /* Expenses */,
 				83C20F8929ED6B3A009B252B /* SettingsVC.swift */,
+				838861752A14214D0028B7D7 /* MyTabBarVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -514,10 +514,10 @@
 				832A841A29F01D360074DC14 /* Constant.swift in Sources */,
 				83D881FE2A0931410056A324 /* TripDetailVC.swift in Sources */,
 				8356871B2A0980FB000A65F8 /* JourneyTableViewCell.swift in Sources */,
+				838861762A14214D0028B7D7 /* MyTabBarVC.swift in Sources */,
 				8300098329FFB97A006DBD54 /* TripTableViewCell.swift in Sources */,
 				8323F6F029E5908600CBDFB5 /* User.swift in Sources */,
 				835687272A0ACD21000A65F8 /* JourneyUpdateService.swift in Sources */,
-				8323F6EE29E58CBD00CBDFB5 /* UserAuth.swift in Sources */,
 				838296BE2A0D76BB00B4E9D3 /* ExpensesVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

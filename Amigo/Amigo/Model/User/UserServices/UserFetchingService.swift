@@ -7,27 +7,52 @@
 
 import Foundation
 import FirebaseFirestore
-import FirebaseAuth
+import FirebaseFirestoreSwift
 
 final class UserFetchingService {
     // MARK: - PROPERTIES & INIT
     private let userTableConstants = Constant.FirestoreTables.User.self
     private let firestoreDatabase: Firestore
-    private let firebaseAuth: Auth
 
-    init(firestoreDatabase: Firestore = Firestore.firestore(), firebaseAuth: Auth = Auth.auth()) {
+    init(firestoreDatabase: Firestore = Firestore.firestore()) {
         self.firestoreDatabase = firestoreDatabase
-        self.firebaseAuth = firebaseAuth
     }
     
     // MARK: - FUNCTIONS
-    func fetchUser(userID: String) async throws -> User {
+    func fetchUser(userID: String) async throws -> User? {
         do {
             let userTableRef = firestoreDatabase.collection(userTableConstants.tableName).document(userID)
-            let user = try await userTableRef.getDocument(as: User.self)
+            
+            // First, we ensure the existence of the user before proceeding.
+            let documentSnapshot = try await userTableRef.getDocument()
+            guard documentSnapshot.exists else {
+                return nil
+            }
+            
+            // If the user is found, we proceed with decoding and returning the corresponding user object.
+            let user = try documentSnapshot.data(as: User.self)
             return user
         } catch {
             throw Errors.DatabaseError.cannotGetDocuments
+        }
+    }
+    
+    func fetchUser2(userID: String, completion: @escaping (User?, Errors.DatabaseError?) -> Void) {
+        let userTableRef = firestoreDatabase.collection(userTableConstants.tableName).document(userID)
+
+        userTableRef.getDocument { documentSnapshot, error in
+            if error != nil {
+                completion(nil, .cannotGetDocuments)
+            }
+            
+            guard let documentSnapshot = documentSnapshot, documentSnapshot.exists else {
+                completion(nil, .cannotGetDocuments)
+                return
+            }
+            
+            let user = try? documentSnapshot.data(as: User.self)
+            
+            completion(user, nil)
         }
     }
 }

@@ -12,7 +12,6 @@ final class ExpenseFetchingService {
     // MARK: - PROPERTIES & INIT
     private let expenseTableConstants = Constant.FirestoreTables.Expense.self
     private let firestoreDatabase: Firestore
-    private var userAuth = UserAuth.shared
     
     init(firestoreDatabase: Firestore = Firestore.firestore()) {
         self.firestoreDatabase = firestoreDatabase

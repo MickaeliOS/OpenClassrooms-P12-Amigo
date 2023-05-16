@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SettingsVC: UIViewController {
     // MARK: - VIEW LIFE CYCLE
@@ -32,9 +33,11 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var logOutButton: UIBarButtonItem!
     
-    private let userAuth = UserAuth.shared
+    var user: User?
+    private let currentUser = Auth.auth().currentUser
     private let userAuthService = UserAuthService()
     private let userUpdatingService = UserUpdatingService()
+    private let userCreationService = UserCreationService()
 
     var currentTheme: Theme {
         return Theme(rawValue: UserDefaults.standard.integer(forKey: "theme")) ?? .unspecified
@@ -63,6 +66,11 @@ class SettingsVC: UIViewController {
     
     // MARK: - PRIVATE FUNCTIONS
     private func saveProfileFlow() {
+        guard let currentUser = currentUser else {
+            presentErrorAlert(with: Errors.DatabaseError.noUser.localizedDescription)
+            return
+        }
+        
         if lastnameTextField.isEmpty || firstnameTextField.isEmpty {
             errorMessageLabel.displayErrorMessage(message: "All fields must be filled.")
             return
@@ -70,24 +78,65 @@ class SettingsVC: UIViewController {
         
         toggleActivityIndicator(shown: true)
         
+        if user == nil {
+            createUser(currentUser: currentUser, userID: currentUser.uid)
+        } else {
+            updateUser(userID: currentUser.uid)
+        }
+    }
+    
+    private func createUser(currentUser: FirebaseAuth.User, userID: String) {
+        Task {
+            do {
+                // First, I get the gender.
+                let selectedIndex = genderSegmentedControl.selectedSegmentIndex
+                let gender: User.Gender = selectedIndex == 0 ? .woman : .man
+                
+                // Then, I create the User.
+                let user = User(firstname: firstnameTextField.text!,
+                                lastname: lastnameTextField.text!, gender: gender,
+                                email: currentUser.email!)
+                
+                // We are prepared to persistently save the user's data, both remotely and locally.
+                try await userCreationService.saveUserInDatabase(user: user, userID: userID)
+                self.user = user
+                
+                // Finally, we conclude the process by executing a set of essential functions.
+                toggleActivityIndicator(shown: false)
+                refreshInterface()
+                setupPersonalInformations()
+                //passDataToTripVC()
+                presentInformationAlert(with: "Your profile has been saved.")
+                
+            } catch let error as Errors.DatabaseError {
+                presentErrorAlert(with: error.localizedDescription)
+            }
+        }
+    }
+    
+    private func updateUser(userID: String) {
         Task {
             do {
                 // First, we get the value from genderSegmentedControl
-                let genderRawValue = genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex)
+                let genderRawValue = genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex) ?? User.Gender.woman.rawValue
                 
                 // Then, we provide the fields to be updated.
                 let fields = [Constant.FirestoreTables.User.lastname: lastnameTextField.text!,
                               Constant.FirestoreTables.User.firstname: firstnameTextField.text!,
-                              Constant.FirestoreTables.User.gender: genderRawValue ?? User.Gender.woman.rawValue]
+                              Constant.FirestoreTables.User.gender: genderRawValue]
                 
                 // Finally, we can save our user locally and remotely.
-                try await userUpdatingService.updateUser(fields: fields)
-                userAuth.user?.lastname = lastnameTextField.text!
-                userAuth.user?.firstname = firstnameTextField.text!
-                userAuth.user?.gender = User.Gender(rawValue: genderRawValue ?? User.Gender.woman.rawValue)
+                try await userUpdatingService.updateUser(fields: fields, userID: userID)
                 
+                user?.lastname = lastnameTextField.text!
+                user?.firstname = firstnameTextField.text!
+                user?.gender = User.Gender(rawValue: genderRawValue)!
+                
+                // We execute some essentials functions to finish the process.
+                toggleActivityIndicator(shown: false)
                 refreshInterface()
                 setupPersonalInformations()
+                //passDataToTripVC()
                 presentInformationAlert(with: "Your profile has been saved.")
             } catch let error as Errors.DatabaseError {
                 presentErrorAlert(with: error.localizedDescription)
@@ -113,13 +162,13 @@ class SettingsVC: UIViewController {
     }
     
     private func setupPersonalInformations() {
-        guard let name = userAuth.user?.lastname, let firstname = userAuth.user?.firstname else {
+        guard let name = user?.lastname, let firstname = user?.firstname else {
             return
         }
         
         lastnameTextField.placeholder = name
         firstnameTextField.placeholder = firstname
-        genderSegmentedControl.selectedSegmentIndex = User.Gender.index(of: userAuth.user?.gender ?? .woman)
+        genderSegmentedControl.selectedSegmentIndex = User.Gender.index(of: user?.gender ?? .woman)
     }
     
     private func toggleActivityIndicator(shown: Bool) {
@@ -141,12 +190,15 @@ class SettingsVC: UIViewController {
     }
     
     private func setupVoiceOver() {
+        // Labels
         themeSegmentedControl.accessibilityLabel = "The choices for the theme."
         genderSegmentedControl.accessibilityLabel = "The choices for the gender."
         
+        // Values
         themeSegmentedControl.accessibilityValue = "Device theme, Light, Dark."
         genderSegmentedControl.accessibilityValue = "Woman, man."
         
+        // Hints
         logOutButton.accessibilityHint = "Press to log out."
         lastnameTextField.accessibilityHint = "Write your lastname"
         firstnameTextField.accessibilityHint = "Write your firstname"
@@ -154,6 +206,12 @@ class SettingsVC: UIViewController {
         genderSegmentedControl.accessibilityHint = "Select your gender"
         saveProfileButton.accessibilityHint = "Press to save your profile."
     }
+    
+    /*private func passDataToTripVC() {
+        let barViewControllers = tabBarController?.viewControllers
+        guard let TripVC = barViewControllers![0] as? TripVC else { return }
+        TripVC.user = user
+    }*/
 }
 
 // MARK: - EXTENSIONS

@@ -13,7 +13,6 @@ final class JourneyUpdateService {
     // MARK: - PROPERTIES & INIT
     private let journeyTableConstants = Constant.FirestoreTables.Journey.self
     private let firestoreDatabase: Firestore
-    private var userAuth = UserAuth.shared
     
     init(firestoreDatabase: Firestore = Firestore.firestore()) {
         self.firestoreDatabase = firestoreDatabase

@@ -11,7 +11,6 @@ import FirebaseFirestoreSwift
 
 final class TripUpdateService {
     // MARK: - PROPERTIES & INIT
-    private var userAuth = UserAuth.shared
     private let tripTableConstants = Constant.FirestoreTables.Trip.self
     private let firestoreDatabase: Firestore
     

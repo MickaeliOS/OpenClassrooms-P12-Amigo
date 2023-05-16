@@ -128,7 +128,7 @@
             </objects>
             <point key="canvasLocation" x="138" y="4"/>
         </scene>
-        <!--Item-->
+        <!--Settings-->
         <scene sceneID="gDB-d4-T8k">
             <objects>
                 <viewController id="b9P-vA-qFd" customClass="SettingsVC" customModule="Amigo" customModuleProvider="target" sceneMemberID="viewController">
@@ -137,7 +137,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tTV-cw-g1N">
-                                <rect key="frame" x="10" y="91" width="355" height="60"/>
+                                <rect key="frame" x="10" y="47" width="355" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saY-ab-Oth">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="24"/>
@@ -159,7 +159,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QX6-A8-QFb">
-                                <rect key="frame" x="10" y="171" width="355" height="207.66666666666663"/>
+                                <rect key="frame" x="10" y="126.99999999999999" width="355" height="210.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWf-ZP-Sxo">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="24"/>
@@ -199,10 +199,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skQ-C9-5oq">
-                                        <rect key="frame" x="0.0" y="163" width="355" height="44.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="163" width="355" height="47.666666666666657"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ckf-EG-kWl">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="44.666666666666664"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="47.666666666666664"/>
                                                 <color key="backgroundColor" name="UIElement1"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -214,10 +214,10 @@
                                                 </connections>
                                             </button>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="c5Q-1Q-fBY">
-                                                <rect key="frame" x="159" y="3.6666666666666856" width="37" height="37"/>
+                                                <rect key="frame" x="159" y="5.3333333333333144" width="37" height="37"/>
                                             </activityIndicatorView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" name="Background"/>
                                         <constraints>
                                             <constraint firstItem="c5Q-1Q-fBY" firstAttribute="centerY" secondItem="skQ-C9-5oq" secondAttribute="centerY" id="AeN-na-HOe"/>
                                             <constraint firstItem="Ckf-EG-kWl" firstAttribute="top" secondItem="skQ-C9-5oq" secondAttribute="top" id="DrL-Uo-qiQ"/>
@@ -246,7 +246,7 @@
                             <outletCollection property="gestureRecognizers" destination="rkD-hJ-fV5" appends="YES" id="nJE-js-uGo"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" image="gear" catalog="system" id="m2Z-xX-Aww"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" id="m2Z-xX-Aww"/>
                     <navigationItem key="navigationItem" id="6y0-mK-jtq">
                         <barButtonItem key="rightBarButtonItem" title="Log out" id="kDz-he-mPB">
                             <color key="tintColor" name="UIElement1"/>
@@ -274,7 +274,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2406" y="797"/>
+            <point key="canvasLocation" x="1404" y="797"/>
         </scene>
         <!--ExpensesVC-->
         <scene sceneID="VIW-UI-AA3">
@@ -1296,11 +1296,11 @@
             </objects>
             <point key="canvasLocation" x="6190" y="-955"/>
         </scene>
-        <!--Find Trip-->
+        <!--My Trips-->
         <scene sceneID="apq-vP-EWN">
             <objects>
                 <navigationController id="eYi-bl-3pL" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Find Trip" image="airplane" catalog="system" id="owK-BC-oqw"/>
+                    <tabBarItem key="tabBarItem" title="My Trips" image="airplane" catalog="system" id="owK-BC-oqw"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="O17-dX-xNJ">
                         <rect key="frame" x="0.0" y="47" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1313,10 +1313,10 @@
             </objects>
             <point key="canvasLocation" x="2406" y="-494"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--My Tab BarVC-->
         <scene sceneID="5Uk-PI-Jfx">
             <objects>
-                <tabBarController storyboardIdentifier="MainTabBar" id="8PT-ZL-RZl" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBar" id="8PT-ZL-RZl" customClass="MyTabBarVC" customModule="Amigo" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="OzX-dY-N0T"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="NLj-6b-DYp">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
@@ -1325,29 +1325,12 @@
                     </tabBar>
                     <connections>
                         <segue destination="eYi-bl-3pL" kind="relationship" relationship="viewControllers" id="U9C-RX-fxP"/>
-                        <segue destination="77X-sJ-XIp" kind="relationship" relationship="viewControllers" id="pkS-rS-NT1"/>
+                        <segue destination="b9P-vA-qFd" kind="relationship" relationship="viewControllers" id="CUt-3M-OIr"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kat-bl-Ji6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1404" y="4"/>
-        </scene>
-        <!--Item-->
-        <scene sceneID="zmJ-K4-lqf">
-            <objects>
-                <navigationController id="77X-sJ-XIp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="gear" catalog="system" id="C75-cR-tZ5"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="OfN-RA-JoP">
-                        <rect key="frame" x="0.0" y="47" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="b9P-vA-qFd" kind="relationship" relationship="rootViewController" id="4ft-dO-7ex"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Abl-xi-yuv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1404" y="797"/>
         </scene>
         <!--Create AccountVC-->
         <scene sceneID="RiT-v6-xyS">

@@ -61,15 +61,20 @@ class TripVC: UIViewController {
         Task {
             do {
                 // First, we fetch the user from Firestore
-                user = try await userFetchingService.fetchUser(userID: currentUser.uid)
-                
-                // We also need the user's trips.
-                user?.trips = try await tripFetchingService.fetchTrips(userID: currentUser.uid)
-                
-                // It's necessary to display the trips in ascending order based on the date, starting from the oldest.
-                sortTripsByDateAscending()
+                if let user = try await userFetchingService.fetchUser(userID: currentUser.uid) {
+                    
+                    // We save it locally.
+                    self.user = user
+                    
+                    // We also need the user's trips.
+                    self.user?.trips = try await tripFetchingService.fetchTrips(userID: currentUser.uid)
+                    
+                    // It's necessary to display the trips in ascending order based on the date, starting from the oldest.
+                    sortTripsByDateAscending()
+                }
 
                 refreshInterface()
+                //passDataToSettingsVC()
                 
             } catch let error as Errors.DatabaseError {
                 presentErrorAlert(with: error.localizedDescription)
@@ -99,6 +104,12 @@ class TripVC: UIViewController {
 
         user?.trips = TripManagement.sortTripsByDateAscending(trips: trips)
     }
+    
+    /*private func passDataToSettingsVC() {
+        let barViewControllers = tabBarController?.viewControllers
+        guard let settingsVC = barViewControllers![1] as? SettingsVC else { return }
+        settingsVC.user = user
+    }*/
 }
 
 // MARK: - EXTENSIONS
@@ -176,24 +187,8 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension TripVC: TripDetailVCDelegate {
-    func refreshTrip() {
-        guard let currentUser = currentUser else {
-            presentErrorAlert(with: Errors.CommonError.noUser.localizedDescription)
-            return
-        }
-        
-        activityIndicator.isHidden = false
-        
-        // In the rare case where the trip has been deleted by an external actor,
-        // we re-fetch them to have the latest ones.
-        Task {
-            do {
-                user?.trips = try await tripFetchingService.fetchTrips(userID: currentUser.uid)
-            } catch let error as Errors.DatabaseError {
-                presentErrorAlert(with: error.localizedDescription)
-            }
-            
-            refreshInterface()
-        }
+    func refreshTrip(trip: Trip) {
+        user?.trips?.append(trip) // TODO: Duplication
+        tripTableView.reloadData()
     }
 }

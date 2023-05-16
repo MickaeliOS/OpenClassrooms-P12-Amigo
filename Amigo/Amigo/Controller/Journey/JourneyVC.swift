@@ -28,7 +28,6 @@ class JourneyVC: UIViewController {
     var trip: Trip?
     var journey: Journey?
 
-    private var userAuth = UserAuth.shared
     private let journeyFetchingService = JourneyFetchingService()
     private let journeyUpdateService = JourneyUpdateService()
     

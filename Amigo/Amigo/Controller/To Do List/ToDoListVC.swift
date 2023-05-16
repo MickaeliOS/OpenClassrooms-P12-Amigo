@@ -28,7 +28,6 @@ class ToDoListVC: UIViewController {
     
     var trip: Trip?
     weak var delegate: ToDoListVCDelegate?
-    private var userAuth = UserAuth.shared
     private let tripUpdateService = TripUpdateService()
     
     // MARK: - ACTIONS
@@ -91,19 +90,16 @@ class ToDoListVC: UIViewController {
                 // First step -> We store the list in the Firestore database.
                 try await tripUpdateService.updateTrip(with: tripID, fields: [Constant.FirestoreTables.Trip.toDoList: toDoList])
                 
-                if let index = userAuth.user?.trips?.firstIndex(where: {$0.tripID == tripID}) {
-                    
-                    // Second step -> By storing the list in the Singleton, we ensure that the data remains consistent both locally and remotely.
-                    userAuth.user?.trips?[index].toDoList = toDoList
-                    
-                    // Third step -> It's also essential to update the trip variable and propagate the changes to the TripDetailVC, to maintain synchronization across all data points.
-                    sendTripToPresentingController()
-                    
-                    toggleActivityIndicator(shown: false)
-                    
-                    presentInformationAlert(with: "Your list has been saved.") {
-                        self.navigationController?.popViewController(animated: true)
-                    }
+                // Then, we save the changes locally.
+                trip?.toDoList = toDoList
+
+                // It's also essential to propagate the changes to the TripDetailVC, to maintain synchronization across all data points.
+                sendTripToPresentingController()
+                
+                toggleActivityIndicator(shown: false)
+                
+                presentInformationAlert(with: "Your list has been saved.") {
+                    self.navigationController?.popViewController(animated: true)
                 }
                 
             } catch let error as Errors.DatabaseError {

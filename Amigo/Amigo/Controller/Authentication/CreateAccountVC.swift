@@ -69,12 +69,8 @@ class CreateAccountVC: UIViewController {
                                                      password: passwordTextField.text!,
                                                      confirmPassword: confirmPasswordTextField.text!)
                 
-                let firebaseUser = try await userCreationService.createUser(email: emailTextField.text!, password: passwordTextField.text!)
-                
-                let user = User(email: firebaseUser.email!)
-                
-                try await userCreationService.saveUserInDatabase(user: user)
-                
+                let _ = try await userCreationService.createUser(email: emailTextField.text!, password: passwordTextField.text!)
+                                                
                 // If all the create user process went good, we can go back on the TabBar.
                 performSegue(withIdentifier: Constant.SegueID.unwindToRootVC, sender: nil)
                 
