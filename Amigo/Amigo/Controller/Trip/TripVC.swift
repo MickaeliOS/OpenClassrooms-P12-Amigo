@@ -23,8 +23,9 @@ class TripVC: UIViewController {
     @IBOutlet weak var noTripLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var addTripButton: UIBarButtonItem!
-    
-    private var userAuth = UserAuth.shared
+
+    var user: User?
+    private let currentUser = Auth.auth().currentUser
     private let userFetchingService = UserFetchingService()
     private let tripFetchingService = TripFetchingService()
     private let tripDeletionService = TripDeletionService()
@@ -38,8 +39,8 @@ class TripVC: UIViewController {
         }
         
         if segue.source is ConfirmationTripVC {
-            tripTableView.reloadData()
-            noTripLabel.isHidden = true
+            refreshInterface()
+            sortTripsByDateAscending()
         }
     }
     
@@ -50,60 +51,53 @@ class TripVC: UIViewController {
     }
     
     private func startLoginFlow() {
-        guard userAuth.currentlyLoggedIn else {
+        guard let currentUser = currentUser else {
             presentVCFullScreen(with: "WelcomeVC")
             return
         }
-        
+
         activityIndicator.isHidden = false
         
         Task {
             do {
                 // First, we fetch the user from Firestore
-                try await userFetchingService.fetchUser()
+                user = try await userFetchingService.fetchUser(userID: currentUser.uid)
                 
                 // We also need the user's trips.
-                await fetchUserTrips()
+                user?.trips = try await tripFetchingService.fetchTrips(userID: currentUser.uid)
                 
-                activityIndicator.isHidden = true
-                noTripLabel.isHidden = isUserTripsEmpty()
+                // It's necessary to display the trips in ascending order based on the date, starting from the oldest.
+                sortTripsByDateAscending()
+
+                refreshInterface()
                 
-            } catch let error as Errors.DatabaseError where error == .noUser {
-                presentErrorAlert(with: error.localizedDescription) {
-                    self.presentVCFullScreen(with: "WelcomeVC")
-                }
             } catch let error as Errors.DatabaseError {
                 presentErrorAlert(with: error.localizedDescription)
             }
         }
     }
     
-    private func fetchUserTrips() async {
-        do {
-            userAuth.user?.trips = try await tripFetchingService.fetchUserTrips()
-            
-            // It's necessary to display the trips in ascending order based on the date, starting from the oldest.
-            if let trips = userAuth.user?.trips, !trips.isEmpty {
-                userAuth.user?.trips = TripManagement.sortTripsByDateAscending(trips: trips)
-            }
-            tripTableView.reloadData()
-            
-        } catch let error as Errors.DatabaseError {
-            presentErrorAlert(with: error.localizedDescription)
-        } catch {
-            presentErrorAlert(with: Errors.CommonError.defaultError.localizedDescription)
-        }
-    }
-    
     private func isUserTripsEmpty() -> Bool {
-        if let trips = userAuth.user?.trips, !trips.isEmpty {
+        if let trips = user?.trips, !trips.isEmpty {
             return true
         }
         return false
     }
     
+    private func refreshInterface() {
+        tripTableView.reloadData()
+        activityIndicator.isHidden = true
+        noTripLabel.isHidden = isUserTripsEmpty()
+    }
+    
     private func setupVoiceOver() {
         addTripButton.accessibilityHint = "Press to add a trip."
+    }
+    
+    private func sortTripsByDateAscending() {
+        guard let trips = user?.trips, !trips.isEmpty else { return }
+
+        user?.trips = TripManagement.sortTripsByDateAscending(trips: trips)
     }
 }
 
@@ -121,7 +115,7 @@ extension TripVC {
 
 extension TripVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userAuth.user?.trips?.count ?? 0
+        return user?.trips?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -130,7 +124,7 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        guard let trip = userAuth.user?.trips?[indexPath.row] else {
+        guard let trip = user?.trips?[indexPath.row] else {
             return UITableViewCell()
         }
         
@@ -142,7 +136,7 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let trip = userAuth.user?.trips?[indexPath.row]
+        let trip = user?.trips?[indexPath.row]
         performSegue(withIdentifier: Constant.SegueID.segueToTripDetailVC, sender: trip)
     }
     
@@ -156,7 +150,7 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
             presentDestructiveAlert(with: "Are you sure you want to delete your Trip ?") {
                 Task {
                     do {
-                        guard let tripID = self.userAuth.user?.trips?[indexPath.row].tripID else {
+                        guard let tripID = self.user?.trips?[indexPath.row].tripID else {
                             self.presentErrorAlert(with: Errors.DatabaseError.noTripID.localizedDescription)
                             return
                         }
@@ -166,7 +160,7 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
                         try await self.journeyDeletionService.deleteJourney(tripID: tripID)
                         try await self.expenseDeletionService.deleteExpense(tripID: tripID)
 
-                        self.userAuth.user?.trips?.remove(at: indexPath.row)
+                        self.user?.trips?.remove(at: indexPath.row)
                         
                         // Then, the cell
                         tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -183,11 +177,23 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
 
 extension TripVC: TripDetailVCDelegate {
     func refreshTrip() {
+        guard let currentUser = currentUser else {
+            presentErrorAlert(with: Errors.CommonError.noUser.localizedDescription)
+            return
+        }
+        
+        activityIndicator.isHidden = false
+        
         // In the rare case where the trip has been deleted by an external actor,
         // we re-fetch them to have the latest ones.
         Task {
-            await fetchUserTrips()
-            noTripLabel.isHidden = isUserTripsEmpty()
+            do {
+                user?.trips = try await tripFetchingService.fetchTrips(userID: currentUser.uid)
+            } catch let error as Errors.DatabaseError {
+                presentErrorAlert(with: error.localizedDescription)
+            }
+            
+            refreshInterface()
         }
     }
 }

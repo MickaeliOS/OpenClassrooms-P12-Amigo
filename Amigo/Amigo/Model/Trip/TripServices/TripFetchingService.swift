@@ -19,18 +19,13 @@ final class TripFetchingService {
     }
     
     //MARK: - FUNCTIONS
-    func fetchUserTrips() async throws -> [Trip] {
-        //TODO: Gérer proprement les erreurs
-        guard let currentUserID = UserAuth.shared.currentUser?.uid else {
-            throw Errors.DatabaseError.noUser
-        }
-        
+    func fetchTrips(userID: String) async throws -> [Trip] {
         var trips: [Trip] = []
         
         do {
             // We need the user's trips, each trip we fetch must have the same userID
             let tripTableRef = firestoreDatabase.collection(tripTableConstants.tableName)
-            let query = tripTableRef.whereField(tripTableConstants.userID, isEqualTo: currentUserID)
+            let query = tripTableRef.whereField(tripTableConstants.userID, isEqualTo: userID)
             
             let result = try await query.getDocuments()
             

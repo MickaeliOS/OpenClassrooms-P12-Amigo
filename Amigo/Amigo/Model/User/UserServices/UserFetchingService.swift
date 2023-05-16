@@ -21,15 +21,11 @@ final class UserFetchingService {
     }
     
     // MARK: - FUNCTIONS
-    func fetchUser() async throws {
-        guard let currentUserID = firebaseAuth.currentUser?.uid else {
-            throw Errors.DatabaseError.noUser
-        }
-        
+    func fetchUser(userID: String) async throws -> User {
         do {
-            let userTableRef = firestoreDatabase.collection(userTableConstants.tableName).document(currentUserID)
+            let userTableRef = firestoreDatabase.collection(userTableConstants.tableName).document(userID)
             let user = try await userTableRef.getDocument(as: User.self)
-            UserAuth.shared.user = user
+            return user
         } catch {
             throw Errors.DatabaseError.cannotGetDocuments
         }

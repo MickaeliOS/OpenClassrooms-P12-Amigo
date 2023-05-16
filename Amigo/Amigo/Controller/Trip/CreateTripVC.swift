@@ -24,7 +24,7 @@ class CreateTripVC: UIViewController {
     @IBOutlet weak var addTripButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
     
-    private let userAuth = UserAuth.shared
+    private let currentUser = Auth.auth().currentUser
     private let tripCreationService = TripCreationService()
     private let descriptionPlaceHolder = "Enter your description."
     
@@ -68,11 +68,6 @@ class CreateTripVC: UIViewController {
             
             // The retrieval of the tripID is essential for any future editing or deletion of the corresponding trip.
             trip.tripID = tripID
-            userAuth.user?.trips?.append(trip)
-            
-            // Again, we must sort the Trip table from the oldest date to the newest.
-            guard let trips = userAuth.user?.trips, !trips.isEmpty else { return }
-            userAuth.user?.trips = TripManagement.sortTripsByDateAscending(trips: trips)
             
             // We can go to the ConfirmationVC screen.
             performSegue(withIdentifier: Constant.SegueID.segueToConfirmationTripVC, sender: trip)
@@ -90,7 +85,7 @@ class CreateTripVC: UIViewController {
     
     private func createTrip() -> Trip? {
         // We need to control if we have a user logged in.
-        guard let currentUserID = userAuth.currentUser?.uid else {
+        guard let currentUser = currentUser else {
             presentErrorAlert(with: Errors.CommonError.noUser.localizedDescription) {
                 self.presentVCFullScreen(with: "WelcomeVC")
             }
@@ -110,7 +105,7 @@ class CreateTripVC: UIViewController {
         }
         
         // We can now safely create our trip
-        let trip = Trip(userID: currentUserID,
+        let trip = Trip(userID: currentUser.uid,
                         startDate: startDatePicker.date,
                         endDate: endDatePicker.date,
                         country: countryInformations.0,
