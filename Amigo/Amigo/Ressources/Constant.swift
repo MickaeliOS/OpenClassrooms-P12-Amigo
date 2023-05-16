@@ -54,6 +54,8 @@ struct Constant {
     }
     
     struct CollectionViewCells {
+        static let toDoNibName = "ToDoCollectionViewCell"
+
         static let toDoCell = "toDoCell"
     }
     

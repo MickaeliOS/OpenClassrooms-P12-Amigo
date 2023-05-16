@@ -60,12 +60,12 @@ extension UIViewController {
         let action = UIAlertAction(title: "OK", style: .destructive) { action in
             completion()
         }
-       
+        
         alert.addAction(action)
         
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(cancelButton)
-
+        
         present(alert, animated: true, completion: nil)
     }
 }

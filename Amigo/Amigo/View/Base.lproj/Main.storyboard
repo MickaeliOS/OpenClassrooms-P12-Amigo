@@ -7,7 +7,6 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -58,11 +57,11 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2IU-KH-FLX">
                                 <rect key="frame" x="10" y="616.66666666666663" width="355" height="73.333333333333371"/>
                                 <color key="backgroundColor" name="UIElement1"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Log in">
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
-                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                </buttonConfiguration>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Log in">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="loginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yzh-fo-8sn"/>
                                 </connections>
@@ -72,7 +71,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Don't have an account ? Sign up">
                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle3"/>
-                                    <color key="baseForegroundColor" name="Button"/>
+                                    <color key="baseForegroundColor" systemColor="tintColor"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <segue destination="ofh-3Y-lyi" kind="presentation" id="w1M-Vg-9EC"/>
@@ -207,7 +206,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Save Profile">
                                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
-                                                    <color key="baseForegroundColor" systemColor="labelColor"/>
+                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </buttonConfiguration>
                                                 <connections>
                                                     <action selector="saveProfileButtonTapped:" destination="b9P-vA-qFd" eventType="touchUpInside" id="xGM-u3-KlP"/>
@@ -296,16 +295,16 @@
                                         <rect key="frame" x="0.0" y="43.666666666666657" width="355" height="63.666666666666657"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your expense here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hxf-Dk-V8Z">
-                                                <rect key="frame" x="0.0" y="0.0" width="248.66666666666666" height="63.666666666666664"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="213" height="63.666666666666664"/>
                                                 <color key="backgroundColor" name="Background"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="qhl-dq-C3D" id="vBZ-Dm-uTF"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bfe-mA-yC0">
-                                                <rect key="frame" x="258.66666666666669" y="0.0" width="96.333333333333314" height="63.666666666666664"/>
+                                                <rect key="frame" x="223" y="0.0" width="132" height="63.666666666666664"/>
                                                 <color key="backgroundColor" name="Background"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
@@ -315,17 +314,17 @@
                                             </textField>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="hxf-Dk-V8Z" firstAttribute="width" secondItem="PDU-bT-979" secondAttribute="width" multiplier="0.7" id="12r-ew-eOm"/>
+                                            <constraint firstItem="hxf-Dk-V8Z" firstAttribute="width" secondItem="PDU-bT-979" secondAttribute="width" multiplier="0.6" id="12r-ew-eOm"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="A8Y-7P-aLS">
                                         <rect key="frame" x="0.0" y="117.33333333333334" width="355" height="64"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CCG-I7-Rp0">
-                                                <rect key="frame" x="0.0" y="0.0" width="248.66666666666666" height="64"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="213" height="64"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AWE-fH-9L0">
-                                                        <rect key="frame" x="61.999999999999993" y="14.666666666666657" width="124.33333333333331" height="34.333333333333336"/>
+                                                        <rect key="frame" x="44.333333333333336" y="14.666666666666657" width="124.33333333333331" height="34.333333333333336"/>
                                                         <subviews>
                                                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="m5T-AM-2ph">
                                                                 <rect key="frame" x="0.0" y="0.0" width="124.33333333333333" height="34.333333333333336"/>
@@ -350,12 +349,12 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mTd-yb-bYR">
-                                                <rect key="frame" x="258.66666666666669" y="0.0" width="96.333333333333314" height="64"/>
+                                                <rect key="frame" x="223" y="0.0" width="132" height="64"/>
                                                 <color key="backgroundColor" name="UIElement1"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="Add">
-                                                    <color key="titleColor" systemColor="labelColor"/>
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="addExpenseItemButtonTapped:" destination="qhl-dq-C3D" eventType="touchUpInside" id="JpC-oF-8gw"/>
@@ -363,7 +362,7 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="CCG-I7-Rp0" firstAttribute="width" secondItem="A8Y-7P-aLS" secondAttribute="width" multiplier="0.7" id="Ljs-jc-XDI"/>
+                                            <constraint firstItem="CCG-I7-Rp0" firstAttribute="width" secondItem="A8Y-7P-aLS" secondAttribute="width" multiplier="0.6" id="Ljs-jc-XDI"/>
                                             <constraint firstItem="AWE-fH-9L0" firstAttribute="width" secondItem="A8Y-7P-aLS" secondAttribute="width" multiplier="0.35" id="VNP-PL-aqz"/>
                                         </constraints>
                                     </stackView>
@@ -387,7 +386,7 @@
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Save Expenses">
-                                            <color key="titleColor" systemColor="labelColor"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="saveExpensesButtonTapped:" destination="qhl-dq-C3D" eventType="touchUpInside" id="dPH-ld-IAL"/>
@@ -509,10 +508,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="64"/>
                                                 <color key="backgroundColor" name="UIElement1"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <color key="tintColor" systemColor="labelColor"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title=" Journey" image="car" catalog="system">
-                                                    <color key="titleColor" systemColor="labelColor"/>
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="journeyButtonTapped:" destination="Ktz-LG-Qti" eventType="touchUpInside" id="gJI-N9-dbj"/>
@@ -522,7 +521,7 @@
                                                 <rect key="frame" x="0.0" y="84" width="355" height="63.666666666666657"/>
                                                 <color key="backgroundColor" name="UIElement1"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <color key="tintColor" systemColor="labelColor"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title=" Expenses" image="dollarsign.circle.fill" catalog="system">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -535,7 +534,7 @@
                                                 <rect key="frame" x="0.0" y="167.66666666666669" width="355" height="64"/>
                                                 <color key="backgroundColor" name="UIElement1"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                                <color key="tintColor" systemColor="labelColor"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title=" To Do List" image="list.bullet" catalog="system">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -614,11 +613,11 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QxW-m4-ZSa">
                                 <rect key="frame" x="10" y="645.33333333333337" width="355" height="63.666666666666629"/>
                                 <color key="backgroundColor" name="UIElement1"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Save">
-                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="saveButtonTapped:" destination="cg4-D8-dG3" eventType="touchUpInside" id="P26-U7-ils"/>
                                 </connections>
@@ -687,11 +686,12 @@
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exe-cH-lif">
                                                 <rect key="frame" x="276.33333333333331" y="0.0" width="78.666666666666686" height="63.666666666666664"/>
-                                                <color key="backgroundColor" systemColor="tintColor"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Add">
-                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </buttonConfiguration>
+                                                <color key="backgroundColor" name="UIElement1"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Add">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="addToDoItemButtonTapped:" destination="9DV-9x-YeN" eventType="touchUpInside" id="jXu-7z-lyE"/>
                                                 </connections>
@@ -708,7 +708,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3HI-Q1-s0u">
-                                        <rect key="frame" x="0.0" y="73.666666666666657" width="355" height="490.66666666666686"/>
+                                        <rect key="frame" x="0.0" y="73.666666666666657" width="355" height="490.66666666666674"/>
                                         <subviews>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sQN-DV-r1T">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="490.66666666666669"/>
@@ -719,54 +719,7 @@
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="toDoCell" id="cPX-HF-d69" customClass="ToDoCollectionViewCell" customModule="Amigo" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="148.33333333333337" height="44"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="pov-xY-EQb">
-                                                            <rect key="frame" x="0.0" y="0.0" width="148.33333333333337" height="44"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ToDoItem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TH6-hd-VRa">
-                                                                    <rect key="frame" x="10" y="10" width="84.333333333333329" height="24"/>
-                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="foA-nJ-LIp">
-                                                                    <rect key="frame" x="104.33333333333333" y="0.0" width="43.999999999999986" height="44"/>
-                                                                    <color key="backgroundColor" systemColor="labelColor"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="foA-nJ-LIp" secondAttribute="height" id="hYe-Ow-wCD"/>
-                                                                    </constraints>
-                                                                    <state key="normal" title="Button"/>
-                                                                    <buttonConfiguration key="configuration" style="plain" title="X">
-                                                                        <color key="baseForegroundColor" systemColor="systemRedColor"/>
-                                                                    </buttonConfiguration>
-                                                                    <connections>
-                                                                        <action selector="deleteItemButtonTapped:" destination="cPX-HF-d69" eventType="touchUpInside" id="EsD-2U-9qr"/>
-                                                                    </connections>
-                                                                </button>
-                                                            </subviews>
-                                                            <color key="backgroundColor" systemColor="tintColor"/>
-                                                            <gestureRecognizers/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="foA-nJ-LIp" secondAttribute="trailing" id="2Bb-CQ-FqW"/>
-                                                                <constraint firstAttribute="bottom" secondItem="foA-nJ-LIp" secondAttribute="bottom" id="3bN-id-vZJ"/>
-                                                                <constraint firstAttribute="bottom" secondItem="TH6-hd-VRa" secondAttribute="bottom" constant="10" id="Ao1-DC-gd9"/>
-                                                                <constraint firstItem="foA-nJ-LIp" firstAttribute="top" secondItem="pov-xY-EQb" secondAttribute="top" id="Inx-JG-0Ti"/>
-                                                                <constraint firstItem="TH6-hd-VRa" firstAttribute="top" secondItem="pov-xY-EQb" secondAttribute="top" constant="10" id="W5u-1D-4LM"/>
-                                                                <constraint firstItem="foA-nJ-LIp" firstAttribute="height" secondItem="pov-xY-EQb" secondAttribute="height" id="ewo-HH-tJq"/>
-                                                                <constraint firstItem="TH6-hd-VRa" firstAttribute="leading" secondItem="pov-xY-EQb" secondAttribute="leading" constant="10" id="ih4-UG-gVp"/>
-                                                                <constraint firstItem="foA-nJ-LIp" firstAttribute="leading" secondItem="TH6-hd-VRa" secondAttribute="trailing" constant="10" id="owk-np-uYo"/>
-                                                            </constraints>
-                                                        </collectionViewCellContentView>
-                                                        <gestureRecognizers/>
-                                                        <connections>
-                                                            <outlet property="toDoLabel" destination="TH6-hd-VRa" id="qcN-lz-AGo"/>
-                                                        </connections>
-                                                    </collectionViewCell>
-                                                </cells>
+                                                <cells/>
                                                 <connections>
                                                     <outlet property="dataSource" destination="9DV-9x-YeN" id="C6x-Cd-qQJ"/>
                                                     <outlet property="delegate" destination="9DV-9x-YeN" id="Lka-fV-hrH"/>
@@ -796,11 +749,12 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0I-oX-Axo">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="63.666666666666664"/>
-                                                <color key="backgroundColor" systemColor="tintColor"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Save List">
-                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </buttonConfiguration>
+                                                <color key="backgroundColor" name="UIElement1"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Save List">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="saveToDoListButtonTapped:" destination="9DV-9x-YeN" eventType="touchUpInside" id="mv9-3e-IGY"/>
                                                 </connections>
@@ -847,7 +801,7 @@
                         <outlet property="noListLabel" destination="yTe-U5-OQ0" id="X87-bf-seG"/>
                         <outlet property="saveToDoListButton" destination="A0I-oX-Axo" id="Bh0-lM-ars"/>
                         <outlet property="toDoCollectionView" destination="sQN-DV-r1T" id="T4r-rt-lQk"/>
-                        <outlet property="toDoLabel" destination="bMg-r9-jU5" id="fnR-kd-avb"/>
+                        <outlet property="toDoTextField" destination="bMg-r9-jU5" id="EaM-lj-SXh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bJM-TT-Ijr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -875,7 +829,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Close">
                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleSubhead"/>
-                                            <color key="baseForegroundColor" systemColor="labelColor"/>
+                                            <color key="baseForegroundColor" systemColor="linkColor"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="closeButtonTapped:" destination="OpC-KT-iJB" eventType="touchUpInside" id="jOX-8F-lcw"/>
@@ -963,7 +917,7 @@
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="Add Journey">
-                                            <color key="titleColor" systemColor="labelColor"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="addJourneyTapped:" destination="OpC-KT-iJB" eventType="touchUpInside" id="chM-ze-xFt"/>
@@ -1208,7 +1162,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="wAp-sf-6TT">
-                                <rect key="frame" x="10" y="321" width="355" height="170.33333333333337"/>
+                                <rect key="frame" x="10" y="321.66666666666669" width="355" height="168.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trip saved !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee1-IT-iE0">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="33.666666666666664"/>
@@ -1217,19 +1171,19 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can now head back to your list and personalise your recently added trip !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="meO-Lj-iLc">
-                                        <rect key="frame" x="0.0" y="53.666666666666686" width="355" height="49"/>
+                                        <rect key="frame" x="0.0" y="53.666666666666629" width="355" height="49"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8u4-jb-XqU">
-                                        <rect key="frame" x="0.0" y="122.6666666666667" width="355" height="47.666666666666671"/>
+                                        <rect key="frame" x="0.0" y="122.66666666666663" width="355" height="46"/>
                                         <color key="backgroundColor" name="UIElement1"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="My List">
-                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
-                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </buttonConfiguration>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="My List">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="myListButtonTapped:" destination="6Oi-wW-Vh0" eventType="touchUpInside" id="Dig-On-tu1"/>
                                             <action selector="myListButtonTapped:" destination="Gtd-pE-DQW" eventType="touchUpInside" id="rbU-fU-EJQ"/>
@@ -1401,7 +1355,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Close">
                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleSubhead"/>
-                                            <color key="baseForegroundColor" name="Button"/>
+                                            <color key="baseForegroundColor" systemColor="tintColor"/>
                                         </buttonConfiguration>
                                         <connections>
                                             <action selector="closeButtonTapped:" destination="ofh-3Y-lyi" eventType="touchUpInside" id="qzI-Iz-3zY"/>
@@ -1467,7 +1421,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Create my account">
                                     <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
-                                    <color key="baseForegroundColor" systemColor="labelColor"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="createAccountButtonTapped:" destination="ofh-3Y-lyi" eventType="touchUpInside" id="8zX-be-mEy"/>
@@ -1526,14 +1480,14 @@
         <namedColor name="Background">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="Button">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="UIElement1">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.26214367897039847" green="0.49207095069896328" blue="0.68363508597883604" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

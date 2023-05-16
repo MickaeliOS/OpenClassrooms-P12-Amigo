@@ -8,13 +8,6 @@
 import UIKit
 
 class TripTableViewCell: UITableViewCell {
-    
-    // MARK: - VIEW LIFE CYCLE
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var flagIconLabel: UILabel!
     @IBOutlet weak var destinationLabel: UILabel!

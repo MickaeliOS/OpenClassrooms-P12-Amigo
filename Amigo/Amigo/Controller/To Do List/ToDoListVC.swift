@@ -13,10 +13,11 @@ class ToDoListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInterface()
+        setupCell()
     }
     
     // MARK: - OUTLETS & PROPERTIES
-    @IBOutlet weak var toDoLabel: UITextField!
+    @IBOutlet weak var toDoTextField: UITextField!
     @IBOutlet weak var addToDoItemButton: UIButton!
     @IBOutlet weak var toDoCollectionView: UICollectionView!
     @IBOutlet weak var saveToDoListButton: UIButton!
@@ -39,23 +40,25 @@ class ToDoListVC: UIViewController {
     }
     
     @IBAction func dismissKeyboard(_ sender: Any) {
-        toDoLabel.resignFirstResponder()
+        toDoTextField.resignFirstResponder()
     }
     
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
         showNoListLabelIfNil()
-        
         addToDoItemButton.layer.cornerRadius = 10
         saveToDoListButton.layer.cornerRadius = 10
-        toDoLabel.becomeFirstResponder()
+        toDoTextField.becomeFirstResponder()
+        
+        guard let taskImage = UIImage(systemName: "list.bullet") else { return }
+        toDoTextField.addLeftSystemImage(image: taskImage)
     }
     
     private func addToDoItem() {
         // If there are no trips, the option to add a task should be unavailable.
         guard let trip = trip else { return }
         
-        guard let task = toDoLabel.text, !task.isEmpty else {
+        guard let task = toDoTextField.text, !task.isEmpty else {
             errorMessageLabel.displayErrorMessage(message: "Please provide a task.")
             return
         }
@@ -70,7 +73,7 @@ class ToDoListVC: UIViewController {
             self.trip?.toDoList?.append(task)
         }
         
-        toDoLabel.text = ""
+        toDoTextField.text = ""
         noListLabel.isHidden = true
         toDoCollectionView.reloadData()
     }
@@ -127,6 +130,11 @@ class ToDoListVC: UIViewController {
         // If not, we hide the Activity Indicator and show the refresh button
         saveToDoListButton.isHidden = shown
         activityIndicator.isHidden = !shown
+    }
+    
+    private func setupCell() {
+        self.toDoCollectionView.register(UINib(nibName: Constant.CollectionViewCells.toDoNibName, bundle: nil),
+                                         forCellWithReuseIdentifier: Constant.CollectionViewCells.toDoCell)
     }
 }
 

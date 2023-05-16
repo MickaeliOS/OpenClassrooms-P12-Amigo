@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="toDoCell" id="rSf-8p-Ev2" customClass="ToDoCollectionViewCell" customModule="Amigo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="378" height="106"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EGZ-LU-e34">
+                <rect key="frame" x="0.0" y="0.0" width="378" height="106"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ToDoItem" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnx-BC-UNB">
+                        <rect key="frame" x="10" y="10" width="252" height="86"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nb5-R6-SIT">
+                        <rect key="frame" x="272" y="0.0" width="106" height="106"/>
+                        <color key="backgroundColor" systemColor="systemRedColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="nb5-R6-SIT" secondAttribute="height" id="xtE-b6-sQ1"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        <color key="tintColor" systemColor="systemRedColor"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="X">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="deleteItemButtonTapped:" destination="rSf-8p-Ev2" eventType="touchUpInside" id="s43-R9-nUc"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" name="UIElement1"/>
+                <gestureRecognizers/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="nb5-R6-SIT" secondAttribute="bottom" id="7Bg-MD-BoR"/>
+                    <constraint firstAttribute="bottom" secondItem="dnx-BC-UNB" secondAttribute="bottom" constant="10" id="EAH-LN-Eua"/>
+                    <constraint firstItem="nb5-R6-SIT" firstAttribute="leading" secondItem="dnx-BC-UNB" secondAttribute="trailing" constant="10" id="EDc-3H-AvA"/>
+                    <constraint firstItem="nb5-R6-SIT" firstAttribute="height" secondItem="EGZ-LU-e34" secondAttribute="height" id="RQf-jo-ykj"/>
+                    <constraint firstItem="nb5-R6-SIT" firstAttribute="top" secondItem="EGZ-LU-e34" secondAttribute="top" id="TIM-EK-gN5"/>
+                    <constraint firstAttribute="trailing" secondItem="nb5-R6-SIT" secondAttribute="trailing" id="hZ2-Z2-Ih0"/>
+                    <constraint firstItem="dnx-BC-UNB" firstAttribute="leading" secondItem="EGZ-LU-e34" secondAttribute="leading" constant="10" id="tCa-L7-xvQ"/>
+                    <constraint firstItem="dnx-BC-UNB" firstAttribute="top" secondItem="EGZ-LU-e34" secondAttribute="top" constant="10" id="vJy-Xi-KrA"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <gestureRecognizers/>
+            <size key="customSize" width="378" height="106"/>
+            <connections>
+                <outlet property="toDoLabel" destination="dnx-BC-UNB" id="haR-xE-QsZ"/>
+            </connections>
+            <point key="canvasLocation" x="300.76335877862596" y="41.549295774647888"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="UIElement1">
+            <color red="0.26214367897039847" green="0.49207095069896328" blue="0.68363508597883604" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

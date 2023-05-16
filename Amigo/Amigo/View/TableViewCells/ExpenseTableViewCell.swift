@@ -12,11 +12,15 @@ class ExpenseTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        dateView.layer.borderWidth = 1
+        dateView.layer.borderColor = UIColor(named: "UIElement1")?.cgColor
+        dateView.layer.cornerRadius = 10
     }
     
     // MARK: - OUTLETS
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var dateView: UIView!
     @IBOutlet weak var amountLabel: UILabel!
     
     // MARK: - FUNCTIONS

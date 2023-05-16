@@ -80,7 +80,7 @@ class CreateJourneyVC: UIViewController {
             guard error == nil, let result = result else {
                 return
             }
-            
+
             let location = Location(address: result.placemark.name ?? "N/A",
                                     postalCode: result.placemark.postalCode ?? "N/A",
                                     city: result.placemark.locality ?? "N/A",
@@ -156,7 +156,7 @@ extension CreateJourneyVC: UITableViewDelegate, UITableViewDataSource {
         //let cell = journeyTableView.cellForRow(at: indexPath)!
         let firstPartAddress = searchResults[indexPath.row].title
         let secondPartAddress = searchResults[indexPath.row].subtitle
-        let completeAddress = firstPartAddress + " " + secondPartAddress
+        let completeAddress = firstPartAddress + ", " + secondPartAddress
         
         journeySearchBar.text = completeAddress
     }

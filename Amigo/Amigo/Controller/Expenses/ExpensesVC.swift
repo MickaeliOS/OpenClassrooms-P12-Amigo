@@ -70,6 +70,13 @@ class ExpensesVC: UIViewController {
     private func setupInterface() {
         addExpenseItemButton.layer.cornerRadius = 10
         saveExpensesButton.layer.cornerRadius = 10
+        
+        guard let pencilImage = UIImage(systemName: "pencil"), let dollarSignImage = UIImage(systemName: "dollarsign.circle") else {
+            return
+        }
+        
+        expenseTextField.addLeftSystemImage(image: pencilImage)
+        amountTextField.addLeftSystemImage(image: dollarSignImage)
     }
     
     private func setupCell() {
@@ -173,7 +180,7 @@ extension ExpensesVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(100)
+        return CGFloat(120)
     }
 }
 
