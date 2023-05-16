@@ -15,6 +15,7 @@ class JourneyVC: UIViewController {
         setupInterface()
         setupCell()
         fetchJourney()
+        setupVoiceOver()
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -22,6 +23,7 @@ class JourneyVC: UIViewController {
     @IBOutlet weak var journeyTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var noJourneyLabel: UILabel!
+    @IBOutlet weak var addDestinationButton: UIBarButtonItem!
     
     var trip: Trip?
     var journey: Journey?
@@ -96,6 +98,11 @@ class JourneyVC: UIViewController {
         } catch {
             presentErrorAlert(with: Errors.CommonError.defaultError.localizedDescription)
         }
+    }
+    
+    private func setupVoiceOver() {
+        saveButton.accessibilityHint = "Press the button to save your journey."
+        addDestinationButton.accessibilityHint = "Press to add some destinations"
     }
 }
 

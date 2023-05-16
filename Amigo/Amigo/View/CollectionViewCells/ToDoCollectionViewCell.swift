@@ -17,6 +17,7 @@ class ToDoCollectionViewCell: UICollectionViewCell {
     
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var toDoLabel: UILabel!
+    @IBOutlet weak var deleteItemButton: UIButton!
     var deleteThisCell: (() -> Void)?
 
     // MARK: - ACTIONS
@@ -27,9 +28,18 @@ class ToDoCollectionViewCell: UICollectionViewCell {
     // MARK: - FUNCTIONS AND PRIVATE FUNCTIONS
     func configureCell(toDo: String) {
         toDoLabel.text = toDo
+        setupVoiceOver()
     }
     
     private func setupInterface() {
         contentView.layer.cornerRadius = 15
+    }
+    
+    private func setupVoiceOver() {
+        // Labels
+        deleteItemButton.accessibilityLabel = "Deletion button."
+        
+        // Hints
+        deleteItemButton.accessibilityHint = "Press to delete your task."
     }
 }

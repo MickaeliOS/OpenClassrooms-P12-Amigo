@@ -13,6 +13,7 @@ class CreateAccountVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInterface()
+        setupVoiceOver()
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -85,6 +86,16 @@ class CreateAccountVC: UIViewController {
                 errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
             }
         }
+    }
+    
+    private func setupVoiceOver() {
+        // Labels
+        emailTextField.accessibilityLabel = "Your email here."
+        passwordTextField.accessibilityLabel = "Your password here."
+        confirmPasswordTextField.accessibilityLabel = "Rewrite your password here."
+        
+        // Hints
+        createAccountButton.accessibilityHint = "Press to create your account."
     }
     
     // MARK: - OBJC FUNCTIONS

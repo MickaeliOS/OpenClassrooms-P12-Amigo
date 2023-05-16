@@ -13,6 +13,7 @@ class SettingsVC: UIViewController {
         super.viewDidLoad()
         setupSegmentedControl()
         setupInterface()
+        setupVoiceOver()
     }
     
     // MARK: - OUTLETS, VARIABLES & ENUMS
@@ -24,6 +25,7 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var saveProfileButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var logOutButton: UIBarButtonItem!
     
     private let userAuth = UserAuth.shared
     private let userAuthService = UserAuthService()
@@ -39,7 +41,7 @@ class SettingsVC: UIViewController {
         Theme.changeMode(mode: currentTheme.interfaceStyle)
     }
     
-    @IBAction func signOutButtonTapped(_ sender: Any) {
+    @IBAction func logOutButtonTapped(_ sender: Any) {
         presentDestructiveAlert(with: "Are you sure you want to Log Out ?") {
             self.signOut()
         }
@@ -117,6 +119,21 @@ class SettingsVC: UIViewController {
         } catch {
             presentErrorAlert(with: error.localizedDescription)
         }
+    }
+    
+    private func setupVoiceOver() {
+        themeSegmentedControl.accessibilityLabel = "The choices for the theme."
+        genderSegmentedControl.accessibilityLabel = "The choices for the gender."
+        
+        themeSegmentedControl.accessibilityValue = "Device theme, Light, Dark."
+        genderSegmentedControl.accessibilityValue = "Woman, man."
+        
+        logOutButton.accessibilityHint = "Press to log out."
+        lastnameTextField.accessibilityHint = "Write your lastname"
+        firstnameTextField.accessibilityHint = "Write your firstname"
+        themeSegmentedControl.accessibilityHint = "Select the new theme."
+        genderSegmentedControl.accessibilityHint = "Select your gender"
+        saveProfileButton.accessibilityHint = "Press to save your profile."
     }
 }
 

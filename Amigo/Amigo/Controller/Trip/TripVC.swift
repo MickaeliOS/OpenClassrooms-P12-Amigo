@@ -15,12 +15,14 @@ class TripVC: UIViewController {
         super.viewDidLoad()
         setupCell()
         startLoginFlow()
+        setupVoiceOver()
     }
     
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var tripTableView: UITableView!
     @IBOutlet weak var noTripLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var addTripButton: UIBarButtonItem!
     
     private var userAuth = UserAuth.shared
     private let userFetchingService = UserFetchingService()
@@ -28,7 +30,6 @@ class TripVC: UIViewController {
     private let tripDeletionService = TripDeletionService()
     private let journeyDeletionService = JourneyDeletionService()
     private let expenseDeletionService = ExpenseDeletionService()
-
     
     // MARK: - ACTIONS
     @IBAction func unwindToRootVC(segue: UIStoryboardSegue) {
@@ -99,6 +100,10 @@ class TripVC: UIViewController {
             return true
         }
         return false
+    }
+    
+    private func setupVoiceOver() {
+        addTripButton.accessibilityHint = "Press to add a trip."
     }
 }
 

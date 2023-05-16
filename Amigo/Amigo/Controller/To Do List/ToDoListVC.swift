@@ -14,6 +14,7 @@ class ToDoListVC: UIViewController {
         super.viewDidLoad()
         setupInterface()
         setupCell()
+        setupVoiceOver()
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -135,6 +136,11 @@ class ToDoListVC: UIViewController {
     private func setupCell() {
         self.toDoCollectionView.register(UINib(nibName: Constant.CollectionViewCells.toDoNibName, bundle: nil),
                                          forCellWithReuseIdentifier: Constant.CollectionViewCells.toDoCell)
+    }
+    
+    private func setupVoiceOver() {
+        addToDoItemButton.accessibilityHint = "Press to add a task."
+        saveToDoListButton.accessibilityHint = "Press to save your tasks."
     }
 }
 

@@ -13,6 +13,7 @@ class ConfirmationTripVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInterface()
+        setupVoiceOver()
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -27,5 +28,9 @@ class ConfirmationTripVC: UIViewController {
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
         myListButton.layer.cornerRadius = 10
+    }
+    
+    private func setupVoiceOver() {
+        myListButton.accessibilityHint = "Press to get back to your trip's list."
     }
 }

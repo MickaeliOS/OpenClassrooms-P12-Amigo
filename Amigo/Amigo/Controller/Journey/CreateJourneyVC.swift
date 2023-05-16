@@ -15,6 +15,7 @@ class CreateJourneyVC: UIViewController {
         super.viewDidLoad()
         setupInterface()
         setupMapKitAutocompletion()
+        setupVoiceOver()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -116,6 +117,19 @@ class CreateJourneyVC: UIViewController {
         searchResults.removeAll()
         journeyTableView.reloadData()
     }
+    
+    private func setupVoiceOver() {
+        // Labels
+        startDatePicker.accessibilityLabel = "Destination's start date."
+        endDatePicker.accessibilityLabel = "Destination's end date."
+
+        // Values
+        startDatePicker.accessibilityValue = startDatePicker.date.dateToString()
+        endDatePicker.accessibilityValue = endDatePicker.date.dateToString()
+        
+        // Hints
+        addJourneyButton.accessibilityHint = "Press to add your destination."
+    }
 }
 
 // MARK: - EXTENSIONS & PROTOCOLS
@@ -148,6 +162,10 @@ extension CreateJourneyVC: UITableViewDelegate, UITableViewDataSource {
         // We get the address of the journey.
         cell.textLabel?.text = searchResults.title
         cell.detailTextLabel?.text = searchResults.subtitle
+        
+        // As an exception, I have placed the accessibility hint here because I am unable to do so within the setupVoiceOver() function.
+        // This is due to the inability to establish a connection between the table view cell and the view controller.
+        cell.accessibilityHint = "Press the row to select your destination."
         
         return cell
     }

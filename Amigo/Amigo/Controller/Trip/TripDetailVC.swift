@@ -12,6 +12,7 @@ class TripDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInterface()
+        setupVoiceOver()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -57,6 +58,21 @@ class TripDetailVC: UIViewController {
         journeyButton.layer.cornerRadius = 10
         expensesButton.layer.cornerRadius = 10
         toDoListButton.layer.cornerRadius = 10
+    }
+    
+    private func setupVoiceOver() {
+        // Labels
+        startDateLabel.accessibilityLabel = "The trip's start date."
+        endDateLabel.accessibilityLabel = "The trip's end date."
+
+        // Values
+        startDateLabel.accessibilityValue = startDateLabel.text
+        endDateLabel.accessibilityValue = endDateLabel.text
+
+        // Hints
+        journeyButton.accessibilityHint = "Press to see the trip's journey."
+        expensesButton.accessibilityHint = "Press to see the trip's expenses."
+        toDoListButton.accessibilityHint = "Press to see the trip's to do list."
     }
 }
 

@@ -8,6 +8,13 @@
 import UIKit
 
 class JourneyTableViewCell: UITableViewCell {
+    
+    // MARK: - VIEW LIFE CYCLE
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        disableVoiceOverForCell()
+    }
+    
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
@@ -20,5 +27,26 @@ class JourneyTableViewCell: UITableViewCell {
         startDateLabel.text = startDate
         endDateLabel.text = endDate
         destinationLabel.text = destination
+        setupVoiceOver()
+    }
+    
+    private func disableVoiceOverForCell() {
+        // Not allowing accessibility for the cell itself
+        isAccessibilityElement = false
+        
+        // But we enable it for every items in the cell
+        accessibilityElements = [startDateLabel!, endDateLabel!, destinationLabel!, datesView!]
+    }
+    
+    private func setupVoiceOver() {
+        // Labels
+        startDateLabel.accessibilityLabel = "Start date."
+        endDateLabel.accessibilityLabel = "End date."
+        destinationLabel.accessibilityLabel = "Destination."
+
+        // Values
+        startDateLabel.accessibilityValue = startDateLabel.text
+        endDateLabel.accessibilityValue = endDateLabel.text
+        destinationLabel.accessibilityValue = destinationLabel.text
     }
 }

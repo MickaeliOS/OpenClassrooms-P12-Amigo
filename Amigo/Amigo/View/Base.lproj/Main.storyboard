@@ -110,6 +110,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="hUV-UH-LQu"/>
                     <connections>
+                        <outlet property="createAccountButton" destination="jG9-Dc-5uq" id="yb9-WL-41m"/>
                         <outlet property="emailTextField" destination="m2G-pC-iKf" id="lSp-a2-tkE"/>
                         <outlet property="errorMessageLabel" destination="0jh-xL-ezu" id="a2E-t4-hHp"/>
                         <outlet property="loginButton" destination="2IU-KH-FLX" id="BmQ-4q-Bne"/>
@@ -203,11 +204,11 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ckf-EG-kWl">
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="44.666666666666664"/>
                                                 <color key="backgroundColor" name="UIElement1"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" title="Save Profile">
-                                                    <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
-                                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </buttonConfiguration>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Save Profile">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="saveProfileButtonTapped:" destination="b9P-vA-qFd" eventType="touchUpInside" id="xGM-u3-KlP"/>
                                                 </connections>
@@ -250,7 +251,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Log out" id="kDz-he-mPB">
                             <color key="tintColor" name="UIElement1"/>
                             <connections>
-                                <action selector="signOutButtonTapped:" destination="b9P-vA-qFd" id="RYB-hr-CjQ"/>
+                                <action selector="logOutButtonTapped:" destination="b9P-vA-qFd" id="2OB-1V-37i"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -260,6 +261,7 @@
                         <outlet property="firstnameTextField" destination="RQM-q7-Exs" id="rDY-da-kYz"/>
                         <outlet property="genderSegmentedControl" destination="KTh-mP-oLG" id="N03-IU-upn"/>
                         <outlet property="lastnameTextField" destination="ARy-0R-1Op" id="Nlu-Ys-vDI"/>
+                        <outlet property="logOutButton" destination="kDz-he-mPB" id="0Pp-I5-RCq"/>
                         <outlet property="saveProfileButton" destination="Ckf-EG-kWl" id="wC2-1y-fdn"/>
                         <outlet property="themeLabel" destination="saY-ab-Oth" id="t48-aN-tIK"/>
                         <outlet property="themeSegmentedControl" destination="dyO-PX-gQ8" id="tBm-Jp-Iwy"/>
@@ -643,7 +645,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Hiq-7p-6EW">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="ZMT-tf-Ams">
+                        <barButtonItem key="rightBarButtonItem" title="Add destination" image="plus" catalog="system" id="ZMT-tf-Ams">
                             <connections>
                                 <action selector="addJourneyTapped:" destination="cg4-D8-dG3" id="wFU-VH-yTU"/>
                             </connections>
@@ -651,6 +653,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="KSS-i6-T3T" id="eYW-f4-LMB"/>
+                        <outlet property="addDestinationButton" destination="ZMT-tf-Ams" id="Sa1-PA-dUA"/>
                         <outlet property="journeyTableView" destination="DJ5-rs-q5G" id="Jym-Sp-Mqb"/>
                         <outlet property="noJourneyLabel" destination="Crp-Sv-eMD" id="Onr-6s-HMP"/>
                         <outlet property="saveButton" destination="QxW-m4-ZSa" id="fov-uO-A10"/>
@@ -1030,6 +1033,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="6A4-zu-xcl" id="ZbB-h2-n2R"/>
+                        <outlet property="addTripButton" destination="6Nu-rJ-D9Y" id="rsr-3P-pzv"/>
                         <outlet property="noTripLabel" destination="nh8-0c-0Yt" id="VXY-06-fzq"/>
                         <outlet property="tripTableView" destination="fD3-57-EQm" id="TVn-rI-CPV"/>
                         <segue destination="Ktz-LG-Qti" kind="show" identifier="segueToTripDetailVC" id="pcQ-tB-o1H"/>
@@ -1109,11 +1113,11 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUJ-wQ-ok1">
                                         <rect key="frame" x="0.0" y="204" width="365" height="63.666666666666686"/>
                                         <color key="backgroundColor" name="UIElement1"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Add Trip">
-                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleTitle1"/>
-                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </buttonConfiguration>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Add Trip">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="addTripButtonTapped:" destination="09R-yk-M0i" eventType="touchUpInside" id="Vrx-ya-aGS"/>
                                         </connections>
@@ -1241,7 +1245,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <searchBar contentMode="redraw" placeholder="Pick your country" translatesAutoresizingMaskIntoConstraints="NO" id="ILx-Uc-a4o">
+                            <searchBar contentMode="redraw" placeholder="Specify your country" translatesAutoresizingMaskIntoConstraints="NO" id="ILx-Uc-a4o">
                                 <rect key="frame" x="10" y="137.66666666666666" width="355" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>

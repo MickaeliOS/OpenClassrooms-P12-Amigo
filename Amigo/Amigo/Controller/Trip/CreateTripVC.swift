@@ -14,6 +14,7 @@ class CreateTripVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInterface()
+        setupVoiceOver()
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -126,6 +127,19 @@ class CreateTripVC: UIViewController {
         if !errorMessageLabel.isHidden {
             errorMessageLabel.isHidden = true
         }
+    }
+    
+    private func setupVoiceOver() {
+        // Labels
+        startDatePicker.accessibilityLabel = "Trip's start date."
+        endDatePicker.accessibilityLabel = "Trip's end date."
+
+        // Values
+        startDatePicker.accessibilityValue = startDatePicker.date.dateToString()
+        endDatePicker.accessibilityValue = endDatePicker.date.dateToString()
+
+        // Hints
+        addTripButton.accessibilityHint = "Press to add your trip."
     }
 }
 

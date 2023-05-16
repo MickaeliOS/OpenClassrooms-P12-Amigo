@@ -15,6 +15,7 @@ class ExpensesVC: UIViewController {
         setupInterface()
         setupCell()
         fetchExpenses()
+        setupVoiceOver()
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -146,6 +147,19 @@ class ExpensesVC: UIViewController {
     private func clearTextFields() {
         expenseTextField.text = ""
         amountTextField.text = ""
+    }
+    
+    private func setupVoiceOver() {
+        // Labels
+        amountTextField.accessibilityLabel = "Your amount here."
+        expenseDatePicker.accessibilityLabel = "The date of the expense."
+        
+        // Values
+        expenseDatePicker.accessibilityValue = expenseDatePicker.date.dateToString()
+        
+        // Hints
+        addExpenseItemButton.accessibilityHint = "Press to add your expense."
+        saveExpensesButton.accessibilityHint = "Press to save your expense."
     }
 }
 

@@ -58,6 +58,7 @@
             <gestureRecognizers/>
             <size key="customSize" width="378" height="106"/>
             <connections>
+                <outlet property="deleteItemButton" destination="nb5-R6-SIT" id="5rW-RP-8kL"/>
                 <outlet property="toDoLabel" destination="dnx-BC-UNB" id="haR-xE-QsZ"/>
             </connections>
             <point key="canvasLocation" x="300.76335877862596" y="41.549295774647888"/>

@@ -13,6 +13,7 @@ class WelcomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInterface()
+        setupVoiceOver()
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -20,6 +21,7 @@ class WelcomeVC: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
+    @IBOutlet weak var createAccountButton: UIButton!
     
     private var isPasswordVisible = false
     private let userAuthService = UserAuthService()
@@ -70,6 +72,16 @@ class WelcomeVC: UIViewController {
     
     private func fieldsControl() -> Bool {
         return (emailTextField.isEmpty || passwordTextField.isEmpty)
+    }
+    
+    private func setupVoiceOver() {
+        // Labels
+        emailTextField.accessibilityLabel = "Your email here."
+        passwordTextField.accessibilityLabel = "Your password here."
+        
+        // Hints
+        loginButton.accessibilityHint = "Press the button to log in."
+        createAccountButton.accessibilityHint = "Press the button to create your account."
     }
     
     // MARK: - OBJC FUNCTIONS
