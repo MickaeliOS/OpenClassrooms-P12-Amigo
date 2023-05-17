@@ -13,25 +13,22 @@ class MyTabBarVC: UITabBarController {
         super.viewDidLoad()
         delegate = self
     }
+    
+    // This is the centralized storage for the User object, enabling seamless data sharing among the various view controllers as I navigate between tabs.
+    var user: User?
 }
 
 extension MyTabBarVC: UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        let barViewControllers = viewControllers
         
-        guard let tripNavigationController = barViewControllers![0] as? UINavigationController,
-              let tripVC = tripNavigationController.topViewController as? TripVC else { return }
-        
-        guard let settingsVC = barViewControllers![1] as? SettingsVC else { return }
-        
-        if item.title == "Settings" {
-            //print("MKA - SETTINGS PRESSED")
-            settingsVC.user = tripVC.user
-        }
-        
-        if item.title == "My Trips" {
-            //print("MKA - TRIPS PRESSED")
-            tripVC.user = settingsVC.user
+        // To ensure that TripVC always has the most up-to-date version of the User object, I am implementing a TableView reload here.
+        // This ensures that any modifications made to the User object in SettingsVC are reflected immediately in TripVC.
+        if tabBar.selectedItem?.title == "My Trips" {
+            if let tripNavigationController = viewControllers![0] as? UINavigationController,
+                let tripVC = tripNavigationController.topViewController as? TripVC  {
+                tripVC.tripTableView.reloadData()
+                print("MKA - DATA RELOADED")
+            }
         }
     }
 }

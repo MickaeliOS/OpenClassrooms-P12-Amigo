@@ -15,6 +15,7 @@ class CreateTripVC: UIViewController {
         super.viewDidLoad()
         setupInterface()
         setupVoiceOver()
+        setupMyTabBarVC()
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -24,6 +25,7 @@ class CreateTripVC: UIViewController {
     @IBOutlet weak var addTripButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
     
+    private var myTabBarVC: MyTabBarVC?
     private let currentUser = Auth.auth().currentUser
     private let tripCreationService = TripCreationService()
     private let descriptionPlaceHolder = "Enter your description."
@@ -69,8 +71,15 @@ class CreateTripVC: UIViewController {
             // The retrieval of the tripID is essential for any future editing or deletion of the corresponding trip.
             trip.tripID = tripID
             
+            // We save the trip locally.
+            if myTabBarVC?.user?.trips == nil {
+                myTabBarVC?.user?.trips = [trip]
+            } else {
+                myTabBarVC?.user?.trips?.append(trip)
+            }
+            
             // We can go to the ConfirmationVC screen.
-            performSegue(withIdentifier: Constant.SegueID.segueToConfirmationTripVC, sender: trip)
+            performSegue(withIdentifier: Constant.SegueID.segueToConfirmationTripVC, sender: nil)
             
         } catch let error as Errors.DatabaseError {
             presentErrorAlert(with: error.localizedDescription)
@@ -136,16 +145,20 @@ class CreateTripVC: UIViewController {
         // Hints
         addTripButton.accessibilityHint = "Press to add your trip."
     }
+    
+    private func setupMyTabBarVC() {
+        myTabBarVC = tabBarController as? MyTabBarVC
+    }
 }
 
 // MARK: - EXTENSIONS & PROTOCOLS
 extension CreateTripVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constant.SegueID.segueToConfirmationTripVC {
+        /*if segue.identifier == Constant.SegueID.segueToConfirmationTripVC {
             let confirmationTripVC = segue.destination as? ConfirmationTripVC
             let trip = sender as? Trip
             confirmationTripVC?.trip = trip
-        }
+        }*/
         
         if segue.identifier == Constant.SegueID.segueToCountryPickerVC {
             let destinationPickerVC = segue.destination as? CountryPickerVC

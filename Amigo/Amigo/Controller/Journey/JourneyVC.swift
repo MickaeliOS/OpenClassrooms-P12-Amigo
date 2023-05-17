@@ -65,7 +65,7 @@ class JourneyVC: UIViewController {
                 return
             }
             
-            if var journey = journey, let locations = journey.locations, !locations.isEmpty {
+            if var journey = journey, let locations = journey.locations {
                 // I am sorting the dates in ascending order, from the oldest to the newest.
                 let dateOrderedJourney = LocationManagement.sortLocationsByDateAscending(locations: locations)
                 journey.locations = dateOrderedJourney
@@ -74,9 +74,6 @@ class JourneyVC: UIViewController {
                 self?.journey = journey
                 self?.journeyTableView.reloadData()
             } else {
-                // I am implementing this because if the Trip does not have a journey, and journey is equal to nil,
-                // the user won't be able to add locations to the trip's journey from the CreateJourneyVC.
-                self?.journey = Journey()
                 self?.noJourneyLabel.isHidden = false
             }
             
@@ -85,7 +82,10 @@ class JourneyVC: UIViewController {
     }
     
     private func saveJourney() {
-        guard let journey = journey, let tripID = trip?.tripID else { return }
+        guard let journey = journey, let tripID = trip?.tripID else {
+            presentErrorAlert(with: Errors.DatabaseError.nothingToAdd.localizedDescription)
+            return
+        }
         
         do {
             try journeyUpdateService.updateJourney(journey: journey, for: tripID)

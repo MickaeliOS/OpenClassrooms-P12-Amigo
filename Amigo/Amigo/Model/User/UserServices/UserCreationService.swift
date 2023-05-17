@@ -40,12 +40,12 @@ final class UserCreationService {
     func saveUserInDatabase(user: User, userID: String) async throws {
         let userData = [userTableConstants.firstname: user.firstname,
                         userTableConstants.lastname: user.lastname,
-                        userTableConstants.gender: user.gender.rawValue,
+                        userTableConstants.gender: user.gender?.rawValue,
                         userTableConstants.email: user.email]
 
         
         do {
-            try await firestoreDatabase.collection(userTableConstants.tableName).document(userID).setData(userData)
+            try await firestoreDatabase.collection(userTableConstants.tableName).document(userID).setData(userData as [String : Any])
         } catch {
             throw Errors.DatabaseError.cannotSaveUser
         }

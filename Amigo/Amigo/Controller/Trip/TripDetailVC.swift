@@ -17,8 +17,11 @@ class TripDetailVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        guard let trip = trip else { return }
-        delegate?.refreshTrip(trip: trip)
+        
+        if isMovingFromParent {
+            guard let trip = trip else { return }
+            delegate?.refreshTrip(trip: trip)
+        }
     }
     
     // MARK: - OUTLETS & PROPERTIES

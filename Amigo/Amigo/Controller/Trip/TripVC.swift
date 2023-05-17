@@ -16,6 +16,7 @@ class TripVC: UIViewController {
         setupCell()
         startLoginFlow()
         setupVoiceOver()
+        setupMyTabBar()
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -24,8 +25,8 @@ class TripVC: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var addTripButton: UIBarButtonItem!
 
-    var user: User?
-    private let currentUser = Auth.auth().currentUser
+    var myTabBarVC: MyTabBarVC?
+    private let userCreationService = UserCreationService()
     private let userFetchingService = UserFetchingService()
     private let tripFetchingService = TripFetchingService()
     private let tripDeletionService = TripDeletionService()
@@ -51,7 +52,7 @@ class TripVC: UIViewController {
     }
     
     private func startLoginFlow() {
-        guard let currentUser = currentUser else {
+        guard let currentUser = Auth.auth().currentUser else {
             presentVCFullScreen(with: "WelcomeVC")
             return
         }
@@ -61,21 +62,23 @@ class TripVC: UIViewController {
         Task {
             do {
                 // First, we fetch the user from Firestore
-                if let user = try await userFetchingService.fetchUser(userID: currentUser.uid) {
-                    
-                    // We save it locally.
-                    self.user = user
+                if var user = try await userFetchingService.fetchUser(userID: currentUser.uid) {
                     
                     // We also need the user's trips.
-                    self.user?.trips = try await tripFetchingService.fetchTrips(userID: currentUser.uid)
+                    user.trips = try await tripFetchingService.fetchTrips(userID: currentUser.uid)
+                    
+                    // We save it locally.
+                    myTabBarVC?.user = user
                     
                     // It's necessary to display the trips in ascending order based on the date, starting from the oldest.
                     sortTripsByDateAscending()
+                    
+                    refreshInterface()
+                    return
                 }
-
-                refreshInterface()
-                //passDataToSettingsVC()
                 
+                await saveUserInDatabase(currentUser: currentUser)
+                refreshInterface()
             } catch let error as Errors.DatabaseError {
                 presentErrorAlert(with: error.localizedDescription)
             }
@@ -83,7 +86,7 @@ class TripVC: UIViewController {
     }
     
     private func isUserTripsEmpty() -> Bool {
-        if let trips = user?.trips, !trips.isEmpty {
+        if let trips = myTabBarVC?.user?.trips, !trips.isEmpty {
             return true
         }
         return false
@@ -100,16 +103,28 @@ class TripVC: UIViewController {
     }
     
     private func sortTripsByDateAscending() {
-        guard let trips = user?.trips, !trips.isEmpty else { return }
+        guard let trips = myTabBarVC?.user?.trips, !trips.isEmpty else { return }
 
-        user?.trips = TripManagement.sortTripsByDateAscending(trips: trips)
+        myTabBarVC?.user?.trips = TripManagement.sortTripsByDateAscending(trips: trips)
     }
     
-    /*private func passDataToSettingsVC() {
-        let barViewControllers = tabBarController?.viewControllers
-        guard let settingsVC = barViewControllers![1] as? SettingsVC else { return }
-        settingsVC.user = user
-    }*/
+    private func setupMyTabBar() {
+        myTabBarVC = tabBarController as? MyTabBarVC
+    }
+    
+    private func saveUserInDatabase(currentUser: FirebaseAuth.User) async {
+        let user = User(email: currentUser.email!)
+        
+        do {
+            try await userCreationService.saveUserInDatabase(user: user, userID: currentUser.uid)
+            // We save it locally.
+            myTabBarVC?.user = user
+        } catch let error as Errors.DatabaseError {
+            presentErrorAlert(with: error.localizedDescription)
+        } catch {
+            presentErrorAlert(with: error.localizedDescription)
+        }
+    }
 }
 
 // MARK: - EXTENSIONS
@@ -126,7 +141,7 @@ extension TripVC {
 
 extension TripVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return user?.trips?.count ?? 0
+        return myTabBarVC?.user?.trips?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -135,10 +150,10 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        guard let trip = user?.trips?[indexPath.row] else {
+        guard let trip = myTabBarVC?.user?.trips?[indexPath.row] else {
             return UITableViewCell()
         }
-        
+
         cell.configureCell(country: trip.country,
                            countryCode: trip.countryCode,
                            fromDate: trip.startDate,
@@ -147,7 +162,7 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let trip = user?.trips?[indexPath.row]
+        let trip = myTabBarVC?.user?.trips?[indexPath.row]
         performSegue(withIdentifier: Constant.SegueID.segueToTripDetailVC, sender: trip)
     }
     
@@ -161,7 +176,7 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
             presentDestructiveAlert(with: "Are you sure you want to delete your Trip ?") {
                 Task {
                     do {
-                        guard let tripID = self.user?.trips?[indexPath.row].tripID else {
+                        guard let tripID = self.myTabBarVC?.user?.trips?[indexPath.row].tripID else {
                             self.presentErrorAlert(with: Errors.DatabaseError.noTripID.localizedDescription)
                             return
                         }
@@ -171,7 +186,7 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
                         try await self.journeyDeletionService.deleteJourney(tripID: tripID)
                         try await self.expenseDeletionService.deleteExpense(tripID: tripID)
 
-                        self.user?.trips?.remove(at: indexPath.row)
+                        self.myTabBarVC?.user?.trips?.remove(at: indexPath.row)
                         
                         // Then, the cell
                         tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -188,7 +203,14 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
 
 extension TripVC: TripDetailVCDelegate {
     func refreshTrip(trip: Trip) {
-        user?.trips?.append(trip) // TODO: Duplication
+        
+        // In order to maintain the latest version of the modified trip within the user's data, I need to update the trip's information.
+        // This ensures that any changes made to the trip are reflected in the user's data, allowing for accurate and up-to-date information across the application.
+        guard let index = myTabBarVC?.user?.trips?.firstIndex(where: { tripItem in
+            trip.tripID == tripItem.tripID
+        }) else { return }
+        
+        myTabBarVC?.user?.trips?[index] = trip
         tripTableView.reloadData()
     }
 }

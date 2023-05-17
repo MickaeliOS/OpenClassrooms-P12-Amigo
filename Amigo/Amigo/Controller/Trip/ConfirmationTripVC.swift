@@ -18,11 +18,10 @@ class ConfirmationTripVC: UIViewController {
     
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var myListButton: UIButton!
-    var trip: Trip?
 
     // MARK: - ACTIONS
     @IBAction func myListButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: Constant.SegueID.unwindToRootVC, sender: trip)
+        performSegue(withIdentifier: Constant.SegueID.unwindToRootVC, sender: nil)
     }
     
     // MARK: - PRIVATE FUNCTIONS
@@ -40,8 +39,7 @@ extension ConfirmationTripVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constant.SegueID.unwindToRootVC {
             let tripVC = segue.destination as? TripVC
-            guard let trip = sender as? Trip else { return }
-            tripVC?.user?.trips?.append(trip)
+            tripVC?.tripTableView.reloadData()
         }
     }
 }

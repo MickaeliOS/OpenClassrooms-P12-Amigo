@@ -80,6 +80,10 @@ class CreateJourneyVC: UIViewController {
     }
     
     private func saveJourney() {
+        if journey == nil {
+            journey = Journey()
+        }
+        
         guard let completeAddress = journeySearchBar.text, !completeAddress.isEmpty else {
             errorMessageLabel.isHidden = false
             errorMessageLabel.displayErrorMessage(message: "Please choose at least one destination.")

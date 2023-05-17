@@ -80,6 +80,7 @@ class ToDoListVC: UIViewController {
     
     private func saveToDoList() {
         guard let tripID = trip?.tripID, let toDoList = trip?.toDoList else {
+            presentErrorAlert(with: Errors.DatabaseError.nothingToAdd.localizedDescription)
             return
         }
         

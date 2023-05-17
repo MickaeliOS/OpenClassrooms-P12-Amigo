@@ -136,30 +136,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tTV-cw-g1N">
-                                <rect key="frame" x="10" y="47" width="355" height="60"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="oES-b7-3oZ">
+                                <rect key="frame" x="10" y="47" width="355" height="34"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saY-ab-Oth">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="24"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dyO-PX-gQ8">
-                                        <rect key="frame" x="0.0" y="29" width="355" height="32"/>
-                                        <segments>
-                                            <segment title="Device"/>
-                                            <segment title="Light"/>
-                                            <segment title="Dark"/>
-                                        </segments>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Psg-Aj-g2e">
+                                        <rect key="frame" x="276.33333333333331" y="0.0" width="78.666666666666686" height="34"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Log Out">
+                                            <fontDescription key="titleFontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <color key="baseForegroundColor" name="UIElement1"/>
+                                        </buttonConfiguration>
                                         <connections>
-                                            <action selector="toggleSegmentedControl:" destination="b9P-vA-qFd" eventType="valueChanged" id="eWN-7x-BZN"/>
+                                            <action selector="logOutButtonTapped:" destination="b9P-vA-qFd" eventType="touchUpInside" id="TNJ-F1-QcX"/>
                                         </connections>
-                                    </segmentedControl>
+                                    </button>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QX6-A8-QFb">
-                                <rect key="frame" x="10" y="126.99999999999999" width="355" height="210.66666666666663"/>
+                                <rect key="frame" x="10" y="181" width="355" height="211"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWf-ZP-Sxo">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="24"/>
@@ -199,10 +193,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skQ-C9-5oq">
-                                        <rect key="frame" x="0.0" y="163" width="355" height="47.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="163" width="355" height="48"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ckf-EG-kWl">
-                                                <rect key="frame" x="0.0" y="0.0" width="355" height="47.666666666666664"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="48"/>
                                                 <color key="backgroundColor" name="UIElement1"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -229,39 +223,57 @@
                                     </view>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="tTV-cw-g1N">
+                                <rect key="frame" x="10" y="101" width="355" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saY-ab-Oth">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="24"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dyO-PX-gQ8">
+                                        <rect key="frame" x="0.0" y="29" width="355" height="32"/>
+                                        <segments>
+                                            <segment title="Device"/>
+                                            <segment title="Light"/>
+                                            <segment title="Dark"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="toggleSegmentedControl:" destination="b9P-vA-qFd" eventType="valueChanged" id="eWN-7x-BZN"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="x26-9F-iUV"/>
                         <color key="backgroundColor" name="Background"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="skQ-C9-5oq" firstAttribute="height" secondItem="x26-9F-iUV" secondAttribute="height" multiplier="0.07" id="5Tx-GX-vDm"/>
-                            <constraint firstItem="tTV-cw-g1N" firstAttribute="top" secondItem="x26-9F-iUV" secondAttribute="top" id="B2g-zL-Brj"/>
                             <constraint firstItem="QX6-A8-QFb" firstAttribute="leading" secondItem="x26-9F-iUV" secondAttribute="leading" constant="10" id="BiA-dv-b4x"/>
                             <constraint firstItem="x26-9F-iUV" firstAttribute="trailing" secondItem="QX6-A8-QFb" secondAttribute="trailing" constant="10" id="C4x-ES-MHh"/>
+                            <constraint firstItem="oES-b7-3oZ" firstAttribute="top" secondItem="x26-9F-iUV" secondAttribute="top" id="NCK-Ma-GOA"/>
                             <constraint firstItem="x26-9F-iUV" firstAttribute="trailing" secondItem="tTV-cw-g1N" secondAttribute="trailing" constant="10" id="OFu-f0-Sbo"/>
-                            <constraint firstItem="QX6-A8-QFb" firstAttribute="top" secondItem="tTV-cw-g1N" secondAttribute="bottom" constant="20" id="UAn-rz-UAK"/>
+                            <constraint firstItem="x26-9F-iUV" firstAttribute="trailing" secondItem="oES-b7-3oZ" secondAttribute="trailing" constant="10" id="bKg-Pr-srS"/>
                             <constraint firstItem="tTV-cw-g1N" firstAttribute="leading" secondItem="x26-9F-iUV" secondAttribute="leading" constant="10" id="o01-eu-QA3"/>
+                            <constraint firstItem="Psg-Aj-g2e" firstAttribute="height" secondItem="x26-9F-iUV" secondAttribute="height" multiplier="0.05" id="pVo-wh-bxL"/>
+                            <constraint firstItem="oES-b7-3oZ" firstAttribute="leading" secondItem="x26-9F-iUV" secondAttribute="leading" constant="10" id="qVp-3b-d4K"/>
+                            <constraint firstItem="QX6-A8-QFb" firstAttribute="top" secondItem="tTV-cw-g1N" secondAttribute="bottom" constant="20" id="so8-Rv-Sas"/>
+                            <constraint firstItem="tTV-cw-g1N" firstAttribute="top" secondItem="oES-b7-3oZ" secondAttribute="bottom" constant="20" id="zAM-Dn-NJv"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="rkD-hJ-fV5" appends="YES" id="nJE-js-uGo"/>
                         </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" id="m2Z-xX-Aww"/>
-                    <navigationItem key="navigationItem" id="6y0-mK-jtq">
-                        <barButtonItem key="rightBarButtonItem" title="Log out" id="kDz-he-mPB">
-                            <color key="tintColor" name="UIElement1"/>
-                            <connections>
-                                <action selector="logOutButtonTapped:" destination="b9P-vA-qFd" id="2OB-1V-37i"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="c5Q-1Q-fBY" id="RuU-wE-22z"/>
                         <outlet property="errorMessageLabel" destination="q9l-3O-TZd" id="MPR-Vk-Z4D"/>
                         <outlet property="firstnameTextField" destination="RQM-q7-Exs" id="rDY-da-kYz"/>
                         <outlet property="genderSegmentedControl" destination="KTh-mP-oLG" id="N03-IU-upn"/>
                         <outlet property="lastnameTextField" destination="ARy-0R-1Op" id="Nlu-Ys-vDI"/>
-                        <outlet property="logOutButton" destination="kDz-he-mPB" id="0Pp-I5-RCq"/>
+                        <outlet property="logOutButton" destination="Psg-Aj-g2e" id="U3a-33-qnl"/>
                         <outlet property="saveProfileButton" destination="Ckf-EG-kWl" id="wC2-1y-fdn"/>
                         <outlet property="themeLabel" destination="saY-ab-Oth" id="t48-aN-tIK"/>
                         <outlet property="themeSegmentedControl" destination="dyO-PX-gQ8" id="tBm-Jp-Iwy"/>
@@ -396,17 +408,27 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your expenses are empty. Please add some to display them!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMB-Qu-YWs">
+                                <rect key="frame" x="10" y="91" width="355" height="618"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Rpb-gO-Ok6"/>
                         <color key="backgroundColor" name="Background"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Rpb-gO-Ok6" firstAttribute="bottom" secondItem="pfi-ow-Y7z" secondAttribute="bottom" constant="20" id="2AR-9a-acF"/>
+                            <constraint firstItem="Rpb-gO-Ok6" firstAttribute="bottom" secondItem="BMB-Qu-YWs" secondAttribute="bottom" constant="20" id="2kn-dp-OTz"/>
                             <constraint firstItem="pfi-ow-Y7z" firstAttribute="leading" secondItem="Rpb-gO-Ok6" secondAttribute="leading" constant="10" id="74p-P0-Ex9"/>
+                            <constraint firstItem="Rpb-gO-Ok6" firstAttribute="trailing" secondItem="BMB-Qu-YWs" secondAttribute="trailing" constant="10" id="9c0-aY-cbN"/>
                             <constraint firstItem="Rpb-gO-Ok6" firstAttribute="trailing" secondItem="pfi-ow-Y7z" secondAttribute="trailing" constant="10" id="KOm-rv-gP4"/>
                             <constraint firstItem="zdh-QF-7IG" firstAttribute="height" secondItem="Rpb-gO-Ok6" secondAttribute="height" multiplier="0.1" id="MN1-1Y-Luv"/>
+                            <constraint firstItem="BMB-Qu-YWs" firstAttribute="leading" secondItem="Rpb-gO-Ok6" secondAttribute="leading" constant="10" id="WFF-8s-31T"/>
                             <constraint firstItem="mTd-yb-bYR" firstAttribute="height" secondItem="Rpb-gO-Ok6" secondAttribute="height" multiplier="0.1" id="Z8A-71-5nz"/>
                             <constraint firstItem="pfi-ow-Y7z" firstAttribute="top" secondItem="Rpb-gO-Ok6" secondAttribute="top" id="c09-uP-qr6"/>
+                            <constraint firstItem="BMB-Qu-YWs" firstAttribute="top" secondItem="Rpb-gO-Ok6" secondAttribute="top" id="ceT-8N-5nG"/>
                             <constraint firstItem="hxf-Dk-V8Z" firstAttribute="height" secondItem="Rpb-gO-Ok6" secondAttribute="height" multiplier="0.1" id="gn5-9F-qy8"/>
                         </constraints>
                         <connections>
@@ -421,6 +443,7 @@
                         <outlet property="expenseDatePicker" destination="m5T-AM-2ph" id="bUH-ZA-sXk"/>
                         <outlet property="expenseTextField" destination="hxf-Dk-V8Z" id="2zT-O3-8R3"/>
                         <outlet property="expensesTableView" destination="v0D-95-quP" id="bOS-TT-Lkg"/>
+                        <outlet property="noExpensesLabel" destination="BMB-Qu-YWs" id="jYC-zR-e5h"/>
                         <outlet property="saveExpensesButton" destination="zdh-QF-7IG" id="1DU-sE-nhA"/>
                         <outlet property="totalLabel" destination="vvw-1M-1cR" id="U1Z-WG-rXf"/>
                     </connections>

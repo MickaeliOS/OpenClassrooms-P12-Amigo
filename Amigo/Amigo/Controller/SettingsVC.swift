@@ -15,6 +15,7 @@ class SettingsVC: UIViewController {
         setupSegmentedControl()
         setupInterface()
         setupVoiceOver()
+        setupMyTabBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,10 +32,9 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var saveProfileButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var logOutButton: UIBarButtonItem!
+    @IBOutlet weak var logOutButton: UIButton!
     
-    var user: User?
-    private let currentUser = Auth.auth().currentUser
+    private var myTabBarVC: MyTabBarVC?
     private let userAuthService = UserAuthService()
     private let userUpdatingService = UserUpdatingService()
     private let userCreationService = UserCreationService()
@@ -66,7 +66,7 @@ class SettingsVC: UIViewController {
     
     // MARK: - PRIVATE FUNCTIONS
     private func saveProfileFlow() {
-        guard let currentUser = currentUser else {
+        guard let currentUser = Auth.auth().currentUser else {
             presentErrorAlert(with: Errors.DatabaseError.noUser.localizedDescription)
             return
         }
@@ -78,7 +78,7 @@ class SettingsVC: UIViewController {
         
         toggleActivityIndicator(shown: true)
         
-        if user == nil {
+        if myTabBarVC?.user == nil {
             createUser(currentUser: currentUser, userID: currentUser.uid)
         } else {
             updateUser(userID: currentUser.uid)
@@ -99,13 +99,12 @@ class SettingsVC: UIViewController {
                 
                 // We are prepared to persistently save the user's data, both remotely and locally.
                 try await userCreationService.saveUserInDatabase(user: user, userID: userID)
-                self.user = user
+                myTabBarVC?.user = user
                 
                 // Finally, we conclude the process by executing a set of essential functions.
                 toggleActivityIndicator(shown: false)
                 refreshInterface()
                 setupPersonalInformations()
-                //passDataToTripVC()
                 presentInformationAlert(with: "Your profile has been saved.")
                 
             } catch let error as Errors.DatabaseError {
@@ -128,9 +127,9 @@ class SettingsVC: UIViewController {
                 // Finally, we can save our user locally and remotely.
                 try await userUpdatingService.updateUser(fields: fields, userID: userID)
                 
-                user?.lastname = lastnameTextField.text!
-                user?.firstname = firstnameTextField.text!
-                user?.gender = User.Gender(rawValue: genderRawValue)!
+                myTabBarVC?.user?.lastname = lastnameTextField.text!
+                myTabBarVC?.user?.firstname = firstnameTextField.text!
+                myTabBarVC?.user?.gender = User.Gender(rawValue: genderRawValue)!
                 
                 // We execute some essentials functions to finish the process.
                 toggleActivityIndicator(shown: false)
@@ -162,13 +161,13 @@ class SettingsVC: UIViewController {
     }
     
     private func setupPersonalInformations() {
-        guard let name = user?.lastname, let firstname = user?.firstname else {
+        guard let name = myTabBarVC?.user?.lastname, let firstname = myTabBarVC?.user?.firstname else {
             return
         }
         
         lastnameTextField.placeholder = name
         firstnameTextField.placeholder = firstname
-        genderSegmentedControl.selectedSegmentIndex = User.Gender.index(of: user?.gender ?? .woman)
+        genderSegmentedControl.selectedSegmentIndex = User.Gender.index(of: myTabBarVC?.user?.gender ?? .woman)
     }
     
     private func toggleActivityIndicator(shown: Bool) {
@@ -212,6 +211,9 @@ class SettingsVC: UIViewController {
         guard let TripVC = barViewControllers![0] as? TripVC else { return }
         TripVC.user = user
     }*/
+    private func setupMyTabBar() {
+        myTabBarVC = tabBarController as? MyTabBarVC
+    }
 }
 
 // MARK: - EXTENSIONS

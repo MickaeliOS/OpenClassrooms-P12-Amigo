@@ -54,10 +54,10 @@ struct Errors {
         case noUser
         case cannotGetDocuments
         case cannotUploadDocuments
-        case cannotGetPicture
         case cannotSaveUser
         case cannotDeleteDocuments
         case noTripID
+        case nothingToAdd
         case defaultError
         
         var localizedDescription: String {
@@ -68,14 +68,14 @@ struct Errors {
                 return "We couldn't retrieve your document(s), please try to log in again."
             case .cannotUploadDocuments:
                 return "We couldn't upload your document(s), please try again."
-            case .cannotGetPicture:
-                return "We couldn't get your picture, please try to log in again."
             case .cannotSaveUser:
                 return "We couldn't save your informations, please try again."
             case .cannotDeleteDocuments:
                 return "We couldn't delete your document(s), please try again."
             case .noTripID:
                 return "An Unexpected error occured, try to log in again to delete your Trip."
+            case .nothingToAdd:
+                return "There is nothing to save, please add some content first."
             case .defaultError:
                 return "A database error occurred, please try again."
             }

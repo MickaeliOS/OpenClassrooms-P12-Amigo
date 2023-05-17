@@ -27,6 +27,7 @@ class ExpensesVC: UIViewController {
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var expenseDatePicker: UIDatePicker!
     @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var noExpensesLabel: UILabel!
     
     var trip: Trip?
     weak var delegate: ExpensesVCDelegate?
@@ -40,21 +41,7 @@ class ExpensesVC: UIViewController {
     }
     
     @IBAction func saveExpensesButtonTapped(_ sender: Any) {
-        guard let tripID = trip?.tripID, let expenses = expenses else {
-            return
-        }
-    
-        do {
-            try expenseUpdateService.updateExpense(expenses: expenses, for: tripID)
-            presentInformationAlert(with: "Your expenses has been saved.") {
-                self.navigationController?.popViewController(animated: true)
-            }
-            
-        } catch let error as Errors.DatabaseError {
-            presentErrorAlert(with: error.localizedDescription)
-        } catch {
-            presentErrorAlert(with: Errors.CommonError.defaultError.localizedDescription)
-        }
+        saveExpenses()
     }
     
     @IBAction func dismissKeyboard(_ sender: Any) {
@@ -97,6 +84,10 @@ class ExpensesVC: UIViewController {
         
         let expenseItem = ExpenseItem(title: expenseTextField.text!, amount: amount, date: expenseDatePicker.date)
 
+        // I am implementing this because if the Trip does not have expenses, so expenses property is nil,
+        // the user won't be able to add expenseItems.
+        if expenses == nil { expenses = Expense() }
+        
         if expenses?.expenseItems == nil {
             expenses?.expenseItems = [expenseItem]
         } else {
@@ -105,11 +96,15 @@ class ExpensesVC: UIViewController {
 
         refreshTotalAmount()
         clearTextFields()
+        showNoExpensesLabelIfNil()
         expensesTableView.reloadData()
     }
 
     private func fetchExpenses() {
-        guard let tripID = trip?.tripID else { return }
+        guard let tripID = trip?.tripID else {
+            showNoExpensesLabelIfNil()
+            return
+        }
 
         expenseFetchingService.fetchTripExpenses(tripID: tripID) { [weak self] expenses, error in
             if let error = error {
@@ -125,13 +120,30 @@ class ExpensesVC: UIViewController {
                 // Since we have the journey data available, we can display it in the TableView.
                 self?.expenses = expenses
                 self?.refreshTotalAmount()
+                self?.showNoExpensesLabelIfNil()
                 self?.expensesTableView.reloadData()
                 return
             }
+            self?.showNoExpensesLabelIfNil()
+        }
+    }
+    
+    private func saveExpenses() {
+        guard let tripID = trip?.tripID, let expenses = expenses else {
+            presentErrorAlert(with: Errors.DatabaseError.nothingToAdd.localizedDescription)
+            return
+        }
+    
+        do {
+            try expenseUpdateService.updateExpense(expenses: expenses, for: tripID)
+            presentInformationAlert(with: "Your expenses has been saved.") {
+                self.navigationController?.popViewController(animated: true)
+            }
             
-            // I am implementing this because if the Trip does not have expenses, so expenses property is nil,
-            // the user won't be able to add expenseItems.
-            self?.expenses = Expense()
+        } catch let error as Errors.DatabaseError {
+            presentErrorAlert(with: error.localizedDescription)
+        } catch {
+            presentErrorAlert(with: Errors.CommonError.defaultError.localizedDescription)
         }
     }
     
@@ -162,6 +174,14 @@ class ExpensesVC: UIViewController {
         addExpenseItemButton.accessibilityHint = "Press to add your expense."
         saveExpensesButton.accessibilityHint = "Press to save your expense."
     }
+    
+    private func showNoExpensesLabelIfNil() {
+        if expenses == nil || expenses?.expenseItems?.isEmpty == true {
+            noExpensesLabel.isHidden = false
+            return
+        }
+        noExpensesLabel.isHidden = true
+    }
 }
 
 // MARK: - EXTENSIONS
@@ -190,6 +210,7 @@ extension ExpensesVC: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             expenses?.expenseItems?.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            showNoExpensesLabelIfNil()
             refreshTotalAmount()
         }
     }

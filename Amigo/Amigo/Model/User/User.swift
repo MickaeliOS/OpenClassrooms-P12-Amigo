@@ -8,9 +8,9 @@
 import Foundation
 
 struct User: Codable {
-    var firstname: String
-    var lastname: String
-    var gender: Gender
+    var firstname: String?
+    var lastname: String?
+    var gender: Gender?
     var email: String
     var trips: [Trip]?
     
