@@ -20,6 +20,7 @@
 		8300098129FFA1BC006DBD54 /* TripTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8300098029FFA1BC006DBD54 /* TripTableViewCell.xib */; };
 		8300098329FFB97A006DBD54 /* TripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300098229FFB97A006DBD54 /* TripTableViewCell.swift */; };
 		830F479129E9311800697C34 /* TripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F479029E9311800697C34 /* TripVC.swift */; };
+		83124AD02A155BF900565F24 /* UserManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83124ACF2A155BF900565F24 /* UserManagement.swift */; };
 		8323F6EC29E587B800CBDFB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */; };
 		8323F6F029E5908600CBDFB5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6EF29E5908600CBDFB5 /* User.swift */; };
 		832A841A29F01D360074DC14 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832A841929F01D360074DC14 /* Constant.swift */; };
@@ -84,6 +85,7 @@
 		8300098029FFA1BC006DBD54 /* TripTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripTableViewCell.xib; sourceTree = "<group>"; };
 		8300098229FFB97A006DBD54 /* TripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableViewCell.swift; sourceTree = "<group>"; };
 		830F479029E9311800697C34 /* TripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripVC.swift; sourceTree = "<group>"; };
+		83124ACF2A155BF900565F24 /* UserManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagement.swift; sourceTree = "<group>"; };
 		8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8323F6EF29E5908600CBDFB5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		832A841929F01D360074DC14 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			children = (
 				83489A2E2A0BBC4A002974E1 /* UserServices */,
 				8323F6EF29E5908600CBDFB5 /* User.swift */,
+				83124ACF2A155BF900565F24 /* UserManagement.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				835687292A0ACF2B000A65F8 /* Journey.swift in Sources */,
 				8356872B2A0AD1DA000A65F8 /* JourneyFetchingService.swift in Sources */,
 				83C20F8E29EE6C54009B252B /* Theme.swift in Sources */,
+				83124AD02A155BF900565F24 /* UserManagement.swift in Sources */,
 				83FED40A2A0C229900B0B231 /* ToDoCollectionViewCell.swift in Sources */,
 				8388260E29E6931A003EBCC1 /* Extension.swift in Sources */,
 				8388260C29E68FBA003EBCC1 /* CreateAccountVC.swift in Sources */,

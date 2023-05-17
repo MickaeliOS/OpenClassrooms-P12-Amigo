@@ -20,6 +20,7 @@ final class TripFetchingService {
     
     //MARK: - FUNCTIONS
     func fetchTrips(userID: String) async throws -> [Trip] {
+        throw Errors.DatabaseError.cannotGetDocuments
         var trips: [Trip] = []
         
         do {

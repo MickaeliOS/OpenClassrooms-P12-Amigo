@@ -59,7 +59,6 @@ class JourneyVC: UIViewController {
         
         journeyFetchingService.fetchTripJourney(tripID: tripID) { [weak self] journey, error in
             if let error = error {
-                self?.noJourneyLabel.isHidden = false
                 self?.activityIndicator.isHidden = true
                 self?.presentErrorAlert(with: error.localizedDescription)
                 return
@@ -156,11 +155,6 @@ extension JourneyVC: UITableViewDelegate, UITableViewDataSource {
 
 extension JourneyVC: CreateJourneyVCDelegate {
     func refreshJourney() {
-        guard let locations = journey?.locations, !locations.isEmpty else {
-            noJourneyLabel.isHidden = false
-            return
-        }
-        noJourneyLabel.isHidden = true
         journeyTableView.reloadData()
     }
 }

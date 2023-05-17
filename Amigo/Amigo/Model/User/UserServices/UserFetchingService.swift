@@ -36,23 +36,4 @@ final class UserFetchingService {
             throw Errors.DatabaseError.cannotGetDocuments
         }
     }
-    
-    func fetchUser2(userID: String, completion: @escaping (User?, Errors.DatabaseError?) -> Void) {
-        let userTableRef = firestoreDatabase.collection(userTableConstants.tableName).document(userID)
-
-        userTableRef.getDocument { documentSnapshot, error in
-            if error != nil {
-                completion(nil, .cannotGetDocuments)
-            }
-            
-            guard let documentSnapshot = documentSnapshot, documentSnapshot.exists else {
-                completion(nil, .cannotGetDocuments)
-                return
-            }
-            
-            let user = try? documentSnapshot.data(as: User.self)
-            
-            completion(user, nil)
-        }
-    }
 }

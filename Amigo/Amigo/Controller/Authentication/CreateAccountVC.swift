@@ -6,9 +6,9 @@
 //
 
 import UIKit
-import FirebaseAuth
 
 class CreateAccountVC: UIViewController {
+    
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +23,8 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var createAccountButton: UIButton!
     
-    private let userCreationService = UserCreationService()
     private var isPasswordVisible = false
+    private let userCreationService = UserCreationService()
     
     // MARK: - ACTIONS
     @IBAction func closeButtonTapped(_ sender: Any) {
@@ -48,30 +48,29 @@ class CreateAccountVC: UIViewController {
     }
     
     private func setupTextFields() {
+        confirmPasswordTextField.addPasswordToggleImage(target: self, action: #selector(togglePasswordVisibility))
+
         guard let envelopeImage = UIImage(systemName: "envelope.fill"),
               let passwordLockImage = UIImage(systemName: "lock.fill") else { return }
         
-        // We incorporated small icons within our TextFields to enhance the overall design aesthetics.
         emailTextField.addLeftSystemImage(image: envelopeImage)
         passwordTextField.addLeftSystemImage(image: passwordLockImage)
         confirmPasswordTextField.addLeftSystemImage(image: passwordLockImage)
-        confirmPasswordTextField.addPasswordToggleImage(target: self, action: #selector(togglePasswordVisibility))
     }
     
     private func createUserFlow() {
         Task {
             do {
-                try userCreationService.emptyFieldsFormControl(email: emailTextField.text,
-                                                               password: passwordTextField.text,
-                                                               confirmPassword: confirmPasswordTextField.text)
+                if fieldsAreEmpty() {
+                    errorMessageLabel.displayErrorMessage(message: Errors.CommonError.emptyFields.localizedDescription)
+                    return
+                }
                 
-                try userCreationService.checkingLogs(email: emailTextField.text!,
-                                                     password: passwordTextField.text!,
-                                                     confirmPassword: confirmPasswordTextField.text!)
-                
-                let _ = try await userCreationService.createUser(email: emailTextField.text!, password: passwordTextField.text!)
+                try await userCreationService.createUser(email: emailTextField.text!,
+                                                         password: passwordTextField.text!,
+                                                         confirmPassword: confirmPasswordTextField.text!)
                                                 
-                // If all the create user process went good, we can go back on the TabBar.
+                // If the user creation process is successful, we can return to the TabBar.
                 performSegue(withIdentifier: Constant.SegueID.unwindToRootVC, sender: nil)
                 
             } catch let error as Errors.CreateAccountError {
@@ -92,6 +91,10 @@ class CreateAccountVC: UIViewController {
         
         // Hints
         createAccountButton.accessibilityHint = "Press to create your account."
+    }
+    
+    private func fieldsAreEmpty() -> Bool {
+        return (emailTextField.isEmpty || passwordTextField.isEmpty || confirmPasswordTextField.isEmpty)
     }
     
     // MARK: - OBJC FUNCTIONS

@@ -94,7 +94,7 @@ extension UITextField {
     
     func addPasswordToggleImage(target: Any?, action: Selector) {
         // This method adds an eye icon to the given UITextField for toggling password visibility.
-        // The button's action needs to be handled in your UIViewController.
+        // The button's action needs to be handled in the UIViewController.
         let button = UIButton(type: .custom)
         
         button.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
@@ -192,25 +192,6 @@ extension String {
             }
         }
         return true
-    }
-    
-    static func isValidEmail(_ email: String) -> Bool {
-        // Firebase already warns us about badly formatted email addresses, but this involves a network call.
-        // To help with Green Code, I prefer to handle the email format validation myself.
-        
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
-    
-    static func isValidPassword(_ password: String) -> Bool {
-        // Same logic as the email verification.
-        let regex = #"(?=^.{7,}$)(?=^.*[A-Z].*$)(?=^.*\d.*$).*"#
-        
-        return password.range(
-            of: regex,
-            options: .regularExpression
-        ) != nil
     }
 }
 

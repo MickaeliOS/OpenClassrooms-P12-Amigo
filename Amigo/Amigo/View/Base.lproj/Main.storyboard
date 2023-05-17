@@ -789,7 +789,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="355" height="63.666666666666664"/>
                                             </activityIndicatorView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" name="Background"/>
                                         <constraints>
                                             <constraint firstItem="KHz-En-Fad" firstAttribute="top" secondItem="eZp-1o-ggw" secondAttribute="top" id="ICO-9O-gC6"/>
                                             <constraint firstAttribute="trailing" secondItem="A0I-oX-Axo" secondAttribute="trailing" id="MGN-Gw-PIz"/>

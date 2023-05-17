@@ -15,7 +15,6 @@ class CreateTripVC: UIViewController {
         super.viewDidLoad()
         setupInterface()
         setupVoiceOver()
-        setupMyTabBarVC()
     }
     
     // MARK: - OUTLETS & PROPERTIES
@@ -25,12 +24,11 @@ class CreateTripVC: UIViewController {
     @IBOutlet weak var addTripButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
     
-    private var myTabBarVC: MyTabBarVC?
+    var countryInformations: (String, String)?
+    private var dataSource: MyTabBarVC { tabBarController as! MyTabBarVC }
     private let currentUser = Auth.auth().currentUser
     private let tripCreationService = TripCreationService()
     private let descriptionPlaceHolder = "Enter your description."
-    
-    var countryInformations: (String, String)?
     
     // MARK: - ACTIONS
     @IBAction func unwindToCreateTripVC(segue: UIStoryboardSegue) {}
@@ -72,10 +70,10 @@ class CreateTripVC: UIViewController {
             trip.tripID = tripID
             
             // We save the trip locally.
-            if myTabBarVC?.user?.trips == nil {
-                myTabBarVC?.user?.trips = [trip]
+            if dataSource.user?.trips == nil {
+                dataSource.user?.trips = [trip]
             } else {
-                myTabBarVC?.user?.trips?.append(trip)
+                dataSource.user?.trips?.append(trip)
             }
             
             // We can go to the ConfirmationVC screen.
@@ -88,16 +86,10 @@ class CreateTripVC: UIViewController {
         }
     }
     
-    private func destinationControl() -> Bool {
-        return destinationTextField.isEmpty
-    }
-    
     private func createTrip() -> Trip? {
-        // We need to control if we have a user logged in.
+        // We need to control if we have a user logged in, because we need his uid to create a trip.
         guard let currentUser = currentUser else {
-            presentErrorAlert(with: Errors.CommonError.noUser.localizedDescription) {
-                self.presentVCFullScreen(with: "WelcomeVC")
-            }
+            presentErrorAlert(with: Errors.CommonError.noUser.localizedDescription)
             return nil
         }
         
@@ -123,14 +115,11 @@ class CreateTripVC: UIViewController {
     }
     
     private func refreshCountryName() {
+        // "countryInformations?.0" is the country name.
         destinationTextField.text = countryInformations?.0
         
-        // If we forgot to set the destination before pressing the Add Trip Button,
-        // the red error message is displayed, and when we set the destination, we
-        // make it disapear.
-        if !errorMessageLabel.isHidden {
-            errorMessageLabel.isHidden = true
-        }
+        // We hide the errorMessage in case it was displayed.
+        errorMessageLabel.isHidden = true
     }
     
     private func setupVoiceOver() {
@@ -145,21 +134,11 @@ class CreateTripVC: UIViewController {
         // Hints
         addTripButton.accessibilityHint = "Press to add your trip."
     }
-    
-    private func setupMyTabBarVC() {
-        myTabBarVC = tabBarController as? MyTabBarVC
-    }
 }
 
 // MARK: - EXTENSIONS & PROTOCOLS
 extension CreateTripVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        /*if segue.identifier == Constant.SegueID.segueToConfirmationTripVC {
-            let confirmationTripVC = segue.destination as? ConfirmationTripVC
-            let trip = sender as? Trip
-            confirmationTripVC?.trip = trip
-        }*/
-        
         if segue.identifier == Constant.SegueID.segueToCountryPickerVC {
             let destinationPickerVC = segue.destination as? CountryPickerVC
             destinationPickerVC?.delegate = self

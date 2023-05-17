@@ -12,10 +12,10 @@ class SettingsVC: UIViewController {
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupMyTabBar()
         setupSegmentedControl()
         setupInterface()
         setupVoiceOver()
-        setupMyTabBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -206,11 +206,6 @@ class SettingsVC: UIViewController {
         saveProfileButton.accessibilityHint = "Press to save your profile."
     }
     
-    /*private func passDataToTripVC() {
-        let barViewControllers = tabBarController?.viewControllers
-        guard let TripVC = barViewControllers![0] as? TripVC else { return }
-        TripVC.user = user
-    }*/
     private func setupMyTabBar() {
         myTabBarVC = tabBarController as? MyTabBarVC
     }

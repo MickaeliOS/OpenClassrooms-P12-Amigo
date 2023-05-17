@@ -18,7 +18,7 @@ final class UserAuthService {
     
     // MARK: - FUNCTIONS
     func signIn(email: String, password: String) async throws {
-        guard String.isValidEmail(email) else {
+        guard UserManagement.isValidEmail(email) else {
             throw Errors.CommonError.badlyFormattedEmail
         }
         

@@ -43,17 +43,19 @@ class WelcomeVC: UIViewController {
     }
     
     private func setupTextFields() {
+        // I am implementing an eye icon that allows users to display or hide the password.
+        passwordTextField.addPasswordToggleImage(target: self, action: #selector(togglePasswordVisibility))
+
         guard let emailImage = UIImage(systemName: "envelope.fill"),
               let passwordLeftImage = UIImage(systemName: "lock.fill") else { return }
         
         // We incorporated small icons within our TextFields to enhance the overall design aesthetics.
         emailTextField.addLeftSystemImage(image: emailImage)
         passwordTextField.addLeftSystemImage(image: passwordLeftImage)
-        passwordTextField.addPasswordToggleImage(target: self, action: #selector(togglePasswordVisibility))
     }
     
     private func loginFlow() {
-        if fieldsControl() {
+        if emptyFieldsControl() {
             errorMessageLabel.displayErrorMessage(message: Errors.CommonError.emptyFields.localizedDescription)
             return
         }
@@ -70,7 +72,7 @@ class WelcomeVC: UIViewController {
         }
     }
     
-    private func fieldsControl() -> Bool {
+    private func emptyFieldsControl() -> Bool {
         return (emailTextField.isEmpty || passwordTextField.isEmpty)
     }
     
@@ -94,6 +96,7 @@ class WelcomeVC: UIViewController {
             sender.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
         }
 
+        // Showing or hidding the password.
         passwordTextField.isSecureTextEntry = !isPasswordVisible
     }
 }

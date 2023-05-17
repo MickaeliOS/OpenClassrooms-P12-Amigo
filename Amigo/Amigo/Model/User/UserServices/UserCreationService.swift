@@ -23,10 +23,17 @@ final class UserCreationService {
     }
     
     // MARK: - FUNCTIONS
-    func createUser(email: String, password: String) async throws {
+    func createUser(email: String, password: String, confirmPassword: String) async throws {
         do {
+            // Prior to user creation, field testing is required.
+            try checkingLogs(email: email, password: password, confirmPassword: confirmPassword)
+            
             let _ = try await firebaseAuth.createUser(withEmail: email, password: password)
             
+        } catch let error as Errors.CommonError {
+            throw error
+        } catch let error as Errors.CreateAccountError {
+            throw error
         } catch let error as NSError {
             switch error.code {
             case AuthErrorCode.emailAlreadyInUse.rawValue:
@@ -51,31 +58,17 @@ final class UserCreationService {
         }
     }
     
-    func emptyFieldsFormControl(email: String?, password: String?, confirmPassword: String?) throws {
-        
-        // Empty control.
-        guard String.emptyControl(fields: [email, password, confirmPassword]) else {
-            throw Errors.CommonError.emptyFields
-        }
-    }
-    
-    func checkingLogs(email: String, password: String, confirmPassword: String) throws {
-        // Mail and Password check.
-        guard String.isValidEmail(email) else {
+    private func checkingLogs(email: String, password: String, confirmPassword: String) throws {
+        guard UserManagement.isValidEmail(email) else {
             throw Errors.CommonError.badlyFormattedEmail
         }
         
-        guard String.isValidPassword(password) else {
+        guard UserManagement.isValidPassword(password) else {
             throw Errors.CreateAccountError.weakPassword
         }
         
-        guard passwordEqualityCheck(password: password, confirmPassword: confirmPassword) else {
+        guard UserManagement.passwordEqualityCheck(password: password, confirmPassword: confirmPassword) else {
             throw Errors.CreateAccountError.passwordsNotEquals
         }
-    }
-    
-    // MARK: - PRIVATE FUNCTIONS
-    private func passwordEqualityCheck(password: String, confirmPassword: String) -> Bool {
-        return password == confirmPassword
     }
 }
