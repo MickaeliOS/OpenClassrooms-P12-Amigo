@@ -23,7 +23,7 @@ class TripVC: UIViewController {
     @IBOutlet weak var noTripLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var addTripButton: UIBarButtonItem!
-
+    
     private var dataSource: MyTabBarVC { tabBarController as! MyTabBarVC }
     private let userCreationService = UserCreationService()
     private let userFetchingService = UserFetchingService()
@@ -55,14 +55,14 @@ class TripVC: UIViewController {
             presentVCFullScreen(with: "WelcomeVC")
             return
         }
-
+        
         activityIndicator.isHidden = false
         
         Task {
             do {
                 // First, we fetch the user from Firestore
                 dataSource.user = try await userFetchingService.fetchUser(userID: currentUser.uid)
-                    
+                
                 if dataSource.user != nil {
                     // We also need the user's trips.
                     dataSource.user!.trips = try await tripFetchingService.fetchTrips(userID: currentUser.uid)
@@ -72,7 +72,7 @@ class TripVC: UIViewController {
                     refreshInterface()
                     return
                 }
-
+                
                 // If the user is nil, it means he is not in our firestore database yet.
                 // Before letting him use the app, we need him to be saved.
                 await saveUserInDatabase(currentUser: currentUser)
@@ -118,7 +118,7 @@ class TripVC: UIViewController {
             }
         }
     }
-
+    
 }
 
 // MARK: - EXTENSIONS
@@ -147,7 +147,7 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
         guard let trip = dataSource.user?.trips?[indexPath.row] else {
             return UITableViewCell()
         }
-
+        
         cell.configureCell(country: trip.country,
                            countryCode: trip.countryCode,
                            fromDate: trip.startDate,
@@ -195,7 +195,7 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension TripVC: TripDetailVCDelegate {
-    func refreshTrip(trip: Trip) {
+    func updateTrip(trip: Trip) {
         
         // In order to maintain the latest version of the modified trip within the user's data, I need to update the trip's information.
         // This ensures that any changes made to the trip are reflected in the user's data, allowing for accurate and up-to-date information across the application.

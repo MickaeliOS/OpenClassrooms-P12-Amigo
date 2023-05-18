@@ -394,18 +394,35 @@
                                             <outlet property="delegate" destination="qhl-dq-C3D" id="W7v-8u-LpH"/>
                                         </connections>
                                     </tableView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdh-QF-7IG">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dhw-hP-rg8">
                                         <rect key="frame" x="0.0" y="554.33333333333337" width="355" height="63.666666666666629"/>
-                                        <color key="backgroundColor" name="UIElement1"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Save Expenses">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="saveExpensesButtonTapped:" destination="qhl-dq-C3D" eventType="touchUpInside" id="dPH-ld-IAL"/>
-                                        </connections>
-                                    </button>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdh-QF-7IG">
+                                                <rect key="frame" x="0.0" y="0.0" width="355" height="63.666666666666664"/>
+                                                <color key="backgroundColor" name="UIElement1"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Save Expenses">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="saveExpensesButtonTapped:" destination="qhl-dq-C3D" eventType="touchUpInside" id="dPH-ld-IAL"/>
+                                                </connections>
+                                            </button>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="0ox-xb-xaz">
+                                                <rect key="frame" x="159" y="13.333333333333258" width="37" height="37"/>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                        <color key="backgroundColor" name="Background"/>
+                                        <constraints>
+                                            <constraint firstItem="0ox-xb-xaz" firstAttribute="centerY" secondItem="Dhw-hP-rg8" secondAttribute="centerY" id="7zd-Kl-O7M"/>
+                                            <constraint firstAttribute="bottom" secondItem="zdh-QF-7IG" secondAttribute="bottom" id="I2P-iy-vPa"/>
+                                            <constraint firstItem="zdh-QF-7IG" firstAttribute="top" secondItem="Dhw-hP-rg8" secondAttribute="top" id="cIX-Ui-zlC"/>
+                                            <constraint firstItem="zdh-QF-7IG" firstAttribute="leading" secondItem="Dhw-hP-rg8" secondAttribute="leading" id="cg0-Gs-UlS"/>
+                                            <constraint firstAttribute="trailing" secondItem="zdh-QF-7IG" secondAttribute="trailing" id="xdb-jM-vHD"/>
+                                            <constraint firstItem="0ox-xb-xaz" firstAttribute="centerX" secondItem="Dhw-hP-rg8" secondAttribute="centerX" id="zbQ-Zu-Wto"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                             </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your expenses are empty. Please add some to display them!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMB-Qu-YWs">
@@ -424,7 +441,7 @@
                             <constraint firstItem="pfi-ow-Y7z" firstAttribute="leading" secondItem="Rpb-gO-Ok6" secondAttribute="leading" constant="10" id="74p-P0-Ex9"/>
                             <constraint firstItem="Rpb-gO-Ok6" firstAttribute="trailing" secondItem="BMB-Qu-YWs" secondAttribute="trailing" constant="10" id="9c0-aY-cbN"/>
                             <constraint firstItem="Rpb-gO-Ok6" firstAttribute="trailing" secondItem="pfi-ow-Y7z" secondAttribute="trailing" constant="10" id="KOm-rv-gP4"/>
-                            <constraint firstItem="zdh-QF-7IG" firstAttribute="height" secondItem="Rpb-gO-Ok6" secondAttribute="height" multiplier="0.1" id="MN1-1Y-Luv"/>
+                            <constraint firstItem="Dhw-hP-rg8" firstAttribute="height" secondItem="Rpb-gO-Ok6" secondAttribute="height" multiplier="0.1" id="P59-gJ-Fok"/>
                             <constraint firstItem="BMB-Qu-YWs" firstAttribute="leading" secondItem="Rpb-gO-Ok6" secondAttribute="leading" constant="10" id="WFF-8s-31T"/>
                             <constraint firstItem="mTd-yb-bYR" firstAttribute="height" secondItem="Rpb-gO-Ok6" secondAttribute="height" multiplier="0.1" id="Z8A-71-5nz"/>
                             <constraint firstItem="pfi-ow-Y7z" firstAttribute="top" secondItem="Rpb-gO-Ok6" secondAttribute="top" id="c09-uP-qr6"/>
@@ -437,6 +454,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="fGN-xn-7wg"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="0ox-xb-xaz" id="zeP-Ap-B8T"/>
                         <outlet property="addExpenseItemButton" destination="mTd-yb-bYR" id="pBv-K3-fcm"/>
                         <outlet property="amountTextField" destination="bfe-mA-yC0" id="4xe-hj-Rf7"/>
                         <outlet property="errorMessageLabel" destination="6bF-mJ-0O0" id="oDW-7i-1Eb"/>
@@ -625,7 +643,7 @@
                                     <outlet property="delegate" destination="cg4-D8-dG3" id="0Jf-eR-ZEi"/>
                                 </connections>
                             </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="KSS-i6-T3T">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="KSS-i6-T3T">
                                 <rect key="frame" x="169" y="344.66666666666669" width="37" height="37"/>
                                 <color key="color" systemColor="labelColor"/>
                             </activityIndicatorView>
@@ -1139,18 +1157,35 @@
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUJ-wQ-ok1">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o3l-j0-OLP">
                                         <rect key="frame" x="0.0" y="204" width="365" height="63.666666666666686"/>
-                                        <color key="backgroundColor" name="UIElement1"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="Add Trip">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="addTripButtonTapped:" destination="09R-yk-M0i" eventType="touchUpInside" id="Vrx-ya-aGS"/>
-                                        </connections>
-                                    </button>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUJ-wQ-ok1">
+                                                <rect key="frame" x="0.0" y="0.0" width="365" height="63.666666666666664"/>
+                                                <color key="backgroundColor" name="UIElement1"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Add Trip">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="addTripButtonTapped:" destination="09R-yk-M0i" eventType="touchUpInside" id="Vrx-ya-aGS"/>
+                                                </connections>
+                                            </button>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="OAb-wp-njN">
+                                                <rect key="frame" x="164" y="13.333333333333371" width="37" height="37"/>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="CUJ-wQ-ok1" firstAttribute="top" secondItem="o3l-j0-OLP" secondAttribute="top" id="Nyv-q3-vHZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="CUJ-wQ-ok1" secondAttribute="trailing" id="dGm-Wl-9Cz"/>
+                                            <constraint firstAttribute="bottom" secondItem="CUJ-wQ-ok1" secondAttribute="bottom" id="eOv-yj-P3i"/>
+                                            <constraint firstItem="OAb-wp-njN" firstAttribute="centerX" secondItem="o3l-j0-OLP" secondAttribute="centerX" id="vhO-I4-3Sf"/>
+                                            <constraint firstItem="OAb-wp-njN" firstAttribute="centerY" secondItem="o3l-j0-OLP" secondAttribute="centerY" id="wOP-DX-k5h"/>
+                                            <constraint firstItem="CUJ-wQ-ok1" firstAttribute="leading" secondItem="o3l-j0-OLP" secondAttribute="leading" id="xa1-74-FCW"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -1158,8 +1193,8 @@
                         <color key="backgroundColor" name="Background"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="CUJ-wQ-ok1" firstAttribute="height" secondItem="h8p-pl-jWi" secondAttribute="height" multiplier="0.1" id="1dn-ai-luW"/>
                             <constraint firstItem="0wK-r7-Q0E" firstAttribute="centerX" secondItem="h8p-pl-jWi" secondAttribute="centerX" id="Hje-hk-xE5"/>
+                            <constraint firstItem="o3l-j0-OLP" firstAttribute="height" secondItem="h8p-pl-jWi" secondAttribute="height" multiplier="0.1" id="MXe-qE-Qgk"/>
                             <constraint firstItem="h8p-pl-jWi" firstAttribute="trailing" secondItem="0wK-r7-Q0E" secondAttribute="trailing" constant="5" id="X0T-te-DKG"/>
                             <constraint firstItem="onC-zZ-UXb" firstAttribute="height" secondItem="h8p-pl-jWi" secondAttribute="height" multiplier="0.1" id="b3t-t4-n5b"/>
                             <constraint firstItem="0wK-r7-Q0E" firstAttribute="centerY" secondItem="h8p-pl-jWi" secondAttribute="centerY" constant="-3.8333333333333712" id="bNI-ea-EW9"/>
@@ -1168,6 +1203,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="CVx-Nq-SjF"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="OAb-wp-njN" id="ZBv-7C-CL0"/>
                         <outlet property="addTripButton" destination="CUJ-wQ-ok1" id="68K-bi-NQm"/>
                         <outlet property="destinationTextField" destination="onC-zZ-UXb" id="JBA-Ir-iuA"/>
                         <outlet property="endDatePicker" destination="Rvo-uw-Ybp" id="e8f-lX-JQB"/>

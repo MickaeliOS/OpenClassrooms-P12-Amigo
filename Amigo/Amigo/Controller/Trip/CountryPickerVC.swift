@@ -8,6 +8,7 @@
 import UIKit
 
 class CountryPickerVC: UIViewController {
+    
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,9 +20,9 @@ class CountryPickerVC: UIViewController {
     @IBOutlet weak var countrySearchBar: UISearchBar!
     @IBOutlet weak var countryTableView: UITableView!
     
-    private let countryList = Locale.countryList
-    private var filteredCountryList = [String]()
     weak var delegate: CountryPickerVCDelegate?
+    private var filteredCountryList = [String]()
+    private let countryList = Locale.countryList
     
     // MARK: - ACTIONS
     @IBAction func closeButtonTapped(_ sender: Any) {
@@ -31,7 +32,7 @@ class CountryPickerVC: UIViewController {
     // MARK: - FUNCTIONS
     private func setupCell() {
         self.countryTableView.register(UINib(nibName: Constant.TableViewCells.countryNibName, bundle: nil),
-                                    forCellReuseIdentifier: Constant.TableViewCells.countryCell)
+                                       forCellReuseIdentifier: Constant.TableViewCells.countryCell)
     }
 }
 
@@ -73,6 +74,7 @@ extension CountryPickerVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Upon user selection, we pass the country's information to the previous controller that contains the trip creation form.
         let countryName = filteredCountryList[indexPath.row]
         let countryCode = Locale.countryCode(forCountryName: countryName)
         let countryInformations = (countryName, countryCode ?? "N/A")

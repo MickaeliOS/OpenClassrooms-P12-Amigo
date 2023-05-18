@@ -27,7 +27,6 @@ class JourneyVC: UIViewController {
     
     var trip: Trip?
     var journey: Journey?
-
     private let journeyFetchingService = JourneyFetchingService()
     private let journeyUpdateService = JourneyUpdateService()
     
@@ -49,13 +48,11 @@ class JourneyVC: UIViewController {
     
     private func setupCell() {
         self.journeyTableView.register(UINib(nibName: Constant.TableViewCells.journeyNibName, bundle: nil),
-                                    forCellReuseIdentifier: Constant.TableViewCells.journeyCell)
+                                       forCellReuseIdentifier: Constant.TableViewCells.journeyCell)
     }
     
     private func fetchJourney() {
         guard let tripID = trip?.tripID else { return }
-        
-        activityIndicator.isHidden = false
         
         journeyFetchingService.fetchTripJourney(tripID: tripID) { [weak self] journey, error in
             if let error = error {
@@ -87,7 +84,10 @@ class JourneyVC: UIViewController {
         }
         
         do {
+            // We update the journey in Firestore.
             try journeyUpdateService.updateJourney(journey: journey, for: tripID)
+            
+            // And we can go back once it's saved.
             presentInformationAlert(with: "Your journey has been saved.") {
                 self.navigationController?.popViewController(animated: true)
             }
@@ -101,6 +101,13 @@ class JourneyVC: UIViewController {
     private func setupVoiceOver() {
         saveButton.accessibilityHint = "Press the button to save your journey."
         addDestinationButton.accessibilityHint = "Press to add some destinations"
+    }
+    
+    private func isJourneyEmpty() -> Bool {
+        if let locations = journey?.locations, !locations.isEmpty {
+            return true
+        }
+        return false
     }
 }
 
@@ -139,9 +146,13 @@ extension JourneyVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            // We remove the location.
             journey?.locations?.remove(at: indexPath.row)
+            
+            // Deleting the cell.
             tableView.deleteRows(at: [indexPath], with: .automatic)
             
+            // In case the list became empty, we display the noJourneyLabel to the User.
             if let locations = journey?.locations, locations.isEmpty {
                 noJourneyLabel.isHidden = false
             }
@@ -155,6 +166,7 @@ extension JourneyVC: UITableViewDelegate, UITableViewDataSource {
 
 extension JourneyVC: CreateJourneyVCDelegate {
     func refreshJourney() {
+        noJourneyLabel.isHidden = isJourneyEmpty()
         journeyTableView.reloadData()
     }
 }

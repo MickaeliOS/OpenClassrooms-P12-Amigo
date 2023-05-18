@@ -8,7 +8,7 @@
 import UIKit
 
 class ToDoListVC: UIViewController {
-
+    
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ class ToDoListVC: UIViewController {
     
     private func addToDoItem() {
         // If there are no trips, the option to add a task should be unavailable.
-        guard let trip = trip else { return }
+        guard let _ = trip else { return }
         
         guard let task = toDoTextField.text, !task.isEmpty else {
             errorMessageLabel.displayErrorMessage(message: "Please provide a task.")
@@ -65,13 +65,7 @@ class ToDoListVC: UIViewController {
         
         // In case the user doesn't have a to-do list, the list will be nil and appending elements to it won't be possible.
         // Therefore, it's crucial to handle this scenario properly.
-        if trip.toDoList == nil {
-            var toDoList = [String]()
-            toDoList.append(task)
-            self.trip?.toDoList = toDoList
-        } else {
-            self.trip?.toDoList?.append(task)
-        }
+        addToDoItem(toDoItem: task)
         
         toDoTextField.text = ""
         noListLabel.isHidden = true
@@ -84,8 +78,8 @@ class ToDoListVC: UIViewController {
             return
         }
         
-        toggleActivityIndicator(shown: true)
-        
+        UIViewController.toggleActivityIndicator(shown: true, button: saveToDoListButton, activityIndicator: activityIndicator)
+
         Task {
             do {
                 // First step -> We store the list in the Firestore database.
@@ -93,11 +87,9 @@ class ToDoListVC: UIViewController {
                 
                 // Then, we save the changes locally.
                 trip?.toDoList = toDoList
-
+                
                 // It's also essential to propagate the changes to the TripDetailVC, to maintain synchronization across all data points.
                 sendTripToPresentingController()
-                
-                toggleActivityIndicator(shown: false)
                 
                 presentInformationAlert(with: "Your list has been saved.") {
                     self.navigationController?.popViewController(animated: true)
@@ -105,9 +97,18 @@ class ToDoListVC: UIViewController {
                 
             } catch let error as Errors.DatabaseError {
                 presentErrorAlert(with: error.localizedDescription)
-                toggleActivityIndicator(shown: false)
+                UIViewController.toggleActivityIndicator(shown: false, button: saveToDoListButton, activityIndicator: activityIndicator)
             }
         }
+    }
+    
+    private func addToDoItem(toDoItem: String) {
+        if trip?.toDoList == nil {
+            self.trip?.toDoList = [toDoItem]
+            return
+        }
+        
+        trip?.toDoList?.append(toDoItem)
     }
     
     private func sendTripToPresentingController() {
@@ -121,13 +122,6 @@ class ToDoListVC: UIViewController {
         if trip?.toDoList == nil || trip?.toDoList?.isEmpty == true {
             noListLabel.isHidden = false
         }
-    }
-    
-    private func toggleActivityIndicator(shown: Bool) {
-        // If shown is true, then the refresh button is hidden and we display the Activity Indicator
-        // If not, we hide the Activity Indicator and show the refresh button
-        saveToDoListButton.isHidden = shown
-        activityIndicator.isHidden = !shown
     }
     
     private func setupCell() {
@@ -155,7 +149,8 @@ extension ToDoListVC: UICollectionViewDelegate, UICollectionViewDataSource {
         guard let toDoList = trip?.toDoList else {
             return UICollectionViewCell()
         }
-
+        
+        // Each cell has a deletion closure.
         cell.deleteThisCell = {
             if let indexPath = collectionView.indexPath(for: cell) {
                 self.trip?.toDoList?.remove(at: indexPath.row)

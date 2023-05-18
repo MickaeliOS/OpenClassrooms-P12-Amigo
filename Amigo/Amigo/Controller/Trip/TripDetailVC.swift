@@ -8,6 +8,7 @@
 import UIKit
 
 class TripDetailVC: UIViewController {
+    
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,9 +19,10 @@ class TripDetailVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        // If the back button is pressed, I need to update the trip in the dataSource property to ensure data synchronization.
         if isMovingFromParent {
             guard let trip = trip else { return }
-            delegate?.refreshTrip(trip: trip)
+            delegate?.updateTrip(trip: trip)
         }
     }
     
@@ -32,8 +34,8 @@ class TripDetailVC: UIViewController {
     @IBOutlet weak var expensesButton: UIButton!
     @IBOutlet weak var toDoListButton: UIButton!
     
-    weak var delegate: TripDetailVCDelegate?
     var trip: Trip?
+    weak var delegate: TripDetailVCDelegate?
     
     // MARK: - ACTIONS
     @IBAction func journeyButtonTapped(_ sender: Any) {
@@ -47,7 +49,7 @@ class TripDetailVC: UIViewController {
     @IBAction func toDoListButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: Constant.SegueID.segueToToDoList, sender: trip)
     }
-
+    
     // MARK: - PRIVATE FUNCTIONS
     private func setupInterface() {
         guard let trip = trip else { return }
@@ -68,11 +70,11 @@ class TripDetailVC: UIViewController {
         // Labels
         startDateLabel.accessibilityLabel = "The trip's start date."
         endDateLabel.accessibilityLabel = "The trip's end date."
-
+        
         // Values
         startDateLabel.accessibilityValue = startDateLabel.text
         endDateLabel.accessibilityValue = endDateLabel.text
-
+        
         // Hints
         journeyButton.accessibilityHint = "Press to see the trip's journey."
         expensesButton.accessibilityHint = "Press to see the trip's expenses."
@@ -84,7 +86,7 @@ class TripDetailVC: UIViewController {
 extension TripDetailVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let trip = sender as? Trip
-
+        
         // Before accessing any of the available features, it is necessary to pass the relevant Trip object.
         switch segue.identifier {
             
@@ -120,5 +122,5 @@ extension TripDetailVC: ExpensesVCDelegate {
 }
 
 protocol TripDetailVCDelegate: AnyObject {
-    func refreshTrip(trip: Trip)
+    func updateTrip(trip: Trip)
 }

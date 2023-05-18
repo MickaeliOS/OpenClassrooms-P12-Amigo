@@ -9,10 +9,10 @@ import UIKit
 import FirebaseAuth
 
 class SettingsVC: UIViewController {
+    
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupMyTabBar()
         setupSegmentedControl()
         setupInterface()
         setupVoiceOver()
@@ -34,11 +34,11 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var logOutButton: UIButton!
     
-    private var myTabBarVC: MyTabBarVC?
+    private var dataSource: MyTabBarVC { tabBarController as! MyTabBarVC }
     private let userAuthService = UserAuthService()
     private let userUpdatingService = UserUpdatingService()
     private let userCreationService = UserCreationService()
-
+    
     var currentTheme: Theme {
         return Theme(rawValue: UserDefaults.standard.integer(forKey: "theme")) ?? .unspecified
     }
@@ -76,9 +76,11 @@ class SettingsVC: UIViewController {
             return
         }
         
-        toggleActivityIndicator(shown: true)
-        
-        if myTabBarVC?.user == nil {
+        UIViewController.toggleActivityIndicator(shown: true, button: saveProfileButton, activityIndicator: activityIndicator)
+
+        // If user is nil at this point, it indicates an issue during the fetching of the user in TripVC.
+        // However, it's important to note that the createUser function will not create a new user if one already exists, but rather update the existing user.
+        if dataSource.user == nil {
             createUser(currentUser: currentUser, userID: currentUser.uid)
         } else {
             updateUser(userID: currentUser.uid)
@@ -99,10 +101,10 @@ class SettingsVC: UIViewController {
                 
                 // We are prepared to persistently save the user's data, both remotely and locally.
                 try await userCreationService.saveUserInDatabase(user: user, userID: userID)
-                myTabBarVC?.user = user
+                dataSource.user = user
                 
                 // Finally, we conclude the process by executing a set of essential functions.
-                toggleActivityIndicator(shown: false)
+                UIViewController.toggleActivityIndicator(shown: false, button: saveProfileButton, activityIndicator: activityIndicator)
                 refreshInterface()
                 setupPersonalInformations()
                 presentInformationAlert(with: "Your profile has been saved.")
@@ -127,21 +129,20 @@ class SettingsVC: UIViewController {
                 // Finally, we can save our user locally and remotely.
                 try await userUpdatingService.updateUser(fields: fields, userID: userID)
                 
-                myTabBarVC?.user?.lastname = lastnameTextField.text!
-                myTabBarVC?.user?.firstname = firstnameTextField.text!
-                myTabBarVC?.user?.gender = User.Gender(rawValue: genderRawValue)!
+                dataSource.user?.lastname = lastnameTextField.text!
+                dataSource.user?.firstname = firstnameTextField.text!
+                dataSource.user?.gender = User.Gender(rawValue: genderRawValue)!
                 
                 // We execute some essentials functions to finish the process.
-                toggleActivityIndicator(shown: false)
+                UIViewController.toggleActivityIndicator(shown: false, button: saveProfileButton, activityIndicator: activityIndicator)
                 refreshInterface()
                 setupPersonalInformations()
-                //passDataToTripVC()
                 presentInformationAlert(with: "Your profile has been saved.")
             } catch let error as Errors.DatabaseError {
                 presentErrorAlert(with: error.localizedDescription)
             }
             
-            toggleActivityIndicator(shown: false)
+            UIViewController.toggleActivityIndicator(shown: false, button: saveProfileButton, activityIndicator: activityIndicator)
         }
     }
     
@@ -161,20 +162,13 @@ class SettingsVC: UIViewController {
     }
     
     private func setupPersonalInformations() {
-        guard let name = myTabBarVC?.user?.lastname, let firstname = myTabBarVC?.user?.firstname else {
+        guard let name = dataSource.user?.lastname, let firstname = dataSource.user?.firstname else {
             return
         }
         
         lastnameTextField.placeholder = name
         firstnameTextField.placeholder = firstname
-        genderSegmentedControl.selectedSegmentIndex = User.Gender.index(of: myTabBarVC?.user?.gender ?? .woman)
-    }
-    
-    private func toggleActivityIndicator(shown: Bool) {
-        // If shown is true, then the refresh button is hidden and we display the Activity Indicator
-        // If not, we hide the Activity Indicator and show the refresh button
-        saveProfileButton.isHidden = shown
-        activityIndicator.isHidden = !shown
+        genderSegmentedControl.selectedSegmentIndex = User.Gender.index(of: dataSource.user?.gender ?? .woman)
     }
     
     private func signOut() {
@@ -204,10 +198,6 @@ class SettingsVC: UIViewController {
         themeSegmentedControl.accessibilityHint = "Select the new theme."
         genderSegmentedControl.accessibilityHint = "Select your gender"
         saveProfileButton.accessibilityHint = "Press to save your profile."
-    }
-    
-    private func setupMyTabBar() {
-        myTabBarVC = tabBarController as? MyTabBarVC
     }
 }
 

@@ -18,7 +18,7 @@ class ConfirmationTripVC: UIViewController {
     
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var myListButton: UIButton!
-
+    
     // MARK: - ACTIONS
     @IBAction func myListButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: Constant.SegueID.unwindToRootVC, sender: nil)
@@ -39,6 +39,7 @@ extension ConfirmationTripVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constant.SegueID.unwindToRootVC {
             let tripVC = segue.destination as? TripVC
+            // I am refreshing the tableView's data to display the newly added trip.
             tripVC?.tripTableView.reloadData()
         }
     }

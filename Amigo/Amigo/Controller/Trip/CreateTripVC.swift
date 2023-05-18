@@ -23,6 +23,7 @@ class CreateTripVC: UIViewController {
     @IBOutlet weak var destinationTextField: UITextField!
     @IBOutlet weak var addTripButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var countryInformations: (String, String)?
     private var dataSource: MyTabBarVC { tabBarController as! MyTabBarVC }
@@ -36,7 +37,7 @@ class CreateTripVC: UIViewController {
     @IBAction func addTripButtonTapped(_ sender: Any) {
         addTripFlow()
     }
-
+    
     @IBAction func destinationTextFieldTapped(_ sender: UITapGestureRecognizer) {
         performSegue(withIdentifier: Constant.SegueID.segueToCountryPickerVC, sender: nil)
     }
@@ -63,18 +64,16 @@ class CreateTripVC: UIViewController {
         }
         
         do {
+            UIViewController.toggleActivityIndicator(shown: true, button: addTripButton, activityIndicator: activityIndicator)
+            
             // We can save the trip inside the Firestore database.
             let tripID = try tripCreationService.createTrip(trip: trip)
             
             // The retrieval of the tripID is essential for any future editing or deletion of the corresponding trip.
             trip.tripID = tripID
             
-            // We save the trip locally.
-            if dataSource.user?.trips == nil {
-                dataSource.user?.trips = [trip]
-            } else {
-                dataSource.user?.trips?.append(trip)
-            }
+            // Let's add the trip locally.
+            addTrip(trip: trip)
             
             // We can go to the ConfirmationVC screen.
             performSegue(withIdentifier: Constant.SegueID.segueToConfirmationTripVC, sender: nil)
@@ -84,6 +83,8 @@ class CreateTripVC: UIViewController {
         } catch {
             presentErrorAlert(with: Errors.CommonError.defaultError.localizedDescription)
         }
+        
+        UIViewController.toggleActivityIndicator(shown: false, button: addTripButton, activityIndicator: activityIndicator)
     }
     
     private func createTrip() -> Trip? {
@@ -114,6 +115,16 @@ class CreateTripVC: UIViewController {
         return trip
     }
     
+    private func addTrip(trip: Trip) {
+        
+        // We locally save the trip. If trip is nil, indicating that the user has not retrieved their list of trips, we allow the addition of the current trip without blocking them.
+        if dataSource.user?.trips == nil {
+            dataSource.user?.trips = [trip]
+        } else {
+            dataSource.user?.trips?.append(trip)
+        }
+    }
+    
     private func refreshCountryName() {
         // "countryInformations?.0" is the country name.
         destinationTextField.text = countryInformations?.0
@@ -126,11 +137,11 @@ class CreateTripVC: UIViewController {
         // Labels
         startDatePicker.accessibilityLabel = "Trip's start date."
         endDatePicker.accessibilityLabel = "Trip's end date."
-
+        
         // Values
         startDatePicker.accessibilityValue = startDatePicker.date.dateToString()
         endDatePicker.accessibilityValue = endDatePicker.date.dateToString()
-
+        
         // Hints
         addTripButton.accessibilityHint = "Press to add your trip."
     }

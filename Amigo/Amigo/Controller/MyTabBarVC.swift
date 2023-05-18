@@ -8,16 +8,19 @@
 import UIKit
 
 class MyTabBarVC: UITabBarController {
-
+    
+    // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
     }
     
+    // MARK: - VARIABLES
     // This is the centralized storage for the User object, enabling seamless data sharing among the various view controllers as I navigate between tabs.
     var user: User?
 }
 
+// MARK: - EXTENSIONS
 extension MyTabBarVC: UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         
@@ -25,9 +28,8 @@ extension MyTabBarVC: UITabBarControllerDelegate {
         // This ensures that any modifications made to the User object in SettingsVC are reflected immediately in TripVC.
         if tabBar.selectedItem?.title == "My Trips" {
             if let tripNavigationController = viewControllers![0] as? UINavigationController,
-                let tripVC = tripNavigationController.topViewController as? TripVC  {
+               let tripVC = tripNavigationController.topViewController as? TripVC  {
                 tripVC.tripTableView.reloadData()
-                print("MKA - DATA RELOADED")
             }
         }
     }

@@ -25,7 +25,7 @@ class WelcomeVC: UIViewController {
     
     private var isPasswordVisible = false
     private let userAuthService = UserAuthService()
-
+    
     // MARK: - ACTIONS
     @IBAction func loginButtonTapped(_ sender: Any) {
         loginFlow()
@@ -45,7 +45,7 @@ class WelcomeVC: UIViewController {
     private func setupTextFields() {
         // I am implementing an eye icon that allows users to display or hide the password.
         passwordTextField.addPasswordToggleImage(target: self, action: #selector(togglePasswordVisibility))
-
+        
         guard let emailImage = UIImage(systemName: "envelope.fill"),
               let passwordLeftImage = UIImage(systemName: "lock.fill") else { return }
         
@@ -95,7 +95,7 @@ class WelcomeVC: UIViewController {
         } else {
             sender.setImage(UIImage(systemName: "eye.slash.fill"), for: .normal)
         }
-
+        
         // Showing or hidding the password.
         passwordTextField.isSecureTextEntry = !isPasswordVisible
     }

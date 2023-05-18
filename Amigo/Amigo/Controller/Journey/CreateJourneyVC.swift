@@ -70,9 +70,10 @@ class CreateJourneyVC: UIViewController {
     
     private func setupMapKitAutocompletion() {
         guard let trip = trip else { return }
+        
         searchCompleter.delegate = self
         searchCompleter.resultTypes = [.address, .pointOfInterest]
-
+        
         LocationManagement.filterLocationByRegion(region: trip.country, completion: { [weak self] region in
             guard let region = region else { return }
             self?.searchCompleter.region = region
@@ -80,10 +81,6 @@ class CreateJourneyVC: UIViewController {
     }
     
     private func saveJourney() {
-        if journey == nil {
-            journey = Journey()
-        }
-        
         guard let completeAddress = journeySearchBar.text, !completeAddress.isEmpty else {
             errorMessageLabel.isHidden = false
             errorMessageLabel.displayErrorMessage(message: "Please choose at least one destination.")
@@ -96,24 +93,19 @@ class CreateJourneyVC: UIViewController {
             return
         }
         
+        // Address decomposition is required for proper storage.
         MKLocalSearch.getPartsFromAddress(address: completeAddress) { [weak self] result, error in
             guard error == nil, let result = result else {
                 return
             }
-
+            
             let location = Location(address: result.placemark.name ?? "N/A",
                                     postalCode: result.placemark.postalCode ?? "N/A",
                                     city: result.placemark.locality ?? "N/A",
                                     startDate: (self?.startDatePicker.date)!,
                                     endDate: (self?.endDatePicker.date)!)
             
-            if self?.journey?.locations == nil {
-                var locations = [Location]()
-                locations.append(location)
-                self?.journey?.locations = locations
-            } else {
-                self?.journey?.locations?.append(location)
-            }
+            self?.addJourney(location: location)
             
             // We empty our interface.
             self?.journeySearchBar.text = ""
@@ -123,16 +115,24 @@ class CreateJourneyVC: UIViewController {
         }
     }
     
-    private func filterByRegion() {
-
+    private func addJourney(location: Location) {
+        guard let journey = journey, journey.locations != nil else {
+            self.journey = Journey(locations: [location])
+            return
+        }
+        
+        self.journey?.locations?.append(location)
     }
     
+    
     private func prepareForRefreshJourney() {
+        // Prior to passing the updated journey to JourneyVC, I ensure it is ordered chronologically by date.
         if var journey = self.journey, let locations = journey.locations {
             let orderedJourney = LocationManagement.sortLocationsByDateAscending(locations: locations)
             journey.locations = orderedJourney
             self.journey = journey
         }
+        
         performSegue(withIdentifier: Constant.SegueID.unwindToTripJourneyVC, sender: journey)
     }
     
@@ -145,7 +145,7 @@ class CreateJourneyVC: UIViewController {
         // Labels
         startDatePicker.accessibilityLabel = "Destination's start date."
         endDatePicker.accessibilityLabel = "Destination's end date."
-
+        
         // Values
         startDatePicker.accessibilityValue = startDatePicker.date.dateToString()
         endDatePicker.accessibilityValue = endDatePicker.date.dateToString()
@@ -163,7 +163,7 @@ extension CreateJourneyVC {
             let journey = sender as? Journey
             tripJourneyVC?.journey = journey
             
-            // After adding a Journey, we need to refresh the list from previous Controler.
+            // After adding a Journey, we need to refresh the list in the previous controller.
             delegate?.refreshJourney()
         }
     }
@@ -194,7 +194,8 @@ extension CreateJourneyVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //let cell = journeyTableView.cellForRow(at: indexPath)!
+        
+        // When the user selects an address, the searchBar is automatically populated.
         let firstPartAddress = searchResults[indexPath.row].title
         let secondPartAddress = searchResults[indexPath.row].subtitle
         let completeAddress = firstPartAddress + ", " + secondPartAddress
@@ -215,7 +216,7 @@ extension CreateJourneyVC: UISearchBarDelegate {
         }
         
         errorMessageLabel.isHidden = true
-
+        
         // We put searchText (our String we need completion for) inside queryFragment for completion.
         searchCompleter.queryFragment = searchText
     }

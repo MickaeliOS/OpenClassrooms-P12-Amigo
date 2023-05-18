@@ -28,6 +28,7 @@ class ExpensesVC: UIViewController {
     @IBOutlet weak var expenseDatePicker: UIDatePicker!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var noExpensesLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var trip: Trip?
     weak var delegate: ExpensesVCDelegate?
@@ -58,7 +59,8 @@ class ExpensesVC: UIViewController {
         addExpenseItemButton.layer.cornerRadius = 10
         saveExpensesButton.layer.cornerRadius = 10
         
-        guard let pencilImage = UIImage(systemName: "pencil"), let dollarSignImage = UIImage(systemName: "dollarsign.circle") else {
+        guard let pencilImage = UIImage(systemName: "pencil"),
+                let dollarSignImage = UIImage(systemName: "dollarsign.circle") else {
             return
         }
         
@@ -94,6 +96,10 @@ class ExpensesVC: UIViewController {
             expenses?.expenseItems?.append(expenseItem)
         }
 
+        // Sorting the expenses by date ascending.
+        let dateOrderedExpenses = ExpenseManagement.sortExpensesByDateAscending(expenseItems: expenses!.expenseItems!)
+        expenses!.expenseItems = dateOrderedExpenses
+        
         refreshTotalAmount()
         clearTextFields()
         showNoExpensesLabelIfNil()
@@ -101,10 +107,7 @@ class ExpensesVC: UIViewController {
     }
 
     private func fetchExpenses() {
-        guard let tripID = trip?.tripID else {
-            showNoExpensesLabelIfNil()
-            return
-        }
+        guard let tripID = trip?.tripID else { return }
 
         expenseFetchingService.fetchTripExpenses(tripID: tripID) { [weak self] expenses, error in
             if let error = error {
@@ -113,7 +116,7 @@ class ExpensesVC: UIViewController {
             }
             
             if var expenses = expenses, let expenseItems = expenses.expenseItems {
-                // Sorting the dates from oldes to newest.
+                // Sorting the dates from oldest to newest.
                 let dateOrderedExpenses = ExpenseManagement.sortExpensesByDateAscending(expenseItems: expenseItems)
                 expenses.expenseItems = dateOrderedExpenses
                 
@@ -135,15 +138,22 @@ class ExpensesVC: UIViewController {
         }
     
         do {
+            UIViewController.toggleActivityIndicator(shown: true, button: saveExpensesButton, activityIndicator: activityIndicator)
+            
+            // Saving in Firestore.
             try expenseUpdateService.updateExpense(expenses: expenses, for: tripID)
+            
+            // Save completed, we can go back to TripDetailVC.
             presentInformationAlert(with: "Your expenses has been saved.") {
                 self.navigationController?.popViewController(animated: true)
             }
             
         } catch let error as Errors.DatabaseError {
             presentErrorAlert(with: error.localizedDescription)
+            UIViewController.toggleActivityIndicator(shown: true, button: saveExpensesButton, activityIndicator: activityIndicator)
         } catch {
             presentErrorAlert(with: Errors.CommonError.defaultError.localizedDescription)
+            UIViewController.toggleActivityIndicator(shown: true, button: saveExpensesButton, activityIndicator: activityIndicator)
         }
     }
     
@@ -184,7 +194,7 @@ class ExpensesVC: UIViewController {
     }
 }
 
-// MARK: - EXTENSIONS
+// MARK: - EXTENSIONS & PROTOCOLS
 extension ExpensesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return expenses?.expenseItems?.count ?? 0
@@ -210,6 +220,8 @@ extension ExpensesVC: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             expenses?.expenseItems?.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            // After deletion, it is necessary to check if the list is empty and obtain the new total amount.
             showNoExpensesLabelIfNil()
             refreshTotalAmount()
         }

@@ -49,7 +49,7 @@ class CreateAccountVC: UIViewController {
     
     private func setupTextFields() {
         confirmPasswordTextField.addPasswordToggleImage(target: self, action: #selector(togglePasswordVisibility))
-
+        
         guard let envelopeImage = UIImage(systemName: "envelope.fill"),
               let passwordLockImage = UIImage(systemName: "lock.fill") else { return }
         
@@ -69,7 +69,7 @@ class CreateAccountVC: UIViewController {
                 try await userCreationService.createUser(email: emailTextField.text!,
                                                          password: passwordTextField.text!,
                                                          confirmPassword: confirmPasswordTextField.text!)
-                                                
+                
                 // If the user creation process is successful, we can return to the TabBar.
                 performSegue(withIdentifier: Constant.SegueID.unwindToRootVC, sender: nil)
                 

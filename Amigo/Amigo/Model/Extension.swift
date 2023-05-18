@@ -68,6 +68,13 @@ extension UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
+    
+    static func toggleActivityIndicator(shown: Bool, button: UIButton, activityIndicator: UIActivityIndicatorView) {
+        // If shown is true, then the refresh button is hidden and we display the Activity Indicator
+        // If not, we hide the Activity Indicator and show the refresh button
+        button.isHidden = shown
+        activityIndicator.isHidden = !shown
+    }
 }
 
 extension UITextField {
