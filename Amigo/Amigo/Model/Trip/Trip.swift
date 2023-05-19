@@ -16,4 +16,6 @@ struct Trip: Codable {
     var country: String
     var countryCode: String
     var toDoList: [String]?
+    var journey: Journey?
+    var expenses: Expense?
 }

@@ -32,7 +32,6 @@ class CreateJourneyVC: UIViewController {
     @IBOutlet weak var errorMessageLabel: UILabel!
     
     var trip: Trip?
-    var journey: Journey?
     weak var delegate: CreateJourneyVCDelegate?
     private var searchCompleter = MKLocalSearchCompleter()
     private var searchResults = [MKLocalSearchCompletion]()
@@ -116,24 +115,24 @@ class CreateJourneyVC: UIViewController {
     }
     
     private func addJourney(location: Location) {
-        guard let journey = journey, journey.locations != nil else {
-            self.journey = Journey(locations: [location])
+        guard let journey = trip?.journey, journey.locations != nil else {
+            self.trip?.journey = Journey(locations: [location])
             return
         }
         
-        self.journey?.locations?.append(location)
+        trip?.journey?.locations?.append(location)
     }
     
     
     private func prepareForRefreshJourney() {
         // Prior to passing the updated journey to JourneyVC, I ensure it is ordered chronologically by date.
-        if var journey = self.journey, let locations = journey.locations {
+        if var journey = trip?.journey, let locations = journey.locations {
             let orderedJourney = LocationManagement.sortLocationsByDateAscending(locations: locations)
             journey.locations = orderedJourney
-            self.journey = journey
+            trip?.journey = journey
         }
         
-        performSegue(withIdentifier: Constant.SegueID.unwindToTripJourneyVC, sender: journey)
+        performSegue(withIdentifier: Constant.SegueID.unwindToTripJourneyVC, sender: nil)
     }
     
     private func emptyTableView() {
@@ -160,8 +159,7 @@ extension CreateJourneyVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constant.SegueID.unwindToTripJourneyVC {
             let tripJourneyVC = segue.destination as? JourneyVC
-            let journey = sender as? Journey
-            tripJourneyVC?.journey = journey
+            tripJourneyVC?.trip?.journey = trip?.journey
             
             // After adding a Journey, we need to refresh the list in the previous controller.
             delegate?.refreshJourney()

@@ -8,9 +8,7 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct Journey: Codable {
-    @DocumentID var tripID: String?
-    
+struct Journey: Codable {    
     // While it is expected for a Journey to contain at least one Location,
     // in order to prevent decoding errors from Firestore, we have marked the location property as optional.
     var locations: [Location]?

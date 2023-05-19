@@ -8,9 +8,7 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-struct Expense: Codable {
-    @DocumentID var tripID: String?
-    
+struct Expense: Codable {    
     // While it is expected for an Expense list to contain at least one ExpenseItem,
     // in order to prevent decoding errors from Firestore, we have marked the expenses property as optional.
     var expenseItems: [ExpenseItem]?

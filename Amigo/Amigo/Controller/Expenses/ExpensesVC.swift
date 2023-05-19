@@ -14,7 +14,7 @@ class ExpensesVC: UIViewController {
         super.viewDidLoad()
         setupInterface()
         setupCell()
-        fetchExpenses()
+        fetchExpensesFlow()
         setupVoiceOver()
     }
     
@@ -32,7 +32,6 @@ class ExpensesVC: UIViewController {
     
     var trip: Trip?
     weak var delegate: ExpensesVCDelegate?
-    private var expenses: Expense?
     private let expenseFetchingService = ExpenseFetchingService()
     private let expenseUpdateService = ExpenseUpdateService()
 
@@ -74,6 +73,8 @@ class ExpensesVC: UIViewController {
     }
     
     private func addExpenseItemToList() {
+        if trip == nil { return }
+        
         guard !expenseTextField.isEmpty, !amountTextField.isEmpty else {
             errorMessageLabel.displayErrorMessage(message: "Both fields must be filled.")
             return
@@ -88,17 +89,17 @@ class ExpensesVC: UIViewController {
 
         // I am implementing this because if the Trip does not have expenses, so expenses property is nil,
         // the user won't be able to add expenseItems.
-        if expenses == nil { expenses = Expense() }
+        if trip?.expenses == nil { trip?.expenses = Expense() }
         
-        if expenses?.expenseItems == nil {
-            expenses?.expenseItems = [expenseItem]
+        if trip?.expenses?.expenseItems == nil {
+            trip?.expenses?.expenseItems = [expenseItem]
         } else {
-            expenses?.expenseItems?.append(expenseItem)
+            trip?.expenses?.expenseItems?.append(expenseItem)
         }
 
         // Sorting the expenses by date ascending.
-        let dateOrderedExpenses = ExpenseManagement.sortExpensesByDateAscending(expenseItems: expenses!.expenseItems!)
-        expenses!.expenseItems = dateOrderedExpenses
+        let dateOrderedExpenses = ExpenseManagement.sortExpensesByDateAscending(expenseItems: trip!.expenses!.expenseItems!)
+        trip?.expenses!.expenseItems = dateOrderedExpenses
         
         refreshTotalAmount()
         clearTextFields()
@@ -106,6 +107,23 @@ class ExpensesVC: UIViewController {
         expensesTableView.reloadData()
     }
 
+    private func fetchExpensesFlow() {
+        guard let expenses = trip?.expenses else {
+            fetchExpenses()
+            return
+        }
+        
+        if let expenseItems = expenses.expenseItems {
+            // Sorting the dates from oldest to newest.
+            let dateOrderedExpenses = ExpenseManagement.sortExpensesByDateAscending(expenseItems: expenseItems)
+            trip?.expenses?.expenseItems = dateOrderedExpenses
+        }
+        
+        showNoExpensesLabelIfNil()
+        expensesTableView.reloadData()
+        activityIndicator.isHidden = true
+    }
+    
     private func fetchExpenses() {
         guard let tripID = trip?.tripID else { return }
 
@@ -121,7 +139,7 @@ class ExpensesVC: UIViewController {
                 expenses.expenseItems = dateOrderedExpenses
                 
                 // Since we have the journey data available, we can display it in the TableView.
-                self?.expenses = expenses
+                self?.trip?.expenses = expenses
                 self?.refreshTotalAmount()
                 self?.showNoExpensesLabelIfNil()
                 self?.expensesTableView.reloadData()
@@ -132,7 +150,7 @@ class ExpensesVC: UIViewController {
     }
     
     private func saveExpenses() {
-        guard let tripID = trip?.tripID, let expenses = expenses else {
+        guard let tripID = trip?.tripID, let expenses = trip?.expenses else {
             presentErrorAlert(with: Errors.DatabaseError.nothingToAdd.localizedDescription)
             return
         }
@@ -142,6 +160,9 @@ class ExpensesVC: UIViewController {
             
             // Saving in Firestore.
             try expenseUpdateService.updateExpense(expenses: expenses, for: tripID)
+            
+            // Sending the modifications.
+            delegate?.sendExpenses(expenses: expenses)
             
             // Save completed, we can go back to TripDetailVC.
             presentInformationAlert(with: "Your expenses has been saved.") {
@@ -158,7 +179,7 @@ class ExpensesVC: UIViewController {
     }
     
     private func refreshTotalAmount() {
-        guard let expenses = expenses, let expenseItems = expenses.expenseItems else {
+        guard let expenses = trip?.expenses, let expenseItems = expenses.expenseItems else {
             return
         }
         
@@ -186,7 +207,7 @@ class ExpensesVC: UIViewController {
     }
     
     private func showNoExpensesLabelIfNil() {
-        if expenses == nil || expenses?.expenseItems?.isEmpty == true {
+        if trip?.expenses == nil || trip?.expenses?.expenseItems?.isEmpty == true {
             noExpensesLabel.isHidden = false
             return
         }
@@ -197,7 +218,7 @@ class ExpensesVC: UIViewController {
 // MARK: - EXTENSIONS & PROTOCOLS
 extension ExpensesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return expenses?.expenseItems?.count ?? 0
+        return trip?.expenses?.expenseItems?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -205,7 +226,7 @@ extension ExpensesVC: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        guard let expenseItems = expenses?.expenseItems else {
+        guard let expenseItems = trip?.expenses?.expenseItems else {
             return UITableViewCell()
         }
                          
@@ -218,7 +239,7 @@ extension ExpensesVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            expenses?.expenseItems?.remove(at: indexPath.row)
+            trip?.expenses?.expenseItems?.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
             
             // After deletion, it is necessary to check if the list is empty and obtain the new total amount.
@@ -244,5 +265,5 @@ extension ExpensesVC: UITextFieldDelegate {
 }
 
 protocol ExpensesVCDelegate: AnyObject {
-    func getTripFromExpensesVC(trip: Trip)
+    func sendExpenses(expenses: Expense)
 }

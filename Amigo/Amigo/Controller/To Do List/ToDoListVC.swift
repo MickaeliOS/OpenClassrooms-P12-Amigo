@@ -85,13 +85,11 @@ class ToDoListVC: UIViewController {
                 // First step -> We store the list in the Firestore database.
                 try await tripUpdateService.updateTrip(with: tripID, fields: [Constant.FirestoreTables.Trip.toDoList: toDoList])
                 
-                // Then, we save the changes locally.
-                trip?.toDoList = toDoList
-                
                 // It's also essential to propagate the changes to the TripDetailVC, to maintain synchronization across all data points.
-                sendTripToPresentingController()
+                delegate?.sendToDoList(toDoList: toDoList)
                 
                 presentInformationAlert(with: "Your list has been saved.") {
+                    // We can safely go back once the toDoList is saved.
                     self.navigationController?.popViewController(animated: true)
                 }
                 
@@ -111,11 +109,9 @@ class ToDoListVC: UIViewController {
         trip?.toDoList?.append(toDoItem)
     }
     
-    private func sendTripToPresentingController() {
-        guard let trip = trip else { return }
-        
-        // We need to communicate eventuals changes.
-        delegate?.getTripFromToDoListVC(trip: trip)
+    private func sendToDoListToPresentingController() {
+        let tripDetailVC = presentingViewController as? TripDetailVC
+        tripDetailVC?.trip?.toDoList = self.trip?.toDoList
     }
     
     private func showNoListLabelIfNil() {
@@ -187,5 +183,5 @@ extension ToDoListVC: UITextFieldDelegate {
 }
 
 protocol ToDoListVCDelegate: AnyObject {
-    func getTripFromToDoListVC(trip: Trip)
+    func sendToDoList(toDoList: [String])
 }

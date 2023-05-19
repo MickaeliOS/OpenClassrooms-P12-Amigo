@@ -14,7 +14,7 @@ class JourneyVC: UIViewController {
         super.viewDidLoad()
         setupInterface()
         setupCell()
-        fetchJourney()
+        fetchJourneyFLow()
         setupVoiceOver()
     }
     
@@ -26,7 +26,7 @@ class JourneyVC: UIViewController {
     @IBOutlet weak var addDestinationButton: UIBarButtonItem!
     
     var trip: Trip?
-    var journey: Journey?
+    weak var delegate: JourneyVCDelegate?
     private let journeyFetchingService = JourneyFetchingService()
     private let journeyUpdateService = JourneyUpdateService()
     
@@ -51,6 +51,23 @@ class JourneyVC: UIViewController {
                                        forCellReuseIdentifier: Constant.TableViewCells.journeyCell)
     }
     
+    private func fetchJourneyFLow() {
+        guard let journey = trip?.journey else {
+            fetchJourney()
+            return
+        }
+        
+        if let locations = journey.locations {
+            // I am sorting the dates in ascending order, from the oldest to the newest.
+            let dateOrderedJourney = LocationManagement.sortLocationsByDateAscending(locations: locations)
+            trip?.journey?.locations = dateOrderedJourney
+        }
+        
+        noJourneyLabel.isHidden = isJourneyEmpty()
+        journeyTableView.reloadData()
+        activityIndicator.isHidden = true
+    }
+    
     private func fetchJourney() {
         guard let tripID = trip?.tripID else { return }
         
@@ -61,14 +78,15 @@ class JourneyVC: UIViewController {
                 return
             }
             
-            if var journey = journey, let locations = journey.locations {
+            if var journey = journey, let locations = journey.locations, !locations.isEmpty {
                 // I am sorting the dates in ascending order, from the oldest to the newest.
                 let dateOrderedJourney = LocationManagement.sortLocationsByDateAscending(locations: locations)
                 journey.locations = dateOrderedJourney
                 
                 // Since we have the journey data available, we can display it in the TableView.
-                self?.journey = journey
+                self?.trip?.journey = journey
                 self?.journeyTableView.reloadData()
+                self?.noJourneyLabel.isHidden = true
             } else {
                 self?.noJourneyLabel.isHidden = false
             }
@@ -78,7 +96,7 @@ class JourneyVC: UIViewController {
     }
     
     private func saveJourney() {
-        guard let journey = journey, let tripID = trip?.tripID else {
+        guard let journey = trip?.journey, let tripID = trip?.tripID else {
             presentErrorAlert(with: Errors.DatabaseError.nothingToAdd.localizedDescription)
             return
         }
@@ -86,6 +104,9 @@ class JourneyVC: UIViewController {
         do {
             // We update the journey in Firestore.
             try journeyUpdateService.updateJourney(journey: journey, for: tripID)
+            
+            // Propagating the modifications.
+            delegate?.sendJourney(journey: journey)
             
             // And we can go back once it's saved.
             presentInformationAlert(with: "Your journey has been saved.") {
@@ -104,34 +125,38 @@ class JourneyVC: UIViewController {
     }
     
     private func isJourneyEmpty() -> Bool {
-        if let locations = journey?.locations, !locations.isEmpty {
+        if let locations = trip?.journey?.locations, !locations.isEmpty {
             return true
         }
         return false
     }
 }
 
-// MARK: - EXTENSIONS
+// MARK: - EXTENSIONS & PROTOCOLS
 extension JourneyVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constant.SegueID.segueToCreateJourneyVC {
+        switch segue.identifier {
+        case Constant.SegueID.segueToCreateJourneyVC:
             let createJourneyVC = segue.destination as? CreateJourneyVC
             createJourneyVC?.trip = trip
-            createJourneyVC?.journey = journey
+            //createJourneyVC?.journey = journey
             
             // To refresh the TableView later with the editedJourneys.
             createJourneyVC?.delegate = self
+
+        default:
+            return
         }
     }
 }
 
 extension JourneyVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return journey?.locations?.count ?? 0
+        return trip?.journey?.locations?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let locations = journey?.locations else { return UITableViewCell() }
+        guard let locations = trip?.journey?.locations else { return UITableViewCell() }
         
         let location = locations[indexPath.row]
         
@@ -147,13 +172,13 @@ extension JourneyVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // We remove the location.
-            journey?.locations?.remove(at: indexPath.row)
+            trip?.journey?.locations?.remove(at: indexPath.row)
             
             // Deleting the cell.
             tableView.deleteRows(at: [indexPath], with: .automatic)
             
             // In case the list became empty, we display the noJourneyLabel to the User.
-            if let locations = journey?.locations, locations.isEmpty {
+            if let locations = trip?.journey?.locations, locations.isEmpty {
                 noJourneyLabel.isHidden = false
             }
         }
@@ -169,4 +194,8 @@ extension JourneyVC: CreateJourneyVCDelegate {
         noJourneyLabel.isHidden = isJourneyEmpty()
         journeyTableView.reloadData()
     }
+}
+
+protocol JourneyVCDelegate: AnyObject {
+    func sendJourney(journey: Journey)
 }

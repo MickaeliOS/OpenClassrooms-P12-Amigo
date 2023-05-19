@@ -38,6 +38,8 @@ class TripDetailVC: UIViewController {
     weak var delegate: TripDetailVCDelegate?
     
     // MARK: - ACTIONS
+    @IBAction func unwindToTripDetailVC(segue: UIStoryboardSegue) {}
+
     @IBAction func journeyButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: Constant.SegueID.segueToTripJourneyVC, sender: trip)
     }
@@ -93,6 +95,7 @@ extension TripDetailVC {
         case Constant.SegueID.segueToTripJourneyVC:
             let tripJourneyVC = segue.destination as? JourneyVC
             tripJourneyVC?.trip = trip
+            tripJourneyVC?.delegate = self
             
         case Constant.SegueID.segueToToDoList:
             let toDoListVC = segue.destination as? ToDoListVC
@@ -110,14 +113,20 @@ extension TripDetailVC {
 }
 
 extension TripDetailVC: ToDoListVCDelegate {
-    func getTripFromToDoListVC(trip: Trip) {
-        self.trip = trip
+    func sendToDoList(toDoList: [String]) {
+        trip?.toDoList = toDoList
     }
 }
 
 extension TripDetailVC: ExpensesVCDelegate {
-    func getTripFromExpensesVC(trip: Trip) {
-        self.trip = trip
+    func sendExpenses(expenses: Expense) {
+        trip?.expenses = expenses
+    }
+}
+
+extension TripDetailVC: JourneyVCDelegate {
+    func sendJourney(journey: Journey) {
+        trip?.journey = journey
     }
 }
 

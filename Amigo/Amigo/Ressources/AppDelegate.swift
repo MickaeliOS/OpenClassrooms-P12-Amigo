@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ********************************************************
             """
             )
-            
+            Auth.auth().useEmulator(withHost: "localhost", port: 9099)
             let settings = Firestore.firestore().settings
             settings.host = "localhost:8080"
             settings.isPersistenceEnabled = false
