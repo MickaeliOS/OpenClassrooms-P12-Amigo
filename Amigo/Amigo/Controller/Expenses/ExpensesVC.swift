@@ -117,6 +117,8 @@ class ExpensesVC: UIViewController {
             // Sorting the dates from oldest to newest.
             let dateOrderedExpenses = ExpenseManagement.sortExpensesByDateAscending(expenseItems: expenseItems)
             trip?.expenses?.expenseItems = dateOrderedExpenses
+            
+            refreshTotalAmount()
         }
         
         showNoExpensesLabelIfNil()
