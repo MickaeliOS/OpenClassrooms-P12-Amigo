@@ -17,7 +17,7 @@ jobs:
     - name: Set up secrets
       env:
         GOOGLE_SERVICE_INFO: ${{ secrets.GOOGLE_SERVICE_INFO }}
-      run: echo "$GOOGLE_SERVICE_INFO" > GoogleService-Info.plist
+      run: echo "$GOOGLE_SERVICE_INFO" > Amigo/Amigo/Ressources/GoogleService-Info.plist
 
     - name: Build Amigo
       run: xcodebuild -scheme Amigo -project Amigo/Amigo.xcodeproj -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 12 Pro Max" build
