@@ -28,7 +28,8 @@ class ExpensesVC: UIViewController {
     @IBOutlet weak var expenseDatePicker: UIDatePicker!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var noExpensesLabel: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var savingButtonAI: UIActivityIndicatorView!
+    @IBOutlet weak var fetchingAI: UIActivityIndicatorView!
     
     var trip: Trip?
     weak var delegate: ExpensesVCDelegate?
@@ -103,7 +104,7 @@ class ExpensesVC: UIViewController {
         
         refreshTotalAmount()
         clearTextFields()
-        showNoExpensesLabelIfNil()
+        showNoExpensesLabelIfNoExpenses()
         expensesTableView.reloadData()
     }
 
@@ -121,9 +122,9 @@ class ExpensesVC: UIViewController {
             refreshTotalAmount()
         }
         
-        showNoExpensesLabelIfNil()
+        showNoExpensesLabelIfNoExpenses()
         expensesTableView.reloadData()
-        activityIndicator.isHidden = true
+        fetchingAI.isHidden = true
     }
     
     private func fetchExpenses() {
@@ -131,23 +132,29 @@ class ExpensesVC: UIViewController {
 
         expenseFetchingService.fetchTripExpenses(tripID: tripID) { [weak self] expenses, error in
             if let error = error {
+                self?.fetchingAI.isHidden = true
                 self?.presentErrorAlert(with: error.localizedDescription)
                 return
             }
             
             if var expenses = expenses, let expenseItems = expenses.expenseItems {
-                // Sorting the dates from oldest to newest.
-                let dateOrderedExpenses = ExpenseManagement.sortExpensesByDateAscending(expenseItems: expenseItems)
-                expenses.expenseItems = dateOrderedExpenses
-                
-                // Since we have the journey data available, we can display it in the TableView.
+                if !expenseItems.isEmpty {
+                    // Sorting the dates from oldest to newest.
+                    let dateOrderedExpenses = ExpenseManagement.sortExpensesByDateAscending(expenseItems: expenseItems)
+                    expenses.expenseItems = dateOrderedExpenses
+                    
+                    // Displaying the expenses.
+                    self?.refreshTotalAmount()
+                }
+
+                // Saving the expenses.
                 self?.trip?.expenses = expenses
-                self?.refreshTotalAmount()
-                self?.showNoExpensesLabelIfNil()
+                self?.delegate?.sendExpenses(expenses: expenses)
                 self?.expensesTableView.reloadData()
-                return
             }
-            self?.showNoExpensesLabelIfNil()
+            
+            self?.fetchingAI.isHidden = true
+            self?.showNoExpensesLabelIfNoExpenses()
         }
     }
     
@@ -158,7 +165,7 @@ class ExpensesVC: UIViewController {
         }
     
         do {
-            UIViewController.toggleActivityIndicator(shown: true, button: saveExpensesButton, activityIndicator: activityIndicator)
+            UIViewController.toggleActivityIndicator(shown: true, button: saveExpensesButton, activityIndicator: savingButtonAI)
             
             // Saving in Firestore.
             try expenseUpdateService.updateExpense(expenses: expenses, for: tripID)
@@ -173,10 +180,10 @@ class ExpensesVC: UIViewController {
             
         } catch let error as Errors.DatabaseError {
             presentErrorAlert(with: error.localizedDescription)
-            UIViewController.toggleActivityIndicator(shown: true, button: saveExpensesButton, activityIndicator: activityIndicator)
+            UIViewController.toggleActivityIndicator(shown: true, button: saveExpensesButton, activityIndicator: savingButtonAI)
         } catch {
             presentErrorAlert(with: Errors.CommonError.defaultError.localizedDescription)
-            UIViewController.toggleActivityIndicator(shown: true, button: saveExpensesButton, activityIndicator: activityIndicator)
+            UIViewController.toggleActivityIndicator(shown: true, button: saveExpensesButton, activityIndicator: savingButtonAI)
         }
     }
     
@@ -208,7 +215,7 @@ class ExpensesVC: UIViewController {
         saveExpensesButton.accessibilityHint = "Press to save your expense."
     }
     
-    private func showNoExpensesLabelIfNil() {
+    private func showNoExpensesLabelIfNoExpenses() {
         if trip?.expenses == nil || trip?.expenses?.expenseItems?.isEmpty == true {
             noExpensesLabel.isHidden = false
             return
@@ -245,7 +252,7 @@ extension ExpensesVC: UITableViewDelegate, UITableViewDataSource {
             tableView.deleteRows(at: [indexPath], with: .automatic)
             
             // After deletion, it is necessary to check if the list is empty and obtain the new total amount.
-            showNoExpensesLabelIfNil()
+            showNoExpensesLabelIfNoExpenses()
             refreshTotalAmount()
         }
     }

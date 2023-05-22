@@ -299,7 +299,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pfi-ow-Y7z">
                                 <rect key="frame" x="10" y="91" width="355" height="618"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvw-1M-1cR">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvw-1M-1cR">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="33.666666666666664"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <nil key="textColor"/>
@@ -431,6 +431,9 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="qrD-km-O25">
+                                <rect key="frame" x="169" y="391.66666666666669" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Rpb-gO-Ok6"/>
                         <color key="backgroundColor" name="Background"/>
@@ -440,9 +443,11 @@
                             <constraint firstItem="Rpb-gO-Ok6" firstAttribute="bottom" secondItem="BMB-Qu-YWs" secondAttribute="bottom" constant="20" id="2kn-dp-OTz"/>
                             <constraint firstItem="pfi-ow-Y7z" firstAttribute="leading" secondItem="Rpb-gO-Ok6" secondAttribute="leading" constant="10" id="74p-P0-Ex9"/>
                             <constraint firstItem="Rpb-gO-Ok6" firstAttribute="trailing" secondItem="BMB-Qu-YWs" secondAttribute="trailing" constant="10" id="9c0-aY-cbN"/>
+                            <constraint firstItem="qrD-km-O25" firstAttribute="centerY" secondItem="Rpb-gO-Ok6" secondAttribute="centerY" id="CE0-c3-eoh"/>
                             <constraint firstItem="Rpb-gO-Ok6" firstAttribute="trailing" secondItem="pfi-ow-Y7z" secondAttribute="trailing" constant="10" id="KOm-rv-gP4"/>
                             <constraint firstItem="Dhw-hP-rg8" firstAttribute="height" secondItem="Rpb-gO-Ok6" secondAttribute="height" multiplier="0.1" id="P59-gJ-Fok"/>
                             <constraint firstItem="BMB-Qu-YWs" firstAttribute="leading" secondItem="Rpb-gO-Ok6" secondAttribute="leading" constant="10" id="WFF-8s-31T"/>
+                            <constraint firstItem="qrD-km-O25" firstAttribute="centerX" secondItem="Rpb-gO-Ok6" secondAttribute="centerX" id="XiD-RR-Hwx"/>
                             <constraint firstItem="mTd-yb-bYR" firstAttribute="height" secondItem="Rpb-gO-Ok6" secondAttribute="height" multiplier="0.1" id="Z8A-71-5nz"/>
                             <constraint firstItem="pfi-ow-Y7z" firstAttribute="top" secondItem="Rpb-gO-Ok6" secondAttribute="top" id="c09-uP-qr6"/>
                             <constraint firstItem="BMB-Qu-YWs" firstAttribute="top" secondItem="Rpb-gO-Ok6" secondAttribute="top" id="ceT-8N-5nG"/>
@@ -454,15 +459,16 @@
                     </view>
                     <navigationItem key="navigationItem" id="fGN-xn-7wg"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="0ox-xb-xaz" id="zeP-Ap-B8T"/>
                         <outlet property="addExpenseItemButton" destination="mTd-yb-bYR" id="pBv-K3-fcm"/>
                         <outlet property="amountTextField" destination="bfe-mA-yC0" id="4xe-hj-Rf7"/>
                         <outlet property="errorMessageLabel" destination="6bF-mJ-0O0" id="oDW-7i-1Eb"/>
                         <outlet property="expenseDatePicker" destination="m5T-AM-2ph" id="bUH-ZA-sXk"/>
                         <outlet property="expenseTextField" destination="hxf-Dk-V8Z" id="2zT-O3-8R3"/>
                         <outlet property="expensesTableView" destination="v0D-95-quP" id="bOS-TT-Lkg"/>
+                        <outlet property="fetchingAI" destination="qrD-km-O25" id="tzr-5D-KfU"/>
                         <outlet property="noExpensesLabel" destination="BMB-Qu-YWs" id="jYC-zR-e5h"/>
                         <outlet property="saveExpensesButton" destination="zdh-QF-7IG" id="1DU-sE-nhA"/>
+                        <outlet property="savingButtonAI" destination="0ox-xb-xaz" id="zeP-Ap-B8T"/>
                         <outlet property="totalLabel" destination="vvw-1M-1cR" id="U1Z-WG-rXf"/>
                     </connections>
                 </viewController>
@@ -636,7 +642,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DJ5-rs-q5G">
-                                <rect key="frame" x="10" y="91" width="355" height="544.33333333333337"/>
+                                <rect key="frame" x="10" y="91" width="355" height="574.33333333333337"/>
                                 <color key="backgroundColor" name="Background"/>
                                 <connections>
                                     <outlet property="dataSource" destination="cg4-D8-dG3" id="eOD-rX-kWC"/>
@@ -644,27 +650,44 @@
                                 </connections>
                             </tableView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="KSS-i6-T3T">
-                                <rect key="frame" x="169" y="344.66666666666669" width="37" height="37"/>
+                                <rect key="frame" x="169" y="359.66666666666669" width="37" height="37"/>
                                 <color key="color" systemColor="labelColor"/>
                             </activityIndicatorView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You don't have a journey yet, please use the top right button to start building one !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Crp-Sv-eMD">
-                                <rect key="frame" x="10" y="91" width="355" height="544.33333333333337"/>
+                                <rect key="frame" x="10" y="91" width="355" height="574.33333333333337"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QxW-m4-ZSa">
-                                <rect key="frame" x="10" y="645.33333333333337" width="355" height="63.666666666666629"/>
-                                <color key="backgroundColor" name="UIElement1"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Save">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="saveButtonTapped:" destination="cg4-D8-dG3" eventType="touchUpInside" id="P26-U7-ils"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jmn-W2-0yl">
+                                <rect key="frame" x="10" y="675.33333333333337" width="355" height="63.666666666666629"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QxW-m4-ZSa">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="63.666666666666664"/>
+                                        <color key="backgroundColor" name="UIElement1"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveButtonTapped:" destination="cg4-D8-dG3" eventType="touchUpInside" id="P26-U7-ils"/>
+                                        </connections>
+                                    </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="oCk-wO-bZU">
+                                        <rect key="frame" x="159" y="13.333333333333258" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" name="Background"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="QxW-m4-ZSa" secondAttribute="trailing" id="FfG-rS-TVx"/>
+                                    <constraint firstAttribute="bottom" secondItem="QxW-m4-ZSa" secondAttribute="bottom" id="GTE-r6-EHZ"/>
+                                    <constraint firstItem="QxW-m4-ZSa" firstAttribute="leading" secondItem="Jmn-W2-0yl" secondAttribute="leading" id="iJU-YJ-iQN"/>
+                                    <constraint firstItem="oCk-wO-bZU" firstAttribute="centerY" secondItem="Jmn-W2-0yl" secondAttribute="centerY" id="xN5-0U-YqV"/>
+                                    <constraint firstItem="oCk-wO-bZU" firstAttribute="centerX" secondItem="Jmn-W2-0yl" secondAttribute="centerX" id="xxs-35-CKu"/>
+                                    <constraint firstItem="QxW-m4-ZSa" firstAttribute="top" secondItem="Jmn-W2-0yl" secondAttribute="top" id="y3Q-r0-mQj"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1Ex-Wc-uav"/>
                         <color key="backgroundColor" name="Background"/>
@@ -672,17 +695,17 @@
                             <constraint firstItem="DJ5-rs-q5G" firstAttribute="leading" secondItem="1Ex-Wc-uav" secondAttribute="leading" constant="10" id="55L-dj-bPc"/>
                             <constraint firstItem="1Ex-Wc-uav" firstAttribute="trailing" secondItem="DJ5-rs-q5G" secondAttribute="trailing" constant="10" id="63Z-DV-hnk"/>
                             <constraint firstItem="Crp-Sv-eMD" firstAttribute="top" secondItem="DJ5-rs-q5G" secondAttribute="top" id="7eL-x5-wZ2"/>
-                            <constraint firstItem="1Ex-Wc-uav" firstAttribute="bottom" secondItem="QxW-m4-ZSa" secondAttribute="bottom" constant="20" id="Kye-OJ-pf9"/>
-                            <constraint firstItem="1Ex-Wc-uav" firstAttribute="trailing" secondItem="QxW-m4-ZSa" secondAttribute="trailing" constant="10" id="NGE-VE-OaR"/>
+                            <constraint firstAttribute="trailing" secondItem="Jmn-W2-0yl" secondAttribute="trailing" constant="10" id="Jbj-w9-mUn"/>
                             <constraint firstItem="KSS-i6-T3T" firstAttribute="centerX" secondItem="DJ5-rs-q5G" secondAttribute="centerX" id="U8b-gu-5AI"/>
-                            <constraint firstItem="QxW-m4-ZSa" firstAttribute="height" secondItem="1Ex-Wc-uav" secondAttribute="height" multiplier="0.1" id="Xvj-aq-sP5"/>
                             <constraint firstItem="Crp-Sv-eMD" firstAttribute="trailing" secondItem="DJ5-rs-q5G" secondAttribute="trailing" id="c5o-Nw-CIH"/>
                             <constraint firstItem="KSS-i6-T3T" firstAttribute="centerY" secondItem="DJ5-rs-q5G" secondAttribute="centerY" id="gKt-Dv-A04"/>
+                            <constraint firstItem="Jmn-W2-0yl" firstAttribute="height" secondItem="1Ex-Wc-uav" secondAttribute="height" multiplier="0.1" id="hBe-Tp-bC9"/>
                             <constraint firstItem="Crp-Sv-eMD" firstAttribute="leading" secondItem="DJ5-rs-q5G" secondAttribute="leading" id="kem-xS-xYI"/>
-                            <constraint firstItem="QxW-m4-ZSa" firstAttribute="top" secondItem="DJ5-rs-q5G" secondAttribute="bottom" constant="10" id="rxt-sa-nJw"/>
-                            <constraint firstItem="QxW-m4-ZSa" firstAttribute="leading" secondItem="1Ex-Wc-uav" secondAttribute="leading" constant="10" id="uEI-be-Qcp"/>
+                            <constraint firstItem="Jmn-W2-0yl" firstAttribute="leading" secondItem="aeF-7z-2by" secondAttribute="leading" constant="10" id="l66-BM-4X7"/>
+                            <constraint firstItem="Jmn-W2-0yl" firstAttribute="top" secondItem="DJ5-rs-q5G" secondAttribute="bottom" constant="10" id="vrn-3I-kuI"/>
                             <constraint firstItem="DJ5-rs-q5G" firstAttribute="top" secondItem="1Ex-Wc-uav" secondAttribute="top" id="wJo-6h-sYQ"/>
                             <constraint firstItem="Crp-Sv-eMD" firstAttribute="bottom" secondItem="DJ5-rs-q5G" secondAttribute="bottom" id="xhe-vJ-nML"/>
+                            <constraint firstItem="Jmn-W2-0yl" firstAttribute="bottom" secondItem="1Ex-Wc-uav" secondAttribute="bottom" constant="10" id="yrl-RL-hR6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Hiq-7p-6EW">
@@ -693,11 +716,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="KSS-i6-T3T" id="eYW-f4-LMB"/>
                         <outlet property="addDestinationButton" destination="ZMT-tf-Ams" id="Sa1-PA-dUA"/>
+                        <outlet property="fetchingAI" destination="KSS-i6-T3T" id="eYW-f4-LMB"/>
                         <outlet property="journeyTableView" destination="DJ5-rs-q5G" id="Jym-Sp-Mqb"/>
                         <outlet property="noJourneyLabel" destination="Crp-Sv-eMD" id="Onr-6s-HMP"/>
                         <outlet property="saveButton" destination="QxW-m4-ZSa" id="fov-uO-A10"/>
+                        <outlet property="saveButtonAI" destination="oCk-wO-bZU" id="7TA-Jq-yQO"/>
                         <segue destination="OpC-KT-iJB" kind="presentation" identifier="segueToCreateJourneyVC" id="IHS-Ac-DfU"/>
                     </connections>
                 </viewController>

@@ -21,9 +21,10 @@ class JourneyVC: UIViewController {
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var journeyTableView: UITableView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var fetchingAI: UIActivityIndicatorView!
     @IBOutlet weak var noJourneyLabel: UILabel!
     @IBOutlet weak var addDestinationButton: UIBarButtonItem!
+    @IBOutlet weak var saveButtonAI: UIActivityIndicatorView!
     
     var trip: Trip?
     weak var delegate: JourneyVCDelegate?
@@ -65,7 +66,7 @@ class JourneyVC: UIViewController {
         
         noJourneyLabel.isHidden = isJourneyEmpty()
         journeyTableView.reloadData()
-        activityIndicator.isHidden = true
+        fetchingAI.isHidden = true
     }
     
     private func fetchJourney() {
@@ -73,25 +74,32 @@ class JourneyVC: UIViewController {
         
         journeyFetchingService.fetchTripJourney(tripID: tripID) { [weak self] journey, error in
             if let error = error {
-                self?.activityIndicator.isHidden = true
+                self?.fetchingAI.isHidden = true
                 self?.presentErrorAlert(with: error.localizedDescription)
                 return
             }
             
-            if var journey = journey, let locations = journey.locations, !locations.isEmpty {
-                // I am sorting the dates in ascending order, from the oldest to the newest.
-                let dateOrderedJourney = LocationManagement.sortLocationsByDateAscending(locations: locations)
-                journey.locations = dateOrderedJourney
+            if var journey = journey, let locations = journey.locations {
+                if !locations.isEmpty {
+                    // I am sorting the dates in ascending order, from the oldest to the newest.
+                    let dateOrderedJourney = LocationManagement.sortLocationsByDateAscending(locations: locations)
+                    journey.locations = dateOrderedJourney
+                    
+                }
+                
+                // Saving the trip's journey.
+                self?.trip?.journey = journey
+                self?.delegate?.sendJourney(journey: journey)
                 
                 // Since we have the journey data available, we can display it in the TableView.
-                self?.trip?.journey = journey
                 self?.journeyTableView.reloadData()
+                
                 self?.noJourneyLabel.isHidden = true
             } else {
                 self?.noJourneyLabel.isHidden = false
             }
             
-            self?.activityIndicator.isHidden = true
+            self?.fetchingAI.isHidden = true
         }
     }
     
@@ -100,8 +108,10 @@ class JourneyVC: UIViewController {
             presentErrorAlert(with: Errors.DatabaseError.nothingToAdd.localizedDescription)
             return
         }
-        
+                
         do {
+            UIViewController.toggleActivityIndicator(shown: true, button: saveButton, activityIndicator: saveButtonAI)
+
             // We update the journey in Firestore.
             try journeyUpdateService.updateJourney(journey: journey, for: tripID)
             
