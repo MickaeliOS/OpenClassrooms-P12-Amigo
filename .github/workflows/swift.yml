@@ -15,6 +15,6 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build Amigo
-      run: xcodebuild -scheme Amigo -workspace Amigo.xcworkspace -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 12 Pro Max" build
+      run: xcodebuild -scheme Amigo -project Amigo.xcodeproj -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 12 Pro Max" build
 
     # Ajoutez d'autres étapes nécessaires pour votre build, telles que les tests unitaires ou les tâches de déploiement
