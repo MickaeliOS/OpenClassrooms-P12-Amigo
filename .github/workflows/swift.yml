@@ -14,7 +14,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Build Amigo
-      run: xcodebuild -scheme Amigo -project Amigo/Amigo.xcodeproj -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 12 Pro Max" build
+    - name: Set up secrets
+      env:
+        GOOGLE_SERVICE_INFO: ${{ secrets.GOOGLE_SERVICE_INFO }}
+      run: echo "$GOOGLE_SERVICE_INFO" | base64 --decode > GoogleService-Info.plist
 
+    - name: Build Amigo
+      run: swift build -v
     # Ajoutez d'autres étapes nécessaires pour votre build, telles que les tests unitaires ou les tâches de déploiement
