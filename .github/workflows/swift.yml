@@ -1,17 +1,20 @@
 # This workflow will build a Swift project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
 
-name: Swift
+name: Manual Build
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Événement personnalisé pour déclencher manuellement le workflow
 
 jobs:
   build:
-
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build
-      run: xcodebuild clean build -workspace Amigo.xcworkspace -scheme Amigo -destination "platform=iOS Simulator,name=iPhone 12 Pro"
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build Amigo
+      run: xcodebuild -scheme Amigo -workspace Amigo.xcworkspace -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 12 Pro Max" build
+
+    # Ajoutez d'autres étapes nécessaires pour votre build, telles que les tests unitaires ou les tâches de déploiement
