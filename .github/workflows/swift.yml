@@ -20,7 +20,7 @@ jobs:
         #FIRESTORE_INDEXES_JSON : ${{ secrets.FIRESTORE_INDEXES_JSON }}
         #FIRESTORE_JSON : ${{ secrets.FIRESTORE_JSON }}
 
-      run: echo "$GOOGLE_SERVICE_INFO" > GoogleService-Info.plist
+      run: echo "$GOOGLE_SERVICE_INFO" > Amigo/Amigo/Ressources/GoogleService-Info.plist
            #echo "$FIRESTORE_INDEXES_JSON" > firestore.indexes.json
            #echo "$FIRESTORE_JSON" > firestore.json
 
