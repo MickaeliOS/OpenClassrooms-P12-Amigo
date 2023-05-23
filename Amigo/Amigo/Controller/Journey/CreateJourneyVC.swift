@@ -73,7 +73,7 @@ class CreateJourneyVC: UIViewController {
         searchCompleter.delegate = self
         searchCompleter.resultTypes = [.address, .pointOfInterest]
         
-        LocationManagement.filterLocationByRegion(region: trip.country, completion: { [weak self] region in
+        LocationManagement().getCoordinatesFromRegion(region: trip.country, completion: { [weak self] region in
             guard let region = region else { return }
             self?.searchCompleter.region = region
         })
@@ -95,6 +95,7 @@ class CreateJourneyVC: UIViewController {
         // Address decomposition is required for proper storage.
         MKLocalSearch.getPartsFromAddress(address: completeAddress) { [weak self] result, error in
             guard error == nil, let result = result else {
+                self?.presentErrorAlert(with: "An error occured with the address, please choose another one.")
                 return
             }
             

@@ -27,6 +27,8 @@
 		8323F6EC29E587B800CBDFB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */; };
 		8323F6F029E5908600CBDFB5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8323F6EF29E5908600CBDFB5 /* User.swift */; };
 		832A841A29F01D360074DC14 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832A841929F01D360074DC14 /* Constant.swift */; };
+		83343D192A1D5C7900FCA27B /* MockCLGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83343D182A1D5C7900FCA27B /* MockCLGeocoder.swift */; };
+		8345F8792A1C958100DB326E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8345F8782A1C958100DB326E /* Location.swift */; };
 		83489A342A0BBD16002974E1 /* LocationManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489A332A0BBD16002974E1 /* LocationManagement.swift */; };
 		83489A362A0BC135002974E1 /* TripDeletionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489A352A0BC135002974E1 /* TripDeletionService.swift */; };
 		83489A382A0C1574002974E1 /* TripManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83489A372A0C1574002974E1 /* TripManagement.swift */; };
@@ -106,6 +108,8 @@
 		8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8323F6EF29E5908600CBDFB5 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		832A841929F01D360074DC14 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		83343D182A1D5C7900FCA27B /* MockCLGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCLGeocoder.swift; sourceTree = "<group>"; };
+		8345F8782A1C958100DB326E /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		83489A332A0BBD16002974E1 /* LocationManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagement.swift; sourceTree = "<group>"; };
 		83489A352A0BC135002974E1 /* TripDeletionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDeletionService.swift; sourceTree = "<group>"; };
 		83489A372A0C1574002974E1 /* TripManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripManagement.swift; sourceTree = "<group>"; };
@@ -218,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				83220E292A1B51A00002A5F4 /* ModelTests.swift */,
+				83343D182A1D5C7900FCA27B /* MockCLGeocoder.swift */,
 				83220E272A1B51700002A5F4 /* FirebaseTests */,
 			);
 			path = AmigoTests;
@@ -267,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				83489A332A0BBD16002974E1 /* LocationManagement.swift */,
+				8345F8782A1C958100DB326E /* Location.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -564,6 +570,7 @@
 			files = (
 				83124ADF2A166ACE00565F24 /* UserTests.swift in Sources */,
 				83220E2A2A1B51A00002A5F4 /* ModelTests.swift in Sources */,
+				83343D192A1D5C7900FCA27B /* MockCLGeocoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +612,7 @@
 				8300096529F8FF2F006DBD54 /* UserCreationService.swift in Sources */,
 				83B4F8F12A03A43D00A1A4FC /* ConfirmationTripVC.swift in Sources */,
 				838296C12A0D7D1D00B4E9D3 /* Expense.swift in Sources */,
+				8345F8792A1C958100DB326E /* Location.swift in Sources */,
 				8361E03429E5522900EE7D2B /* SceneDelegate.swift in Sources */,
 				8300096729F90598006DBD54 /* UserAuthService.swift in Sources */,
 				83FED4072A0C1B0800B0B231 /* ToDoListVC.swift in Sources */,

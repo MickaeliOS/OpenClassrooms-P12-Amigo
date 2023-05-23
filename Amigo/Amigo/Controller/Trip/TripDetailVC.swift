@@ -57,7 +57,7 @@ class TripDetailVC: UIViewController {
         guard let trip = trip else { return }
         
         // Labels
-        let countryFlag = String.countryFlag(countryCode: trip.countryCode)
+        let countryFlag = String.countryFlag(countryCode: trip.countryCode) ?? "N/A"
         countryNameLabel.text = countryFlag + " " + trip.country
         startDateLabel.text = trip.startDate.dateToString()
         endDateLabel.text = trip.endDate.dateToString()

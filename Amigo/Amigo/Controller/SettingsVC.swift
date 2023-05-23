@@ -30,7 +30,6 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var firstnameTextField: UITextField!
     @IBOutlet weak var genderSegmentedControl: UISegmentedControl!
     @IBOutlet weak var saveProfileButton: UIButton!
-    @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var logOutButton: UIButton!
     
@@ -71,11 +70,6 @@ class SettingsVC: UIViewController {
             return
         }
         
-        if lastnameTextField.isEmpty || firstnameTextField.isEmpty {
-            errorMessageLabel.displayErrorMessage(message: "All fields must be filled.")
-            return
-        }
-        
         UIViewController.toggleActivityIndicator(shown: true, button: saveProfileButton, activityIndicator: activityIndicator)
 
         // If user is nil at this point, it indicates an issue during the fetching of the user in TripVC.
@@ -95,8 +89,8 @@ class SettingsVC: UIViewController {
                 let gender: User.Gender = selectedIndex == 0 ? .woman : .man
                 
                 // Then, I create the User.
-                let user = User(firstname: firstnameTextField.text!,
-                                lastname: lastnameTextField.text!, gender: gender,
+                let user = User(firstname: firstnameTextField.text,
+                                lastname: lastnameTextField.text, gender: gender,
                                 email: currentUser.email!)
                 
                 // We are prepared to persistently save the user's data, both remotely and locally.
@@ -121,13 +115,14 @@ class SettingsVC: UIViewController {
                 // First, we get the value from genderSegmentedControl
                 let genderRawValue = genderSegmentedControl.titleForSegment(at: genderSegmentedControl.selectedSegmentIndex) ?? User.Gender.woman.rawValue
                 
+                
                 // Then, we provide the fields to be updated.
-                let fields = [Constant.FirestoreTables.User.lastname: lastnameTextField.text!,
-                              Constant.FirestoreTables.User.firstname: firstnameTextField.text!,
+                let fields = [Constant.FirestoreTables.User.lastname: lastnameTextField.text,
+                              Constant.FirestoreTables.User.firstname: firstnameTextField.text,
                               Constant.FirestoreTables.User.gender: genderRawValue]
                 
                 // Finally, we can save our user locally and remotely.
-                try await userUpdatingService.updateUser(fields: fields, userID: userID)
+                try await userUpdatingService.updateUser(fields: fields as [String : Any], userID: userID)
                 
                 dataSource.user?.lastname = lastnameTextField.text!
                 dataSource.user?.firstname = firstnameTextField.text!
@@ -162,18 +157,15 @@ class SettingsVC: UIViewController {
     }
     
     private func setupPersonalInformations() {
-        guard let name = dataSource.user?.lastname, let firstname = dataSource.user?.firstname else {
-            return
-        }
-        
-        lastnameTextField.placeholder = name
-        firstnameTextField.placeholder = firstname
+        lastnameTextField.text = dataSource.user?.lastname
+        firstnameTextField.text = dataSource.user?.firstname
         genderSegmentedControl.selectedSegmentIndex = User.Gender.index(of: dataSource.user?.gender ?? .woman)
     }
     
     private func signOut() {
         do {
             try userAuthService.signOut()
+            dataSource.user = nil
             presentVCFullScreen(with: "WelcomeVC")
         } catch let error as Errors.SignOutError {
             presentErrorAlert(with: error.localizedDescription)
@@ -206,9 +198,5 @@ extension SettingsVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    func textFieldDidChangeSelection(_ textField: UITextField) {
-        errorMessageLabel.isHidden = true
     }
 }

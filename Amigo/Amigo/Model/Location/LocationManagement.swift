@@ -9,14 +9,20 @@ import Foundation
 import MapKit
 
 final class LocationManagement {
+    var geocoder: CLGeocoder
+    
+    init(geocoder: CLGeocoder = CLGeocoder()) {
+        self.geocoder = geocoder
+    }
+    
     static func sortLocationsByDateAscending(locations: [Location]) -> [Location] {
         var copiedLocations = locations
         copiedLocations.sort(by: { $0.endDate.compare($1.endDate) == .orderedAscending })
         return copiedLocations
     }
     
-    static func filterLocationByRegion(region: String, completion: @escaping (MKCoordinateRegion?) -> Void) {
-        CLGeocoder().geocodeAddressString(region) { result, error in
+    func getCoordinatesFromRegion(region: String, completion: @escaping (MKCoordinateRegion?) -> Void) {
+        geocoder.geocodeAddressString(region) { result, error in
             if error != nil {
                 completion(nil)
                 return
@@ -34,6 +40,5 @@ final class LocationManagement {
             
             completion(coordinateRegion)
         }
-        
     }
 }

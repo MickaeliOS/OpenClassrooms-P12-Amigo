@@ -17,11 +17,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Starting Firebase.
         FirebaseApp.configure()
         
+        #if DEBUG
+        // By utilizing the #if DEBUG, we ensure that the following code is not executed during the build process, but exclusively during testing.
         if ProcessInfo.processInfo.environment["unit_tests"] == "true" {
             print("""
+            
                 ********************************************************
-                Setting up Firebase emulator localhost:8080
+                      Setting up Firebase emulator localhost:8080
                 ********************************************************
+            
             """
             )
             Auth.auth().useEmulator(withHost: "localhost", port: 9099)
@@ -31,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             settings.isSSLEnabled = false
             Firestore.firestore().settings = settings
         }
+        #endif
+
         return true
     }
     

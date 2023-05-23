@@ -69,7 +69,7 @@ extension CountryPickerVC: UITableViewDelegate, UITableViewDataSource {
         let countryFlag = String.countryFlag(countryCode: countryCode ?? "N/A")
         
         // We will present the country name in conjunction with its corresponding national flag.
-        cell.configureCell(flag: countryFlag, country: filteredCountryList[indexPath.row])
+        cell.configureCell(flag: countryFlag ?? "N/A", country: filteredCountryList[indexPath.row])
         return cell
     }
     

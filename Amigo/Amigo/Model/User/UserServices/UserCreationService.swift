@@ -29,6 +29,7 @@ final class UserCreationService {
             try checkingLogs(email: email, password: password, confirmPassword: confirmPassword)
             
             let _ = try await firebaseAuth.createUser(withEmail: email, password: password)
+            
         } catch let error as Errors.CommonError {
             throw error
         } catch let error as Errors.CreateAccountError {
