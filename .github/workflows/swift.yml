@@ -12,13 +12,38 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up secrets
       env:
         GOOGLE_SERVICE_INFO: ${{ secrets.GOOGLE_SERVICE_INFO }}
-      run: echo "$GOOGLE_SERVICE_INFO" > Amigo/Amigo/Ressources/GoogleService-Info.plist
+        #FIRESTORE_INDEXES_JSON : ${{ secrets.FIRESTORE_INDEXES_JSON }}
+        #FIRESTORE_JSON : ${{ secrets.FIRESTORE_JSON }}
+
+      run: echo "$GOOGLE_SERVICE_INFO" > GoogleService-Info.plist
+           #echo "$FIRESTORE_INDEXES_JSON" > firestore.indexes.json
+           #echo "$FIRESTORE_JSON" > firestore.json
 
     - name: Build Amigo
       run: xcodebuild -scheme Amigo -project Amigo/Amigo.xcodeproj -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 12 Pro Max" build
-    # Ajoutez d'autres étapes nécessaires pour votre build, telles que les tests unitaires ou les tâches de déploiement
+
+    # UNIT TESTS
+    - name: Setting up NodeJS
+      uses: actions/setup-node@v2.5.2
+      
+    - name: Setting up Java
+      uses: actions/setup-java@v1.4.4
+      with:     
+        java-version: 17
+
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}'
+        
+    - name: Install Firebase CLI tools
+      run: npm install -g firebase-tools
+      
+    - name: Run unit/integration tests (Execute w/ Firebase emulators)
+      run: firebase emulators:start --only firestore,auth
