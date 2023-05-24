@@ -6,16 +6,34 @@
 //
 
 import XCTest
+import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
 @testable import Amigo
 
 final class UserServicesTests: XCTestCase {
     private let userCreationService = UserCreationService()
+    private let userFetchingService = UserFetchingService()
+
 
     /*override class func setUp() {
         <#code#>
     }*/
+    
+    // MARK: - UTILITIES FUNC
+    func clearFirestore() {
+      let semaphore = DispatchSemaphore(value: 0)
+      let projectId = FirebaseApp.app()!.options.projectID!
+      let url = URL(string: "http://localhost:8080/emulator/v1/projects/\(projectId)/databases/(default)/documents")!
+      var request = URLRequest(url: url)
+      request.httpMethod = "DELETE"
+      let task = URLSession.shared.dataTask(with: request) { _,_,_ in
+        print("Firestore cleared")
+        semaphore.signal()
+      }
+      task.resume()
+      semaphore.wait()
+    }
     
     // MARK: - UserCreationService.swift
     func testGivenIncorrectEmail_WhenCreatingUser_ThenUserIsNotCreatedAndErrorReturns() async {
@@ -79,14 +97,19 @@ final class UserServicesTests: XCTestCase {
         }
     }
     
-    func testGivenAUserWithoutID_WhenTryingToSaveInFirestore_ThenUserErrorIsReturned() async {
+    func testGivenAUser_WhenTryingToSaveInFirestore_ThenUserErrorIsStored() async {
         let user = User(email: "test@example.com")
         
         do {
-            try await userCreationService.saveUserInDatabase(user: user, userID: "")
-            XCTFail("Expected to throw while awaiting, but succeeded")
+            try await userCreationService.saveUserInDatabase(user: user, userID: "1234")
+            
+            // I have to be sure the user exists after creation.
+            let user = try await userFetchingService.fetchUser(userID: "1234")
+            XCTAssertNotNil(user)
+            clearFirestore()
+            
         } catch {
-            XCTAssertEqual(error as? Errors.DatabaseError, .cannotSaveUser)
+            XCTFail("Test failed, was not expected to throw.")
         }
     }
 

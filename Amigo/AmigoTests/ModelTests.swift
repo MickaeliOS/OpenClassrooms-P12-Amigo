@@ -10,6 +10,7 @@ import MapKit
 @testable import Amigo
 
 final class ModelTests: XCTestCase {
+    
     // MARK: - UTILITIES FUNC
     private func setupExpenses() -> [ExpenseItem] {
         // Creating samples expense items.
