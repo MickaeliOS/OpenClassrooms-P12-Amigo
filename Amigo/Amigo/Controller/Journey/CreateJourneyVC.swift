@@ -73,7 +73,12 @@ class CreateJourneyVC: UIViewController {
         searchCompleter.delegate = self
         searchCompleter.resultTypes = [.address, .pointOfInterest]
         
-        LocationManagement().getCoordinatesFromRegion(region: trip.country, completion: { [weak self] region in
+        LocationManagement().getCoordinatesFromRegion(region: trip.country, completion: { [weak self] region, error in
+            if let error = error {
+                self?.presentErrorAlert(with: error.localizedDescription)
+                return
+            }
+            
             guard let region = region else { return }
             self?.searchCompleter.region = region
         })

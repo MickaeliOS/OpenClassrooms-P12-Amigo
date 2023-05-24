@@ -21,16 +21,16 @@ final class LocationManagement {
         return copiedLocations
     }
     
-    func getCoordinatesFromRegion(region: String, completion: @escaping (MKCoordinateRegion?) -> Void) {
+    func getCoordinatesFromRegion(region: String, completion: @escaping (MKCoordinateRegion?, Error?) -> Void) {
         geocoder.geocodeAddressString(region) { result, error in
             if error != nil {
-                completion(nil)
+                completion(nil, Errors.CommonError.defaultError)
                 return
             }
             
             guard let result = result?.first,
                   let circularRegion = result.region as? CLCircularRegion else {
-                completion(nil)
+                completion(nil, nil)
                 return
             }
             
@@ -38,7 +38,7 @@ final class LocationManagement {
             let radius = circularRegion.radius
             let coordinateRegion = MKCoordinateRegion(center: center, latitudinalMeters: radius, longitudinalMeters: radius)
             
-            completion(coordinateRegion)
+            completion(coordinateRegion, nil)
         }
     }
 }

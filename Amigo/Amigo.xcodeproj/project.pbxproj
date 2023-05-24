@@ -21,7 +21,7 @@
 		8300098329FFB97A006DBD54 /* TripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8300098229FFB97A006DBD54 /* TripTableViewCell.swift */; };
 		830F479129E9311800697C34 /* TripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830F479029E9311800697C34 /* TripVC.swift */; };
 		83124AD02A155BF900565F24 /* UserManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83124ACF2A155BF900565F24 /* UserManagement.swift */; };
-		83124ADF2A166ACE00565F24 /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83124ADE2A166ACE00565F24 /* UserTests.swift */; };
+		83124ADF2A166ACE00565F24 /* UserServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83124ADE2A166ACE00565F24 /* UserServicesTests.swift */; };
 		83220E262A1B51040002A5F4 /* ControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83220E252A1B51040002A5F4 /* ControllerExtensions.swift */; };
 		83220E2A2A1B51A00002A5F4 /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83220E292A1B51A00002A5F4 /* ModelTests.swift */; };
 		8323F6EC29E587B800CBDFB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */; };
@@ -102,7 +102,7 @@
 		830F479029E9311800697C34 /* TripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripVC.swift; sourceTree = "<group>"; };
 		83124ACF2A155BF900565F24 /* UserManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagement.swift; sourceTree = "<group>"; };
 		83124AD52A166A5500565F24 /* AmigoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AmigoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		83124ADE2A166ACE00565F24 /* UserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
+		83124ADE2A166ACE00565F24 /* UserServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServicesTests.swift; sourceTree = "<group>"; };
 		83220E252A1B51040002A5F4 /* ControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerExtensions.swift; sourceTree = "<group>"; };
 		83220E292A1B51A00002A5F4 /* ModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		8323F6EB29E587B800CBDFB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -231,7 +231,7 @@
 		83220E272A1B51700002A5F4 /* FirebaseTests */ = {
 			isa = PBXGroup;
 			children = (
-				83124ADE2A166ACE00565F24 /* UserTests.swift */,
+				83124ADE2A166ACE00565F24 /* UserServicesTests.swift */,
 			);
 			path = FirebaseTests;
 			sourceTree = "<group>";
@@ -568,7 +568,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83124ADF2A166ACE00565F24 /* UserTests.swift in Sources */,
+				83124ADF2A166ACE00565F24 /* UserServicesTests.swift in Sources */,
 				83220E2A2A1B51A00002A5F4 /* ModelTests.swift in Sources */,
 				83343D192A1D5C7900FCA27B /* MockCLGeocoder.swift in Sources */,
 			);

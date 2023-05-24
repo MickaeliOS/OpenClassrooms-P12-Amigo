@@ -3,4 +3,210 @@
    uuid = "6F3E657E-4531-4BA0-9BB6-019F1223672E"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "197BDE45-AE02-4835-9C11-D243DE66F1C6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Model/User/UserServices/UserCreationService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "saveUserInDatabase(user:userID:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "197BDE45-AE02-4835-9C11-D243DE66F1C6 - ca7c78b892fb02c2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Amigo.UserCreationService.saveUserInDatabase(user: Amigo.User, userID: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/User/UserServices/UserCreationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "124">
+               </Location>
+               <Location
+                  uuid = "197BDE45-AE02-4835-9C11-D243DE66F1C6 - 3e59342a39d8cb0f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Amigo.UserCreationService.saveUserInDatabase(user: Amigo.User, userID: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/User/UserServices/UserCreationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A147C891-FEE0-48B8-A1E5-C5029B72F99E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Model/User/UserServices/UserCreationService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "saveUserInDatabase(user:userID:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A147C891-FEE0-48B8-A1E5-C5029B72F99E - 3e59342a39d8ca66"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Amigo.UserCreationService.saveUserInDatabase(user: Amigo.User, userID: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/User/UserServices/UserCreationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "764">
+               </Location>
+               <Location
+                  uuid = "A147C891-FEE0-48B8-A1E5-C5029B72F99E - cb121d4709ea0179"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for Amigo.UserCreationService.saveUserInDatabase(user: Amigo.User, userID: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/User/UserServices/UserCreationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "A147C891-FEE0-48B8-A1E5-C5029B72F99E - 9833e35c81830e64"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Amigo.UserCreationService.saveUserInDatabase(user: Amigo.User, userID: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/User/UserServices/UserCreationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "A147C891-FEE0-48B8-A1E5-C5029B72F99E - 34c137f82d976c65"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Amigo.UserCreationService.saveUserInDatabase(user: Amigo.User, userID: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/User/UserServices/UserCreationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6862C902-718B-4526-8C89-427D28F073BD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Amigo/Model/User/UserServices/UserCreationService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "saveUserInDatabase(user:userID:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6862C902-718B-4526-8C89-427D28F073BD - 3e59342a39d8ca66"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Amigo.UserCreationService.saveUserInDatabase(user: Amigo.User, userID: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/User/UserServices/UserCreationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "764">
+               </Location>
+               <Location
+                  uuid = "6862C902-718B-4526-8C89-427D28F073BD - cb121d4709ea0179"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for Amigo.UserCreationService.saveUserInDatabase(user: Amigo.User, userID: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/User/UserServices/UserCreationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "6862C902-718B-4526-8C89-427D28F073BD - 9833e35c81830e64"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Amigo.UserCreationService.saveUserInDatabase(user: Amigo.User, userID: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/User/UserServices/UserCreationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "6862C902-718B-4526-8C89-427D28F073BD - 34c137f82d976c65"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Amigo.UserCreationService.saveUserInDatabase(user: Amigo.User, userID: Swift.String) async throws -&gt; ()"
+                  moduleName = "Amigo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/iwase/Desktop/OC/projet12/Amigo/Amigo/Model/User/UserServices/UserCreationService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

@@ -50,7 +50,6 @@ final class UserCreationService {
                         userTableConstants.gender: user.gender?.rawValue,
                         userTableConstants.email: user.email]
 
-        
         do {
             try await firestoreDatabase.collection(userTableConstants.tableName).document(userID).setData(userData as [String : Any])
         } catch {

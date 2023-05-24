@@ -10,35 +10,14 @@ import MapKit
 @testable import Amigo
 
 final class ModelTests: XCTestCase {
-    // MARK: - VARIABLES
-    private var trip1: Trip!
-    private var trip2: Trip!
-    private var trip3: Trip!
-    private var location1: Location!
-    private var location2: Location!
-    private var location3: Location!
-
-    
-    // MARK: - SETUP
-    override func setUp() {
-        super.setUp()
-
-        setupTrips()
-        setupLocations()
-    }
-    
     // MARK: - UTILITIES FUNC
-    private func setupTrips() {
-        // Sample trips.
-        trip1 = Trip(tripID: "1", userID: "user1", startDate: Date(), endDate: Date().addingTimeInterval(3600), country: "France", countryCode: "FR")
-        trip2 = Trip(tripID: "2", userID: "user2", startDate: Date(), endDate: Date().addingTimeInterval(7200), country: "Monaco", countryCode: "MC")
-        trip3 = Trip(tripID: "3", userID: "user3", startDate: Date(), endDate: Date().addingTimeInterval(1800), country: "Egypt", countryCode: "EG")
-    }
-    
-    private func setupLocations() {
-        location1 = Location(address: "Address 1", postalCode: "11111", city: "City 1", startDate: Date(), endDate: Date().addingTimeInterval(3600))
-        location2 = Location(address: "Address 2", postalCode: "22222", city: "City 2", startDate: Date(), endDate: Date().addingTimeInterval(7200))
-        location3 = Location(address: "Address 3", postalCode: "33333", city: "City 3", startDate: Date(), endDate: Date().addingTimeInterval(1800))
+    private func setupExpenses() -> [ExpenseItem] {
+        // Creating samples expense items.
+        let expenseItem1 = ExpenseItem(title: "Expense1", amount: 100, date: Date().addingTimeInterval(3600))
+        let expenseItem2 = ExpenseItem(title: "Expense2", amount: 10, date: Date().addingTimeInterval(7200))
+        let expenseItem3 = ExpenseItem(title: "Expense3", amount: 25.60, date: Date().addingTimeInterval(1800))
+        
+        return [expenseItem1, expenseItem2, expenseItem3]
     }
     
     // MARK: - User.swift
@@ -89,6 +68,11 @@ final class ModelTests: XCTestCase {
     
     // MARK: - TripManagement.swift
     func testGivenTripTable_WhenSortingByDates_ThenTripTableIsSorted() {
+        // Creating samples trips.
+        let trip1 = Trip(tripID: "1", userID: "user1", startDate: Date(), endDate: Date().addingTimeInterval(3600), country: "France", countryCode: "FR")
+        let trip2 = Trip(tripID: "2", userID: "user2", startDate: Date(), endDate: Date().addingTimeInterval(7200), country: "Monaco", countryCode: "MC")
+        let trip3 = Trip(tripID: "3", userID: "user3", startDate: Date(), endDate: Date().addingTimeInterval(1800), country: "Egypt", countryCode: "EG")
+        
         let unsortedTrips: [Trip] = [trip1, trip2, trip3]
         let sortedTrips = TripManagement.sortTripsByDateAscending(trips: unsortedTrips)
         
@@ -98,8 +82,35 @@ final class ModelTests: XCTestCase {
         XCTAssertEqual(sortedTrips[2].country, "Monaco")
     }
     
+    // MARK: - ExpenseManagement.swift
+    func testGivenExpenseTable_WhenSortingByDates_ThenExpenseTableIsSorted() {
+        let unsortedExpenseItems = setupExpenses()
+        let sortedExpenses = ExpenseManagement.sortExpensesByDateAscending(expenseItems: unsortedExpenseItems)
+        
+        // Validating the correct ordering of the sorted expense items.
+        XCTAssertEqual(sortedExpenses[0].title, "Expense3")
+        XCTAssertEqual(sortedExpenses[1].title, "Expense1")
+        XCTAssertEqual(sortedExpenses[2].title, "Expense2")
+    }
+    
+    func testGivenEmptyExpenseTable_WhenCalculatingTheTotalAmount_ThenTotalAmountIsCalculated() {
+        let expenseItems = setupExpenses()
+        let totalAmount = ExpenseManagement.getTotalAmount(expenses: expenseItems)
+        XCTAssertEqual(totalAmount, 135.6)
+    }
+    
+    func testGivenEmptyExpenseTable_WhenCalculatingTheTotalAmount_ThenTotalAmountIs0() {
+        let totalAmount = ExpenseManagement.getTotalAmount(expenses: [])
+        XCTAssertEqual(totalAmount, 0.0)
+    }
+    
     // MARK: - LocationManagement.swift
     func testGivenLocationTable_WhenSortingByDates_ThenLocationTableIsSorted() {
+        // Creating samples locations.
+        let location1 = Location(address: "Address 1", postalCode: "11111", city: "City 1", startDate: Date(), endDate: Date().addingTimeInterval(3600))
+        let location2 = Location(address: "Address 2", postalCode: "22222", city: "City 2", startDate: Date(), endDate: Date().addingTimeInterval(7200))
+        let location3 = Location(address: "Address 3", postalCode: "33333", city: "City 3", startDate: Date(), endDate: Date().addingTimeInterval(1800))
+        
         let unsortedLocations: [Location] = [location1, location2, location3]
         let sortedLocations = LocationManagement.sortLocationsByDateAscending(locations: unsortedLocations)
         
@@ -112,7 +123,8 @@ final class ModelTests: XCTestCase {
     func testGivenAValidRegion_WhenAskingForCoordinates_ThenCoordinatesReturns() {
         let expectation = XCTestExpectation(description: "Completion called")
         
-        LocationManagement().getCoordinatesFromRegion(region: "France") { coordinateRegion in
+        LocationManagement().getCoordinatesFromRegion(region: "France") { coordinateRegion, error in
+            XCTAssertNil(error)
             
             // Checking if we got the good coordinates.
             XCTAssertEqual(coordinateRegion?.center.latitude, 46.26319925)
@@ -128,9 +140,26 @@ final class ModelTests: XCTestCase {
     
     func testGivenAnInvalidRegion_WhenAskingForCoordinates_ThenCoordinatesReturnsNil() {
         let expectation = XCTestExpectation(description: "Completion called")
+        
+        // Using a Mock to test the case where there is no errors, but the result is nil.
         let locationManagement = LocationManagement(geocoder: CLGeocoderMock())
         
-        locationManagement.getCoordinatesFromRegion(region: "Region") { coordinateRegion in
+        locationManagement.getCoordinatesFromRegion(region: "Region") { coordinateRegion, error in
+            XCTAssertNil(coordinateRegion)
+            XCTAssertNil(error)
+
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func testGivenAnInvalidRegion_WhenAskingForCoordinates_ThenCoordinatesReturnsError() {
+        let expectation = XCTestExpectation(description: "Completion called")
+        
+        LocationManagement().getCoordinatesFromRegion(region: "InvalidRegionName") { coordinateRegion, error in
+            XCTAssertNotNil(error)
+            XCTAssertTrue(error is Errors.CommonError)
             XCTAssertNil(coordinateRegion)
 
             expectation.fulfill()
