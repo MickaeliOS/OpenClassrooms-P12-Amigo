@@ -15,7 +15,7 @@ class MyTabBarVC: UITabBarController {
         delegate = self
     }
     
-    // MARK: - VARIABLES
+    // MARK: - PROPERTIES
     // This is the centralized storage for the User object, enabling seamless data sharing among the various view controllers as I navigate between tabs.
     var user: User?
 }

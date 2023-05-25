@@ -23,7 +23,7 @@ class SettingsVC: UIViewController {
         setupPersonalInformations()
     }
     
-    // MARK: - OUTLETS, VARIABLES & ENUMS
+    // MARK: - OUTLETS, PROPERTIES & ENUMS
     @IBOutlet weak var themeLabel: UILabel!
     @IBOutlet weak var themeSegmentedControl: UISegmentedControl!
     @IBOutlet weak var lastnameTextField: UITextField!

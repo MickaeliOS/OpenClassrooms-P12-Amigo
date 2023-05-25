@@ -24,7 +24,7 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var createAccountButton: UIButton!
     
     private var isPasswordVisible = false
-    private let userCreationService = UserCreationService()
+    private let userAuthService = UserAuthService()
     
     // MARK: - ACTIONS
     @IBAction func closeButtonTapped(_ sender: Any) {
@@ -66,7 +66,7 @@ class CreateAccountVC: UIViewController {
                     return
                 }
                 
-                try await userCreationService.createUser(email: emailTextField.text!,
+                try await userAuthService.createUser(email: emailTextField.text!,
                                                          password: passwordTextField.text!,
                                                          confirmPassword: confirmPasswordTextField.text!)
                 

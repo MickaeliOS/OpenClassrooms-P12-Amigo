@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 enum Theme: Int {
-    //MARK: - CASES & VARIABLES
+    //MARK: - CASES & PROPERTIES
     case unspecified
     case light
     case dark

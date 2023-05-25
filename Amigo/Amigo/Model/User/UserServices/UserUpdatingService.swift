@@ -10,17 +10,17 @@ import FirebaseFirestore
 
 class UserUpdatingService {
     // MARK: - PROPERTIES & INIT
+    private let firebaseWrapper: FirebaseProtocol
     private let userTableConstants = Constant.FirestoreTables.User.self
-    private let firestoreDatabase: Firestore
 
-    init(firestoreDatabase: Firestore = Firestore.firestore()) {
-        self.firestoreDatabase = firestoreDatabase
+    init(firebaseWrapper: FirebaseProtocol = FirebaseWrapper()) {
+        self.firebaseWrapper = firebaseWrapper
     }
     
     // MARK: - FUNCTIONS
     func updateUser(fields: [String:Any], userID: String) async throws {
         do {
-            try await firestoreDatabase.collection(userTableConstants.tableName).document(userID).updateData(fields)
+            try await firebaseWrapper.updateUser(fields: fields, userID: userID)
         } catch {
             throw Errors.DatabaseError.cannotUploadDocuments
         }

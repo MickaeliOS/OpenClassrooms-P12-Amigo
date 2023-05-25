@@ -10,10 +10,10 @@ import FirebaseAuth
 
 final class UserAuthService {
     // MARK: - PROPERTIES & INIT
-    private let firebaseAuth: Auth
+    private let firebaseWrapper: FirebaseProtocol
 
-    init(firebaseAuth: Auth = Auth.auth()) {
-        self.firebaseAuth = firebaseAuth
+    init(firebaseWrapper: FirebaseProtocol = FirebaseWrapper()) {
+        self.firebaseWrapper = firebaseWrapper
     }
     
     // MARK: - FUNCTIONS
@@ -23,7 +23,7 @@ final class UserAuthService {
         }
         
         do {
-            try await firebaseAuth.signIn(withEmail: email, password: password)
+            try await firebaseWrapper.signIn(email: email, password: password)
             
         } catch let error as NSError {
             
@@ -39,9 +39,44 @@ final class UserAuthService {
     
     func signOut() throws {
         do {
-            try Auth.auth().signOut()
+            try firebaseWrapper.signOut()
         } catch {
             throw Errors.SignOutError.cannotSignOut
+        }
+    }
+    
+    func createUser(email: String, password: String, confirmPassword: String) async throws {
+        do {
+            // Prior to user creation, field testing is required.
+            try checkingLogs(email: email, password: password, confirmPassword: confirmPassword)
+            
+            try await firebaseWrapper.createUser(withEmail: email, password: password)
+            
+        } catch let error as Errors.CommonError {
+            throw error
+        } catch let error as Errors.CreateAccountError {
+            throw error
+        } catch let error as NSError {
+            switch error.code {
+            case AuthErrorCode.emailAlreadyInUse.rawValue:
+                throw Errors.CreateAccountError.emailAlreadyInUse
+            default:
+                throw Errors.CommonError.defaultError
+            }
+        }
+    }
+    
+    private func checkingLogs(email: String, password: String, confirmPassword: String) throws {
+        guard UserManagement.isValidEmail(email) else {
+            throw Errors.CommonError.badlyFormattedEmail
+        }
+        
+        guard UserManagement.isValidPassword(password) else {
+            throw Errors.CreateAccountError.weakPassword
+        }
+        
+        guard UserManagement.passwordEqualityCheck(password: password, confirmPassword: confirmPassword) else {
+            throw Errors.CreateAccountError.passwordsNotEquals
         }
     }
 }
