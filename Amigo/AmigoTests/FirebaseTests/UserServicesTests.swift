@@ -12,106 +12,107 @@ import FirebaseFirestore
 @testable import Amigo
 
 final class UserServicesTests: XCTestCase {
-    private let userCreationService = UserCreationService()
-    private let userFetchingService = UserFetchingService()
-
-
-    /*override class func setUp() {
-        <#code#>
-    }*/
+    private var firebaseMock: FirebaseMock!
+    private var userCreationService: UserCreationService!
+    
+    override func setUp() {
+        super.setUp()
+        firebaseMock = FirebaseMock()
+        userCreationService = UserCreationService(firebaseWrapper: firebaseMock)
+    }
     
     // MARK: - UTILITIES FUNC
-    func clearFirestore() {
-      let semaphore = DispatchSemaphore(value: 0)
-      let projectId = FirebaseApp.app()!.options.projectID!
-      let url = URL(string: "http://localhost:8080/emulator/v1/projects/\(projectId)/databases/(default)/documents")!
-      var request = URLRequest(url: url)
-      request.httpMethod = "DELETE"
-      let task = URLSession.shared.dataTask(with: request) { _,_,_ in
-        print("Firestore cleared")
-        semaphore.signal()
-      }
-      task.resume()
-      semaphore.wait()
-    }
     
     // MARK: - UserCreationService.swift
-    func testGivenIncorrectEmail_WhenCreatingUser_ThenUserIsNotCreatedAndErrorReturns() async {
-        let email = "testexample.com"
-        let password = "pmpmpmP0"
-        let confirmPassword = "pmpmpmP0"
+    func testGivenIncorrectEmail_WhenCreatingUser_ThenBadlyFormattedEmailError() async {
+        let incorrectEmail = "testtest.com"
         
         do {
-            try await userCreationService.createUser(email: email, password: password, confirmPassword: confirmPassword)
-            XCTFail("Expected to throw while awaiting, but succeeded")
-
-        } catch {
-            XCTAssertEqual(error as? Errors.CommonError, .badlyFormattedEmail)
-        }
-    }
-    
-    func testGivenIncorrectPassword_WhenCreatingUser_ThenUserIsNotCreatedAndErrorReturns() async {
-        let email = "test@example.com"
-        let password = "1234"
-        let confirmPassword = "pmpmpmP0"
-        
-        do {
-            try await userCreationService.createUser(email: email, password: password, confirmPassword: confirmPassword)
-            XCTFail("Expected to throw while awaiting, but succeeded")
-
-        } catch {
-            XCTAssertEqual(error as? Errors.CreateAccountError, .weakPassword)
-        }
-    }
-    
-    func testGivenIncorrectConfirmationPassword_WhenCreatingUser_ThenUserIsNotCreatedAndErrorReturns() async {
-        let email = "test@example.com"
-        let password = "pmpmpmP0"
-        let confirmPassword = "pmpmpmP0000"
-        
-        do {
-            try await userCreationService.createUser(email: email, password: password, confirmPassword: confirmPassword)
-            XCTFail("Expected to throw while awaiting, but succeeded")
-
-        } catch {
-            XCTAssertEqual(error as? Errors.CreateAccountError, .passwordsNotEquals)
-        }
-    }
-    
-    
-    func testGivenCorrectLogs_WhenCreatingUser_ThenUserIsCreated() async {
-        let email = "test@example.com"
-        let password = "pmpmpmP0"
-        let confirmPassword = "pmpmpmP0"
-        
-        do {
-            try await userCreationService.createUser(email: email, password: password, confirmPassword: confirmPassword)
+            try await userCreationService.createUser(email: incorrectEmail,
+                                                     password: "",
+                                                     confirmPassword: "")
             
-            // Checking if the user has been created.
-            let currentUser = Auth.auth().currentUser
-            XCTAssertNotNil(currentUser)
-                        
+            XCTFail("Test failed, expected to throw but passed.")
+        } catch let error as Errors.CommonError {
+            XCTAssertEqual(error.localizedDescription, "Badly formatted email, please provide a correct one.")
         } catch {
-            // The test shouldn't pass by the catch, so it fails.
-            XCTFail("Error during the user creation process : \(error)")
+            XCTFail("Test failed, expected to be Errors.CommonError type.")
         }
     }
     
-    func testGivenAUser_WhenTryingToSaveInFirestore_ThenUserErrorIsStored() async {
-        let user = User(email: "test@example.com")
+    func testGivenIncorrectPassword_WhenCreatingUser_ThenWeakPasswordError() async {
+        let correctEmail = "test@test.com"
+        let incorrectPassword = "123"
         
         do {
-            try await userCreationService.saveUserInDatabase(user: user, userID: "1234")
+            try await userCreationService.createUser(email: correctEmail,
+                                                     password: incorrectPassword,
+                                                     confirmPassword: "")
             
-            // I have to be sure the user exists after creation.
-            let user = try await userFetchingService.fetchUser(userID: "1234")
-            XCTAssertNotNil(user)
-            clearFirestore()
-            
+            XCTFail("Test failed, expected to throw but passed.")
+        } catch let error as Errors.CreateAccountError {
+            XCTAssertEqual(error.localizedDescription, "Your password is too weak. It must be : \n - At least 7 characters long \n - At least one uppercase letter \n - At least one number")
         } catch {
-            XCTFail("Test failed, was not expected to throw.")
+            XCTFail("Test failed, expected to be Errors.CreateAccountError type.")
         }
     }
-
     
+    
+    func testGivenDifferentPasswords_WhenCreatingUser_ThenPasswordsNotEqualsError() async {
+        let correctEmail = "test@test.com"
+        let correctPassword = "pmpmpmP0"
+        let incorrectConfirmationPassword = "123"
+
+        do {
+            try await userCreationService.createUser(email: correctEmail,
+                                                     password: correctPassword,
+                                                     confirmPassword: incorrectConfirmationPassword)
+            
+            XCTFail("Test failed, expected to throw but passed.")
+        } catch let error as Errors.CreateAccountError {
+            XCTAssertEqual(error.localizedDescription, "Passwords must be equals.")
+        } catch {
+            XCTFail("Test failed, expected to be Errors.CreateAccountError type.")
+        }
+    }
+    
+    func testGivenEmailAlreadyInUseError_WhenCreatingUser_ThenCustomEmailAlreadyInUseError() async {
+        // I'm telling the Mock that I want createUser() to fail, and I provide the error i want.
+        firebaseMock.createUserSuccess = false
+        let errorCode = AuthErrorCode.emailAlreadyInUse.rawValue
+        firebaseMock.createUserError = NSError(domain: "", code: errorCode, userInfo: nil)
+        
+        let correctEmail = "test@test.com"
+        let correctPassword = "pmpmpmP0"
+        let correctConfirmationPassword = "pmpmpmP0"
+        
+        do {
+            try await userCreationService.createUser(email: correctEmail,
+                                                     password: correctPassword,
+                                                     confirmPassword: correctConfirmationPassword)
+            
+            XCTFail("Test failed, expected to throw but passed.")
+        } catch let error as Errors.CreateAccountError {
+            XCTAssertEqual(error.localizedDescription, "Email already in use. Please choose a different one.")
+        } catch {
+            XCTFail("Test failed, expected to be Errors.CreateAccountError type.")
+        }
+    }
+    
+    func testGivenCorrectInformations_WhenCreatingUser_ThenUserIsCreated() async {
+        let correctEmail = "test@test.com"
+        let correctPassword = "pmpmpmP0"
+        let correctConfirmationPassword = "pmpmpmP0"
+        
+        do {
+            try await userCreationService.createUser(email: correctEmail,
+                                                     password: correctPassword,
+                                                     confirmPassword: correctConfirmationPassword)
+            
+            // If there is no throw, test succeeded.
+            // However, I cant' use XCTAssertNoThrow(), because 'async' call in an autoclosure does not support concurrency.
+        } catch {
+            XCTFail("Test failed, did not expected to throw.")
+        }
+    }
 }

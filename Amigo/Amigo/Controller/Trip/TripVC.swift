@@ -179,6 +179,7 @@ extension TripVC: UITableViewDelegate, UITableViewDataSource {
                         try await self.tripDeletionService.deleteTrip(tripID: tripID)
                         try await self.journeyDeletionService.deleteJourney(tripID: tripID)
                         try await self.expenseDeletionService.deleteExpense(tripID: tripID)
+                        
                         self.dataSource.user?.trips?.remove(at: indexPath.row)
                         
                         // Then, the cell

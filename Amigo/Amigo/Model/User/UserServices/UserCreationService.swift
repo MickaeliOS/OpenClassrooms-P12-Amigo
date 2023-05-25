@@ -11,15 +11,11 @@ import FirebaseFirestore
 
 final class UserCreationService {
     // MARK: - PROPERTIES & INIT
+    private let firebaseWrapper: FirebaseProtocol
     private let userTableConstants = Constant.FirestoreTables.User.self
-    private let firebaseAuth: Auth
-    private let firestoreDatabase: Firestore
 
-    init(firebaseAuth: Auth = Auth.auth(),
-         firestoreDatabase: Firestore = Firestore.firestore()) {
-        
-        self.firebaseAuth = firebaseAuth
-        self.firestoreDatabase = firestoreDatabase
+    init(firebaseWrapper: FirebaseProtocol = FirebaseWrapper()) {
+        self.firebaseWrapper = firebaseWrapper
     }
     
     // MARK: - FUNCTIONS
@@ -28,7 +24,7 @@ final class UserCreationService {
             // Prior to user creation, field testing is required.
             try checkingLogs(email: email, password: password, confirmPassword: confirmPassword)
             
-            let _ = try await firebaseAuth.createUser(withEmail: email, password: password)
+            try await firebaseWrapper.createUser(withEmail: email, password: password)
             
         } catch let error as Errors.CommonError {
             throw error
@@ -49,9 +45,9 @@ final class UserCreationService {
                         userTableConstants.lastname: user.lastname,
                         userTableConstants.gender: user.gender?.rawValue,
                         userTableConstants.email: user.email]
-
+        
         do {
-            try await firestoreDatabase.collection(userTableConstants.tableName).document(userID).setData(userData as [String : Any])
+            try await firebaseWrapper.saveUserInDatabase(user: user, userID: userID, fields: userData as [String : Any])
         } catch {
             throw Errors.DatabaseError.cannotSaveUser
         }

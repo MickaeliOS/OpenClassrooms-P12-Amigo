@@ -66,6 +66,8 @@
 		8388260E29E6931A003EBCC1 /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388260D29E6931A003EBCC1 /* ModelExtensions.swift */; };
 		838861742A13659E0028B7D7 /* ToDoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 838861732A13659E0028B7D7 /* ToDoCollectionViewCell.xib */; };
 		838861762A14214D0028B7D7 /* MyTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838861752A14214D0028B7D7 /* MyTabBarVC.swift */; };
+		83A3F0CB2A1F463B00301833 /* FirebaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3F0CA2A1F463B00301833 /* FirebaseMock.swift */; };
+		83A3F0CD2A1F839400301833 /* FirebaseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3F0CC2A1F839400301833 /* FirebaseWrapper.swift */; };
 		83B4F8F12A03A43D00A1A4FC /* ConfirmationTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8F02A03A43D00A1A4FC /* ConfirmationTripVC.swift */; };
 		83C20F8A29ED6B3A009B252B /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8929ED6B3A009B252B /* SettingsVC.swift */; };
 		83C20F8E29EE6C54009B252B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8D29EE6C54009B252B /* Theme.swift */; };
@@ -142,6 +144,8 @@
 		8388260D29E6931A003EBCC1 /* ModelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
 		838861732A13659E0028B7D7 /* ToDoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToDoCollectionViewCell.xib; sourceTree = "<group>"; };
 		838861752A14214D0028B7D7 /* MyTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarVC.swift; sourceTree = "<group>"; };
+		83A3F0CA2A1F463B00301833 /* FirebaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMock.swift; sourceTree = "<group>"; };
+		83A3F0CC2A1F839400301833 /* FirebaseWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseWrapper.swift; sourceTree = "<group>"; };
 		83B4F8F02A03A43D00A1A4FC /* ConfirmationTripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationTripVC.swift; sourceTree = "<group>"; };
 		83C20F8929ED6B3A009B252B /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		83C20F8D29EE6C54009B252B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -221,8 +225,7 @@
 		83124AD62A166A5500565F24 /* AmigoTests */ = {
 			isa = PBXGroup;
 			children = (
-				83220E292A1B51A00002A5F4 /* ModelTests.swift */,
-				83343D182A1D5C7900FCA27B /* MockCLGeocoder.swift */,
+				83A3F0CF2A1F9E5300301833 /* ModelTests */,
 				83220E272A1B51700002A5F4 /* FirebaseTests */,
 			);
 			path = AmigoTests;
@@ -232,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				83124ADE2A166ACE00565F24 /* UserServicesTests.swift */,
+				83A3F0CA2A1F463B00301833 /* FirebaseMock.swift */,
 			);
 			path = FirebaseTests;
 			sourceTree = "<group>";
@@ -363,6 +367,7 @@
 				838296C62A0E12A800B4E9D3 /* Expense */,
 				8300097029F907D2006DBD54 /* Errors.swift */,
 				8388260D29E6931A003EBCC1 /* ModelExtensions.swift */,
+				83A3F0CC2A1F839400301833 /* FirebaseWrapper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -427,6 +432,15 @@
 				83DA20762A121DB500C417BE /* ExpenseDeletionService.swift */,
 			);
 			path = ExpenseServices;
+			sourceTree = "<group>";
+		};
+		83A3F0CF2A1F9E5300301833 /* ModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				83220E292A1B51A00002A5F4 /* ModelTests.swift */,
+				83343D182A1D5C7900FCA27B /* MockCLGeocoder.swift */,
+			);
+			path = ModelTests;
 			sourceTree = "<group>";
 		};
 		83FED4052A0C1AF200B0B231 /* To Do List */ = {
@@ -570,6 +584,7 @@
 			files = (
 				83124ADF2A166ACE00565F24 /* UserServicesTests.swift in Sources */,
 				83220E2A2A1B51A00002A5F4 /* ModelTests.swift in Sources */,
+				83A3F0CB2A1F463B00301833 /* FirebaseMock.swift in Sources */,
 				83343D192A1D5C7900FCA27B /* MockCLGeocoder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,6 +596,7 @@
 				83220E262A1B51040002A5F4 /* ControllerExtensions.swift in Sources */,
 				83DA20772A121DB500C417BE /* ExpenseDeletionService.swift in Sources */,
 				838296C52A0D81B500B4E9D3 /* ExpenseTableViewCell.swift in Sources */,
+				83A3F0CD2A1F839400301833 /* FirebaseWrapper.swift in Sources */,
 				8361E03629E5522900EE7D2B /* WelcomeVC.swift in Sources */,
 				8300096029F6B4D7006DBD54 /* CreateTripVC.swift in Sources */,
 				838296C92A0E12D600B4E9D3 /* ExpenseUpdateService.swift in Sources */,
