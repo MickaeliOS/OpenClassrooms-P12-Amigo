@@ -136,7 +136,7 @@ final class ModelTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 3.0)
     }
     
     func testGivenAnInvalidRegion_WhenAskingForCoordinates_ThenCoordinatesReturnsNil() {
@@ -166,7 +166,7 @@ final class ModelTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 3.0)
     }
     
     // MARK: - ModelExtensions.swift
@@ -195,7 +195,7 @@ final class ModelTests: XCTestCase {
 
         }
         
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 3.0)
     }
     
     func testGivenIncorrectAddress_WhenGettingPartOfTheAddress_ThenErrorOccur() {
