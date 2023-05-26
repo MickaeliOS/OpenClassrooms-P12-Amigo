@@ -17,11 +17,11 @@ protocol FirebaseProtocol {
     func signIn(email: String, password: String) async throws
     func signOut() throws
     func createUser(withEmail: String, password: String) async throws
-    func saveUserInDatabase(user: User, userID: String, fields: [String: Any]) async throws
+    func saveUserInDatabase(userID: String, fields: [String: Any]) async throws
     func fetchUser(userID: String) async throws -> User?
     func updateUser(fields: [String:Any], userID: String) async throws
     func createTrip(trip: Trip) throws -> String
-    //func fetchTrips(userID: String) async throws -> [Trip]
+    func fetchTrips(userID: String) async throws -> [Trip]
 
 
 }
@@ -56,7 +56,7 @@ final class FirebaseWrapper: FirebaseProtocol {
         }
     }
     
-    func saveUserInDatabase(user: User, userID: String, fields: [String: Any]) async throws {
+    func saveUserInDatabase(userID: String, fields: [String: Any]) async throws {
         do {
             try await Firestore.firestore().collection(Constant.FirestoreTables.User.tableName).document(userID).setData(fields)
         } catch {
@@ -93,6 +93,25 @@ final class FirebaseWrapper: FirebaseProtocol {
         do {
             let docRef = try Firestore.firestore().collection(Constant.FirestoreTables.Trip.tableName).addDocument(from: trip.self)
             return docRef.documentID
+        } catch {
+            throw error
+        }
+    }
+    
+    func fetchTrips(userID: String) async throws -> [Trip] {
+        var trips: [Trip] = []
+
+        do {
+            // We need the user's trips, each trip we fetch must have the same userID
+            let result = try await Firestore.firestore().collection(Constant.FirestoreTables.Trip.tableName).whereField(Constant.FirestoreTables.Trip.userID, isEqualTo: userID).getDocuments()
+            
+            // Transforming the [QueryDocumentSnapshot] with Codable
+            try result.documents.forEach { document in
+                let trip = try document.data(as: Trip.self)
+                trips.append(trip)
+            }
+            
+            return trips
         } catch {
             throw error
         }

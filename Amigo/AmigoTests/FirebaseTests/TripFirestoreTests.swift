@@ -25,8 +25,8 @@ final class TripFirestoreTests: XCTestCase {
         super.setUp()
         firebaseMock = FirebaseMock()
         tripCreationService = TripCreationService(firebaseWrapper: firebaseMock)
-        /*tripFetchingService = TripFetchingService(firebaseWrapper: firebaseMock)
-        tripUpdatingService = TripUpdatingService(firebaseWrapper: firebaseMock)
+        tripFetchingService = TripFetchingService(firebaseWrapper: firebaseMock)
+        /*tripUpdatingService = TripUpdatingService(firebaseWrapper: firebaseMock)
         tripDeletionService = TripDeletionService(firebaseWrapper: firebaseMock)*/
     }
     
@@ -34,23 +34,23 @@ final class TripFirestoreTests: XCTestCase {
     func testGivenAnError_WhenCreatingTrip_ThenDefaultError() {
         firebaseMock.createTripSuccess = false
         
-        do {
-            let _ = try tripCreationService.createTrip(trip: trip)
-            XCTFail("Test failed, expected to throw but passed.")
-
-        } catch let error as Errors.DatabaseError {
+        XCTAssertThrowsError(try tripCreationService.createTrip(trip: trip)) { error in
+            guard let databaseError = error as? Errors.DatabaseError else {
+                XCTFail("Test failed, expected to be Errors.DatabaseError type.")
+                return
+            }
+            
             XCTAssertTrue(firebaseMock.createTripTriggered)
-            XCTAssertEqual(error, .defaultError)
-            XCTAssertEqual(error.localizedDescription, "A database error occurred, please try again.")
-        } catch {
-            XCTFail("Test failed, expected to be Errors.DatabaseError type.")
+            XCTAssertEqual(databaseError, .defaultError)
+            XCTAssertEqual(databaseError.localizedDescription, "A database error occurred, please try again.")
         }
     }
     
     func testGivenNoError_WhenCreatingTrip_ThenTripIsCreated() {
         do {
-            let _ = try tripCreationService.createTrip(trip: trip)
+            let tripID = try tripCreationService.createTrip(trip: trip)
             XCTAssertTrue(firebaseMock.createTripTriggered)
+            XCTAssertNotNil(tripID)
 
         } catch {
             XCTFail("Test failed, was not expected to throw.")
@@ -58,7 +58,11 @@ final class TripFirestoreTests: XCTestCase {
     }
 
     // MARK: - fetchTrips TESTS
-    func testGivenAnError_WhenFetchingTrips_ThenDefaultError() {
+    func testGivenAnError_WhenFetchingTrips_ThenDefaultError() async {
+        firebaseMock.fetchTripsSuccess = false
         
+        do {
+            
+        }
     }
 }

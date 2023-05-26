@@ -26,7 +26,7 @@ final class UserCreationService {
                         userTableConstants.email: user.email]
         
         do {
-            try await firebaseWrapper.saveUserInDatabase(user: user, userID: userID, fields: userData as [String : Any])
+            try await firebaseWrapper.saveUserInDatabase(userID: userID, fields: userData as [String : Any])
         } catch {
             throw Errors.DatabaseError.cannotSaveUser
         }

@@ -21,6 +21,7 @@ final class FirebaseMock: FirebaseProtocol {
     var fetchUserTriggered = false
     var updateUserTriggered = false
     var createTripTriggered = false
+    var fetchTripsTriggered = false
     
     // These properties indicate an expectation for the corresponding function to succeed.
     // If set to false, it signifies an intention for them to throw an error.
@@ -31,6 +32,7 @@ final class FirebaseMock: FirebaseProtocol {
     var fetchUserSuccess = true
     var updateUserSuccess = true
     var createTripSuccess = true
+    var fetchTripsSuccess = true
 
     // Errors.
     private let testError = TestError.testError
@@ -56,7 +58,7 @@ extension FirebaseMock {
         if !createUserSuccess { throw createUserError }
     }
     
-    func saveUserInDatabase(user: Amigo.User, userID: String, fields: [String : Any]) async throws {
+    func saveUserInDatabase(userID: String, fields: [String : Any]) async throws {
         saveUserIntDatabaseTriggered = true
         if !saveUserIntDatabaseSuccess { throw testError }
     }
@@ -76,6 +78,12 @@ extension FirebaseMock {
         createTripTriggered = true
         if !createTripSuccess { throw testError }
         return "tripID"
+    }
+    
+    func fetchTrips(userID: String) async throws -> [Trip] {
+        fetchTripsTriggered = true
+        if !fetchTripsSuccess { throw testError }
+        return []
     }
 }
 
