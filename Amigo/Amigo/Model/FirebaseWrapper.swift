@@ -10,7 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 // MARK: - PROTOCOL
-    /// This protocol contains all the functions the project will use.
+    /// This protocol contains all the Firebase related functions the project will use.
     /// It will be really useful for Mocking Firebase later.
 
 protocol FirebaseProtocol {
@@ -20,6 +20,9 @@ protocol FirebaseProtocol {
     func saveUserInDatabase(user: User, userID: String, fields: [String: Any]) async throws
     func fetchUser(userID: String) async throws -> User?
     func updateUser(fields: [String:Any], userID: String) async throws
+    func createTrip(trip: Trip) throws -> String
+    //func fetchTrips(userID: String) async throws -> [Trip]
+
 
 }
 
@@ -56,7 +59,6 @@ final class FirebaseWrapper: FirebaseProtocol {
     func saveUserInDatabase(user: User, userID: String, fields: [String: Any]) async throws {
         do {
             try await Firestore.firestore().collection(Constant.FirestoreTables.User.tableName).document(userID).setData(fields)
-
         } catch {
             throw error
         }
@@ -73,6 +75,7 @@ final class FirebaseWrapper: FirebaseProtocol {
             
             // If the user is found, we proceed with decoding and returning the corresponding user object.
             return try documentSnapshot.data(as: User.self)
+            
         } catch {
             throw error
         }
@@ -85,4 +88,14 @@ final class FirebaseWrapper: FirebaseProtocol {
             throw error
         }
     }
+    
+    func createTrip(trip: Trip) throws -> String {
+        do {
+            let docRef = try Firestore.firestore().collection(Constant.FirestoreTables.Trip.tableName).addDocument(from: trip.self)
+            return docRef.documentID
+        } catch {
+            throw error
+        }
+    }
+
 }

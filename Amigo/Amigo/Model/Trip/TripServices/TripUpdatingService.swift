@@ -1,5 +1,5 @@
 //
-//  TripUpdateService.swift
+//  TripUpdatingService.swift
 //  Amigo
 //
 //  Created by Mickaël Horn on 09/05/2023.
@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-final class TripUpdateService {
+final class TripUpdatingService {
     // MARK: - PROPERTIES & INIT
     private let tripTableConstants = Constant.FirestoreTables.Trip.self
     private let firestoreDatabase: Firestore

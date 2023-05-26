@@ -28,7 +28,7 @@ class ToDoListVC: UIViewController {
     
     var trip: Trip?
     weak var delegate: ToDoListVCDelegate?
-    private let tripUpdateService = TripUpdateService()
+    private let tripUpdateService = TripUpdatingService()
     
     // MARK: - ACTIONS
     @IBAction func addToDoItemButtonTapped(_ sender: Any) {

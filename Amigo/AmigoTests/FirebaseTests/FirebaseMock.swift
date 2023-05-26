@@ -12,59 +12,70 @@ import FirebaseAuth
 final class FirebaseMock: FirebaseProtocol {
     
     // MARK: - PROPERTIES
-    private let testError = TestError.testError
     
-    // SignIn and Out.
+    // I am verifying that the functions have been triggered to ensure that we did not utilize Firebase.
+    var signInTriggered = false
+    var signOutTriggered = false
+    var createUserTriggered = false
+    var saveUserIntDatabaseTriggered = false
+    var fetchUserTriggered = false
+    var updateUserTriggered = false
+    var createTripTriggered = false
+    
+    // These properties indicate an expectation for the corresponding function to succeed.
+    // If set to false, it signifies an intention for them to throw an error.
     var signInSuccess = true
     var signOutSuccess = true
-    var signInError = NSError()
-
-    // CreateUser.
     var createUserSuccess = true
-    var createUserError = NSError()
-    
-    // SaveUserInDatabase.
     var saveUserIntDatabaseSuccess = true
-    
-    // FetchUser
     var fetchUserSuccess = true
-    
-    // UpdateUser
     var updateUserSuccess = true
+    var createTripSuccess = true
+
+    // Errors.
+    private let testError = TestError.testError
+    var signInError = NSError()
+    var createUserError = NSError()
 }
 
 extension FirebaseMock {
     
     // MARK: - FUNCTIONS
     func signIn(email: String, password: String) async throws {
+        signInTriggered = true
         if !signInSuccess { throw signInError }
     }
     
     func signOut() throws {
+        signOutTriggered = true
         if !signOutSuccess { throw testError }
     }
     
     func createUser(withEmail: String, password: String) async throws {
+        createUserTriggered = true
         if !createUserSuccess { throw createUserError }
     }
     
-    func setData(user: Amigo.User, userID: String, fields: [String : Any]) async throws {
-        if !saveUserIntDatabaseSuccess {
-            throw testError
-        }
-    }
-    
     func saveUserInDatabase(user: Amigo.User, userID: String, fields: [String : Any]) async throws {
-        print("todo")
+        saveUserIntDatabaseTriggered = true
+        if !saveUserIntDatabaseSuccess { throw testError }
     }
     
     func fetchUser(userID: String) async throws -> Amigo.User? {
+        fetchUserTriggered = true
         if !fetchUserSuccess { throw testError }
-        return User(email: "test@test.com")
+        return nil
     }
     
     func updateUser(fields: [String : Any], userID: String) async throws {
+        updateUserTriggered = true
         if !updateUserSuccess { throw testError }
+    }
+    
+    func createTrip(trip: Trip) throws -> String {
+        createTripTriggered = true
+        if !createTripSuccess { throw testError }
+        return "tripID"
     }
 }
 

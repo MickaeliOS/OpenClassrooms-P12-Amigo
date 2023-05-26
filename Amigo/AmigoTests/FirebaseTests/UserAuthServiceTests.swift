@@ -41,6 +41,9 @@ final class UserAuthServiceTests: XCTestCase {
             XCTFail("Test failed, expected to throw but passed.")
             
         } catch let error as Errors.CommonError {
+            // Sometimes, the mock may not be triggered because it is unnecessary.
+            // This can occur when certain checks or validations are performed before executing the mocked function, and if those checks determine that an error should be thrown, the mock function is bypassed.
+            XCTAssertFalse(firebaseMock.signInTriggered)
             XCTAssertEqual(error, .badlyFormattedEmail)
             XCTAssertEqual(error.localizedDescription, "Badly formatted email, please provide a correct one.")
         } catch {
@@ -59,6 +62,7 @@ final class UserAuthServiceTests: XCTestCase {
             XCTFail("Test failed, expected to throw but passed.")
             
         } catch let error as Errors.SignInError {
+            XCTAssertTrue(firebaseMock.signInTriggered)
             XCTAssertEqual(error, .incorrectLogs)
             XCTAssertEqual(error.localizedDescription, "Incorrect Email or Password.")
         } catch {
@@ -74,6 +78,7 @@ final class UserAuthServiceTests: XCTestCase {
             XCTFail("Test failed, expected to throw but passed.")
             
         } catch let error as Errors.CommonError {
+            XCTAssertTrue(firebaseMock.signInTriggered)
             XCTAssertEqual(error, .defaultError)
             XCTAssertEqual(error.localizedDescription, "Something went wrong, please try again.")
         } catch {
@@ -91,6 +96,7 @@ final class UserAuthServiceTests: XCTestCase {
             XCTFail("Test failed, expected to throw but passed.")
             
         } catch let error as Errors.SignInError {
+            XCTAssertTrue(firebaseMock.signInTriggered)
             XCTAssertEqual(error, .incorrectLogs)
             XCTAssertEqual(error.localizedDescription, "Incorrect Email or Password.")
         } catch {
@@ -107,6 +113,8 @@ final class UserAuthServiceTests: XCTestCase {
             XCTFail("Test failed, expected to throw but passed.")
             
         } catch let error as Errors.SignOutError {
+
+            XCTAssertTrue(firebaseMock.signOutTriggered)
             XCTAssertEqual(error, .cannotSignOut)
             XCTAssertEqual(error.localizedDescription, "Unable to log you out. Please restart the application and attempt the logout process again.")
         } catch {
@@ -116,10 +124,11 @@ final class UserAuthServiceTests: XCTestCase {
     
     func testGivenNoError_WhenLoginOut_ThenUserIsLoggedOut() {
         XCTAssertNoThrow(try userAuthService.signOut())
+        XCTAssertTrue(firebaseMock.signOutTriggered)
     }
     
     // MARK: - CREATEUSER TESTS
-    func testGivenIncorrectEmail_WhenCreatingUser_ThenBadlyFormattedEmailError() async {
+    func testGivenBadlyFormattedEmail_WhenCreatingUser_ThenBadlyFormattedEmailError() async {
         
         do {
             try await userAuthService.createUser(email: incorrectEmail,
@@ -128,6 +137,7 @@ final class UserAuthServiceTests: XCTestCase {
             
             XCTFail("Test failed, expected to throw but passed.")
         } catch let error as Errors.CommonError {
+            XCTAssertFalse(firebaseMock.createUserTriggered)
             XCTAssertEqual(error, .badlyFormattedEmail)
             XCTAssertEqual(error.localizedDescription, "Badly formatted email, please provide a correct one.")
         } catch {
@@ -143,6 +153,7 @@ final class UserAuthServiceTests: XCTestCase {
             
             XCTFail("Test failed, expected to throw but passed.")
         } catch let error as Errors.CreateAccountError {
+            XCTAssertFalse(firebaseMock.createUserTriggered)
             XCTAssertEqual(error, .weakPassword)
             XCTAssertEqual(error.localizedDescription, "Your password is too weak. It must be : \n - At least 7 characters long \n - At least one uppercase letter \n - At least one number")
         } catch {
@@ -159,6 +170,7 @@ final class UserAuthServiceTests: XCTestCase {
             
             XCTFail("Test failed, expected to throw but passed.")
         } catch let error as Errors.CreateAccountError {
+            XCTAssertFalse(firebaseMock.createUserTriggered)
             XCTAssertEqual(error, .passwordsNotEquals)
             XCTAssertEqual(error.localizedDescription, "Passwords must be equals.")
         } catch {
@@ -179,6 +191,7 @@ final class UserAuthServiceTests: XCTestCase {
             
             XCTFail("Test failed, expected to throw but passed.")
         } catch let error as Errors.CreateAccountError {
+            XCTAssertTrue(firebaseMock.createUserTriggered)
             XCTAssertEqual(error, .emailAlreadyInUse)
             XCTAssertEqual(error.localizedDescription, "Email already in use. Please choose a different one.")
         } catch {
@@ -196,6 +209,7 @@ final class UserAuthServiceTests: XCTestCase {
             
             XCTFail("Test failed, expected to throw but passed.")
         } catch let error as Errors.CommonError {
+            XCTAssertTrue(firebaseMock.createUserTriggered)
             XCTAssertEqual(error, .defaultError)
             XCTAssertEqual(error.localizedDescription, "Something went wrong, please try again.")
         } catch {
@@ -209,6 +223,8 @@ final class UserAuthServiceTests: XCTestCase {
                                                  password: correctPassword,
                                                  confirmPassword: correctConfirmPassword)
             
+            XCTAssertTrue(firebaseMock.createUserTriggered)
+
             // If there is no throw, test succeeded.
             // However, I cant' use XCTAssertNoThrow(), because 'async' call in an autoclosure does not support concurrency.
         } catch {

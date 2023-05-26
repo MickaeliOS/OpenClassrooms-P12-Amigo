@@ -36,7 +36,7 @@
 		835687192A0980DD000A65F8 /* JourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 835687182A0980DD000A65F8 /* JourneyTableViewCell.xib */; };
 		8356871B2A0980FB000A65F8 /* JourneyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8356871A2A0980FB000A65F8 /* JourneyTableViewCell.swift */; };
 		8356871D2A0989B0000A65F8 /* CreateJourneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8356871C2A0989B0000A65F8 /* CreateJourneyVC.swift */; };
-		835687212A0A78BD000A65F8 /* TripUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835687202A0A78BD000A65F8 /* TripUpdateService.swift */; };
+		835687212A0A78BD000A65F8 /* TripUpdatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835687202A0A78BD000A65F8 /* TripUpdatingService.swift */; };
 		835687272A0ACD21000A65F8 /* JourneyUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835687262A0ACD21000A65F8 /* JourneyUpdateService.swift */; };
 		835687292A0ACF2B000A65F8 /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835687282A0ACF2B000A65F8 /* Journey.swift */; };
 		8356872B2A0AD1DA000A65F8 /* JourneyFetchingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8356872A2A0AD1DA000A65F8 /* JourneyFetchingService.swift */; };
@@ -69,6 +69,7 @@
 		83A3F0CB2A1F463B00301833 /* FirebaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3F0CA2A1F463B00301833 /* FirebaseMock.swift */; };
 		83A3F0CD2A1F839400301833 /* FirebaseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3F0CC2A1F839400301833 /* FirebaseWrapper.swift */; };
 		83A3F0D62A1FF66A00301833 /* UserFirestoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3F0D52A1FF66A00301833 /* UserFirestoreTests.swift */; };
+		83A3F0D92A20AEA600301833 /* TripFirestoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3F0D82A20AEA600301833 /* TripFirestoreTests.swift */; };
 		83B4F8F12A03A43D00A1A4FC /* ConfirmationTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8F02A03A43D00A1A4FC /* ConfirmationTripVC.swift */; };
 		83C20F8A29ED6B3A009B252B /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8929ED6B3A009B252B /* SettingsVC.swift */; };
 		83C20F8E29EE6C54009B252B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8D29EE6C54009B252B /* Theme.swift */; };
@@ -120,7 +121,7 @@
 		835687182A0980DD000A65F8 /* JourneyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JourneyTableViewCell.xib; sourceTree = "<group>"; };
 		8356871A2A0980FB000A65F8 /* JourneyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyTableViewCell.swift; sourceTree = "<group>"; };
 		8356871C2A0989B0000A65F8 /* CreateJourneyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateJourneyVC.swift; sourceTree = "<group>"; };
-		835687202A0A78BD000A65F8 /* TripUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripUpdateService.swift; sourceTree = "<group>"; };
+		835687202A0A78BD000A65F8 /* TripUpdatingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripUpdatingService.swift; sourceTree = "<group>"; };
 		835687262A0ACD21000A65F8 /* JourneyUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyUpdateService.swift; sourceTree = "<group>"; };
 		835687282A0ACF2B000A65F8 /* Journey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
 		8356872A2A0AD1DA000A65F8 /* JourneyFetchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyFetchingService.swift; sourceTree = "<group>"; };
@@ -148,6 +149,7 @@
 		83A3F0CA2A1F463B00301833 /* FirebaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseMock.swift; sourceTree = "<group>"; };
 		83A3F0CC2A1F839400301833 /* FirebaseWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseWrapper.swift; sourceTree = "<group>"; };
 		83A3F0D52A1FF66A00301833 /* UserFirestoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFirestoreTests.swift; sourceTree = "<group>"; };
+		83A3F0D82A20AEA600301833 /* TripFirestoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripFirestoreTests.swift; sourceTree = "<group>"; };
 		83B4F8F02A03A43D00A1A4FC /* ConfirmationTripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationTripVC.swift; sourceTree = "<group>"; };
 		83C20F8929ED6B3A009B252B /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		83C20F8D29EE6C54009B252B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -237,7 +239,9 @@
 			isa = PBXGroup;
 			children = (
 				83A3F0CA2A1F463B00301833 /* FirebaseMock.swift */,
-				83A3F0D02A1FF5D900301833 /* UserServicesTests */,
+				83124ADE2A166ACE00565F24 /* UserAuthServiceTests.swift */,
+				83A3F0D52A1FF66A00301833 /* UserFirestoreTests.swift */,
+				83A3F0D82A20AEA600301833 /* TripFirestoreTests.swift */,
 			);
 			path = FirebaseTests;
 			sourceTree = "<group>";
@@ -258,7 +262,7 @@
 			children = (
 				8300097A29FAA580006DBD54 /* TripCreationService.swift */,
 				8300097C29FB9EF6006DBD54 /* TripFetchingService.swift */,
-				835687202A0A78BD000A65F8 /* TripUpdateService.swift */,
+				835687202A0A78BD000A65F8 /* TripUpdatingService.swift */,
 				83489A352A0BC135002974E1 /* TripDeletionService.swift */,
 			);
 			path = TripServices;
@@ -445,15 +449,6 @@
 			path = ModelTests;
 			sourceTree = "<group>";
 		};
-		83A3F0D02A1FF5D900301833 /* UserServicesTests */ = {
-			isa = PBXGroup;
-			children = (
-				83124ADE2A166ACE00565F24 /* UserAuthServiceTests.swift */,
-				83A3F0D52A1FF66A00301833 /* UserFirestoreTests.swift */,
-			);
-			path = UserServicesTests;
-			sourceTree = "<group>";
-		};
 		83FED4052A0C1AF200B0B231 /* To Do List */ = {
 			isa = PBXGroup;
 			children = (
@@ -593,6 +588,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83A3F0D92A20AEA600301833 /* TripFirestoreTests.swift in Sources */,
 				83A3F0D62A1FF66A00301833 /* UserFirestoreTests.swift in Sources */,
 				83124ADF2A166ACE00565F24 /* UserAuthServiceTests.swift in Sources */,
 				83220E2A2A1B51A00002A5F4 /* ModelTests.swift in Sources */,
@@ -621,7 +617,7 @@
 				83489A382A0C1574002974E1 /* TripManagement.swift in Sources */,
 				83489A362A0BC135002974E1 /* TripDeletionService.swift in Sources */,
 				8300096229F6BBD2006DBD54 /* CountryPickerVC.swift in Sources */,
-				835687212A0A78BD000A65F8 /* TripUpdateService.swift in Sources */,
+				835687212A0A78BD000A65F8 /* TripUpdatingService.swift in Sources */,
 				838296CB2A0E25E100B4E9D3 /* ExpenseFetchingService.swift in Sources */,
 				83DA20722A121D5000C417BE /* JourneyDeletionService.swift in Sources */,
 				8300097129F907D2006DBD54 /* Errors.swift in Sources */,

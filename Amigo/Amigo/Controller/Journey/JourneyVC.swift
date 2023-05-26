@@ -84,7 +84,6 @@ class JourneyVC: UIViewController {
                     // I am sorting the dates in ascending order, from the oldest to the newest.
                     let dateOrderedJourney = LocationManagement.sortLocationsByDateAscending(locations: locations)
                     journey.locations = dateOrderedJourney
-                    
                 }
                 
                 // Saving the trip's journey.

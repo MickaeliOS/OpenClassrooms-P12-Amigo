@@ -10,18 +10,17 @@ import FirebaseFirestore
 
 final class TripCreationService {
     // MARK: - PROPERTIES & INIT
+    private let firebaseWrapper: FirebaseProtocol
     private let tripTableConstants = Constant.FirestoreTables.Trip.self
-    private let firestoreDatabase: Firestore
     
-    init(firestoreDatabase: Firestore = Firestore.firestore()) {
-        self.firestoreDatabase = firestoreDatabase
+    init(firebaseWrapper: FirebaseProtocol = FirebaseWrapper()) {
+        self.firebaseWrapper = firebaseWrapper
     }
     
     // MARK: - FUNCTIONS
     func createTrip(trip: Trip) throws -> String {
         do {
-            let docRef = try firestoreDatabase.collection(tripTableConstants.tableName).addDocument(from: trip.self)
-            return docRef.documentID
+            return try firebaseWrapper.createTrip(trip: trip)
         } catch {
             throw Errors.DatabaseError.defaultError
         }
