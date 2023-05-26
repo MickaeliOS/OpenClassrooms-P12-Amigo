@@ -22,7 +22,7 @@ jobs:
     - name: Set up GoogleService-Info.plist
       env: 
         GOOGLE_SERVICE_INFO: ${{ secrets.GOOGLE_SERVICE_INFO }}
-      run: echo "$GOOGLE_SERVICE_INFO" > ProjetTest/ProjetTest/GoogleService-Info.plist
+      run: echo "$GOOGLE_SERVICE_INFO" > Amigo/Amigo/Ressources/GoogleService-Info.plist
 
     # We build the app, to ensure it's working.
     - name: Build Amigo
