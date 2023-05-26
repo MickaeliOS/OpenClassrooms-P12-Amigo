@@ -30,4 +30,4 @@ jobs:
 
     # UNIT TESTS
     - name: Run Unit Tests
-      run: xcodebuild test -scheme ProjetTest -project ProjetTest/ProjetTest.xcodeproj -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 12 Pro Max" build
+      run: xcodebuild test -scheme Amigo -project Amigo/Amigo.xcodeproj -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 12 Pro Max" build
