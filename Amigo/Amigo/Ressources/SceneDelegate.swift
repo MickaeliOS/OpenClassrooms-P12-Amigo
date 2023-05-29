@@ -57,4 +57,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 }
-// If the user is logged in, the UITabBar which contains all his personal screens become the new RootViewController, fot cleaner navigation.

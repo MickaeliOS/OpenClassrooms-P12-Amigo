@@ -10,8 +10,9 @@ import MapKit
 
 // MARK: - MODEL EXTENSIONS
 extension Date {
-    func dateToString() -> String {
+    func dateToString(locale: Locale = Locale.current) -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = locale
         dateFormatter.dateFormat = "MMMM d, yyyy"
         return dateFormatter.string(from: self)
     }
