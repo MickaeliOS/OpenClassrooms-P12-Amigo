@@ -39,6 +39,7 @@ final class UserFirestoreTests: XCTestCase {
             XCTFail("Test failed, expected to throw but passed.")
 
         } catch let error as Errors.DatabaseError {
+            XCTAssertTrue(firebaseMock.saveUserIntDatabaseTriggered)
             XCTAssertEqual(error, .cannotSaveUser)
             XCTAssertEqual(error.localizedDescription, "We couldn't save your informations, please try again.")
         } catch {
@@ -51,6 +52,7 @@ final class UserFirestoreTests: XCTestCase {
             try await userCreationService.saveUserInDatabase(user: user, userID: userID)
 
         } catch let error as Errors.DatabaseError {
+            XCTAssertTrue(firebaseMock.saveUserIntDatabaseTriggered)
             XCTAssertEqual(error, .cannotSaveUser)
             XCTAssertEqual(error.localizedDescription, "We couldn't save your informations, please try again.")
         } catch {
@@ -67,6 +69,7 @@ final class UserFirestoreTests: XCTestCase {
             XCTFail("Test failed, expected to throw but passed.")
 
         } catch let error as Errors.DatabaseError {
+            XCTAssertTrue(firebaseMock.fetchUserTriggered)
             XCTAssertEqual(error, .cannotGetDocuments)
             XCTAssertEqual(error.localizedDescription, "We couldn't retrieve your document(s), please try to log in again.")
         } catch {
@@ -77,6 +80,7 @@ final class UserFirestoreTests: XCTestCase {
     func testGivenNoError_WhenFetchingUser_ThenUserIsFetched() async {
         do {
             let _ = try await userFetchingService.fetchUser(userID: userID)
+            XCTAssertTrue(firebaseMock.fetchUserTriggered)
 
         } catch {
             XCTFail("Test failed, was not expected to throw.")
@@ -94,6 +98,7 @@ final class UserFirestoreTests: XCTestCase {
             XCTFail("Test failed, expected to throw but passed.")
 
         } catch let error as Errors.DatabaseError {
+            XCTAssertTrue(firebaseMock.updateUserTriggered)
             XCTAssertEqual(error, .notFoundUpdate)
             XCTAssertEqual(error.localizedDescription, "The document you are trying to update was not found.")
         } catch {
@@ -109,6 +114,7 @@ final class UserFirestoreTests: XCTestCase {
             XCTFail("Test failed, expected to throw but passed.")
 
         } catch let error as Errors.DatabaseError {
+            XCTAssertTrue(firebaseMock.updateUserTriggered)
             XCTAssertEqual(error, .defaultError)
             XCTAssertEqual(error.localizedDescription, "A database error occurred, please try again.")
         } catch {
@@ -119,7 +125,7 @@ final class UserFirestoreTests: XCTestCase {
     func testGivenNoError_WhenUpdatingUser_ThenUserIsUpdated() async {
         do {
             try await userUpdatingService.updateUser(fields: ["": ""], userID: userID)
-
+            XCTAssertTrue(firebaseMock.updateUserTriggered)
         } catch {
             XCTFail("Test failed, was not expected to throw.")
         }

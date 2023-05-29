@@ -12,7 +12,6 @@ struct Errors {
         case emailAlreadyInUse
         case weakPassword
         case passwordsNotEquals
-        case defaultError
         
         var localizedDescription: String {
             switch self {
@@ -22,8 +21,6 @@ struct Errors {
                 return "Your password is too weak. It must be : \n - At least 7 characters long \n - At least one uppercase letter \n - At least one number"
             case .passwordsNotEquals:
                 return "Passwords must be equals."
-            case .defaultError:
-                return "An error occurred, please try again."
             }
         }
     }

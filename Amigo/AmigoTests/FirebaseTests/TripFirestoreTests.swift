@@ -78,7 +78,7 @@ final class TripFirestoreTests: XCTestCase {
     func testGivenNoError_WhenFetchingTrips_ThenTripsAreFetched() async {
         do {
             let _ = try await firebaseMock.fetchTrips(userID: "1234")
-            
+            XCTAssertTrue(firebaseMock.fetchTripsTriggered)
         } catch {
             XCTFail("Test failed, was not expected to throw.")
         }
@@ -122,6 +122,7 @@ final class TripFirestoreTests: XCTestCase {
     func testGivenNoError_WhenUpdatingTrip_ThenTripIsUpdated() async {
         do {
             try await tripUpdatingService.updateTrip(with: "1234", fields: ["":""])
+            XCTAssertTrue(firebaseMock.updateTripTriggered)
 
         } catch {
             XCTFail("Test failed, was not expected to throw.")
@@ -148,6 +149,7 @@ final class TripFirestoreTests: XCTestCase {
     func testGivenNoError_WhenDeletingTrip_ThenTripIsDeleted() async {
         do {
             try await tripDeletionService.deleteTrip(tripID: "1234")
+            XCTAssertTrue(firebaseMock.deleteTripTriggered)
 
         } catch {
             XCTFail("Test failed, was not expected to throw.")

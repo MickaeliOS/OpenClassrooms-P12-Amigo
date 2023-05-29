@@ -28,6 +28,8 @@ final class FirebaseMock: FirebaseProtocol {
     var updateJourneyTriggered = false
     var deleteJourneyTriggered = false
     var updateExpenseTriggered = false
+    var fetchTripExpensesTriggered = false
+    var deleteExpenseTriggered = false
     
     // This property indicate an expectation for the corresponding function to succeed.
     // If set to false, it signifies an intention for it to throw an error.
@@ -37,6 +39,7 @@ final class FirebaseMock: FirebaseProtocol {
     let testError = TestError.testError
     var testNSError = NSError()
     var fetchTripJourneyError: Error?
+    var fetchTripExpensesError: Error?
 }
 
 extension FirebaseMock {
@@ -100,7 +103,14 @@ extension FirebaseMock {
     // MARK: - JOURNEY FIRESTORE FUNCTIONS
     func fetchTripJourney(tripID: String, completion: @escaping (Journey?, Error?) -> Void) {
         fetchTripJourneyTriggered = true
-        completion(Journey(), fetchTripJourneyError)
+        
+        let location = Location(address: "Address",
+                                postalCode: "90000",
+                                city: "City",
+                                startDate: Date(timeIntervalSince1970: 1685359786),
+                                endDate: Date(timeIntervalSince1970: 1685359786))
+        
+        completion(Journey(locations: [location]), fetchTripJourneyError)
     }
     
     func updateJourney(journey: Journey, for tripID: String) throws {
@@ -116,6 +126,18 @@ extension FirebaseMock {
     // MARK: - JOURNEY FIRESTORE FUNCTIONS
     func updateExpense(expenses: Expense, for tripID: String) throws {
         updateExpenseTriggered = true
+        if !success { throw testError }
+    }
+    
+    func fetchTripExpenses(tripID: String, completion: @escaping (Expense?, Error?) -> Void) {
+        fetchTripExpensesTriggered = true
+        completion(Expense(expenseItems: [ExpenseItem(title: "Pizza",
+                                                      amount: 12,
+                                                      date: Date(timeIntervalSince1970: 1685359786))]), fetchTripExpensesError)
+    }
+    
+    func deleteExpense(tripID: String) async throws {
+        deleteExpenseTriggered = true
         if !success { throw testError }
     }
 }

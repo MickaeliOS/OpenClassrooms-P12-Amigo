@@ -30,6 +30,7 @@ final class JourneyFirestoreTests: XCTestCase {
         firebaseMock.fetchTripJourneyError = firebaseMock.testError
         
         journeyFetchingService.fetchTripJourney(tripID: "1234") { journey, error in
+            XCTAssertTrue(self.firebaseMock.fetchTripJourneyTriggered)
             XCTAssertNotNil(error)
             XCTAssertEqual(error, .cannotGetDocuments)
             XCTAssertEqual(error?.localizedDescription, "We couldn't retrieve your document(s), please try to log in again.")
@@ -38,6 +39,7 @@ final class JourneyFirestoreTests: XCTestCase {
     
     func testGivenNoError_WhenFetchingTripJourney_ThenOptionnalJourneyIsReturned() {
         journeyFetchingService.fetchTripJourney(tripID: "1234") { journey, error in
+            XCTAssertTrue(self.firebaseMock.fetchTripJourneyTriggered)
             XCTAssertNil(error)
             XCTAssertNotNil(journey)
         }
@@ -61,6 +63,8 @@ final class JourneyFirestoreTests: XCTestCase {
     
     func testGivenNoError_WhenUpdatingJourney_ThenJourneyIsUpdated() {
         XCTAssertNoThrow(try journeyUpdateService.updateJourney(journey: Journey(), for: "1234"))
+        XCTAssertTrue(firebaseMock.updateJourneyTriggered)
+
     }
     
     // MARK: - deleteJourney TESTS
@@ -80,15 +84,13 @@ final class JourneyFirestoreTests: XCTestCase {
         }
     }
     
-    func testGivenNoError_WhenDeletingJourney_ThenTripIsDeleted() async {
-        firebaseMock.success = false
-        
+    func testGivenNoError_WhenDeletingJourney_ThenJourneyIsDeleted() async {        
         do {
             try await journeyDeletionService.deleteJourney(tripID: "1234")
+            XCTAssertTrue(firebaseMock.deleteJourneyTriggered)
 
         } catch {
             XCTFail("Test failed, was not expected to throw.")
         }
     }
-
 }

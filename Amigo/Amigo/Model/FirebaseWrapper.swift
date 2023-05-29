@@ -28,8 +28,8 @@ protocol FirebaseProtocol {
     func updateJourney(journey: Journey, for tripID: String) throws
     func deleteJourney(tripID: String) async throws
     func updateExpense(expenses: Expense, for tripID: String) throws
-
-
+    func fetchTripExpenses(tripID: String, completion: @escaping (Expense?, Error?) -> Void)
+    func deleteExpense(tripID: String) async throws
 }
 
 // MARK: - PROTOCOLS
@@ -182,6 +182,31 @@ final class FirebaseWrapper: FirebaseProtocol {
     func updateExpense(expenses: Expense, for tripID: String) throws {
         do {
             try Firestore.firestore().collection(Constant.FirestoreTables.Expense.tableName).document(tripID).setData(from: expenses.self)
+        } catch {
+            throw error
+        }
+    }
+    
+    func fetchTripExpenses(tripID: String, completion: @escaping (Expense?, Error?) -> Void) {
+        Firestore.firestore().collection(Constant.FirestoreTables.Expense.tableName).document(tripID).getDocument { document, error in
+            if error != nil {
+                completion(nil, error)
+                return
+            }
+            
+            if let document = document, document.exists {
+                let convertedExpense = try? document.data(as: Expense.self)
+                completion(convertedExpense, nil)
+                return
+            }
+            
+            completion(nil, nil)
+        }
+    }
+    
+    func deleteExpense(tripID: String) async throws {
+        do {
+            try await Firestore.firestore().collection(Constant.FirestoreTables.Expense.tableName).document(tripID).delete()
         } catch {
             throw error
         }

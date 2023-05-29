@@ -9,31 +9,24 @@ import Foundation
 import FirebaseFirestore
 
 final class ExpenseFetchingService {
-    // MARK: - PROPERTIES & INIT
-    private let expenseTableConstants = Constant.FirestoreTables.Expense.self
-    private let firestoreDatabase: Firestore
     
-    init(firestoreDatabase: Firestore = Firestore.firestore()) {
-        self.firestoreDatabase = firestoreDatabase
+    // MARK: - PROPERTIES & INIT
+    private let firebaseWrapper: FirebaseProtocol
+    private let expenseTableConstants = Constant.FirestoreTables.Expense.self
+    
+    init(firebaseWrapper: FirebaseProtocol = FirebaseWrapper()) {
+        self.firebaseWrapper = firebaseWrapper
     }
     
     // MARK: - FUNCTIONS
     func fetchTripExpenses(tripID: String, completion: @escaping (Expense?, Errors.DatabaseError?) -> Void) {
-        let tableRef = firestoreDatabase.collection(expenseTableConstants.tableName).document(tripID)
-        
-        tableRef.getDocument { document, error in
-            if error != nil {
+        firebaseWrapper.fetchTripExpenses(tripID: tripID) { expense, error in
+            guard error == nil else {
                 completion(nil, .cannotGetDocuments)
                 return
             }
             
-            if let document = document, document.exists {
-                let convertedExpense = try? document.data(as: Expense.self)
-                completion(convertedExpense, nil)
-                return
-            }
-            
-            completion(nil, nil)
+            completion(expense, nil)
         }
     }
 }
