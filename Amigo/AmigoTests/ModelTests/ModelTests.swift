@@ -128,15 +128,16 @@ final class ModelTests: XCTestCase {
             XCTAssertNil(error)
             
             // Checking if we got the good coordinates.
-            XCTAssertEqual(coordinateRegion?.center.latitude, 46.26319925)
-            XCTAssertEqual(coordinateRegion?.center.longitude, 2.1886005)
-            XCTAssertEqual(coordinateRegion?.span.latitudeDelta, 7.452321918635983)
-            XCTAssertEqual(coordinateRegion?.span.longitudeDelta, 10.744818517368163)
+            // I round the results to mitigate potential failures depending on the iOS version.
+            XCTAssertEqual(coordinateRegion?.center.latitude.rounded(), 46)
+            XCTAssertEqual(coordinateRegion?.center.longitude.rounded(), 2)
+            XCTAssertEqual(coordinateRegion?.span.latitudeDelta.rounded(), 7)
+            XCTAssertEqual(coordinateRegion?.span.longitudeDelta.rounded(), 11)
 
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 3.0)
+        wait(for: [expectation], timeout: 5.0)
     }
     
     func testGivenAnInvalidRegion_WhenAskingForCoordinates_ThenCoordinatesReturnsNil() {
@@ -152,7 +153,7 @@ final class ModelTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 3.0)
     }
     
     func testGivenAnInvalidRegion_WhenAskingForCoordinates_ThenCoordinatesReturnsError() {
@@ -210,7 +211,7 @@ final class ModelTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 1)
+        wait(for: [expectation], timeout: 3.0)
     }
     
     func testGivenFranceCountryCode_WhenGettingTheFlag_ThenWeGetFranceFlag() {

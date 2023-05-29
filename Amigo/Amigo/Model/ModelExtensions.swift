@@ -11,11 +11,9 @@ import MapKit
 // MARK: - MODEL EXTENSIONS
 extension Date {
     func dateToString() -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        let dateString = formatter.string(from: self)
-        
-        return dateString
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM d, yyyy"
+        return dateFormatter.string(from: self)
     }
 }
 
