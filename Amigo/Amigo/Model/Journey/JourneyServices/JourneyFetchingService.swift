@@ -9,31 +9,24 @@ import Foundation
 import FirebaseFirestore
 
 final class JourneyFetchingService {
-    // MARK: - PROPERTIES & INIT
-    private let journeyTableConstants = Constant.FirestoreTables.Journey.self
-    private let firestoreDatabase: Firestore
     
-    init(firestoreDatabase: Firestore = Firestore.firestore()) {
-        self.firestoreDatabase = firestoreDatabase
+    // MARK: - PROPERTIES & INIT
+    private let firebaseWrapper: FirebaseProtocol
+    private let journeyTableConstants = Constant.FirestoreTables.Journey.self
+    
+    init(firebaseWrapper: FirebaseProtocol = FirebaseWrapper()) {
+        self.firebaseWrapper = firebaseWrapper
     }
     
     // MARK: - FUNCTIONS
     func fetchTripJourney(tripID: String, completion: @escaping (Journey?, Errors.DatabaseError?) -> Void) {
-        let tableRef = firestoreDatabase.collection(journeyTableConstants.tableName).document(tripID)
-        
-        tableRef.getDocument { document, error in
-            if error != nil {
+        firebaseWrapper.fetchTripJourney(tripID: tripID) { journey, error in
+            guard error == nil else {
                 completion(nil, .cannotGetDocuments)
                 return
             }
             
-            if let document = document, document.exists {
-                let convertedJourney = try? document.data(as: Journey.self)
-                completion(convertedJourney, nil)
-                return
-            }
-            
-            completion(nil, nil)
+            completion(journey, nil)
         }
     }
 }

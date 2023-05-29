@@ -53,11 +53,12 @@ struct Errors {
     enum DatabaseError: Error {
         case noUser
         case cannotGetDocuments
-        case cannotUploadDocuments
+        case cannotUpdateDocuments
         case cannotSaveUser
         case cannotDeleteDocuments
         case noTripID
         case nothingToAdd
+        case notFoundUpdate
         case defaultError
         
         var localizedDescription: String {
@@ -66,8 +67,8 @@ struct Errors {
                 return "Unfortunately, we were unable to retrieve your information due to a disconnection. Please log in again."
             case .cannotGetDocuments:
                 return "We couldn't retrieve your document(s), please try to log in again."
-            case .cannotUploadDocuments:
-                return "We couldn't upload your document(s), please try again."
+            case .cannotUpdateDocuments:
+                return "We couldn't update your document(s), please try again."
             case .cannotSaveUser:
                 return "We couldn't save your informations, please try again."
             case .cannotDeleteDocuments:
@@ -76,6 +77,8 @@ struct Errors {
                 return "An Unexpected error occured, try to log in again to delete your Trip."
             case .nothingToAdd:
                 return "There is nothing to save, please add some content first."
+            case .notFoundUpdate:
+                return "The document you are trying to update was not found."
             case .defaultError:
                 return "A database error occurred, please try again."
             }

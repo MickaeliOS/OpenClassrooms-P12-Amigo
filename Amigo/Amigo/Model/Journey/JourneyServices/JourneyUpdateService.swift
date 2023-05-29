@@ -10,21 +10,21 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final class JourneyUpdateService {
-    // MARK: - PROPERTIES & INIT
-    private let journeyTableConstants = Constant.FirestoreTables.Journey.self
-    private let firestoreDatabase: Firestore
     
-    init(firestoreDatabase: Firestore = Firestore.firestore()) {
-        self.firestoreDatabase = firestoreDatabase
+    // MARK: - PROPERTIES & INIT
+    private let firebaseWrapper: FirebaseProtocol
+    private let journeyTableConstants = Constant.FirestoreTables.Journey.self
+    
+    init(firebaseWrapper: FirebaseProtocol = FirebaseWrapper()) {
+        self.firebaseWrapper = firebaseWrapper
     }
     
     //MARK: - FUNCTIONS
     func updateJourney(journey: Journey, for tripID: String) throws {
         do {
-            let tableRef = firestoreDatabase.collection(journeyTableConstants.tableName).document(tripID)
-            try tableRef.setData(from: journey.self)
+            try firebaseWrapper.updateJourney(journey: journey, for: tripID)
         } catch {
-            throw Errors.DatabaseError.cannotUploadDocuments
+            throw Errors.DatabaseError.cannotUpdateDocuments
         }
     }
 }

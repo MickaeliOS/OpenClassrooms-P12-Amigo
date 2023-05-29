@@ -53,9 +53,9 @@ final class UserAuthServiceTests: XCTestCase {
     
     func testGivenBadEmail_WhenSignIn_ThenIncorrectLogsError() async {
         // I'm telling the Mock that I want the call to fail, and specifically with the userNotFound error.
-        firebaseMock.signInSuccess = false
+        firebaseMock.success = false
         let errorCode = AuthErrorCode.userNotFound.rawValue
-        firebaseMock.signInError = NSError(domain: "", code: errorCode, userInfo: nil)
+        firebaseMock.testNSError = NSError(domain: "", code: errorCode, userInfo: nil)
         
         do {
             try await userAuthService.signIn(email: correctEmail, password: correctPassword)
@@ -71,7 +71,7 @@ final class UserAuthServiceTests: XCTestCase {
     }
     
     func testGivenAnError_WhenSignIn_ThenDefaultError() async {
-        firebaseMock.signInSuccess = false
+        firebaseMock.success = false
         
         do {
             try await userAuthService.signIn(email: correctEmail, password: correctPassword)
@@ -87,9 +87,9 @@ final class UserAuthServiceTests: XCTestCase {
     }
     
     func testGivenBadPassword_WhenSignIn_ThenIncorrectLogsError() async {
-        firebaseMock.signInSuccess = false
+        firebaseMock.success = false
         let errorCode = AuthErrorCode.wrongPassword.rawValue
-        firebaseMock.signInError = NSError(domain: "", code: errorCode, userInfo: nil)
+        firebaseMock.testNSError = NSError(domain: "", code: errorCode, userInfo: nil)
         
         do {
             try await userAuthService.signIn(email: correctEmail, password: correctPassword)
@@ -106,7 +106,7 @@ final class UserAuthServiceTests: XCTestCase {
     
     // MARK: - SIGNOUT TESTS
     func testGivenError_WhenLoginOut_ThenUserCannotLogOut() {
-        firebaseMock.signOutSuccess = false
+        firebaseMock.success = false
         
         do {
             try userAuthService.signOut()
@@ -129,7 +129,6 @@ final class UserAuthServiceTests: XCTestCase {
     
     // MARK: - CREATEUSER TESTS
     func testGivenBadlyFormattedEmail_WhenCreatingUser_ThenBadlyFormattedEmailError() async {
-        
         do {
             try await userAuthService.createUser(email: incorrectEmail,
                                                  password: correctPassword,
@@ -180,9 +179,9 @@ final class UserAuthServiceTests: XCTestCase {
     
     func testGivenEmailAlreadyInUseError_WhenCreatingUser_ThenCustomEmailAlreadyInUseError() async {
         // I'm telling the Mock that I want createUser() to fail, and I provide the error i want.
-        firebaseMock.createUserSuccess = false
+        firebaseMock.success = false
         let errorCode = AuthErrorCode.emailAlreadyInUse.rawValue
-        firebaseMock.createUserError = NSError(domain: "", code: errorCode, userInfo: nil)
+        firebaseMock.testNSError = NSError(domain: "", code: errorCode, userInfo: nil)
         
         do {
             try await userAuthService.createUser(email: correctEmail,
@@ -200,7 +199,7 @@ final class UserAuthServiceTests: XCTestCase {
     }
     
     func testGivenAnError_WhenCreatingUser_ThenCommonError() async {
-        firebaseMock.createUserSuccess = false
+        firebaseMock.success = false
         
         do {
             try await userAuthService.createUser(email: correctEmail,

@@ -11,19 +11,18 @@ import FirebaseFirestoreSwift
 
 final class ExpenseUpdateService {
     // MARK: - PROPERTIES & INIT
+    private let firebaseWrapper: FirebaseProtocol
     private let expenseTableConstants = Constant.FirestoreTables.Expense.self
-    private let firestoreDatabase: Firestore
     
-    init(firestoreDatabase: Firestore = Firestore.firestore()) {
-        self.firestoreDatabase = firestoreDatabase
+    init(firebaseWrapper: FirebaseProtocol = FirebaseWrapper()) {
+        self.firebaseWrapper = firebaseWrapper
     }
     
     func updateExpense(expenses: Expense, for tripID: String) throws {
         do {
-            let tableRef = firestoreDatabase.collection(expenseTableConstants.tableName).document(tripID)
-            try tableRef.setData(from: expenses.self)
+            try firebaseWrapper.updateExpense(expenses: expenses, for: tripID)
         } catch {
-            throw Errors.DatabaseError.cannotUploadDocuments
+            throw Errors.DatabaseError.cannotUpdateDocuments
         }
     }
 }

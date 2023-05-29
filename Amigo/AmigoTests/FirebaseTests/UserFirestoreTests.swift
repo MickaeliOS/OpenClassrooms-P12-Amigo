@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import FirebaseFirestore
 @testable import Amigo
 
 final class UserFirestoreTests: XCTestCase {
@@ -31,7 +32,7 @@ final class UserFirestoreTests: XCTestCase {
     
     // MARK: - SaveUserInDatabase TESTS
     func testGivenAnError_WhenSavingUser_ThenCannotSaveUserError() async {
-        firebaseMock.saveUserIntDatabaseSuccess = false
+        firebaseMock.success = false
         
         do {
             try await userCreationService.saveUserInDatabase(user: user, userID: userID)
@@ -59,7 +60,7 @@ final class UserFirestoreTests: XCTestCase {
     
     // MARK: - fetchUser TESTS
     func testGivenAnError_WhenFetchingUser_ThenCannotGetDocumentsError() async {
-        firebaseMock.fetchUserSuccess = false
+        firebaseMock.success = false
         
         do {
             let _ = try await userFetchingService.fetchUser(userID: userID)
@@ -83,16 +84,33 @@ final class UserFirestoreTests: XCTestCase {
     }
     
     // MARK: - updateUser TESTS
-    func testGivenAnError_WhenUpdatingUser_ThenCannotUploadDocumentsError() async {
-        firebaseMock.updateUserSuccess = false
+    func testGivenDocumentNotFound_WhenUpdatingUser_ThenNotFoundUpdateError() async {
+        firebaseMock.success = false
+        let errorCode = FirestoreErrorCode.notFound.rawValue
+        firebaseMock.testNSError = NSError(domain: "", code: errorCode, userInfo: nil)
         
         do {
             try await userUpdatingService.updateUser(fields: ["": ""], userID: userID)
             XCTFail("Test failed, expected to throw but passed.")
 
         } catch let error as Errors.DatabaseError {
-            XCTAssertEqual(error, .cannotUploadDocuments)
-            XCTAssertEqual(error.localizedDescription, "We couldn't upload your document(s), please try again.")
+            XCTAssertEqual(error, .notFoundUpdate)
+            XCTAssertEqual(error.localizedDescription, "The document you are trying to update was not found.")
+        } catch {
+            XCTFail("Test failed, expected to be Errors.DatabaseError type.")
+        }
+    }
+    
+    func testGivenAnError_WhenUpdatingUser_ThenCannotUploadDocumentsError() async {
+        firebaseMock.success = false
+        
+        do {
+            try await userUpdatingService.updateUser(fields: ["": ""], userID: userID)
+            XCTFail("Test failed, expected to throw but passed.")
+
+        } catch let error as Errors.DatabaseError {
+            XCTAssertEqual(error, .defaultError)
+            XCTAssertEqual(error.localizedDescription, "A database error occurred, please try again.")
         } catch {
             XCTFail("Test failed, expected to be Errors.DatabaseError type.")
         }

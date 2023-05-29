@@ -70,6 +70,8 @@
 		83A3F0CD2A1F839400301833 /* FirebaseWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3F0CC2A1F839400301833 /* FirebaseWrapper.swift */; };
 		83A3F0D62A1FF66A00301833 /* UserFirestoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3F0D52A1FF66A00301833 /* UserFirestoreTests.swift */; };
 		83A3F0D92A20AEA600301833 /* TripFirestoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3F0D82A20AEA600301833 /* TripFirestoreTests.swift */; };
+		83A3F0DB2A248C1800301833 /* JourneyFirestoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3F0DA2A248C1800301833 /* JourneyFirestoreTests.swift */; };
+		83A3F0DD2A249EDC00301833 /* ExpenseFirestoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3F0DC2A249EDC00301833 /* ExpenseFirestoreTests.swift */; };
 		83B4F8F12A03A43D00A1A4FC /* ConfirmationTripVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B4F8F02A03A43D00A1A4FC /* ConfirmationTripVC.swift */; };
 		83C20F8A29ED6B3A009B252B /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8929ED6B3A009B252B /* SettingsVC.swift */; };
 		83C20F8E29EE6C54009B252B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C20F8D29EE6C54009B252B /* Theme.swift */; };
@@ -150,6 +152,8 @@
 		83A3F0CC2A1F839400301833 /* FirebaseWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseWrapper.swift; sourceTree = "<group>"; };
 		83A3F0D52A1FF66A00301833 /* UserFirestoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFirestoreTests.swift; sourceTree = "<group>"; };
 		83A3F0D82A20AEA600301833 /* TripFirestoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripFirestoreTests.swift; sourceTree = "<group>"; };
+		83A3F0DA2A248C1800301833 /* JourneyFirestoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyFirestoreTests.swift; sourceTree = "<group>"; };
+		83A3F0DC2A249EDC00301833 /* ExpenseFirestoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseFirestoreTests.swift; sourceTree = "<group>"; };
 		83B4F8F02A03A43D00A1A4FC /* ConfirmationTripVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationTripVC.swift; sourceTree = "<group>"; };
 		83C20F8929ED6B3A009B252B /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		83C20F8D29EE6C54009B252B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -242,6 +246,8 @@
 				83124ADE2A166ACE00565F24 /* UserAuthServiceTests.swift */,
 				83A3F0D52A1FF66A00301833 /* UserFirestoreTests.swift */,
 				83A3F0D82A20AEA600301833 /* TripFirestoreTests.swift */,
+				83A3F0DA2A248C1800301833 /* JourneyFirestoreTests.swift */,
+				83A3F0DC2A249EDC00301833 /* ExpenseFirestoreTests.swift */,
 			);
 			path = FirebaseTests;
 			sourceTree = "<group>";
@@ -592,8 +598,10 @@
 				83A3F0D62A1FF66A00301833 /* UserFirestoreTests.swift in Sources */,
 				83124ADF2A166ACE00565F24 /* UserAuthServiceTests.swift in Sources */,
 				83220E2A2A1B51A00002A5F4 /* ModelTests.swift in Sources */,
+				83A3F0DD2A249EDC00301833 /* ExpenseFirestoreTests.swift in Sources */,
 				83A3F0CB2A1F463B00301833 /* FirebaseMock.swift in Sources */,
 				83343D192A1D5C7900FCA27B /* MockCLGeocoder.swift in Sources */,
+				83A3F0DB2A248C1800301833 /* JourneyFirestoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

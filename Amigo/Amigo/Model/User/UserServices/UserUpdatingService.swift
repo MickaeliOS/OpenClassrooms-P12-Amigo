@@ -21,8 +21,13 @@ class UserUpdatingService {
     func updateUser(fields: [String:Any], userID: String) async throws {
         do {
             try await firebaseWrapper.updateUser(fields: fields, userID: userID)
-        } catch {
-            throw Errors.DatabaseError.cannotUploadDocuments
+        } catch let error as NSError {
+            switch error.code {
+            case FirestoreErrorCode.notFound.rawValue:
+                throw Errors.DatabaseError.notFoundUpdate
+            default:
+                throw Errors.DatabaseError.defaultError
+            }
         }
     }
 }

@@ -11,19 +11,24 @@ import FirebaseFirestoreSwift
 
 final class TripUpdatingService {
     // MARK: - PROPERTIES & INIT
+    private let firebaseWrapper: FirebaseProtocol
     private let tripTableConstants = Constant.FirestoreTables.Trip.self
-    private let firestoreDatabase: Firestore
     
-    init(firestoreDatabase: Firestore = Firestore.firestore()) {
-        self.firestoreDatabase = firestoreDatabase
+    init(firebaseWrapper: FirebaseProtocol = FirebaseWrapper()) {
+        self.firebaseWrapper = firebaseWrapper
     }
     
     // MARK: - FUNCTIONS
     func updateTrip(with tripID: String, fields: [String:Any]) async throws {
         do {
-            try await firestoreDatabase.collection(tripTableConstants.tableName).document(tripID).updateData(fields)
-        } catch {
-            throw Errors.DatabaseError.cannotUploadDocuments
+            try await firebaseWrapper.updateTrip(with: tripID, fields: fields)
+        } catch let error as NSError {
+            switch error.code {
+            case FirestoreErrorCode.notFound.rawValue :
+                throw Errors.DatabaseError.notFoundUpdate
+            default:
+                throw Errors.DatabaseError.cannotUpdateDocuments
+            }
         }
     }
 }
