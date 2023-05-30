@@ -14,6 +14,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
+    # Perform a repository checkout to utilize it within the virtual machine.
     - name: Checkout repository
       uses: actions/checkout@v3
 
@@ -28,6 +29,6 @@ jobs:
     - name: Build Amigo
       run: xcodebuild -scheme Amigo -project Amigo/Amigo.xcodeproj -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 12 Pro Max" build
 
-    # UNIT TESTS
+    # Unit Testing
     - name: Run Unit Tests
       run: xcodebuild test -scheme Amigo -project Amigo/Amigo.xcodeproj -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 12 Pro Max" build
