@@ -10,6 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 final class UserCreationService {
+    
     // MARK: - PROPERTIES & INIT
     private let firebaseWrapper: FirebaseProtocol
     private let userTableConstants = Constant.FirestoreTables.User.self
@@ -27,6 +28,7 @@ final class UserCreationService {
         
         do {
             try await firebaseWrapper.saveUserInDatabase(userID: userID, fields: userData as [String : Any])
+            
         } catch {
             throw Errors.DatabaseError.cannotSaveUser
         }

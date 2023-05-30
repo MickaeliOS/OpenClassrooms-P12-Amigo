@@ -22,6 +22,7 @@ final class UserFetchingService {
     func fetchUser(userID: String) async throws -> User? {
         do {            
             return try await firebaseWrapper.fetchUser(userID: userID)
+            
         } catch {
             throw Errors.DatabaseError.cannotGetDocuments
         }

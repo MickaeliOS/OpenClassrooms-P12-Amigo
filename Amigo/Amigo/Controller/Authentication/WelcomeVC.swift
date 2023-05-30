@@ -22,6 +22,7 @@ class WelcomeVC: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var createAccountButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var isPasswordVisible = false
     private let userAuthService = UserAuthService()
@@ -60,6 +61,8 @@ class WelcomeVC: UIViewController {
             return
         }
         
+        UIViewController.toggleActivityIndicator(shown: true, button: loginButton, activityIndicator: activityIndicator)
+        
         Task {
             do {
                 try await userAuthService.signIn(email: emailTextField.text!, password: passwordTextField.text!)
@@ -69,6 +72,8 @@ class WelcomeVC: UIViewController {
             } catch let error as Errors.CommonError {
                 errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
             }
+            
+            UIViewController.toggleActivityIndicator(shown: false, button: loginButton, activityIndicator: activityIndicator)
         }
     }
     

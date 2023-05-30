@@ -39,7 +39,7 @@ final class UserFirestoreTests: XCTestCase {
             XCTFail("Test failed, expected to throw but passed.")
 
         } catch let error as Errors.DatabaseError {
-            XCTAssertTrue(firebaseMock.saveUserIntDatabaseTriggered)
+            XCTAssertTrue(firebaseMock.saveUserInDatabaseTriggered)
             XCTAssertEqual(error, .cannotSaveUser)
             XCTAssertEqual(error.localizedDescription, "We couldn't save your informations, please try again.")
         } catch {
@@ -50,13 +50,10 @@ final class UserFirestoreTests: XCTestCase {
     func testGivenNoError_WhenSavingUser_ThenUserIsSaved() async {
         do {
             try await userCreationService.saveUserInDatabase(user: user, userID: userID)
+            XCTAssertTrue(firebaseMock.saveUserInDatabaseTriggered)
 
-        } catch let error as Errors.DatabaseError {
-            XCTAssertTrue(firebaseMock.saveUserIntDatabaseTriggered)
-            XCTAssertEqual(error, .cannotSaveUser)
-            XCTAssertEqual(error.localizedDescription, "We couldn't save your informations, please try again.")
         } catch {
-            XCTFail("Test failed, expected to be Errors.DatabaseError type.")
+            XCTFail("Test failed, was not expected to throw.")
         }
     }
     

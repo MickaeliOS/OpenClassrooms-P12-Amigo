@@ -22,6 +22,7 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var errorMessageLabel: UILabel!
     @IBOutlet weak var createAccountButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var isPasswordVisible = false
     private let userAuthService = UserAuthService()
@@ -66,6 +67,10 @@ class CreateAccountVC: UIViewController {
                     return
                 }
                 
+                UIViewController.toggleActivityIndicator(shown: true,
+                                                         button: createAccountButton,
+                                                         activityIndicator: activityIndicator)
+                
                 try await userAuthService.createUser(email: emailTextField.text!,
                                                          password: passwordTextField.text!,
                                                          confirmPassword: confirmPasswordTextField.text!)
@@ -80,6 +85,10 @@ class CreateAccountVC: UIViewController {
             } catch let error as Errors.CommonError {
                 errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
             }
+            
+            UIViewController.toggleActivityIndicator(shown: false,
+                                                     button: createAccountButton,
+                                                     activityIndicator: activityIndicator)
         }
     }
     

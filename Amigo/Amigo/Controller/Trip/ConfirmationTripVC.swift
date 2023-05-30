@@ -39,6 +39,7 @@ extension ConfirmationTripVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constant.SegueID.unwindToRootVC {
             let tripVC = segue.destination as? TripVC
+            
             // I am refreshing the tableView's data to display the newly added trip.
             tripVC?.tripTableView.reloadData()
         }

@@ -90,7 +90,8 @@ class SettingsVC: UIViewController {
                 
                 // Then, I create the User.
                 let user = User(firstname: firstnameTextField.text,
-                                lastname: lastnameTextField.text, gender: gender,
+                                lastname: lastnameTextField.text,
+                                gender: gender,
                                 email: currentUser.email!)
                 
                 // We are prepared to persistently save the user's data, both remotely and locally.

@@ -17,7 +17,7 @@ final class FirebaseMock: FirebaseProtocol {
     var signInTriggered = false
     var signOutTriggered = false
     var createUserTriggered = false
-    var saveUserIntDatabaseTriggered = false
+    var saveUserInDatabaseTriggered = false
     var fetchUserTriggered = false
     var updateUserTriggered = false
     var createTripTriggered = false
@@ -62,7 +62,7 @@ extension FirebaseMock {
     
     // MARK: - USER FIRESTORE FUNCTIONS
     func saveUserInDatabase(userID: String, fields: [String : Any]) async throws {
-        saveUserIntDatabaseTriggered = true
+        saveUserInDatabaseTriggered = true
         if !success { throw testError }
     }
     

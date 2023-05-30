@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAnalytics
 
 class CountryPickerVC: UIViewController {
     
@@ -78,6 +79,11 @@ extension CountryPickerVC: UITableViewDelegate, UITableViewDataSource {
         let countryName = filteredCountryList[indexPath.row]
         let countryCode = Locale.countryCode(forCountryName: countryName)
         let countryInformations = (countryName, countryCode ?? "N/A")
+        
+        // A little custom event for Firebase Analytics where we store the picked countries.
+        Analytics.logEvent("picked_countries", parameters: [
+          "name": countryName as NSObject
+        ])
         
         performSegue(withIdentifier: Constant.SegueID.unwindToCreateTripVC, sender: countryInformations)
     }
