@@ -116,7 +116,6 @@ class CreateTripVC: UIViewController {
     }
     
     private func addTrip(trip: Trip) {
-        
         // We locally save the trip. If trip is nil, indicating that the user has not retrieved their list of trips, we allow the addition of the current trip without blocking them.
         if dataSource.user?.trips == nil {
             dataSource.user?.trips = [trip]

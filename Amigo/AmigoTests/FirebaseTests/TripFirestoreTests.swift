@@ -10,14 +10,14 @@ import FirebaseFirestore
 @testable import Amigo
 
 final class TripFirestoreTests: XCTestCase {
-
+    
     // MARK: - MOCK AND MODEL
     private var firebaseMock: FirebaseMock!
     private var tripCreationService: TripCreationService!
     private var tripFetchingService: TripFetchingService!
     private var tripUpdatingService: TripUpdatingService!
     private var tripDeletionService: TripDeletionService!
-
+    
     // MARK: - PROPERTIES
     private let trip = Trip(userID: "1234", startDate: Date.now, endDate: Date.now, country: "France", countryCode: "FR")
     
@@ -52,12 +52,12 @@ final class TripFirestoreTests: XCTestCase {
             let tripID = try tripCreationService.createTrip(trip: trip)
             XCTAssertTrue(firebaseMock.createTripTriggered)
             XCTAssertNotNil(tripID)
-
+            
         } catch {
             XCTFail("Test failed, was not expected to throw.")
         }
     }
-
+    
     // MARK: - fetchTrips TESTS
     func testGivenAnError_WhenFetchingTrips_ThenDefaultError() async {
         firebaseMock.success = false
@@ -65,7 +65,7 @@ final class TripFirestoreTests: XCTestCase {
         do {
             let _ = try await tripFetchingService.fetchTrips(userID: "1234")
             XCTFail("Test failed, expected to throw but passed.")
-
+            
         } catch let error as Errors.DatabaseError {
             XCTAssertTrue(firebaseMock.fetchTripsTriggered)
             XCTAssertEqual(error, .cannotGetDocuments)
@@ -93,7 +93,7 @@ final class TripFirestoreTests: XCTestCase {
         do {
             try await tripUpdatingService.updateTrip(with: "1234", fields: ["":""])
             XCTFail("Test failed, expected to throw but passed.")
-
+            
         } catch let error as Errors.DatabaseError {
             XCTAssertTrue(firebaseMock.updateTripTriggered)
             XCTAssertEqual(error, .notFoundUpdate)
@@ -109,7 +109,7 @@ final class TripFirestoreTests: XCTestCase {
         do {
             try await tripUpdatingService.updateTrip(with: "1234", fields: ["":""])
             XCTFail("Test failed, expected to throw but passed.")
-
+            
         } catch let error as Errors.DatabaseError {
             XCTAssertTrue(firebaseMock.updateTripTriggered)
             XCTAssertEqual(error, .cannotUpdateDocuments)
@@ -123,7 +123,7 @@ final class TripFirestoreTests: XCTestCase {
         do {
             try await tripUpdatingService.updateTrip(with: "1234", fields: ["":""])
             XCTAssertTrue(firebaseMock.updateTripTriggered)
-
+            
         } catch {
             XCTFail("Test failed, was not expected to throw.")
         }
@@ -136,7 +136,7 @@ final class TripFirestoreTests: XCTestCase {
         do {
             try await tripDeletionService.deleteTrip(tripID: "1234")
             XCTFail("Test failed, expected to throw but passed.")
-
+            
         } catch let error as Errors.DatabaseError {
             XCTAssertTrue(firebaseMock.deleteTripTriggered)
             XCTAssertEqual(error, .cannotDeleteDocuments)
@@ -150,7 +150,7 @@ final class TripFirestoreTests: XCTestCase {
         do {
             try await tripDeletionService.deleteTrip(tripID: "1234")
             XCTAssertTrue(firebaseMock.deleteTripTriggered)
-
+            
         } catch {
             XCTFail("Test failed, was not expected to throw.")
         }

@@ -8,7 +8,7 @@
 import UIKit
 
 class ToDoCollectionViewCell: UICollectionViewCell {
-
+    
     // MARK: - VIEW LIFE CYCLE
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -19,7 +19,7 @@ class ToDoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var toDoLabel: UILabel!
     @IBOutlet weak var deleteItemButton: UIButton!
     var deleteThisCell: (() -> Void)?
-
+    
     // MARK: - ACTIONS
     @IBAction func deleteItemButtonTapped(_ sender: Any) {
         deleteThisCell?()

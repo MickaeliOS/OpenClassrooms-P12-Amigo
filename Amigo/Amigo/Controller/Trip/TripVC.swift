@@ -112,19 +112,20 @@ class TripVC: UIViewController {
             try await userCreationService.saveUserInDatabase(user: user, userID: currentUser.uid)
             dataSource.user = user
         } catch {
-            presentErrorAlert(with: Errors.DatabaseError.cannotSaveUser.localizedDescription) {
-                self.activityIndicator.isHidden = true
-                self.presentVCFullScreen(with: "WelcomeVC")
-            }
+            self.activityIndicator.isHidden = true
+            let error = Errors.DatabaseError.cannotSaveUser.localizedDescription
+            
+            // In case of a process failure, the user will be prompted to log in again and retry the saving process.
+            self.presentVCFullScreen(with: "WelcomeVC", error: error)
         }
     }
-    
 }
 
 // MARK: - EXTENSIONS
 extension TripVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constant.SegueID.segueToTripDetailVC {
+            // I am passing the trip we will be working on to the TripDetailVC, which contains all the features and functionality related to that trip.
             let tripDetailVC = segue.destination as? TripDetailVC
             let trip = sender as? Trip
             tripDetailVC?.trip = trip

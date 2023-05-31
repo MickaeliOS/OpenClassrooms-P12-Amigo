@@ -34,7 +34,7 @@ final class FirebaseMock: FirebaseProtocol {
     // This property indicate an expectation for the corresponding function to succeed.
     // If set to false, it signifies an intention for it to throw an error.
     var success = true
-
+    
     // Errors.
     let testError = TestError.testError
     var testNSError = NSError()

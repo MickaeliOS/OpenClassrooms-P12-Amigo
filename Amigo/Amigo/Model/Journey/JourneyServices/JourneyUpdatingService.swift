@@ -1,5 +1,5 @@
 //
-//  JourneyUpdateService.swift
+//  JourneyUpdatingService.swift
 //  Amigo
 //
 //  Created by Mickaël Horn on 09/05/2023.
@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-final class JourneyUpdateService {
+final class JourneyUpdatingService {
     
     // MARK: - PROPERTIES & INIT
     private let firebaseWrapper: FirebaseProtocol

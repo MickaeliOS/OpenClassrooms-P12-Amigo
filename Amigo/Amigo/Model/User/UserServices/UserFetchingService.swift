@@ -10,17 +10,18 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final class UserFetchingService {
+    
     // MARK: - PROPERTIES & INIT
     private let firebaseWrapper: FirebaseProtocol
     private let userTableConstants = Constant.FirestoreTables.User.self
-
+    
     init(firebaseWrapper: FirebaseProtocol = FirebaseWrapper()) {
         self.firebaseWrapper = firebaseWrapper
     }
     
     // MARK: - FUNCTIONS
     func fetchUser(userID: String) async throws -> User? {
-        do {            
+        do {
             return try await firebaseWrapper.fetchUser(userID: userID)
             
         } catch {

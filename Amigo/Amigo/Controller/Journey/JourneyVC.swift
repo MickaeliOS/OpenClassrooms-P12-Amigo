@@ -29,7 +29,7 @@ class JourneyVC: UIViewController {
     var trip: Trip?
     weak var delegate: JourneyVCDelegate?
     private let journeyFetchingService = JourneyFetchingService()
-    private let journeyUpdateService = JourneyUpdateService()
+    private let journeyUpdateService = JourneyUpdatingService()
     
     // MARK: - ACTIONS
     @IBAction func unwindToTripJourneyVC(segue: UIStoryboardSegue) {}
@@ -107,10 +107,10 @@ class JourneyVC: UIViewController {
             presentErrorAlert(with: Errors.DatabaseError.nothingToAdd.localizedDescription)
             return
         }
-                
+        
         do {
             UIViewController.toggleActivityIndicator(shown: true, button: saveButton, activityIndicator: saveButtonAI)
-
+            
             // We update the journey in Firestore.
             try journeyUpdateService.updateJourney(journey: journey, for: tripID)
             
@@ -148,11 +148,10 @@ extension JourneyVC {
         case Constant.SegueID.segueToCreateJourneyVC:
             let createJourneyVC = segue.destination as? CreateJourneyVC
             createJourneyVC?.trip = trip
-            //createJourneyVC?.journey = journey
             
             // To refresh the TableView later with the editedJourneys.
             createJourneyVC?.delegate = self
-
+            
         default:
             return
         }

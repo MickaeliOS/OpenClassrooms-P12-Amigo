@@ -13,7 +13,7 @@ final class JourneyFirestoreTests: XCTestCase {
     // MARK: - MOCK AND MODEL
     private var firebaseMock: FirebaseMock!
     private var journeyFetchingService: JourneyFetchingService!
-    private var journeyUpdateService: JourneyUpdateService!
+    private var journeyUpdateService: JourneyUpdatingService!
     private var journeyDeletionService: JourneyDeletionService!
     
     // MARK: - UTILITIES FUNC
@@ -21,7 +21,7 @@ final class JourneyFirestoreTests: XCTestCase {
         super.setUp()
         firebaseMock = FirebaseMock()
         journeyFetchingService = JourneyFetchingService(firebaseWrapper: firebaseMock)
-        journeyUpdateService = JourneyUpdateService(firebaseWrapper: firebaseMock)
+        journeyUpdateService = JourneyUpdatingService(firebaseWrapper: firebaseMock)
         journeyDeletionService = JourneyDeletionService(firebaseWrapper: firebaseMock)
     }
     
@@ -64,7 +64,7 @@ final class JourneyFirestoreTests: XCTestCase {
     func testGivenNoError_WhenUpdatingJourney_ThenJourneyIsUpdated() {
         XCTAssertNoThrow(try journeyUpdateService.updateJourney(journey: Journey(), for: "1234"))
         XCTAssertTrue(firebaseMock.updateJourneyTriggered)
-
+        
     }
     
     // MARK: - deleteJourney TESTS
@@ -74,7 +74,7 @@ final class JourneyFirestoreTests: XCTestCase {
         do {
             try await journeyDeletionService.deleteJourney(tripID: "1234")
             XCTFail("Test failed, expected to throw but passed.")
-
+            
         } catch let error as Errors.DatabaseError {
             XCTAssertTrue(firebaseMock.deleteJourneyTriggered)
             XCTAssertEqual(error, .cannotDeleteDocuments)
@@ -84,11 +84,11 @@ final class JourneyFirestoreTests: XCTestCase {
         }
     }
     
-    func testGivenNoError_WhenDeletingJourney_ThenJourneyIsDeleted() async {        
+    func testGivenNoError_WhenDeletingJourney_ThenJourneyIsDeleted() async {
         do {
             try await journeyDeletionService.deleteJourney(tripID: "1234")
             XCTAssertTrue(firebaseMock.deleteJourneyTriggered)
-
+            
         } catch {
             XCTFail("Test failed, was not expected to throw.")
         }

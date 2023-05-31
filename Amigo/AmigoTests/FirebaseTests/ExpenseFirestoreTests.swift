@@ -9,7 +9,7 @@ import XCTest
 @testable import Amigo
 
 final class ExpenseFirestoreTests: XCTestCase {
-
+    
     // MARK: - MOCK AND MODEL
     private var firebaseMock: FirebaseMock!
     private var expenseUpdateService: ExpenseUpdateService!
@@ -58,7 +58,7 @@ final class ExpenseFirestoreTests: XCTestCase {
         }
     }
     
-    func testGivenNoError_WhenFetchingExpense_ThenExpenseIsFetched() {        
+    func testGivenNoError_WhenFetchingExpense_ThenExpenseIsFetched() {
         expenseFetchingService.fetchTripExpenses(tripID: "1234") { expense, error in
             guard let expense = expense else {
                 XCTFail("Test failed, expense should not be nil.")
@@ -70,7 +70,6 @@ final class ExpenseFirestoreTests: XCTestCase {
             XCTAssertEqual(expense.expenseItems?[0].title, "Pizza")
             XCTAssertEqual(expense.expenseItems?[0].amount, 12)
             XCTAssertEqual(expense.expenseItems?[0].date, Date(timeIntervalSince1970: 1685359786))
-
         }
     }
     
@@ -81,7 +80,7 @@ final class ExpenseFirestoreTests: XCTestCase {
         do {
             try await expenseDeletionService.deleteExpense(tripID: "1234")
             XCTFail("Test failed, expected to throw but passed.")
-
+            
         } catch let error as Errors.DatabaseError {
             XCTAssertTrue(firebaseMock.deleteExpenseTriggered)
             XCTAssertEqual(error, .cannotDeleteDocuments)
@@ -95,7 +94,7 @@ final class ExpenseFirestoreTests: XCTestCase {
         do {
             try await expenseDeletionService.deleteExpense(tripID: "1234")
             XCTAssertTrue(firebaseMock.deleteExpenseTriggered)
-
+            
         } catch {
             XCTFail("Test failed, was not expected to throw.")
         }

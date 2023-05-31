@@ -39,7 +39,7 @@ class TripDetailVC: UIViewController {
     
     // MARK: - ACTIONS
     @IBAction func unwindToTripDetailVC(segue: UIStoryboardSegue) {}
-
+    
     @IBAction func journeyButtonTapped(_ sender: Any) {
         performSegue(withIdentifier: Constant.SegueID.segueToTripJourneyVC, sender: trip)
     }

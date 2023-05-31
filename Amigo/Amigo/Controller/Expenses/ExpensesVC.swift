@@ -8,7 +8,7 @@
 import UIKit
 
 class ExpensesVC: UIViewController {
-
+    
     // MARK: - VIEW LIFE CYCLE
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +35,7 @@ class ExpensesVC: UIViewController {
     weak var delegate: ExpensesVCDelegate?
     private let expenseFetchingService = ExpenseFetchingService()
     private let expenseUpdateService = ExpenseUpdateService()
-
+    
     // MARK: - ACTIONS
     @IBAction func addExpenseItemButtonTapped(_ sender: Any) {
         addExpenseItemToList()
@@ -60,7 +60,7 @@ class ExpensesVC: UIViewController {
         saveExpensesButton.layer.cornerRadius = 10
         
         guard let pencilImage = UIImage(systemName: "pencil"),
-                let dollarSignImage = UIImage(systemName: "dollarsign.circle") else {
+              let dollarSignImage = UIImage(systemName: "dollarsign.circle") else {
             return
         }
         
@@ -70,7 +70,7 @@ class ExpensesVC: UIViewController {
     
     private func setupCell() {
         self.expensesTableView.register(UINib(nibName: Constant.TableViewCells.expenseNibName, bundle: nil),
-                                    forCellReuseIdentifier: Constant.TableViewCells.expenseCell)
+                                        forCellReuseIdentifier: Constant.TableViewCells.expenseCell)
     }
     
     private func addExpenseItemToList() {
@@ -87,7 +87,7 @@ class ExpensesVC: UIViewController {
         }
         
         let expenseItem = ExpenseItem(title: expenseTextField.text!, amount: amount, date: expenseDatePicker.date)
-
+        
         // I am implementing this because if the Trip does not have expenses, so expenses property is nil,
         // the user won't be able to add expenseItems.
         if trip?.expenses == nil { trip?.expenses = Expense() }
@@ -97,17 +97,18 @@ class ExpensesVC: UIViewController {
         } else {
             trip?.expenses?.expenseItems?.append(expenseItem)
         }
-
+        
         // Sorting the expenses by date ascending.
         let dateOrderedExpenses = ExpenseManagement.sortExpensesByDateAscending(expenseItems: trip!.expenses!.expenseItems!)
         trip?.expenses!.expenseItems = dateOrderedExpenses
         
+        // Refreshing interface.
         refreshTotalAmount()
         clearTextFields()
         showNoExpensesLabelIfNoExpenses()
         expensesTableView.reloadData()
     }
-
+    
     private func fetchExpensesFlow() {
         guard let expenses = trip?.expenses else {
             fetchExpenses()
@@ -129,7 +130,7 @@ class ExpensesVC: UIViewController {
     
     private func fetchExpenses() {
         guard let tripID = trip?.tripID else { return }
-
+        
         expenseFetchingService.fetchTripExpenses(tripID: tripID) { [weak self] expenses, error in
             if let error = error {
                 self?.fetchingAI.isHidden = true
@@ -146,7 +147,7 @@ class ExpensesVC: UIViewController {
                     // Displaying the expenses.
                     self?.refreshTotalAmount()
                 }
-
+                
                 // Saving the expenses.
                 self?.trip?.expenses = expenses
                 self?.delegate?.sendExpenses(expenses: expenses)
@@ -163,7 +164,7 @@ class ExpensesVC: UIViewController {
             presentErrorAlert(with: Errors.DatabaseError.nothingToAdd.localizedDescription)
             return
         }
-    
+        
         do {
             UIViewController.toggleActivityIndicator(shown: true, button: saveExpensesButton, activityIndicator: savingButtonAI)
             
@@ -238,11 +239,11 @@ extension ExpensesVC: UITableViewDelegate, UITableViewDataSource {
         guard let expenseItems = trip?.expenses?.expenseItems else {
             return UITableViewCell()
         }
-                         
+        
         let expense = expenseItems[indexPath.row]
         
         cell.configureCell(date: expense.date, title: expense.title, amount: expense.amount)
-                 
+        
         return cell
     }
     

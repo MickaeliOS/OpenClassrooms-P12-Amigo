@@ -35,7 +35,7 @@ final class UserAuthServiceTests: XCTestCase {
     }
     
     // MARK: - SIGNIN TESTS
-    func testGivenBadleFormattedEmail_WhenSignIn_ThenBadlyFormattedEmailError() async {
+    func testGivenBadFormattedEmail_WhenSignIn_ThenBadlyFormattedEmailError() async {
         do {
             try await userAuthService.signIn(email: incorrectEmail, password: correctPassword)
             XCTFail("Test failed, expected to throw but passed.")
@@ -52,7 +52,7 @@ final class UserAuthServiceTests: XCTestCase {
     }
     
     func testGivenBadEmail_WhenSignIn_ThenIncorrectLogsError() async {
-        // I'm telling the Mock that I want the call to fail, and specifically with the userNotFound error.
+        // I'm telling the Mock that I want signIn() to fail, and I provide the error i want.
         firebaseMock.success = false
         let errorCode = AuthErrorCode.userNotFound.rawValue
         firebaseMock.testNSError = NSError(domain: "", code: errorCode, userInfo: nil)
@@ -62,6 +62,7 @@ final class UserAuthServiceTests: XCTestCase {
             XCTFail("Test failed, expected to throw but passed.")
             
         } catch let error as Errors.SignInError {
+            // Controlling that we have the correct error.
             XCTAssertTrue(firebaseMock.signInTriggered)
             XCTAssertEqual(error, .incorrectLogs)
             XCTAssertEqual(error.localizedDescription, "Incorrect Email or Password.")
@@ -113,7 +114,6 @@ final class UserAuthServiceTests: XCTestCase {
             XCTFail("Test failed, expected to throw but passed.")
             
         } catch let error as Errors.SignOutError {
-
             XCTAssertTrue(firebaseMock.signOutTriggered)
             XCTAssertEqual(error, .cannotSignOut)
             XCTAssertEqual(error.localizedDescription, "Unable to log you out. Please restart the application and attempt the logout process again.")
@@ -178,7 +178,6 @@ final class UserAuthServiceTests: XCTestCase {
     }
     
     func testGivenEmailAlreadyInUseError_WhenCreatingUser_ThenCustomEmailAlreadyInUseError() async {
-        // I'm telling the Mock that I want createUser() to fail, and I provide the error i want.
         firebaseMock.success = false
         let errorCode = AuthErrorCode.emailAlreadyInUse.rawValue
         firebaseMock.testNSError = NSError(domain: "", code: errorCode, userInfo: nil)
@@ -223,7 +222,7 @@ final class UserAuthServiceTests: XCTestCase {
                                                  confirmPassword: correctConfirmPassword)
             
             XCTAssertTrue(firebaseMock.createUserTriggered)
-
+            
             // If there is no throw, test succeeded.
             // However, I cant' use XCTAssertNoThrow(), because 'async' call in an autoclosure does not support concurrency.
         } catch {

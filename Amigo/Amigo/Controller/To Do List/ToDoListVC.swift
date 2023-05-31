@@ -79,7 +79,7 @@ class ToDoListVC: UIViewController {
         }
         
         UIViewController.toggleActivityIndicator(shown: true, button: saveToDoListButton, activityIndicator: activityIndicator)
-
+        
         Task {
             do {
                 // First step -> We store the list in the Firestore database.

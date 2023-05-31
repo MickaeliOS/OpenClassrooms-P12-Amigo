@@ -9,9 +9,10 @@ import Foundation
 import FirebaseAuth
 
 final class UserAuthService {
+    
     // MARK: - PROPERTIES & INIT
     private let firebaseWrapper: FirebaseProtocol
-
+    
     init(firebaseWrapper: FirebaseProtocol = FirebaseWrapper()) {
         self.firebaseWrapper = firebaseWrapper
     }
@@ -26,7 +27,6 @@ final class UserAuthService {
             try await firebaseWrapper.signIn(email: email, password: password)
             
         } catch let error as NSError {
-            
             switch error.code {
             case AuthErrorCode.wrongPassword.rawValue,
                 AuthErrorCode.userNotFound.rawValue:
@@ -40,6 +40,7 @@ final class UserAuthService {
     func signOut() throws {
         do {
             try firebaseWrapper.signOut()
+            
         } catch {
             throw Errors.SignOutError.cannotSignOut
         }
@@ -67,6 +68,7 @@ final class UserAuthService {
     }
     
     private func checkingLogs(email: String, password: String, confirmPassword: String) throws {
+        // The function executes a battery of tests to ensure the accuracy of the fields.
         guard UserManagement.isValidEmail(email) else {
             throw Errors.CommonError.badlyFormattedEmail
         }

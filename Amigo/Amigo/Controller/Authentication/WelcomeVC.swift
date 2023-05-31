@@ -66,6 +66,8 @@ class WelcomeVC: UIViewController {
         Task {
             do {
                 try await userAuthService.signIn(email: emailTextField.text!, password: passwordTextField.text!)
+                
+                // Upon successful completion of the signIn process, the user will be redirected to the root view controller (TripVC), where they will have the ability to add trip(s).
                 performSegue(withIdentifier: Constant.SegueID.unwindToRootVC, sender: nil)
             } catch let error as Errors.SignInError {
                 errorMessageLabel.displayErrorMessage(message: error.localizedDescription)

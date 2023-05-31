@@ -8,6 +8,7 @@
 import UIKit
 
 class TripTableViewCell: UITableViewCell {
+    
     // MARK: - OUTLETS & PROPERTIES
     @IBOutlet weak var flagIconLabel: UILabel!
     @IBOutlet weak var destinationLabel: UILabel!

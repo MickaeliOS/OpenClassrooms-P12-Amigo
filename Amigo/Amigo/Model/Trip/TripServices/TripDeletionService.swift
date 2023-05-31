@@ -22,6 +22,7 @@ final class TripDeletionService {
     func deleteTrip(tripID: String) async throws {
         do {
             try await firebaseWrapper.deleteTrip(tripID: tripID)
+            
         } catch {
             throw Errors.DatabaseError.cannotDeleteDocuments
         }

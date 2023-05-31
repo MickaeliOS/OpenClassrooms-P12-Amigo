@@ -30,6 +30,7 @@ class JourneyTableViewCell: UITableViewCell {
         setupVoiceOver()
     }
     
+    // MARK: - PRIVATE FUNCTIONS
     private func disableVoiceOverForCell() {
         // Not allowing accessibility for the cell itself
         isAccessibilityElement = false
@@ -43,7 +44,7 @@ class JourneyTableViewCell: UITableViewCell {
         startDateLabel.accessibilityLabel = "Start date."
         endDateLabel.accessibilityLabel = "End date."
         destinationLabel.accessibilityLabel = "Destination."
-
+        
         // Values
         startDateLabel.accessibilityValue = startDateLabel.text
         endDateLabel.accessibilityValue = endDateLabel.text

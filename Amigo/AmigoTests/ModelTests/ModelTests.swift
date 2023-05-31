@@ -27,7 +27,7 @@ final class ModelTests: XCTestCase {
         let indexOfGender = User.Gender.index(of: gender)
         XCTAssertEqual(indexOfGender, 0)
     }
-
+    
     func testGivenManGender_WhenGettingIndexOfGender_ThenReturnManIndex() {
         let gender = User.Gender.man
         let indexOfGender = User.Gender.index(of: gender)
@@ -133,7 +133,7 @@ final class ModelTests: XCTestCase {
             XCTAssertEqual(coordinateRegion?.center.longitude.rounded(), 2)
             XCTAssertEqual(coordinateRegion?.span.latitudeDelta.rounded(), 7)
             XCTAssertEqual(coordinateRegion?.span.longitudeDelta.rounded(), 11)
-
+            
             expectation.fulfill()
         }
         
@@ -149,7 +149,7 @@ final class ModelTests: XCTestCase {
         locationManagement.getCoordinatesFromRegion(region: "Region") { coordinateRegion, error in
             XCTAssertNil(coordinateRegion)
             XCTAssertNil(error)
-
+            
             expectation.fulfill()
         }
         
@@ -163,7 +163,7 @@ final class ModelTests: XCTestCase {
             XCTAssertNotNil(error)
             XCTAssertTrue(error is Errors.CommonError)
             XCTAssertNil(coordinateRegion)
-
+            
             expectation.fulfill()
         }
         
@@ -181,7 +181,7 @@ final class ModelTests: XCTestCase {
     func testGivenAnAddress_WhenGettingPartOfTheAddress_ThenWeHaveAddressParts() {
         let address = "12 Rue Volney, 75002 Paris, France"
         let expectation = expectation(description: "Search expectation")
-
+        
         
         MKLocalSearch.getPartsFromAddress(address: address) { mkMapItem, error in
             XCTAssertNil(error)
@@ -192,9 +192,9 @@ final class ModelTests: XCTestCase {
             XCTAssertEqual(mkMapItem?.placemark.name, "12 Rue Volney")
             XCTAssertEqual(mkMapItem?.placemark.postalCode, "75002")
             XCTAssertEqual(mkMapItem?.placemark.locality, "Paris")
-
+            
             expectation.fulfill()
-
+            
         }
         
         wait(for: [expectation], timeout: 3.0)
@@ -203,12 +203,12 @@ final class ModelTests: XCTestCase {
     func testGivenIncorrectAddress_WhenGettingPartOfTheAddress_ThenErrorOccur() {
         let address = " "
         let expectation = expectation(description: "Search expectation")
-
+        
         MKLocalSearch.getPartsFromAddress(address: address) { mkMapItem, error in
             XCTAssertNotNil(error)
             XCTAssertTrue(error is Errors.CommonError)
             XCTAssertNil(mkMapItem)
-
+            
             expectation.fulfill()
         }
         
@@ -229,7 +229,7 @@ final class ModelTests: XCTestCase {
         let flag = String.countryFlag(countryCode: countryCode)
         XCTAssertNil(flag)
     }
-
+    
     func testGivenCountryListProperty_WhenGettingCountryList_ThenCountryListIsReturned() {
         let countryList = Locale.countryList
         

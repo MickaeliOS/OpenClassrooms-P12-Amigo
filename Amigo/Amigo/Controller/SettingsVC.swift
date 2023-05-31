@@ -71,43 +71,8 @@ class SettingsVC: UIViewController {
         }
         
         UIViewController.toggleActivityIndicator(shown: true, button: saveProfileButton, activityIndicator: activityIndicator)
-
-        // If user is nil at this point, it indicates an issue during the fetching of the user in TripVC.
-        // However, it's important to note that the createUser function will not create a new user if one already exists, but rather update the existing user.
-        if dataSource.user == nil {
-            createUser(currentUser: currentUser, userID: currentUser.uid)
-        } else {
-            updateUser(userID: currentUser.uid)
-        }
-    }
-    
-    private func createUser(currentUser: FirebaseAuth.User, userID: String) {
-        Task {
-            do {
-                // First, I get the gender.
-                let selectedIndex = genderSegmentedControl.selectedSegmentIndex
-                let gender: User.Gender = selectedIndex == 0 ? .woman : .man
-                
-                // Then, I create the User.
-                let user = User(firstname: firstnameTextField.text,
-                                lastname: lastnameTextField.text,
-                                gender: gender,
-                                email: currentUser.email!)
-                
-                // We are prepared to persistently save the user's data, both remotely and locally.
-                try await userCreationService.saveUserInDatabase(user: user, userID: userID)
-                dataSource.user = user
-                
-                // Finally, we conclude the process by executing a set of essential functions.
-                UIViewController.toggleActivityIndicator(shown: false, button: saveProfileButton, activityIndicator: activityIndicator)
-                refreshInterface()
-                setupPersonalInformations()
-                presentInformationAlert(with: "Your profile has been saved.")
-                
-            } catch let error as Errors.DatabaseError {
-                presentErrorAlert(with: error.localizedDescription)
-            }
-        }
+        
+        updateUser(userID: currentUser.uid)
     }
     
     private func updateUser(userID: String) {

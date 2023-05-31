@@ -10,6 +10,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 final class ExpenseUpdateService {
+    
     // MARK: - PROPERTIES & INIT
     private let firebaseWrapper: FirebaseProtocol
     private let expenseTableConstants = Constant.FirestoreTables.Expense.self
@@ -18,6 +19,7 @@ final class ExpenseUpdateService {
         self.firebaseWrapper = firebaseWrapper
     }
     
+    // MARK: - FUNCTIONS
     func updateExpense(expenses: Expense, for tripID: String) throws {
         do {
             try firebaseWrapper.updateExpense(expenses: expenses, for: tripID)

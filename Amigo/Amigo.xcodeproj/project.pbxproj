@@ -37,7 +37,7 @@
 		8356871B2A0980FB000A65F8 /* JourneyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8356871A2A0980FB000A65F8 /* JourneyTableViewCell.swift */; };
 		8356871D2A0989B0000A65F8 /* CreateJourneyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8356871C2A0989B0000A65F8 /* CreateJourneyVC.swift */; };
 		835687212A0A78BD000A65F8 /* TripUpdatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835687202A0A78BD000A65F8 /* TripUpdatingService.swift */; };
-		835687272A0ACD21000A65F8 /* JourneyUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835687262A0ACD21000A65F8 /* JourneyUpdateService.swift */; };
+		835687272A0ACD21000A65F8 /* JourneyUpdatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835687262A0ACD21000A65F8 /* JourneyUpdatingService.swift */; };
 		835687292A0ACF2B000A65F8 /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835687282A0ACF2B000A65F8 /* Journey.swift */; };
 		8356872B2A0AD1DA000A65F8 /* JourneyFetchingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8356872A2A0AD1DA000A65F8 /* JourneyFetchingService.swift */; };
 		8361E03229E5522900EE7D2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8361E03129E5522900EE7D2B /* AppDelegate.swift */; };
@@ -124,7 +124,7 @@
 		8356871A2A0980FB000A65F8 /* JourneyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyTableViewCell.swift; sourceTree = "<group>"; };
 		8356871C2A0989B0000A65F8 /* CreateJourneyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateJourneyVC.swift; sourceTree = "<group>"; };
 		835687202A0A78BD000A65F8 /* TripUpdatingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripUpdatingService.swift; sourceTree = "<group>"; };
-		835687262A0ACD21000A65F8 /* JourneyUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyUpdateService.swift; sourceTree = "<group>"; };
+		835687262A0ACD21000A65F8 /* JourneyUpdatingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyUpdatingService.swift; sourceTree = "<group>"; };
 		835687282A0ACF2B000A65F8 /* Journey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
 		8356872A2A0AD1DA000A65F8 /* JourneyFetchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyFetchingService.swift; sourceTree = "<group>"; };
 		8361E02E29E5522900EE7D2B /* Amigo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Amigo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,7 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				8356872A2A0AD1DA000A65F8 /* JourneyFetchingService.swift */,
-				835687262A0ACD21000A65F8 /* JourneyUpdateService.swift */,
+				835687262A0ACD21000A65F8 /* JourneyUpdatingService.swift */,
 				83DA20712A121D5000C417BE /* JourneyDeletionService.swift */,
 			);
 			path = JourneyServices;
@@ -439,8 +439,8 @@
 		838296C72A0E12BD00B4E9D3 /* ExpenseServices */ = {
 			isa = PBXGroup;
 			children = (
-				838296C82A0E12D600B4E9D3 /* ExpenseUpdateService.swift */,
 				838296CA2A0E25E100B4E9D3 /* ExpenseFetchingService.swift */,
+				838296C82A0E12D600B4E9D3 /* ExpenseUpdateService.swift */,
 				83DA20762A121DB500C417BE /* ExpenseDeletionService.swift */,
 			);
 			path = ExpenseServices;
@@ -466,8 +466,8 @@
 		83FED4082A0C222500B0B231 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				83FED4092A0C229900B0B231 /* ToDoCollectionViewCell.swift */,
 				838861732A13659E0028B7D7 /* ToDoCollectionViewCell.xib */,
+				83FED4092A0C229900B0B231 /* ToDoCollectionViewCell.swift */,
 			);
 			path = CollectionViewCells;
 			sourceTree = "<group>";
@@ -680,7 +680,7 @@
 				838861762A14214D0028B7D7 /* MyTabBarVC.swift in Sources */,
 				8300098329FFB97A006DBD54 /* TripTableViewCell.swift in Sources */,
 				8323F6F029E5908600CBDFB5 /* User.swift in Sources */,
-				835687272A0ACD21000A65F8 /* JourneyUpdateService.swift in Sources */,
+				835687272A0ACD21000A65F8 /* JourneyUpdatingService.swift in Sources */,
 				838296BE2A0D76BB00B4E9D3 /* ExpensesVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

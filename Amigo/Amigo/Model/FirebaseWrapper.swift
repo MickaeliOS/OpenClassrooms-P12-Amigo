@@ -10,8 +10,8 @@ import FirebaseAuth
 import FirebaseFirestore
 
 // MARK: - PROTOCOL
-    /// This protocol contains all the Firebase related functions the project will use.
-    /// It will be really useful for Mocking Firebase later.
+/// This protocol contains all the Firebase related functions the project will use.
+/// It will be really useful for Mocking Firebase later.
 
 protocol FirebaseProtocol {
     func signIn(email: String, password: String) async throws
@@ -33,9 +33,9 @@ protocol FirebaseProtocol {
 }
 
 // MARK: - PROTOCOLS
-    /// Inside the Wrapper, we write the classics Firebase functions.
-    /// These functions does not need to be tested, because it is already done
-    /// by Firebase.
+/// Inside the Wrapper, we write the classics Firebase functions.
+/// These functions does not need to be tested, because it is already done
+/// by Firebase.
 
 final class FirebaseWrapper: FirebaseProtocol {
     
@@ -55,7 +55,7 @@ final class FirebaseWrapper: FirebaseProtocol {
             throw error
         }
     }
-
+    
     func createUser(withEmail: String, password: String) async throws {
         do {
             try await Auth.auth().createUser(withEmail: withEmail, password: password)
@@ -77,7 +77,7 @@ final class FirebaseWrapper: FirebaseProtocol {
         do {
             let documentSnapshot = try await Firestore.firestore().collection(Constant.FirestoreTables.User.tableName).document(userID).getDocument()
             
-            // First, we ensure the existence of the user before proceeding.
+            // First, we ensure the existence of the user before decoding, otherwise, it will crash.
             guard documentSnapshot.exists else {
                 return nil
             }
@@ -110,7 +110,7 @@ final class FirebaseWrapper: FirebaseProtocol {
     
     func fetchTrips(userID: String) async throws -> [Trip] {
         var trips: [Trip] = []
-
+        
         do {
             // We need the user's trips, each trip we fetch must have the same userID
             let result = try await Firestore.firestore().collection(Constant.FirestoreTables.Trip.tableName).whereField(Constant.FirestoreTables.Trip.userID, isEqualTo: userID).getDocuments()
@@ -126,7 +126,7 @@ final class FirebaseWrapper: FirebaseProtocol {
             throw error
         }
     }
-
+    
     func updateTrip(with tripID: String, fields: [String : Any]) async throws {
         do {
             try await Firestore.firestore().collection(Constant.FirestoreTables.Trip.tableName).document(tripID).updateData(fields)

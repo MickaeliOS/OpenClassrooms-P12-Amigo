@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class CreateAccountVC: UIViewController {
     
@@ -26,6 +27,7 @@ class CreateAccountVC: UIViewController {
     
     private var isPasswordVisible = false
     private let userAuthService = UserAuthService()
+    private let userCreationService = UserCreationService()
     
     // MARK: - ACTIONS
     @IBAction func closeButtonTapped(_ sender: Any) {
@@ -71,17 +73,24 @@ class CreateAccountVC: UIViewController {
                                                          button: createAccountButton,
                                                          activityIndicator: activityIndicator)
                 
+                // First, we create the User in the authentication system.
                 try await userAuthService.createUser(email: emailTextField.text!,
-                                                         password: passwordTextField.text!,
-                                                         confirmPassword: confirmPasswordTextField.text!)
+                                                     password: passwordTextField.text!,
+                                                     confirmPassword: confirmPasswordTextField.text!)
                 
-                // If the user creation process is successful, we can return to the TabBar.
+                // Then, we save it in Firestore.
+                let user = User(email: Auth.auth().currentUser!.email!)
+                try await userCreationService.saveUserInDatabase(user: user, userID: Auth.auth().currentUser!.uid)
+                
+                // If the user creation process is successful, we can go to the RootVC (TripVC) and start using the app.
                 performSegue(withIdentifier: Constant.SegueID.unwindToRootVC, sender: nil)
                 
             } catch let error as Errors.CreateAccountError {
                 errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
             } catch let error as Errors.DatabaseError {
-                errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
+                presentErrorAlert(with: error.localizedDescription) {
+                    self.dismiss(animated: true)
+                }
             } catch let error as Errors.CommonError {
                 errorMessageLabel.displayErrorMessage(message: error.localizedDescription)
             }

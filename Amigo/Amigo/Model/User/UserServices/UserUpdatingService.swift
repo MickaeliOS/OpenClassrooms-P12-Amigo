@@ -12,7 +12,7 @@ class UserUpdatingService {
     // MARK: - PROPERTIES & INIT
     private let firebaseWrapper: FirebaseProtocol
     private let userTableConstants = Constant.FirestoreTables.User.self
-
+    
     init(firebaseWrapper: FirebaseProtocol = FirebaseWrapper()) {
         self.firebaseWrapper = firebaseWrapper
     }
@@ -21,6 +21,7 @@ class UserUpdatingService {
     func updateUser(fields: [String:Any], userID: String) async throws {
         do {
             try await firebaseWrapper.updateUser(fields: fields, userID: userID)
+            
         } catch let error as NSError {
             switch error.code {
             case FirestoreErrorCode.notFound.rawValue:

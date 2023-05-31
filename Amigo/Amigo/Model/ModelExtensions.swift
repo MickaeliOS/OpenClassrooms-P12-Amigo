@@ -42,6 +42,7 @@ extension String {
             return nil
         }
         
+        // I return a small emoji representing the flag of the country based on the countryCode.
         return String(String.UnicodeScalarView(
             countryCode.unicodeScalars.compactMap(
                 { UnicodeScalar(127397 + $0.value) })))

@@ -22,6 +22,7 @@ final class TripUpdatingService {
     func updateTrip(with tripID: String, fields: [String:Any]) async throws {
         do {
             try await firebaseWrapper.updateTrip(with: tripID, fields: fields)
+            
         } catch let error as NSError {
             switch error.code {
             case FirestoreErrorCode.notFound.rawValue :

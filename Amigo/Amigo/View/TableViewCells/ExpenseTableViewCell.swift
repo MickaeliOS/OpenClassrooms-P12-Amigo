@@ -8,7 +8,8 @@
 import UIKit
 
 class ExpenseTableViewCell: UITableViewCell {
-
+    
+    // MARK: - VIEW LIFE CYCLE
     override func awakeFromNib() {
         super.awakeFromNib()
         setupInterface()

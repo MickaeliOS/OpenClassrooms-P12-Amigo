@@ -9,11 +9,20 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-    func presentVCFullScreen(with identifier: String) {
+    func presentVCFullScreen(with identifier: String, error: String? = nil) {
+        // Presenting a VC in Modal Full Screen, with an error if needed.
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: identifier)
         vc.modalPresentationStyle = .fullScreen
-        present(vc, animated:true)
+        
+        guard let error = error else {
+            present(vc, animated: true)
+            return
+        }
+        
+        present(vc, animated: true) {
+            vc.presentErrorAlert(with: error)
+        }
     }
     
     func presentErrorAlert(with error: String) {
@@ -24,6 +33,8 @@ extension UIViewController {
     }
     
     func presentErrorAlert(with error: String, completion: @escaping () -> Void) {
+        // In certain cases, after the user presses the OK button, there is a need to perform additional actions.
+        // To facilitate this, I have added a completion handler to handle such scenarios.
         let alert: UIAlertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
         
         let action = UIAlertAction(title: "OK", style: .cancel) { action in
@@ -53,6 +64,7 @@ extension UIViewController {
     }
     
     func presentDestructiveAlert(with message: String, completion: @escaping () -> Void) {
+        // When the User is deleting something, I have to make sure he really want to do it.
         let alert: UIAlertController = UIAlertController(title: "Attention", message: message, preferredStyle: .alert)
         
         let action = UIAlertAction(title: "OK", style: .destructive) { action in
@@ -129,23 +141,5 @@ extension UILabel {
     func displayErrorMessage(message: String) {
         isHidden = false
         text = message
-    }
-}
-
-extension UIImageView {
-    func makeRounded() {
-        layer.borderWidth = 2
-        layer.masksToBounds = false
-        layer.borderColor = UIColor(named: "Label Color")?.cgColor
-        layer.cornerRadius = self.frame.height / 2
-        clipsToBounds = true
-    }
-}
-
-extension UIImage {
-    func isEqualToImage(image: UIImage) -> Bool {
-        let data1: NSData = self.pngData()! as NSData
-        let data2: NSData = image.pngData()! as NSData
-        return data1.isEqual(data2)
     }
 }

@@ -40,7 +40,7 @@ struct Constant {
         
         // Country
         static let countryNibName = "CountryTableViewCell"
-
+        
         static let countryCell = "countryCell"
         
         // Journey
@@ -55,7 +55,7 @@ struct Constant {
     
     struct CollectionViewCells {
         static let toDoNibName = "ToDoCollectionViewCell"
-
+        
         static let toDoCell = "toDoCell"
     }
     
@@ -84,7 +84,7 @@ struct Constant {
         
         struct Journey {
             static let tableName = "Journey"
-
+            
             static let locations = "locations"
         }
         

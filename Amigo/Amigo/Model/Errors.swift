@@ -67,7 +67,7 @@ struct Errors {
             case .cannotUpdateDocuments:
                 return "We couldn't update your document(s), please try again."
             case .cannotSaveUser:
-                return "We couldn't save your informations, please try again."
+                return "We couldn't save your informations, please try to log in again."
             case .cannotDeleteDocuments:
                 return "We couldn't delete your document(s), please try again."
             case .noTripID:

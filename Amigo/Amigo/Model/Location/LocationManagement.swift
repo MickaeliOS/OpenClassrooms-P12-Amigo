@@ -22,6 +22,7 @@ final class LocationManagement {
     }
     
     func getCoordinatesFromRegion(region: String, completion: @escaping (MKCoordinateRegion?, Error?) -> Void) {
+        // Given a region name, I retrieve the corresponding coordinates. This information will be used to filter locations based on the country's area when constructing the trip's journey.
         geocoder.geocodeAddressString(region) { result, error in
             if error != nil {
                 completion(nil, Errors.CommonError.defaultError)

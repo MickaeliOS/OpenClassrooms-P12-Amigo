@@ -14,13 +14,14 @@ final class UserCreationService {
     // MARK: - PROPERTIES & INIT
     private let firebaseWrapper: FirebaseProtocol
     private let userTableConstants = Constant.FirestoreTables.User.self
-
+    
     init(firebaseWrapper: FirebaseProtocol = FirebaseWrapper()) {
         self.firebaseWrapper = firebaseWrapper
     }
     
     // MARK: - FUNCTIONS
     func saveUserInDatabase(user: User, userID: String) async throws {
+        // Before the process, I'm building the fields to be saved.
         let userData = [userTableConstants.firstname: user.firstname,
                         userTableConstants.lastname: user.lastname,
                         userTableConstants.gender: user.gender?.rawValue,
