@@ -19,7 +19,7 @@ class TripDetailVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // If the back button is pressed, I need to update the trip in the dataSource property to ensure data synchronization.
+        // If the back button or tab is pressed, I need to update the trip in the dataSource property to ensure data synchronization.
         if isMovingFromParent {
             guard let trip = trip else { return }
             delegate?.updateTrip(trip: trip)
