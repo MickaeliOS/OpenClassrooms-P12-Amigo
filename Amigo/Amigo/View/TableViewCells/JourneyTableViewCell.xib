@@ -24,26 +24,26 @@
                                 <rect key="frame" x="0.0" y="0.0" width="518" height="147"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="TfV-bA-XM7">
-                                        <rect key="frame" x="0.0" y="0.0" width="155.33333333333334" height="147"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="181.33333333333334" height="147"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vgd-r2-nbk">
-                                                <rect key="frame" x="0.0" y="0.0" width="155.33333333333334" height="147"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="181.33333333333334" height="147"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="StartDate" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iVH-gQ-1Iz">
-                                                        <rect key="frame" x="0.0" y="0.0" width="155.33333333333334" height="73.666666666666671"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="181.33333333333334" height="73.666666666666671"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fDT-X8-nMg">
-                                                        <rect key="frame" x="59.333333333333343" y="56.333333333333314" width="36.666666666666657" height="34.666666666666686"/>
+                                                        <rect key="frame" x="72.333333333333329" y="56.333333333333314" width="36.666666666666671" height="34.666666666666686"/>
                                                         <color key="tintColor" name="UIElement1"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="fDT-X8-nMg" secondAttribute="height" id="QFY-XD-zKC"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EndDate" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SR6-TG-P1m">
-                                                        <rect key="frame" x="0.0" y="73.666666666666686" width="155.33333333333334" height="73.333333333333314"/>
+                                                        <rect key="frame" x="0.0" y="73.666666666666686" width="181.33333333333334" height="73.333333333333314"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -72,7 +72,7 @@
                                         </constraints>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFG-ex-zS8">
-                                        <rect key="frame" x="175.33333333333334" y="0.0" width="342.66666666666663" height="147"/>
+                                        <rect key="frame" x="201.33333333333334" y="0.0" width="316.66666666666663" height="147"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -87,7 +87,7 @@
                     <constraint firstAttribute="trailing" secondItem="8Hi-cj-2AM" secondAttribute="trailing" id="5Q6-dM-VBz"/>
                     <constraint firstItem="8Hi-cj-2AM" firstAttribute="leading" secondItem="UUJ-SF-oMK" secondAttribute="leading" id="H5x-wv-INJ"/>
                     <constraint firstItem="8Hi-cj-2AM" firstAttribute="top" secondItem="UUJ-SF-oMK" secondAttribute="top" id="U0f-oZ-lED"/>
-                    <constraint firstItem="Vgd-r2-nbk" firstAttribute="width" secondItem="UUJ-SF-oMK" secondAttribute="width" multiplier="0.3" id="U6t-Da-gio"/>
+                    <constraint firstItem="Vgd-r2-nbk" firstAttribute="width" secondItem="UUJ-SF-oMK" secondAttribute="width" multiplier="0.35" id="U6t-Da-gio"/>
                     <constraint firstAttribute="bottom" secondItem="8Hi-cj-2AM" secondAttribute="bottom" id="hOU-wv-a54"/>
                 </constraints>
             </tableViewCellContentView>
@@ -107,7 +107,7 @@
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="UIElement1">
-            <color red="0.26214367897039847" green="0.49207095069896328" blue="0.68363508597883604" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.26199999451637268" green="0.49200001358985901" blue="0.68400001525878906" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
