@@ -1,5 +1,18 @@
 # OpenClassrooms-P12-Amigo
 
+## Important
+
+If you want to try this project, you will have to setup your own Firebase project including :
+
+- Firebase Authentication
+- Firestore
+- Firebase Crashlytics + Analytics
+
+ - [Firebase](https://firebase.google.com)
+ 
+ 
+## Welcome !
+
 We've reached the final OpenClassrooms project, and it's time to showcase our skills by creating something cool.
 
 In this project, we have the freedom to unleash our creativity while adhering to a few guidelines:
