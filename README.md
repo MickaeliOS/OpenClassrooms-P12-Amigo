@@ -2,13 +2,11 @@
 
 ## Important
 
-If you want to try this project, you will have to setup your own Firebase project including :
+If you want to try this project, you will have to setup your own [Firebase](https://firebase.google.com) project including :
 
 - Firebase Authentication
 - Firestore
 - Firebase Crashlytics + Analytics
-
- - [Firebase](https://firebase.google.com)
  
  
 ## Welcome !
